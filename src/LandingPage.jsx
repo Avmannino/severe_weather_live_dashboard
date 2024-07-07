@@ -1,6 +1,7 @@
 import React from 'react';
-import './LandingPage.css';  
-import Rainstorm from '../public/Rainstorm.mp4'; // Adjust the path as necessary
+import { Link } from 'react-router-dom';
+import './LandingPage.css';
+import Rainstorm from '/Rainstorm.mp4'; // Adjust the path as necessary
 
 function LandingPage() {
     return (
@@ -12,8 +13,12 @@ function LandingPage() {
                 <h1 className='titleLanding'>Severe Weather Monitoring Dashboard</h1>
                 <p className='mottoLanding'>Stay updated with the latest severe weather alerts and tornado tracking.</p>
                 <div className="buttons">
-                    <button onClick={() => console.log('Navigate to dashboard')}>Dashboard</button>
-                    <button onClick={() => console.log('Navigate to reports')}>Reports</button>
+                    <Link to="/dashboard">
+                        <button>Dashboard</button>
+                    </Link>
+                    <Link to="/reports">
+                        <button>Reports</button>
+                    </Link>
                 </div>
             </div>
         </div>
