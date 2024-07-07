@@ -1,5 +1,4 @@
-// src/components/Dashboard.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Dashboard.css';
 
@@ -7,6 +6,16 @@ const Dashboard = () => {
   const [searchInput, setSearchInput] = useState('');
   const [weather, setWeather] = useState(null);
   const [forecast, setForecast] = useState(null);
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const [location, setLocation] = useState('');
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
 
   const handleSearch = async () => {
     if (!searchInput) return;
@@ -20,6 +29,8 @@ const Dashboard = () => {
         if (geocodeResponse.data.length > 0) {
           lat = geocodeResponse.data[0].lat;
           lon = geocodeResponse.data[0].lon;
+          const displayName = geocodeResponse.data[0].display_name;
+          setLocation(extractCityState(displayName));
         } else {
           console.error('Invalid ZIP code');
           return;
@@ -30,6 +41,8 @@ const Dashboard = () => {
         if (geocodeResponse.data.length > 0) {
           lat = geocodeResponse.data[0].lat;
           lon = geocodeResponse.data[0].lon;
+          const displayName = geocodeResponse.data[0].display_name;
+          setLocation(extractCityState(displayName));
         } else {
           console.error('Invalid city name');
           return;
@@ -38,11 +51,38 @@ const Dashboard = () => {
 
       // Fetch gridpoints
       const gridResponse = await axios.get(`https://api.weather.gov/points/${lat},${lon}`);
-      const { gridId, gridX, gridY } = gridResponse.data.properties;
+      const { gridId, gridX, gridY, observationStations } = gridResponse.data.properties;
+
+      // Fetch the latest observation station
+      const stationsResponse = await axios.get(observationStations);
+      const observationStation = stationsResponse.data.features[0].properties.stationIdentifier;
 
       // Fetch current weather
-      const weatherResponse = await axios.get(`https://api.weather.gov/gridpoints/${gridId}/${gridX},${gridY}/forecast`);
-      setWeather(weatherResponse.data.properties.periods[0]);
+      const weatherResponse = await axios.get(`https://api.weather.gov/stations/${observationStation}/observations/latest`);
+      const observation = weatherResponse.data.properties;
+
+      console.log('Observation Data:', observation); // Log the observation data
+
+      // Fetch hourly forecast for humidity and dew point
+      const hourlyForecastResponse = await axios.get(`https://api.weather.gov/gridpoints/${gridId}/${gridX},${gridY}/forecast/hourly`);
+      const hourlyForecast = hourlyForecastResponse.data.properties.periods[0];
+
+      console.log('Hourly Forecast Data:', hourlyForecast); // Log the hourly forecast data
+
+      const celsiusToFahrenheit = (celsius) => Math.round((celsius * 9/5) + 32);
+
+      const currentWeather = {
+        temperature: observation.temperature?.value ? celsiusToFahrenheit(observation.temperature.value) : null,
+        windSpeed: observation.windSpeed?.value,
+        humidity: hourlyForecast.relativeHumidity?.value,
+        pressure: observation.barometricPressure?.value / 100, // Convert to hPa
+        dewPoint: hourlyForecast.dewpoint?.value ? celsiusToFahrenheit(hourlyForecast.dewpoint.value) : null,
+        shortForecast: observation.textDescription,
+      };
+
+      console.log('Current Weather Data:', currentWeather); // Log the current weather data
+
+      setWeather(currentWeather);
 
       // Fetch 7-day forecast
       const forecastResponse = await axios.get(`https://api.weather.gov/gridpoints/${gridId}/${gridX},${gridY}/forecast`);
@@ -56,6 +96,14 @@ const Dashboard = () => {
     if (event.key === 'Enter') {
       handleSearch();
     }
+  };
+
+  const extractCityState = (displayName) => {
+    const parts = displayName.split(',').map(part => part.trim());
+    if (parts.length >= 3) {
+      return `${parts[0]}, ${parts[2]}`;
+    }
+    return displayName;
   };
 
   return (
@@ -79,9 +127,16 @@ const Dashboard = () => {
       {weather && (
         <div className="section current-weather">
           <h2>Current Weather</h2>
-          <p>Temperature: {weather.temperature}°F</p>
-          <p>Wind: {weather.windSpeed}</p>
-          <p>{weather.shortForecast}</p>
+          <p>{location}</p>
+          <p>Current Time: {currentTime.toLocaleTimeString()}</p>
+          <div className="current-weather-details">
+            <p>Temperature: {weather.temperature}°F</p>
+            <p>Wind: {weather.windSpeed} mph</p>
+            <p>Humidity: {weather.humidity}%</p>
+            <p>Pressure: {weather.pressure} hPa</p>
+            <p>Dew Point: {weather.dewPoint}°F</p>
+            <p>{weather.shortForecast}</p>
+          </div>
         </div>
       )}
 
