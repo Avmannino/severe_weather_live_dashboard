@@ -1,4 +1,5 @@
 /* src/components/Dashboard.css */
+
 .dashboard-container {
     display: flex;
     flex-direction: column;
@@ -11,12 +12,41 @@
     margin-bottom: 20px;
   }
   
+  .search-bar {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  .search-bar input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    width: 250px;
+  }
+  
+  .search-bar button {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .search-bar button:hover {
+    background-color: #0056b3;
+  }
+  
   .section {
     width: 80%;
     margin: 20px 0;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 10px;
+    background-color: #000000;
   }
   
   .weather-map {
@@ -29,9 +59,48 @@
     border-radius: 10px;
   }
   
+  .forecast-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+  }
+  
+  .forecast-item {
+    background-color: rgb(124, 0, 0);
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .forecast-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .forecast-day {
+    font-weight: bold;
+  }
+  
+  .forecast-temp {
+    font-size: 1.2em;
+    color: #007BFF;
+  }
+  
+  .forecast-details {
+    font-size: 0.9em;
+    color: #666;
+  }
+  
   @media (min-width: 768px) {
     .section {
       width: 60%;
+    }
+  
+    .search-bar input {
+      width: 300px;
     }
   }
   

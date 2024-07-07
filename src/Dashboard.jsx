@@ -3,28 +3,58 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './Dashboard.css';
 
-const API_KEY = 'your_openweathermap_api_key';
-
 const Dashboard = () => {
-  const [city, setCity] = useState('');
+  const [searchInput, setSearchInput] = useState('');
   const [weather, setWeather] = useState(null);
   const [forecast, setForecast] = useState(null);
 
   const handleSearch = async () => {
-    if (!city) return;
+    if (!searchInput) return;
 
     try {
-      const weatherResponse = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=imperial`
-      );
-      setWeather(weatherResponse.data);
+      let lat, lon;
 
-      const forecastResponse = await axios.get(
-        `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&cnt=7&appid=${API_KEY}&units=imperial`
-      );
-      setForecast(forecastResponse.data);
+      if (/^\d{5}$/.test(searchInput)) {
+        // If the input is a 5-digit number, treat it as a ZIP code
+        const geocodeResponse = await axios.get(`https://nominatim.openstreetmap.org/search?postalcode=${searchInput}&country=us&format=json&limit=1`);
+        if (geocodeResponse.data.length > 0) {
+          lat = geocodeResponse.data[0].lat;
+          lon = geocodeResponse.data[0].lon;
+        } else {
+          console.error('Invalid ZIP code');
+          return;
+        }
+      } else {
+        // Otherwise, treat it as a city name
+        const geocodeResponse = await axios.get(`https://nominatim.openstreetmap.org/search?q=${searchInput}&format=json&limit=1`);
+        if (geocodeResponse.data.length > 0) {
+          lat = geocodeResponse.data[0].lat;
+          lon = geocodeResponse.data[0].lon;
+        } else {
+          console.error('Invalid city name');
+          return;
+        }
+      }
+
+      // Fetch gridpoints
+      const gridResponse = await axios.get(`https://api.weather.gov/points/${lat},${lon}`);
+      const { gridId, gridX, gridY } = gridResponse.data.properties;
+
+      // Fetch current weather
+      const weatherResponse = await axios.get(`https://api.weather.gov/gridpoints/${gridId}/${gridX},${gridY}/forecast`);
+      setWeather(weatherResponse.data.properties.periods[0]);
+
+      // Fetch 7-day forecast
+      const forecastResponse = await axios.get(`https://api.weather.gov/gridpoints/${gridId}/${gridX},${gridY}/forecast`);
+      setForecast(forecastResponse.data.properties.periods);
     } catch (error) {
       console.error('Error fetching weather data', error);
+    }
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
     }
   };
 
@@ -38,32 +68,39 @@ const Dashboard = () => {
       <div className="search-bar">
         <input 
           type="text" 
-          value={city} 
-          onChange={(e) => setCity(e.target.value)} 
-          placeholder="Enter city name" 
+          value={searchInput} 
+          onChange={(e) => setSearchInput(e.target.value)} 
+          onKeyDown={handleKeyDown} 
+          placeholder="Enter city name or ZIP code" 
         />
         <button onClick={handleSearch}>Search</button>
       </div>
 
       {weather && (
         <div className="section current-weather">
-          <h2>Current Weather in {weather.name}</h2>
-          <p>Temperature: {weather.main.temp}°F</p>
-          <p>Humidity: {weather.main.humidity}%</p>
-          <p>Wind: {weather.wind.speed} mph</p>
+          <h2>Current Weather</h2>
+          <p>Temperature: {weather.temperature}°F</p>
+          <p>Wind: {weather.windSpeed}</p>
+          <p>{weather.shortForecast}</p>
         </div>
       )}
 
       {forecast && (
         <div className="section forecast">
           <h2>7-Day Forecast</h2>
-          <ul>
-            {forecast.list.map((day, index) => (
-              <li key={index}>
-                {new Date(day.dt * 1000).toLocaleDateString('en-US', { weekday: 'long' })}: {day.weather[0].description}, {day.temp.day}°F
-              </li>
+          <div className="forecast-grid">
+            {forecast.map((day, index) => (
+              <div key={index} className="forecast-item">
+                <div className="forecast-header">
+                  <span className="forecast-day">{day.name}</span>
+                  <span className="forecast-temp">{day.temperature}°F</span>
+                </div>
+                <div className="forecast-details">
+                  <span>{day.shortForecast}</span>
+                </div>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       )}
 
