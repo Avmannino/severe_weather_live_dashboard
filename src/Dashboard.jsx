@@ -10,9 +10,23 @@ const weatherImages = {
   "Rain": "./rain.png",
   "Snow": "./snow.png",
   "Scattered Showers And Thunderstorms": "./scatteredtstorms.png",
+  "Chance Showers And Thunderstorms": "./scatteredtstorms.png",
   "Clear": "./clear.png",
-  "Mostly Clear": "./partlycloudy.png"
+  "Mostly Clear": "./partlycloudy.png",
+  "Fog": "./fog.png",
+  "Patchy Fog": "./fog.png",
 };
+
+const smallWeatherImages = {
+  "Clear": "./clearnight_small.png",
+  "Mostly Clear": "./clearnight_small.png",
+  "Rain": "./rain_small.png",
+  "Cloudy": "./cloudy_small.png",
+  "Mostly Cloudy": "./cloudy_small.png",
+};
+
+const locationImage = "./location_marker.png"; // Add your location image path here
+const dateTimeImage = "./calendar_small.png"; // Add your date and time image path here
 
 const Dashboard = () => {
   const [searchInput, setSearchInput] = useState('');
@@ -109,14 +123,28 @@ const Dashboard = () => {
 
   const extractCityState = (displayName) => {
     const parts = displayName.split(',').map(part => part.trim());
-    if (parts.length >= 2) {
-      return `${parts[0]}`, `${parts[1]}` ;
-    }
-    return displayName;
+    let city = '', state = '';
+
+    // Iterate through parts to find city and state
+    parts.forEach(part => {
+      if (part.match(/^[A-Za-z\s]+$/) && !part.match(/county/i)) {
+        if (!city) {
+          city = part;
+        } else if (!state) {
+          state = part;
+        }
+      }
+    });
+
+    return city && state ? `${city}, ${state}` : displayName;
   };
 
   const getWeatherImage = (weatherDescription) => {
     return weatherImages[weatherDescription] || 'path/to/default.png'; // Fallback to a default image
+  };
+
+  const getSmallWeatherImage = (weatherDescription) => {
+    return smallWeatherImages[weatherDescription] || 'path/to/default.png'; // Fallback to a default image
   };
 
   return (
@@ -137,19 +165,31 @@ const Dashboard = () => {
       </div>
 
       {weather && (
-        <div className="section current-weather">
-          <h2 style={{ fontSize: '14px' }}>Current Weather</h2>
-          <p style={{ fontSize: '14px', margin: '0' }}>{currentTime.toLocaleTimeString()}</p>
+        <div className="section current-weather" style={{ textAlign: 'left' }}>
+          <img src={getWeatherImage(weather.weather)} alt={weather.weather} style={{ width: '125px', height: '125px', margin: '-10px 0' }} />
+          <p style={{ fontSize: '58px', fontWeight: 'normal', color: 'white', margin: '0px 0 15px 5px' }}>{weather.temperature}°F</p>
           
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '2px' }}>
-            <p style={{ fontSize: '24px', fontWeight: 'bold', margin: '5px 0' }}>{location}</p>
-            <p style={{ fontSize: '65px', fontWeight: 'bold', color: 'white', margin: '-10px -5px -5px -6px' }}>{weather.temperature}°F</p>
-            <p style={{ fontSize: '17px', fontWeight: 'light', color: 'white', margin: '-10px 0 0 0' }}>Feels Like: {weather.heatIndex}°F</p>
-            <img src={getWeatherImage(weather.weather)} alt={weather.weather} style={{ width: '125px', height: '125px', margin: '10px 0' }} />
-            <p style={{ fontSize: '26px', fontWeight: 'bold', color: 'yellow', margin: '0' }}>{weather.weather}</p>
+          <div style={{ display: 'flex', alignItems: 'center', margin: '-20px 0 15px -5px' }}>
+            <img src={getSmallWeatherImage(weather.weather)} alt={weather.weather} style={{ width: '30px', height: '30px', marginRight: '5px' }} />
+            <p style={{ fontSize: '18px', fontWeight: 'normal', color: 'white', margin: '0' }}>{weather.weather}</p>
+          </div>
+
+          <div className="styled-line-break">
+          
+          </div>
+
+
+          <div style={{ display: 'flex', alignItems: 'center', margin: '-10px 0 5px -5px' }}>
+            <img src={locationImage} alt="Location" style={{ width: '25px', height: '25px', margin:'0 5px' }} />
+            <p style={{ fontSize: '14px', margin: '0' }}>{location}</p>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', margin: '0 0 10px 0' }}>
+            <img src={dateTimeImage} alt="Date and Time" style={{ width: '20px', height: '20px', margin: '0px 5px 5px 1px' }} />
+            <p style={{ fontSize: '14px', margin: '-15px 0' }}>{currentTime.toLocaleTimeString()} | {currentTime.toLocaleDateString()}</p>
           </div>
           
-          <div className="current-weather-details">
+          <div className="current-weather-details" style={{ textAlign: 'left', margin: '20px auto', maxWidth: '300px' }}>
             <p>Wind: {weather.windSpeed} mph</p>
             <p>Wind Direction: {weather.windDirection}°</p>
             <p>Humidity: {weather.humidity}%</p>
@@ -159,12 +199,6 @@ const Dashboard = () => {
           </div>
         </div>
       )}
-
-
-
-
-
-
       {forecast && (
         <div className="section forecast">
           <h2>7-Day Forecast</h2>
