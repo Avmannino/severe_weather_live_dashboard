@@ -9,7 +9,7 @@ const weatherIcons = {
   0: 'sunny.png',           // Clear sky - Y
   1: 'mostlysunny.png',     // Mainly clear - Y
   2: 'partly_cloudy.png',   // Partly cloudy - Y
-  3: 'cloudy.png',        // Overcast - Y
+  3: 'cloudy.png',          // Overcast - Y
   45: 'fog.png',            // Fog - Y
   48: 'depositing_rime_fog.png', // Depositing rime fog
   51: 'drizzle_light.png',  // Drizzle: Light
@@ -23,14 +23,14 @@ const weatherIcons = {
   66: 'freezing_rain_light.png', // Freezing Rain: Light
   67: 'freezing_rain_heavy.png', // Freezing Rain: Heavy
   71: 'snow_fall_slight.png', // Snow fall: Slight
-  73: 'snow.png', // Snow fall: Moderate - Y
+  73: 'snow.png',           // Snow fall: Moderate - Y
   75: 'snow_fall_heavy.png', // Snow fall: Heavy
   77: 'snow_grains.png',    // Snow grains
   80: 'rain_showers_slight.png', // Rain showers: Slight
   81: 'rain_showers_moderate.png', // Rain showers: Moderate
   82: 'rain_showers_violent.png', // Rain showers: Violent
   85: 'snow_showers_slight.png', // Snow showers: Slight
-  86: 'snow_showers_heavy.png', // Snow showers: Heavy
+  86: 'snow_showers_heavy.png',  // Snow showers: Heavy
   95: 'thunderstorm.png',   // Thunderstorm: Slight or moderate
   96: 'thunderstorm_hail.png', // Thunderstorm with slight hail
   99: 'thunderstorm_heavy_hail.png' // Thunderstorm with heavy hail
@@ -79,6 +79,7 @@ const Dashboard = () => {
   const [searchInput, setSearchInput] = useState('');
   const [weather, setWeather] = useState(null);
   const [forecast, setForecast] = useState(null);
+  const [hourlyForecast, setHourlyForecast] = useState(null);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [location, setLocation] = useState('');
   const [isCelsius, setIsCelsius] = useState(false);
@@ -122,7 +123,9 @@ const Dashboard = () => {
       }
 
       // Fetch weather data from Open-Meteo API
-      const weatherResponse = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=auto`);
+      const weatherResponse = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&hourly=temperature_2m,weathercode&timezone=auto`);
+      console.log(weatherResponse.data); // Debug: Log the full API response
+
       const weatherData = weatherResponse.data.current_weather;
 
       const currentWeather = {
@@ -145,11 +148,24 @@ const Dashboard = () => {
         temperatureMaxFahrenheit: Math.round((forecastData.temperature_2m_max[index] * 9/5) + 32),
         temperatureMinFahrenheit: Math.round((forecastData.temperature_2m_min[index] * 9/5) + 32),
         precipitationSum: forecastData.precipitation_sum[index],
-        weatherCode: forecastData.weathercode[index],
-        weatherDescription: getWeatherDescription(forecastData.weathercode[index])
+        weatherCode: forecastData.weathercode ? forecastData.weathercode[index] : null,
+        weatherDescription: forecastData.weathercode ? getWeatherDescription(forecastData.weathercode[index]) : 'N/A'
       }));
 
       setForecast(formattedForecast);
+
+      const hourlyData = weatherResponse.data.hourly;
+      const formattedHourlyForecast = hourlyData.time.slice(0, 48).map((time, index) => ({
+        time: new Date(time),
+        temperatureCelsius: Math.round(hourlyData.temperature_2m[index]),
+        temperatureFahrenheit: Math.round((hourlyData.temperature_2m[index] * 9/5) + 32),
+        weatherCode: hourlyData.weathercode[index],
+        weatherDescription: getWeatherDescription(hourlyData.weathercode[index])
+      }));
+
+      console.log(formattedHourlyForecast); // Debug: Log the formatted hourly forecast
+
+      setHourlyForecast(formattedHourlyForecast);
     } catch (error) {
       console.error('Error fetching weather data', error);
     }
@@ -259,10 +275,33 @@ const Dashboard = () => {
         </div>
       )}
 
-      <div className="section weather-map">
+      {hourlyForecast && (
+        <div className="section hourly-forecast">
+          <h2>48-Hour Forecast</h2>
+          <div className="hourly-forecast-grid">
+            {hourlyForecast.map((hour, index) => (
+              <div key={index} className="hourly-forecast-item">
+                <div className="hourly-forecast-time">
+                  {hour.time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </div>
+                <div className="hourly-forecast-temp">
+                  High: {isCelsius ? hour.temperatureCelsius : hour.temperatureFahrenheit}°{isCelsius ? 'C' : 'F'}
+                  <br />
+                  Low: {isCelsius ? hour.temperatureCelsius : hour.temperatureFahrenheit}°{isCelsius ? 'C' : 'F'}
+                </div>
+                <div className="hourly-forecast-icon">
+                  <img src={`/icons/${getWeatherIcon(hour.weatherCode)}`} alt={hour.weatherDescription} style={{ width: '50px', height: '50px' }} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* <div className="section weather-map">
         <h2>Weather Map</h2>
         <p>Map placeholder</p>
-      </div>
+      </div> */}
     </div>
   );
 }
