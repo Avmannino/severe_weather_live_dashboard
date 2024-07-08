@@ -6,9 +6,12 @@ const weatherImages = {
   "Sunny": "./sunny.png",
   "Partly Cloudy": "./partlycloudy.png",
   "Cloudy": "./cloudy.png",
+  "Mostly Cloudy": "./cloudy.png",
   "Rain": "./rain.png",
   "Snow": "./snow.png",
-  "Scattered Showers And Thunderstorms": "./scatteredtstorms.png"
+  "Scattered Showers And Thunderstorms": "./scatteredtstorms.png",
+  "Clear": "./clear.png",
+  "Mostly Clear": "./partlycloudy.png"
 };
 
 const Dashboard = () => {
@@ -106,8 +109,8 @@ const Dashboard = () => {
 
   const extractCityState = (displayName) => {
     const parts = displayName.split(',').map(part => part.trim());
-    if (parts.length >= 3) {
-      return `${parts[1]}, ${parts[2]}, ${parts[0]}`;
+    if (parts.length >= 2) {
+      return `${parts[0]}`, `${parts[1]}` ;
     }
     return displayName;
   };
@@ -119,8 +122,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <header className="header">
-        <h1>Weather Dashboard</h1>
-        <p>Stay updated with the latest weather information</p>
+        <h1>Dashboard</h1>
       </header>
 
       <div className="search-bar">
@@ -138,17 +140,13 @@ const Dashboard = () => {
         <div className="section current-weather">
           <h2 style={{ fontSize: '14px' }}>Current Weather</h2>
           <p style={{ fontSize: '14px', margin: '0' }}>{currentTime.toLocaleTimeString()}</p>
-          <p style={{ fontSize: '22px', fontWeight: 'bold', margin: '0' }}>{location}</p>
           
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '20px' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginRight: '15px' }}>
-              <p style={{ fontSize: '48px', fontWeight: 'bold', color: 'white', margin: '0 0px' }}>{weather.temperature}°F</p>
-              <p style={{ fontSize: '15px', fontWeight: 'light', color: 'white', margin: '0' }}>Feels Like: {weather.heatIndex}°F</p>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginRight:'-20px', marginTop: '-70px' }}>
-              <img src={getWeatherImage(weather.weather)} alt={weather.weather} style={{ width: '120px', height: '120px' }} />
-              <p style={{ fontSize: '20px', fontWeight: 'bold', color: 'yellow', margin: '0' }}>{weather.weather}</p>
-            </div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '2px' }}>
+            <p style={{ fontSize: '24px', fontWeight: 'bold', margin: '5px 0' }}>{location}</p>
+            <p style={{ fontSize: '65px', fontWeight: 'bold', color: 'white', margin: '-10px -5px -5px -6px' }}>{weather.temperature}°F</p>
+            <p style={{ fontSize: '17px', fontWeight: 'light', color: 'white', margin: '-10px 0 0 0' }}>Feels Like: {weather.heatIndex}°F</p>
+            <img src={getWeatherImage(weather.weather)} alt={weather.weather} style={{ width: '125px', height: '125px', margin: '10px 0' }} />
+            <p style={{ fontSize: '26px', fontWeight: 'bold', color: 'yellow', margin: '0' }}>{weather.weather}</p>
           </div>
           
           <div className="current-weather-details">
@@ -161,6 +159,11 @@ const Dashboard = () => {
           </div>
         </div>
       )}
+
+
+
+
+
 
       {forecast && (
         <div className="section forecast">
