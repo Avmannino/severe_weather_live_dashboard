@@ -2,6 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Dashboard.css';
 
+const weatherImages = {
+  "Sunny": "./sunny.png",
+  "Partly Cloudy": "./partlycloudy.png",
+  "Cloudy": "./cloudy.png",
+  "Rain": "./rain.png",
+  "Snow": "./snow.png",
+  "Scattered Showers And Thunderstorms": "./scatteredtstorms.png"
+};
+
 const Dashboard = () => {
   const [searchInput, setSearchInput] = useState('');
   const [weather, setWeather] = useState(null);
@@ -24,7 +33,6 @@ const Dashboard = () => {
       let lat, lon;
 
       if (/^\d{5}$/.test(searchInput)) {
-        // If the input is a 5-digit number, treat it as a ZIP code
         const geocodeResponse = await axios.get(`https://nominatim.openstreetmap.org/search?postalcode=${searchInput}&country=us&format=json&limit=1`);
         if (geocodeResponse.data.length > 0) {
           lat = geocodeResponse.data[0].lat;
@@ -36,7 +44,6 @@ const Dashboard = () => {
           return;
         }
       } else {
-        // Otherwise, treat it as a city name
         const geocodeResponse = await axios.get(`https://nominatim.openstreetmap.org/search?q=${searchInput}&format=json&limit=1`);
         if (geocodeResponse.data.length > 0) {
           lat = geocodeResponse.data[0].lat;
@@ -49,42 +56,41 @@ const Dashboard = () => {
         }
       }
 
-      // Fetch gridpoints
       const gridResponse = await axios.get(`https://api.weather.gov/points/${lat},${lon}`);
       const { gridId, gridX, gridY, observationStations } = gridResponse.data.properties;
 
-      // Fetch the latest observation station
       const stationsResponse = await axios.get(observationStations);
       const observationStation = stationsResponse.data.features[0].properties.stationIdentifier;
 
-      // Fetch current weather
       const weatherResponse = await axios.get(`https://api.weather.gov/stations/${observationStation}/observations/latest`);
       const observation = weatherResponse.data.properties;
 
-      console.log('Observation Data:', observation); // Log the observation data
+      console.log('Observation Data:', observation);
 
-      // Fetch hourly forecast for humidity and dew point
       const hourlyForecastResponse = await axios.get(`https://api.weather.gov/gridpoints/${gridId}/${gridX},${gridY}/forecast/hourly`);
       const hourlyForecast = hourlyForecastResponse.data.properties.periods[0];
 
-      console.log('Hourly Forecast Data:', hourlyForecast); // Log the hourly forecast data
+      console.log('Hourly Forecast Data:', hourlyForecast);
 
       const celsiusToFahrenheit = (celsius) => Math.round((celsius * 9/5) + 32);
 
       const currentWeather = {
-        temperature: observation.temperature?.value ? celsiusToFahrenheit(observation.temperature.value) : null,
-        windSpeed: observation.windSpeed?.value,
-        humidity: hourlyForecast.relativeHumidity?.value,
-        pressure: observation.barometricPressure?.value / 100, // Convert to hPa
-        dewPoint: hourlyForecast.dewpoint?.value ? celsiusToFahrenheit(hourlyForecast.dewpoint.value) : null,
-        shortForecast: observation.textDescription,
+        temperature: observation.temperature?.value ? celsiusToFahrenheit(observation.temperature.value) : 'N/A',
+        dewPoint: hourlyForecast.dewpoint?.value ? celsiusToFahrenheit(hourlyForecast.dewpoint.value) : 'N/A',
+        humidity: hourlyForecast.relativeHumidity?.value ?? 'N/A',
+        windDirection: observation.windDirection?.value ?? 'N/A',
+        windSpeed: observation.windSpeed?.value ?? 'N/A',
+        weather: hourlyForecast.shortForecast ?? 'N/A',
+        probabilityOfPrecipitation: hourlyForecast.probabilityOfPrecipitation?.value ?? 'N/A',
+        pressure: observation.barometricPressure?.value ? (observation.barometricPressure.value / 100).toFixed(2) : 'N/A', // Convert to hPa
+        shortForecast: observation.textDescription ?? 'N/A',
+        heatIndex: observation.heatIndex?.value ? celsiusToFahrenheit(observation.heatIndex.value) : 'N/A',
       };
 
-      console.log('Current Weather Data:', currentWeather); // Log the current weather data
+      console.log('Current Weather Data:', currentWeather);
 
       setWeather(currentWeather);
 
-      // Fetch 7-day forecast
       const forecastResponse = await axios.get(`https://api.weather.gov/gridpoints/${gridId}/${gridX},${gridY}/forecast`);
       setForecast(forecastResponse.data.properties.periods);
     } catch (error) {
@@ -101,9 +107,13 @@ const Dashboard = () => {
   const extractCityState = (displayName) => {
     const parts = displayName.split(',').map(part => part.trim());
     if (parts.length >= 3) {
-      return `${parts[0]}, ${parts[2]}`;
+      return `${parts[1]}, ${parts[2]}, ${parts[0]}`;
     }
     return displayName;
+  };
+
+  const getWeatherImage = (weatherDescription) => {
+    return weatherImages[weatherDescription] || 'path/to/default.png'; // Fallback to a default image
   };
 
   return (
@@ -126,16 +136,28 @@ const Dashboard = () => {
 
       {weather && (
         <div className="section current-weather">
-          <h2>Current Weather</h2>
-          <p>{location}</p>
-          <p>Current Time: {currentTime.toLocaleTimeString()}</p>
+          <h2 style={{ fontSize: '14px' }}>Current Weather</h2>
+          <p style={{ fontSize: '14px', margin: '0' }}>{currentTime.toLocaleTimeString()}</p>
+          <p style={{ fontSize: '22px', fontWeight: 'bold', margin: '0' }}>{location}</p>
+          
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '20px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginRight: '15px' }}>
+              <p style={{ fontSize: '48px', fontWeight: 'bold', color: 'white', margin: '0 0px' }}>{weather.temperature}°F</p>
+              <p style={{ fontSize: '15px', fontWeight: 'light', color: 'white', margin: '0' }}>Feels Like: {weather.heatIndex}°F</p>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginRight:'-20px', marginTop: '-70px' }}>
+              <img src={getWeatherImage(weather.weather)} alt={weather.weather} style={{ width: '120px', height: '120px' }} />
+              <p style={{ fontSize: '20px', fontWeight: 'bold', color: 'yellow', margin: '0' }}>{weather.weather}</p>
+            </div>
+          </div>
+          
           <div className="current-weather-details">
-            <p>Temperature: {weather.temperature}°F</p>
             <p>Wind: {weather.windSpeed} mph</p>
+            <p>Wind Direction: {weather.windDirection}°</p>
             <p>Humidity: {weather.humidity}%</p>
             <p>Pressure: {weather.pressure} hPa</p>
             <p>Dew Point: {weather.dewPoint}°F</p>
-            <p>{weather.shortForecast}</p>
+            <p>Chance of Rain: {weather.probabilityOfPrecipitation}%</p>
           </div>
         </div>
       )}

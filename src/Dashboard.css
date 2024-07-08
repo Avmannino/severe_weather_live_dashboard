@@ -6,6 +6,7 @@
   align-items: center;
   padding-left: 250px;
   padding-right: 250px;
+  background-color: rgb(36, 97, 146);
 }
 
 .header {
@@ -42,21 +43,16 @@
 }
 
 .section {
-  width: 100%;
-  margin: 20px 0;
-  padding: 20px;
+  max-width: 30%;
+  margin: 10px 10px;
+  padding: 40px;
   border: 1px solid #ccc;
   border-radius: 10px;
-  background-color: #000000;
-}
-
-.current-weather h2,
-.current-weather p {
-  margin: 0px 0;
+  background-color: #5555557e;
 }
 
 .current-weather h2 {
-  font-size: 18px;
+  margin: 0px 0;
   font-weight: bolder;
 }
 
@@ -77,7 +73,7 @@
   margin-bottom: 25px;
 }
 
-.temp {
+.current-temp {
   color: rgb(128, 0, 0);
   font-size: 45px;
   font-weight: bold;
