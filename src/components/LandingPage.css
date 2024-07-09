@@ -41,7 +41,12 @@
     font-size: 66px;
     text-align: center;
     position: relative;
-    top: -4vh;
+    top: -6vh;
+}
+
+.landing-logo {
+    width: 400px;
+    margin-top: -90px;
 }
 
 .mottoLanding {

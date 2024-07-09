@@ -10,6 +10,7 @@ function LandingPage() {
                 <source src={Rainstorm} type="video/mp4" />
             </video>
             <div className="content">
+                <img className='landing-logo' src='/landing_logo.png' />
                 <h1 className='titleLanding'>SPOTT'R</h1>
                 <div className="buttons">
                     <Link to="/dashboard">

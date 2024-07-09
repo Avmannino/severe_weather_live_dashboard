@@ -28,7 +28,7 @@ const weatherIcons = {
   75: 'snow_fall_heavy.png',
   77: 'snow_grains.png',
   80: 'rain.png',
-  81: 'rain_showers_moderate.png',
+  81: 'rain.png',
   82: 'rain_showers_violent.png',
   85: 'snow_showers_slight.png',
   86: 'snow_showers_heavy.png',
@@ -58,8 +58,8 @@ const weatherDescriptions = {
   73: 'Snow fall: Moderate',
   75: 'Snow fall: Heavy',
   77: 'Snow Grains',
-  80: 'Showers: Light',
-  81: 'Showers: Moderate',
+  80: 'Showers',
+  81: 'Showers',
   82: 'Showers: Violent',
   85: 'Snow Showers: Slight',
   86: 'Snow Showers: Heavy',
@@ -92,6 +92,7 @@ const Dashboard = () => {
   const [location, setLocation] = useState('');
   const [isCelsius, setIsCelsius] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
+  const [latLon, setLatLon] = useState({ lat: 50.4, lon: 14.3, zoom: 5 }); // Default coordinates with zoom level
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -130,6 +131,8 @@ const Dashboard = () => {
           return;
         }
       }
+
+      setLatLon({ lat, lon, zoom: 20 }); // Set zoom level to 10 for city-level view
 
       // Fetch weather data from Open-Meteo API
       const weatherResponse = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max&hourly=temperature_2m,weathercode&timezone=auto`);
@@ -255,7 +258,13 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <label className="switch" style={{position:'relative', top:'5vh', left: '-38vw', zIndex:'999'}}>
+      <iframe
+        title="Windy Map"
+        src={`https://embed.windy.com/embed2.html?lat=${latLon.lat}&lon=${latLon.lon}&detailLat=${latLon.lat}&detailLon=${latLon.lon}&width=650&height=450&zoom=${latLon.zoom}&level=surface&overlay=radar&product=ecmwf&menu=&message=true&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1`}
+        frameBorder="0"
+      ></iframe>
+
+      <label className="switch" style={{position:'relative', top:'-32vh', left: '-37.5vw', zIndex:'999'}}>
           <input type="checkbox" checked={isCelsius} onChange={toggleTemperatureUnit} />
           <span className="slider">
             <span className="slider-text">
@@ -267,6 +276,7 @@ const Dashboard = () => {
       {weather && (
         <>
           <div className="section current-weather">
+          <h2 style={{position:'absolute', top: "-4.5vh", left:'1vw', fontSize:'24px'}}>Right Now:</h2>
             <img src={weather.iconUrl} alt={weather.weatherDescription} style={{ width: '150px', height: '150px', margin: '10px 0 0 25px' }} />
             <p style={{ fontSize: '58px', fontWeight: 'normal', color: 'white', margin: '-165px 0 0px 250px' }}>
               {isCelsius ? weather.temperatureCelsius : weather.temperatureFahrenheit}°{isCelsius ? 'C' : 'F'}
@@ -291,8 +301,9 @@ const Dashboard = () => {
               </p>
             </div>
 
-
             <div className="styled-line-break"></div>
+
+            <div className="vertical-line"></div>
 
             <div style={{ display: 'flex', flexDirection:'row', gap:'10px', alignItems: 'center', margin: '-15px 0 5px -10px' }}>
               <img src={locationImage} alt="Location" style={{ width: '25px', height: '25px', margin:'-5px 0 -5px 5px' }} />
@@ -308,8 +319,8 @@ const Dashboard = () => {
 
       {forecast && (
         <div className="section forecast">
-          <h2 style={{position:'absolute', top: "13vh", right:'16vw', fontSize:'30px'}}>7 Day Outlook</h2>
-          <h4 style={{position:'absolute', top: "18vh", right:'16vw', fontSize:'15px'}}>* Click for hourly forecast *</h4>
+          <h2 style={{position:'absolute', top: "56vh", left:'10vw', fontSize:'30px'}}>7-Day Outlook</h2>
+          <h4 style={{position:'absolute', top: "60.5vh", left:'10vw', fontSize:'15px'}}>* Click for hourly forecast *</h4>
           <div className="forecast-grid">
             {forecast.map((day, index) => (
               <div key={index} className="forecast-item" onClick={() => handleDayClick(index)}>
@@ -317,13 +328,13 @@ const Dashboard = () => {
                   <span className="forecast-day">{day.date.toLocaleDateString('en-US', { weekday: 'long' })}</span>
                   <span className="forecast-date">{day.date.toLocaleDateString()}</span>
                   <div className="forecast-temp" style={{alignItems:'start', justifyContent:'end'}}>
-                    <span style={{color: 'orange'}}>Hi: {isCelsius ? day.temperatureMaxCelsius : day.temperatureMaxFahrenheit}°{isCelsius ? 'C' : 'F'}</span>
-                    <span style={{color: '#448dab'}}>Lo: {isCelsius ? day.temperatureMinCelsius : day.temperatureMinFahrenheit}°{isCelsius ? 'C' : 'F'}</span>
+                    <span style={{color: 'orange'}}>H: {isCelsius ? day.temperatureMaxCelsius : day.temperatureMaxFahrenheit}°{isCelsius ? 'C' : 'F'}</span>
+                    <span style={{color: '#448dab'}}>L: {isCelsius ? day.temperatureMinCelsius : day.temperatureMinFahrenheit}°{isCelsius ? 'C' : 'F'}</span>
                   </div>
                 </div>
                 <div className="forecast-details">
                   <img src={`/icons/${getWeatherIcon(day.weatherCode)}`} alt={day.weatherDescription} style={{ width: '60px', height: '60px', display:'flex', margin:'-50px 0 0 0'  }} />
-                  <span>{day.weatherDescription}</span>
+                  <span style={{color:'grey'}}>{day.weatherDescription}</span>
                 </div>
                 {selectedDay === index && (
                   <div className="hourly-forecast-grid">
