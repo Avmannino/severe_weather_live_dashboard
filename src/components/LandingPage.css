@@ -47,11 +47,12 @@
 .mottoLanding {
     color: rgb(255, 255, 255);
     font-family: Gunners;
-    font-weight: 100;
-    font-size: 18px;
+    font-weight: 300;
+    font-size: 22px;
     text-align: center;
     position: relative;
     top: -8vh;
+    font-family: thunder;
     
 }
 
@@ -79,6 +80,6 @@
 }
 
 @font-face {
-    font-family: 'Gunners';
-    src: url('/gunners.ttf') format('truetype');
-}
+    font-family: 'thunder';
+    src: url('./thunder.otf') format('opentype');
+  }
