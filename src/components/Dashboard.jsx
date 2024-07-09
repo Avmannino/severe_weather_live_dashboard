@@ -4,6 +4,7 @@ import './Dashboard.css';
 
 const locationImage = "./icons/location_marker.png";
 const dateTimeImage = "./icons/calendar_small.png";
+const rainDropImage = "./icons/rain_drop.png";
 
 const weatherIcons = {
   0: 'sunny.png',
@@ -26,7 +27,7 @@ const weatherIcons = {
   73: 'snow.png',
   75: 'snow_fall_heavy.png',
   77: 'snow_grains.png',
-  80: 'rain_showers_slight.png',
+  80: 'rain.png',
   81: 'rain_showers_moderate.png',
   82: 'rain_showers_violent.png',
   85: 'snow_showers_slight.png',
@@ -57,9 +58,9 @@ const weatherDescriptions = {
   73: 'Snow fall: Moderate',
   75: 'Snow fall: Heavy',
   77: 'Snow Grains',
-  80: 'Rain Showers: Slight',
-  81: 'Rain Showers: Moderate',
-  82: 'Rain Showers: Violent',
+  80: 'Showers: Light',
+  81: 'Showers: Moderate',
+  82: 'Showers: Violent',
   85: 'Snow Showers: Slight',
   86: 'Snow Showers: Heavy',
   95: 'T-Storms',
@@ -73,6 +74,13 @@ const getWeatherIcon = (weatherCode) => {
 
 const getWeatherDescription = (weatherCode) => {
   return weatherDescriptions[weatherCode] || 'Unknown weather';
+};
+
+const calculateHeatIndex = (temperatureF, humidity) => {
+  const T = temperatureF;
+  const R = humidity;
+  const HI = -42.379 + 2.04901523 * T + 10.14333127 * R - 0.22475541 * T * R - 0.00683783 * T * T - 0.05481717 * R * R + 0.00122874 * T * T * R + 0.00085282 * T * R * R - 0.00000199 * T * T * R * R;
+  return Math.round(HI);
 };
 
 const Dashboard = () => {
@@ -124,19 +132,32 @@ const Dashboard = () => {
       }
 
       // Fetch weather data from Open-Meteo API
-      const weatherResponse = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=temperature_2m_max,temperature_2m_min,weathercode&hourly=temperature_2m,weathercode&timezone=auto`);
+      const weatherResponse = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max&hourly=temperature_2m,weathercode&timezone=auto`);
       console.log(weatherResponse.data); // Debug: Log the full API response
 
       const weatherData = weatherResponse.data.current_weather;
 
+      // Assume a fixed humidity value (e.g., 70%) as the API doesn't provide humidity
+      const fixedHumidity = 70;
+      const temperatureFahrenheit = Math.round((weatherData.temperature * 9 / 5) + 32);
+      const heatIndexFahrenheit = calculateHeatIndex(temperatureFahrenheit, fixedHumidity);
+
       const currentWeather = {
         temperatureCelsius: Math.round(weatherData.temperature),
-        temperatureFahrenheit: Math.round((weatherData.temperature * 9/5) + 32),
+        temperatureFahrenheit: temperatureFahrenheit,
+        humidity: fixedHumidity,
         windSpeed: weatherData.windspeed,
         windDirection: weatherData.winddirection,
         weatherCode: weatherData.weathercode,
         weatherDescription: getWeatherDescription(weatherData.weathercode),
-        iconUrl: `/icons/${getWeatherIcon(weatherData.weathercode)}`
+        precipitationProbability: weatherResponse.data.daily.precipitation_probability_max[0], // Assuming we want today's probability
+        iconUrl: `/icons/${getWeatherIcon(weatherData.weathercode)}`,
+        heatIndexCelsius: Math.round((heatIndexFahrenheit - 32) * 5 / 9),
+        heatIndexFahrenheit: heatIndexFahrenheit,
+        temperatureMaxCelsius: Math.round(weatherResponse.data.daily.temperature_2m_max[0]),
+        temperatureMinCelsius: Math.round(weatherResponse.data.daily.temperature_2m_min[0]),
+        temperatureMaxFahrenheit: Math.round((weatherResponse.data.daily.temperature_2m_max[0] * 9 / 5) + 32),
+        temperatureMinFahrenheit: Math.round((weatherResponse.data.daily.temperature_2m_min[0] * 9 / 5) + 32)
       };
 
       setWeather(currentWeather);
@@ -146,10 +167,11 @@ const Dashboard = () => {
         date: new Date(time),
         temperatureMaxCelsius: Math.round(forecastData.temperature_2m_max[index]),
         temperatureMinCelsius: Math.round(forecastData.temperature_2m_min[index]),
-        temperatureMaxFahrenheit: Math.round((forecastData.temperature_2m_max[index] * 9/5) + 32),
-        temperatureMinFahrenheit: Math.round((forecastData.temperature_2m_min[index] * 9/5) + 32),
+        temperatureMaxFahrenheit: Math.round((forecastData.temperature_2m_max[index] * 9 / 5) + 32),
+        temperatureMinFahrenheit: Math.round((forecastData.temperature_2m_min[index] * 9 / 5) + 32),
         weatherCode: forecastData.weathercode[index],
-        weatherDescription: getWeatherDescription(forecastData.weathercode[index])
+        weatherDescription: getWeatherDescription(forecastData.weathercode[index]),
+        precipitationProbability: forecastData.precipitation_probability_max[index]
       }));
 
       setForecast(formattedForecast);
@@ -158,7 +180,7 @@ const Dashboard = () => {
       const formattedHourlyForecast = hourlyData.time.map((time, index) => ({
         time: new Date(time),
         temperatureCelsius: Math.round(hourlyData.temperature_2m[index]),
-        temperatureFahrenheit: Math.round((hourlyData.temperature_2m[index] * 9/5) + 32),
+        temperatureFahrenheit: Math.round((hourlyData.temperature_2m[index] * 9 / 5) + 32),
         weatherCode: hourlyData.weathercode[index],
         weatherDescription: getWeatherDescription(hourlyData.weathercode[index])
       }));
@@ -220,7 +242,6 @@ const Dashboard = () => {
         <h1>Dashboard</h1>
       </header>
       
-
       <div className="search-bar-container">
         <div className="search-bar">
           <input 
@@ -234,7 +255,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <label className="switch" style={{position:'relative', top:'-4.2vh', left: '-11.5vw', zIndex:'999'}}>
+      <label className="switch" style={{position:'relative', top:'5vh', left: '-38vw', zIndex:'999'}}>
           <input type="checkbox" checked={isCelsius} onChange={toggleTemperatureUnit} />
           <span className="slider">
             <span className="slider-text">
@@ -246,25 +267,39 @@ const Dashboard = () => {
       {weather && (
         <>
           <div className="section current-weather">
-            <img src={weather.iconUrl} alt={weather.weatherDescription} style={{ width: '150px', height: '150px', margin: '10px 0' }} />
-            <p style={{ fontSize: '58px', fontWeight: 'normal', color: 'white', margin: '-20px 0 0px 10px' }}>
+            <img src={weather.iconUrl} alt={weather.weatherDescription} style={{ width: '150px', height: '150px', margin: '10px 0 0 25px' }} />
+            <p style={{ fontSize: '58px', fontWeight: 'normal', color: 'white', margin: '-165px 0 0px 250px' }}>
               {isCelsius ? weather.temperatureCelsius : weather.temperatureFahrenheit}°{isCelsius ? 'C' : 'F'}
             </p>
+            <p style={{ fontSize: '16px', fontWeight: '100', fontStyle:"italic", color: 'rgba(255, 255, 255, 0.500)', margin: '-10px 0 10px 255px' }}>
+              Feels Like: {isCelsius ? weather.heatIndexCelsius : weather.heatIndexFahrenheit}°{isCelsius ? 'C' : 'F'}
+            </p>
             
-            <div style={{ display: 'flex', alignItems: 'center', margin: '-20px 0 15px -5px' }}>
-              <p style={{ fontSize: '16px', fontWeight: 'normal', color: 'white', margin: '10px 0 0 25px' }}>{weather.weatherDescription}</p>
+            <div style={{ display: 'flex', alignItems: 'center', margin: '-25px 0 15px 235px' }}>
+              <p style={{ fontSize: '20px', fontWeight: '100', color: 'rgba(145, 145, 145)', margin: '20px 5px 5px 0px' }}>
+                {weather.weatherDescription} | 
+                <img src={rainDropImage} alt={weather.precipitationProbability} style={{ width: '22px', height: '22px', margin: '5px 5px -5px 5px' }} />{weather.precipitationProbability}% 
+              </p>
             </div>
+
+            <div style={{ display: 'flex', flexDirection:'row', justifyContent:"flex-start", gap:'5px', alignItems: 'flex-start', margin: '-10px 0px 0px 260px', paddingBottom:"15px" }}>
+              <p style={{ fontSize: '14px', fontWeight: '100', color: '#ffa500', margin: '0px 5px 0px 0px' }}>
+                H: {isCelsius ? weather.temperatureMaxCelsius : weather.temperatureMaxFahrenheit}°{isCelsius ? 'C' : 'F'} 
+              </p>
+              <p style={{ fontSize: '14px', fontWeight: '100', color: '#458dab', margin: '0px 5px 0px 0px' }}>
+                L: {isCelsius ? weather.temperatureMinCelsius : weather.temperatureMinFahrenheit}°{isCelsius ? 'C' : 'F'}
+              </p>
+            </div>
+
 
             <div className="styled-line-break"></div>
 
-            <div style={{ display: 'flex', alignItems: 'center', margin: '0px 0 5px -5px' }}>
-              <img src={locationImage} alt="Location" style={{ width: '25px', height: '25px', margin:'0 5px' }} />
+            <div style={{ display: 'flex', flexDirection:'row', gap:'10px', alignItems: 'center', margin: '-15px 0 5px -10px' }}>
+              <img src={locationImage} alt="Location" style={{ width: '25px', height: '25px', margin:'-5px 0 -5px 5px' }} />
               <p style={{ fontSize: '16px', margin: '25px 0' }}>{location}</p>
-            </div>
-
-            <div style={{ display: 'flex', alignItems: 'center', margin: '0 0 10px 0' }}>
-              <img src={dateTimeImage} alt="Date and Time" style={{ width: '25px', height: '25px', margin: '0px 5px 5px 1px' }} />
-              <p style={{ fontSize: '14px', margin: '0px 0' }}>{currentTime.toLocaleTimeString()} | {currentTime.toLocaleDateString()}</p>
+          
+              <img src={dateTimeImage} alt="Date and Time" style={{ width: '25px', height: '25px', margin: '0px 5px 5px 15px' }} />
+              <p style={{ fontSize: '14.5px', margin: '0px 0' }}>{currentTime.toLocaleDateString()} | {currentTime.toLocaleTimeString()}</p>
             </div>
             
           </div>

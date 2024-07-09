@@ -10,8 +10,7 @@ function LandingPage() {
                 <source src={Rainstorm} type="video/mp4" />
             </video>
             <div className="content">
-                <h1 className='titleLanding'>Weather Aware</h1>
-                <p className='mottoLanding'>Your Severe Weather HQ</p>
+                <h1 className='titleLanding'>SPOTT'R</h1>
                 <div className="buttons">
                     <Link to="/dashboard">
                         <button>Dashboard</button>
