@@ -19,7 +19,7 @@ const weatherIcons = {
   56: 'freezing_drizzle_light.png',
   57: 'freezing_drizzle_dense.png',
   61: 'rain_slight.png',
-  63: 'rain_moderate.png',
+  63: 'rain.png',
   65: 'rain_heavy.png',
   66: 'freezing_rain_light.png',
   67: 'freezing_rain_heavy.png',
@@ -49,7 +49,7 @@ const weatherDescriptions = {
   55: 'Drizzle',
   56: 'Freezing Drizzle: Light',
   57: 'Freezing Drizzle: Dense',
-  61: 'Rain: Slight',
+  61: 'Rain',
   63: 'Rain: Moderate',
   65: 'Rain: Heavy',
   66: 'Freezing Rain: Light',
@@ -141,7 +141,7 @@ const Dashboard = () => {
       const weatherData = weatherResponse.data.current_weather;
 
       // Assume a fixed humidity value (e.g., 70%) as the API doesn't provide humidity
-      const fixedHumidity = 70;
+      const fixedHumidity = 40;
       const temperatureFahrenheit = Math.round((weatherData.temperature * 9 / 5) + 32);
       const heatIndexFahrenheit = calculateHeatIndex(temperatureFahrenheit, fixedHumidity);
 
@@ -242,7 +242,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <header className="header">
-        <h1>Dashboard</h1>
+        <h1></h1>
       </header>
       
       <div className="search-bar-container">
@@ -264,7 +264,7 @@ const Dashboard = () => {
         frameBorder="0"
       ></iframe>
 
-      <label className="switch" style={{position:'relative', top:'-32vh', left: '-37.5vw', zIndex:'999'}}>
+      <label className="switch" style={{position:'relative', top:'-26vh', left: '-21.5vw', zIndex:'999'}}>
           <input type="checkbox" checked={isCelsius} onChange={toggleTemperatureUnit} />
           <span className="slider">
             <span className="slider-text">
@@ -276,7 +276,7 @@ const Dashboard = () => {
       {weather && (
         <>
           <div className="section current-weather">
-          <h2 style={{position:'absolute', top: "-4.5vh", left:'1vw', fontSize:'24px'}}>Right Now:</h2>
+          <h2 style={{position:'absolute', top: "-3.5vh", left:'0.5vw', fontSize:'24px'}}>Right Now:</h2>
             <img src={weather.iconUrl} alt={weather.weatherDescription} style={{ width: '150px', height: '150px', margin: '10px 0 0 25px' }} />
             <p style={{ fontSize: '58px', fontWeight: 'normal', color: 'white', margin: '-165px 0 0px 250px' }}>
               {isCelsius ? weather.temperatureCelsius : weather.temperatureFahrenheit}°{isCelsius ? 'C' : 'F'}
@@ -303,8 +303,6 @@ const Dashboard = () => {
 
             <div className="styled-line-break"></div>
 
-            <div className="vertical-line"></div>
-
             <div style={{ display: 'flex', flexDirection:'row', gap:'10px', alignItems: 'center', margin: '-15px 0 5px -10px' }}>
               <img src={locationImage} alt="Location" style={{ width: '25px', height: '25px', margin:'-5px 0 -5px 5px' }} />
               <p style={{ fontSize: '16px', margin: '25px 0' }}>{location}</p>
@@ -319,8 +317,8 @@ const Dashboard = () => {
 
       {forecast && (
         <div className="section forecast">
-          <h2 style={{position:'absolute', top: "56vh", left:'10vw', fontSize:'30px'}}>7-Day Outlook</h2>
-          <h4 style={{position:'absolute', top: "60.5vh", left:'10vw', fontSize:'15px'}}>* Click for hourly forecast *</h4>
+          <h2 style={{position:'absolute', top: "66vh", left:'45vw', fontSize:'30px'}}>7-Day Outlook</h2>
+          <h4 style={{position:'absolute', top: "70vh", left:'45vw', fontSize:'15px'}}>* Click for hourly forecast *</h4>
           <div className="forecast-grid">
             {forecast.map((day, index) => (
               <div key={index} className="forecast-item" onClick={() => handleDayClick(index)}>

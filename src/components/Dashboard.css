@@ -28,7 +28,9 @@
 
 .search-bar {
   display: flex;
-  margin-left: 10px;
+  position: relative;
+  top: 4vh;
+  left: -0vw
 }
 
 .search-bar input {
@@ -55,12 +57,12 @@
 }
 
 iframe {
-  width: 35%;
-  height: 500px;
+  width: 30%;
+  height: 450px;
   border: 2px solid yellow;
   position: relative;
   top:5vh;
-  left:30vw;
+  left:-0vw;
   border-radius: 25px;
 }
 
@@ -185,7 +187,7 @@ input:checked + .slider:before {
 
 .current-weather {
   text-align: left;
-  max-width: 850px;
+  max-width: 470px;
   height: 250px;
   padding: 25px;
   border-radius: 20px;
@@ -194,8 +196,8 @@ input:checked + .slider:before {
   flex-direction: column;
   gap: 5px;
   position: relative;
-  top: -35vh;
-  left: -22vw;
+  top: -29vh;
+  left: -30vw;
 }
 
 .short-forecast {
@@ -204,7 +206,7 @@ input:checked + .slider:before {
 }
 
 .styled-line-break {
-  width: 45%;
+  width: 100%;
   height: 1px;
   border: solid 1px rgba(108, 137, 218, 0.548);
   background-color: rgba(108, 137, 218, 0.247);
@@ -247,7 +249,8 @@ input:checked + .slider:before {
   max-width:1100px;
   gap: 15px;
   position: relative;
-  top: -23vh;
+  top: -1vh;
+  left: 18vw;
 }
 
 .forecast-item {
