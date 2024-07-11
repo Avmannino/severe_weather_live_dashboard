@@ -1,8 +1,9 @@
+// src/App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
-import LandingPage from './components/LandingPage.jsx'; // Ensure the path is correct based on your file structure
+import LandingPage from './components/LandingPage.jsx';
 import Dashboard from './components/Dashboard.jsx';
-import Navbar from './components/Navbar.jsx'; // Import the Navbar component
+import Navbar from './components/Navbar.jsx';
 
 function App() {
     return (

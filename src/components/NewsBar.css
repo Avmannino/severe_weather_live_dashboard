@@ -1,0 +1,25 @@
+/* src/components/NewsBar.css */
+.news-bar {
+    width: 100%;
+    background-color: #f8be0075;
+    color: rgb(0, 0, 0);
+    padding: 10px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    bottom:88vh;
+}
+
+.news-item {
+    display: inline-block;
+    margin-right: 50px;  /* Spacing between items */
+}
+
+.news-item a {
+    color: white;
+    text-decoration: none;
+}
+
+.news-item a:hover {
+    text-decoration: underline;
+}

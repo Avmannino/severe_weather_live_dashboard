@@ -180,7 +180,6 @@ input:checked + .slider:before {
   margin-bottom: 10px;
 }
 
-
 .current-weather h2 {
   margin: 0;
 }
@@ -222,7 +221,6 @@ input:checked + .slider:before {
   border: solid 1px rgba(108, 137, 218, 0.548);
 }
 
-
 .current-weather-details {
   display: flex;
   flex-direction: column;
@@ -239,7 +237,6 @@ input:checked + .slider:before {
   font-size: 45px;
   font-weight: bold;
 }
-
 
 .forecast-grid {
   display: flex;
@@ -306,3 +303,21 @@ input:checked + .slider:before {
     width: 350px;
   }
 }
+
+
+.current-weather .expanded-section {
+  transition: height 0.3s ease;
+}
+
+.current-weather .expanded-section.collapsed {
+  height: 0;
+  overflow: hidden;
+}
+
+.current-weather .expanded-section.expanded {
+  height: 500px; 
+ 
+}
+
+
+

@@ -1,10 +1,14 @@
+// src/components/Dashboard.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Dashboard.css';
+import NewsBar from './NewsBar';
 
 const locationImage = "./icons/location_marker.png";
 const dateTimeImage = "./icons/calendar_small.png";
 const rainDropImage = "./icons/rain_drop.png";
+const caretDownImage = "./icons/caretdown.png";
+const caretUpImage = "./icons/caretup.png";
 
 const weatherIcons = {
   0: 'sunny.png',
@@ -93,6 +97,8 @@ const Dashboard = () => {
   const [isCelsius, setIsCelsius] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
   const [latLon, setLatLon] = useState({ lat: 50.4, lon: 14.3, zoom: 5 }); // Default coordinates with zoom level
+  const [isExpanded, setIsExpanded] = useState(false); // State for managing expansion
+  const [uvIndex, setUvIndex] = useState(null); // State for storing UV index
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -164,6 +170,11 @@ const Dashboard = () => {
       };
 
       setWeather(currentWeather);
+
+      // Fetch UV index data
+      const uvResponse = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=uv_index_max&timezone=auto`);
+      const uvIndexData = uvResponse.data.daily.uv_index_max[0];
+      setUvIndex(uvIndexData);
 
       const forecastData = weatherResponse.data.daily;
       const formattedForecast = forecastData.time.map((time, index) => ({
@@ -239,6 +250,10 @@ const Dashboard = () => {
     });
   };
 
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
+  };
+
   return (
     <div className="dashboard-container">
       <header className="header">
@@ -311,6 +326,17 @@ const Dashboard = () => {
               <p style={{ fontSize: '14.5px', margin: '0px 0' }}>{currentTime.toLocaleDateString()} | {currentTime.toLocaleTimeString()}</p>
             </div>
             
+            <button onClick={toggleExpand} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0' }}>
+              <img src={isExpanded ? caretUpImage : caretDownImage} alt="Toggle Expand" style={{ width: '30px', height: '30px', margin: '10px 0' }} />
+            </button>
+
+            <div className={`expanded-section ${isExpanded ? 'expanded' : 'collapsed'}`}>
+              {isExpanded && (
+                <div style={{ padding: '20px', backgroundColor: 'rgba(255, 255, 255, 0.1)', borderRadius: '10px' }}>
+                  <p style={{ color: 'white' }}>UV Index: {uvIndex !== null ? uvIndex : 'Loading...'}</p>
+                </div>
+              )}
+            </div>
           </div>
         </>
       )}
@@ -359,6 +385,9 @@ const Dashboard = () => {
           </div>
         </div>
       )}
+
+      {/* Add the NewsBar component here */}
+      <NewsBar />
     </div>
   );
 }
