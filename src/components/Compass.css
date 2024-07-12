@@ -1,0 +1,20 @@
+.compass {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    margin: 10px 0 0 0;
+  }
+  
+
+  
+  .compass-arrow {
+    position: relative;
+    top: -0%;
+    left: -100%;
+    width: 55px;
+    height: 55px;
+    transform-origin:center center;
+    transform: translateX(-50%) translateY(-100%);
+    z-index: 1; /* Ensures the arrow is above the compass */
+  }
+  

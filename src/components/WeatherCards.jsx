@@ -1,12 +1,13 @@
-// src/components/WeatherCards.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import GaugeChart from 'react-gauge-chart';
+import Compass from './Compass.jsx';
 import './WeatherCards.css';
 
 const WeatherCards = ({ lat, lon }) => {
   const [uvIndex, setUvIndex] = useState(null);
   const [windSpeed, setWindSpeed] = useState(null);
+  const [windDirection, setWindDirection] = useState(null);
 
   useEffect(() => {
     const fetchWeatherData = async () => {
@@ -17,9 +18,10 @@ const WeatherCards = ({ lat, lon }) => {
           setUvIndex(uvIndexData);
 
           const windResponse = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&timezone=auto`);
-          const windSpeedData = windResponse.data.current_weather.windspeed;
-          const windSpeedMph = (windSpeedData * 0.621371).toFixed(1); 
+          const windData = windResponse.data.current_weather;
+          const windSpeedMph = (windData.windspeed * 0.621371).toFixed(1); 
           setWindSpeed(windSpeedMph);
+          setWindDirection(windData.winddirection);
         } catch (error) {
           console.error('Error fetching weather data', error);
         }
@@ -30,18 +32,18 @@ const WeatherCards = ({ lat, lon }) => {
   }, [lat, lon]);
 
   const getGaugeValue = (uvIndex) => {
-    if (uvIndex <= 1.0) return 0.01; // mapped to 10%
-    if (uvIndex <= 2.9) return 0.10; // mapped to 20%
-    if (uvIndex <= 3.0) return 0.20; // mapped to 30%
-    if (uvIndex <= 4.5) return 0.20; // mapped to 40%
-    if (uvIndex <= 5.9) return 0.30; // mapped to 50%
-    if (uvIndex <= 6.0) return 0.40; // mapped to 60%
-    if (uvIndex <= 7.9) return 0.50; // mapped to 70%
-    if (uvIndex <= 8.0) return 0.70; // mapped to 80%
-    if (uvIndex <= 9.0) return 0.70; // mapped to 90%
-    if (uvIndex <= 10.9) return 0.80; // mapped to 95%
-    if (uvIndex <= 11.0) return .90; // mapped to 100%
-    return 1; // 11+ mapped to 100%
+    if (uvIndex <= 1.0) return 0.01;
+    if (uvIndex <= 2.9) return 0.10;
+    if (uvIndex <= 3.0) return 0.20;
+    if (uvIndex <= 4.5) return 0.20;
+    if (uvIndex <= 5.9) return 0.30;
+    if (uvIndex <= 6.0) return 0.40;
+    if (uvIndex <= 7.9) return 0.50;
+    if (uvIndex <= 8.0) return 0.70;
+    if (uvIndex <= 9.0) return 0.70;
+    if (uvIndex <= 10.9) return 0.80;
+    if (uvIndex <= 11.0) return .90;
+    return 1;
   };
 
   const getUvLevel = (uvIndex) => {
@@ -52,8 +54,14 @@ const WeatherCards = ({ lat, lon }) => {
     return 'Extreme';
   };
 
+  const getWindDirection = (degree) => {
+    const directions = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
+    const index = Math.round(degree / 22.5);
+    return directions[index % 16];
+  };
+
   if (!lat || !lon) {
-    return null; // Return nothing if lat and lon are not set
+    return null;
   }
 
   return (
@@ -82,10 +90,12 @@ const WeatherCards = ({ lat, lon }) => {
         )}
       </div>
       <div className="weather-card">
-        {windSpeed !== null ? (
+        {windSpeed !== null && windDirection !== null ? (
           <div className="wind-speed">
-            <h3>Wind Speed</h3>
-            <p>{windSpeed} mph</p>
+            <h3>Wind</h3>
+            {windSpeed} MPH
+            <p className='wind-direction'>{getWindDirection(windDirection)}</p>
+            <Compass direction={windDirection} />
           </div>
         ) : (
           <p>Loading...</p>

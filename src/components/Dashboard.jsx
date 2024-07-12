@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Dashboard.css';
-import NewsBar from './NewsBar';
+// import NewsBar from './NewsBar';
 import WeatherCards from './WeatherCards';
 import DashNav from './DashNav'; // Import the DashNav component
 
@@ -282,39 +282,39 @@ const Dashboard = () => {
       {weather && (
         <>
           <div className="section current-weather">
-          <h2 style={{position:'absolute', top: "-4.5vh", left:'7vw', fontSize:'24px'}}>Right Now:</h2>
-            <img src={weather.iconUrl} alt={weather.weatherDescription} style={{ width: '150px', height: '150px', margin: '10px 0 0 25px' }} />
-            <p style={{ fontSize: '58px', fontWeight: 'normal', color: 'white', margin: '-165px 0 0px 250px' }}>
+          <h2 style={{position:'absolute', top: "-4.5vh", left:'0vw', fontSize:'24px'}}>Right Now:</h2>
+            <img src={weather.iconUrl} alt={weather.weatherDescription} style={{ width: '170px', height: '170px', margin: '10px 0 0 50px' }} />
+            <p style={{ fontSize: '60px', fontWeight: 'normal', color: 'white', margin: '-185px 0 0px 320px' }}>
               {isCelsius ? weather.temperatureCelsius : weather.temperatureFahrenheit}°{isCelsius ? 'C' : 'F'}
             </p>
-            <p style={{ fontSize: '16px', fontWeight: '100', fontStyle:"italic", color: 'rgba(255, 255, 255, 0.500)', margin: '-10px 0 10px 255px' }}>
+            <p style={{ fontSize: '16px', fontWeight: '100', fontStyle:"italic", color: 'rgba(255, 255, 255, 0.500)', margin: '-15px 0 10px 325px' }}>
               Feels Like: {isCelsius ? weather.heatIndexCelsius : weather.heatIndexFahrenheit}°{isCelsius ? 'C' : 'F'}
             </p>
             
-            <div style={{ display: 'flex', alignItems: 'center', margin: '-25px 0 15px 235px' }}>
-              <p style={{ fontSize: '20px', fontWeight: '100', color: 'rgba(145, 145, 145)', margin: '20px 5px 5px 0px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', margin: '-20px 0 20px 305px' }}>
+              <p style={{ fontSize: '22px', fontWeight: '100', color: 'white', margin: '20px 5px 5px -0px', overflow:'clip' }}>
                 {weather.weatherDescription} | 
-                <img src={rainDropImage} alt={weather.precipitationProbability} style={{ width: '22px', height: '22px', margin: '5px 5px -5px 5px' }} />{weather.precipitationProbability}% 
+                <img src={rainDropImage} alt={weather.precipitationProbability} style={{ width: '22px', height: '22px', margin: '5px 5px -5px 2px' }} />{weather.precipitationProbability}% 
               </p>
             </div>
 
-            <div style={{ display: 'flex', flexDirection:'row', justifyContent:"flex-start", gap:'5px', alignItems: 'flex-start', margin: '-10px 0px 0px 260px', paddingBottom:"15px" }}>
-              <p style={{ fontSize: '14px', fontWeight: '100', color: '#ffa500', margin: '0px 5px 0px 0px' }}>
+            <div style={{ display: 'flex', flexDirection:'row', justifyContent:"flex-start", gap:'5px', alignItems: 'flex-start', margin: '-15px 0px 0px 315px', paddingBottom:"15px" }}>
+              <p style={{ fontSize: '20px', fontWeight: '100', color: '#ffa500', margin: '0px 5px 0px 0px' }}>
                 H: {isCelsius ? weather.temperatureMaxCelsius : weather.temperatureMaxFahrenheit}°{isCelsius ? 'C' : 'F'} 
               </p>
-              <p style={{ fontSize: '14px', fontWeight: '100', color: '#458dab', margin: '0px 5px 0px 0px' }}>
+              <p style={{ fontSize: '20px', fontWeight: '100', color: '#458dab', margin: '0px 5px 0px 0px' }}>
                 L: {isCelsius ? weather.temperatureMinCelsius : weather.temperatureMinFahrenheit}°{isCelsius ? 'C' : 'F'}
               </p>
             </div>
 
             <div className="styled-line-break"></div>
 
-            <div style={{ display: 'flex', flexDirection:'row', gap:'10px', alignItems: 'center', margin: '-15px 0 5px -10px' }}>
+            <div style={{ display: 'flex', flexDirection:'row', gap:'10px', justifyContent:'center', alignItems: 'center', margin: '-15px 0 5px -10px' }}>
               <img src={locationImage} alt="Location" style={{ width: '25px', height: '25px', margin:'-5px 0 -5px 5px' }} />
-              <p style={{ fontSize: '16px', margin: '25px 0' }}>{location}</p>
+              <p style={{ fontSize: '20px', margin: '25px 0' }}>{location}</p>
           
-              <img src={dateTimeImage} alt="Date and Time" style={{ width: '25px', height: '25px', margin: '0px 5px 5px 15px' }} />
-              <p style={{ fontSize: '14.5px', margin: '0px 0' }}>{currentTime.toLocaleDateString()} | {currentTime.toLocaleTimeString()}</p>
+              <img src={dateTimeImage} alt="Date and Time" style={{ width: '25px', height: '25px', margin: '0px 0px 0px 55px' }} />
+              <p style={{ fontSize: '15px', margin: '25px 0' }}>{currentTime.toLocaleDateString()} | {currentTime.toLocaleTimeString()}</p>
             </div>
             
             <button onClick={toggleExpand} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0' }}>
@@ -383,7 +383,7 @@ const Dashboard = () => {
         </div>
       )}
 
-      <NewsBar />
+      {/* <NewsBar /> */}
     </div>
   );
 }
