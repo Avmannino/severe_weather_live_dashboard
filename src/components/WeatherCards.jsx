@@ -52,6 +52,10 @@ const WeatherCards = ({ lat, lon }) => {
     return 'Extreme';
   };
 
+  if (!lat || !lon) {
+    return null; // Return nothing if lat and lon are not set
+  }
+
   return (
     <div className="weather-cards-container">
       <div className="weather-card">

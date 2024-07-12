@@ -4,7 +4,7 @@ import axios from 'axios';
 import './Dashboard.css';
 import NewsBar from './NewsBar';
 import WeatherCards from './WeatherCards';
-import MyLocation from './MyLocation'; // Import the MyLocation component
+import DashNav from './DashNav'; // Import the DashNav component
 
 const locationImage = "./icons/location_marker.png";
 const dateTimeImage = "./icons/calendar_small.png";
@@ -100,6 +100,7 @@ const Dashboard = () => {
   const [selectedDay, setSelectedDay] = useState(null);
   const [latLon, setLatLon] = useState({ lat: 50.4, lon: 14.3, zoom: 5 }); // Default coordinates with zoom level
   const [isExpanded, setIsExpanded] = useState(false); // State for managing expansion
+  const [searchConducted, setSearchConducted] = useState(false); // State for tracking search
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -198,6 +199,7 @@ const Dashboard = () => {
       console.log(formattedHourlyForecast); // Debug: Log the formatted hourly forecast
 
       setHourlyForecast(formattedHourlyForecast);
+      setSearchConducted(true); // Set search conducted to true after successful search
     } catch (error) {
       console.error('Error fetching weather data', error);
     }
@@ -260,35 +262,22 @@ const Dashboard = () => {
       <header className="header">
         <h1></h1>
       </header>
-      
-      <div className="search-bar-container">
-        <div className="search-bar">
-          <input 
-            type="text" 
-            value={searchInput} 
-            onChange={(e) => setSearchInput(e.target.value)} 
-            onKeyDown={handleKeyDown} 
-            placeholder="Enter city name or ZIP code" 
-          />
-          <button onClick={handleSearch}>Search</button>
-          <MyLocation updateSearchBar={updateSearchBar} /> {/* Add the MyLocation component */}
-        </div>
-      </div>
+
+      <DashNav 
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
+        handleSearch={handleSearch}
+        handleKeyDown={handleKeyDown}
+        toggleTemperatureUnit={toggleTemperatureUnit}
+        isCelsius={isCelsius}
+        updateSearchBar={updateSearchBar}
+      />
 
       <iframe
         title="Windy Map"
         src={`https://embed.windy.com/embed2.html?lat=${latLon.lat}&lon=${latLon.lon}&detailLat=${latLon.lat}&detailLon=${latLon.lon}&width=650&height=450&zoom=${latLon.zoom}&level=surface&overlay=radar&product=ecmwf&menu=&message=true&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1`}
         frameBorder="0"
       ></iframe>
-
-      <label className="switch" style={{position:'relative', top:'-26vh', left: '-21.5vw', zIndex:'999'}}>
-          <input type="checkbox" checked={isCelsius} onChange={toggleTemperatureUnit} />
-          <span className="slider">
-            <span className="slider-text">
-              {isCelsius ? '°C' : '°F'}
-            </span>
-          </span>
-      </label>
 
       {weather && (
         <>
@@ -345,8 +334,8 @@ const Dashboard = () => {
 
       {forecast && (
         <div className="section forecast">
-          <h2 style={{position:'absolute', top: "60vh", left:'45vw', fontSize:'30px'}}>7-Day Outlook</h2>
-          <h4 style={{position:'absolute', top: "64vh", left:'45vw', fontSize:'15px'}}>* Click for hourly forecast *</h4>
+          <h2 style={{position:'absolute', top: "14vh", left:'48vw', fontSize:'30px'}}>7-Day Outlook</h2>
+          <h4 style={{position:'absolute', top: "18vh", left:'48vw', fontSize:'15px'}}>* Click for hourly forecast *</h4>
           <div className="forecast-grid">
             {forecast.map((day, index) => (
               <div key={index} className="forecast-item" onClick={() => handleDayClick(index)}>
@@ -388,10 +377,13 @@ const Dashboard = () => {
         </div>
       )}
 
+      {searchConducted && (
+        <div className='weather-cards'>
+          <WeatherCards lat={latLon.lat} lon={latLon.lon} />
+        </div>
+      )}
+
       <NewsBar />
-      <div className='weather-cards'>
-        <WeatherCards lat={latLon.lat} lon={latLon.lon} />
-      </div>
     </div>
   );
 }

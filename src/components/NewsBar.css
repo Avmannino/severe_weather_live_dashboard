@@ -10,6 +10,7 @@
     top: 0px; /* Adjust this value based on your navbar height */
     left: 0;
     z-index: 1;
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.400);
   }
 
 .news-item {

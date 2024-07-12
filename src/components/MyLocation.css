@@ -1,0 +1,24 @@
+/* src/components/MyLocation.css */
+.location-button {
+    display: flex;
+    align-items: center;
+    background-color: #024c57;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 5px;
+
+  }
+  
+  .location-button .location-icon {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+  }
+  
+  .location-button:hover {
+    background-color: #024c57;
+  }
+  

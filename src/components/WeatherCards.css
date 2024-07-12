@@ -21,7 +21,7 @@
     aspect-ratio: 1; /* Maintain a 1:1 aspect ratio */
     background-color: #a1a1a13d;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 15px 15px 13px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s;
     display: flex;
     flex-direction: column;
