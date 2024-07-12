@@ -4,6 +4,7 @@ import axios from 'axios';
 import './Dashboard.css';
 import NewsBar from './NewsBar';
 import WeatherCards from './WeatherCards';
+import MyLocation from './MyLocation'; // Import the MyLocation component
 
 const locationImage = "./icons/location_marker.png";
 const dateTimeImage = "./icons/calendar_small.png";
@@ -249,6 +250,11 @@ const Dashboard = () => {
     setIsExpanded(!isExpanded);
   };
 
+  const updateSearchBar = (zipCode) => {
+    setSearchInput(zipCode);
+    handleSearch();
+  };
+
   return (
     <div className="dashboard-container">
       <header className="header">
@@ -265,6 +271,7 @@ const Dashboard = () => {
             placeholder="Enter city name or ZIP code" 
           />
           <button onClick={handleSearch}>Search</button>
+          <MyLocation updateSearchBar={updateSearchBar} /> {/* Add the MyLocation component */}
         </div>
       </div>
 
@@ -338,8 +345,8 @@ const Dashboard = () => {
 
       {forecast && (
         <div className="section forecast">
-          <h2 style={{position:'absolute', top: "66vh", left:'45vw', fontSize:'30px'}}>7-Day Outlook</h2>
-          <h4 style={{position:'absolute', top: "70vh", left:'45vw', fontSize:'15px'}}>* Click for hourly forecast *</h4>
+          <h2 style={{position:'absolute', top: "60vh", left:'45vw', fontSize:'30px'}}>7-Day Outlook</h2>
+          <h4 style={{position:'absolute', top: "64vh", left:'45vw', fontSize:'15px'}}>* Click for hourly forecast *</h4>
           <div className="forecast-grid">
             {forecast.map((day, index) => (
               <div key={index} className="forecast-item" onClick={() => handleDayClick(index)}>
