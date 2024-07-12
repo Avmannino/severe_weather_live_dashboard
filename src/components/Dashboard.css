@@ -8,6 +8,7 @@
   background-repeat: no-repeat;
   background-size: auto;
   font-family: dashboard;
+  position: relative;
 }
 
 @font-face {
@@ -24,13 +25,12 @@
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  position: relative;
+  top: 4vh;
 }
 
 .search-bar {
   display: flex;
-  position: relative;
-  top: 4vh;
-  left: -0vw
 }
 
 .search-bar input {
@@ -57,12 +57,12 @@
 }
 
 iframe {
-  width: 30%;
+  width: 100%;
+  max-width: 650px;
   height: 450px;
   border: 2px solid yellow;
   position: relative;
-  top:5vh;
-  left:-0vw;
+  top: 5vh;
   border-radius: 25px;
 }
 
@@ -212,7 +212,6 @@ input:checked + .slider:before {
   margin: 5px 0;
 }
 
-/* Dashboard.css */
 .vertical-line {
   width: 20px;
   background-color: rgba(255, 255, 255, 0.3);
@@ -243,7 +242,7 @@ input:checked + .slider:before {
   flex-direction: row;
   padding-left: -122px;
   height: 100%;
-  max-width:1100px;
+  max-width: 1100px;
   gap: 15px;
   position: relative;
   top: -1vh;
@@ -291,7 +290,7 @@ input:checked + .slider:before {
   align-items: center;
   margin: 60px 0 0 0;
   height: 45px;
-  width: 130px
+  width: 130px;
 }
 
 @media (min-width: 768px) {
@@ -304,6 +303,11 @@ input:checked + .slider:before {
   }
 }
 
+.weather-cards {
+  position: relative;
+  bottom: 80vh;
+  left: 33vw;
+}
 
 .current-weather .expanded-section {
   transition: height 0.3s ease;
@@ -316,8 +320,4 @@ input:checked + .slider:before {
 
 .current-weather .expanded-section.expanded {
   height: 500px; 
- 
 }
-
-
-

@@ -6,13 +6,16 @@
     padding: 10px 0;
     overflow: hidden;
     white-space: nowrap;
-    position: relative;
-    bottom:88vh;
-}
+    position: absolute;
+    top: 0px; /* Adjust this value based on your navbar height */
+    left: 0;
+    z-index: 1;
+  }
 
 .news-item {
     display: inline-block;
-    margin-right: 50px;  /* Spacing between items */
+    margin-right: 50px; /* Spacing between items */
+    font-size: 1em;
 }
 
 .news-item a {
@@ -22,4 +25,27 @@
 
 .news-item a:hover {
     text-decoration: underline;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    .news-bar {
+        padding: 10px 5px;
+    }
+
+    .news-item {
+        margin-right: 20px; /* Reduce spacing for smaller screens */
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    .news-bar {
+        padding: 10px 3px;
+    }
+
+    .news-item {
+        margin-right: 10px; /* Further reduce spacing for smaller screens */
+        font-size: 0.8em;
+    }
 }

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Dashboard.css';
 import NewsBar from './NewsBar';
+import WeatherCards from './WeatherCards';
 
 const locationImage = "./icons/location_marker.png";
 const dateTimeImage = "./icons/calendar_small.png";
@@ -98,7 +99,6 @@ const Dashboard = () => {
   const [selectedDay, setSelectedDay] = useState(null);
   const [latLon, setLatLon] = useState({ lat: 50.4, lon: 14.3, zoom: 5 }); // Default coordinates with zoom level
   const [isExpanded, setIsExpanded] = useState(false); // State for managing expansion
-  const [uvIndex, setUvIndex] = useState(null); // State for storing UV index
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -138,7 +138,7 @@ const Dashboard = () => {
         }
       }
 
-      setLatLon({ lat, lon, zoom: 20 }); // Set zoom level to 10 for city-level view
+      setLatLon({ lat, lon, zoom: 20 }); // Set zoom level to 20 for city-level view
 
       // Fetch weather data from Open-Meteo API
       const weatherResponse = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max&hourly=temperature_2m,weathercode&timezone=auto`);
@@ -170,11 +170,6 @@ const Dashboard = () => {
       };
 
       setWeather(currentWeather);
-
-      // Fetch UV index data
-      const uvResponse = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=uv_index_max&timezone=auto`);
-      const uvIndexData = uvResponse.data.daily.uv_index_max[0];
-      setUvIndex(uvIndexData);
 
       const forecastData = weatherResponse.data.daily;
       const formattedForecast = forecastData.time.map((time, index) => ({
@@ -386,8 +381,10 @@ const Dashboard = () => {
         </div>
       )}
 
-      {/* Add the NewsBar component here */}
       <NewsBar />
+      <div className='weather-cards'>
+        <WeatherCards lat={latLon.lat} lon={latLon.lon} />
+      </div>
     </div>
   );
 }

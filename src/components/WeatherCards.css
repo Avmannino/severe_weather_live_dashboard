@@ -1,0 +1,77 @@
+/* src/components/WeatherCards.css */
+.weather-cards-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Default to 4 columns */
+    gap: 10px;
+    justify-items: center;
+    align-items: center;
+    font-family: dashboard;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'dashboard';
+    src: url('./dashboard.otf') format('opentype');
+}
+
+.weather-card {
+    width: 100%;
+    max-width: 175px;
+    aspect-ratio: 1; /* Maintain a 1:1 aspect ratio */
+    background-color: #a1a1a13d;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.weather-card:hover {
+    transform: scale(1.05);
+}
+
+.uv-index {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.uv-index h3 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #ffffff;
+    font-weight: 100;
+}
+
+.uv-index p {
+    margin: 5px 0;
+    font-size: 1em;
+    color: #dbdbdbd2;
+    font-weight: 100;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 1200px) {
+    .weather-cards-container {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns for medium screens */
+    }
+}
+
+@media (max-width: 900px) {
+    .weather-cards-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for small screens */
+    }
+}
+
+@media (max-width: 600px) {
+    .weather-cards-container {
+        grid-template-columns: repeat(1, 1fr); /* 1 column for extra small screens */
+    }
+}
