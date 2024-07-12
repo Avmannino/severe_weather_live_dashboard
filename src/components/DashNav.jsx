@@ -3,9 +3,17 @@ import React from 'react';
 import MyLocation from './MyLocation';
 import './DashNav.css';
 
-const DashNav = ({ searchInput, setSearchInput, handleSearch, handleKeyDown, toggleTemperatureUnit, isCelsius, updateSearchBar }) => {
+const DashNav = ({ toggleTemperatureUnit, isCelsius, searchInput, setSearchInput, handleSearch, handleKeyDown, updateSearchBar }) => {
   return (
     <div className="dash-nav">
+        <label className="switch">
+            <input type="checkbox" checked={isCelsius} onChange={toggleTemperatureUnit} />
+            <span className="slider">
+            <span className="slider-text">
+                {isCelsius ? '°C' : '°F'}
+            </span>
+            </span>
+        </label>
       <div className="search-bar">
         <input 
           type="text" 
@@ -17,14 +25,6 @@ const DashNav = ({ searchInput, setSearchInput, handleSearch, handleKeyDown, tog
         <button onClick={handleSearch}>Search</button>
         <MyLocation updateSearchBar={updateSearchBar} />
       </div>
-      <label className="switch">
-        <input type="checkbox" checked={isCelsius} onChange={toggleTemperatureUnit} />
-        <span className="slider">
-          <span className="slider-text">
-            {isCelsius ? '°C' : '°F'}
-          </span>
-        </span>
-      </label>
     </div>
   );
 };

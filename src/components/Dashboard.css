@@ -63,7 +63,7 @@ iframe {
   border: 2px solid yellow;
   position: relative;
   top: 34.5vh;
-  left: 21vw;
+  left: 20vw;
   border-radius: 25px;
   box-shadow: 0px 0px 17px 15px rgba(0, 0, 0, 0.400);
   transition: transform 0.2s;
@@ -90,9 +90,12 @@ iframe {
 
 .hourly-forecast-grid {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  border-radius: 38px;
+  flex-direction: column;
+  max-height: 300px; /* Adjust this value based on your layout needs */
+  overflow-y: auto;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #2c3e50; /* Background color to make it distinct */
 }
 
 .hourly-forecast-item {
@@ -103,32 +106,41 @@ iframe {
   background-color: #34495e;
   border-radius: 8px;
   padding: 10px;
-  margin: 5px;
-  width: 80px;
+  margin: 5px 0; /* Adjust margin for spacing between items */
+  width: 100%;
   text-align: center;
 }
 
-.hourly-forecast-time {
-  font-size: 14px;
-  margin-bottom: 5px;
-  color: #ecf0f1;
+.hourly-forecast-time, .hourly-forecast-temp, .hourly-forecast-description, .hourly-forecast-icon {
+  margin: 0px 5px 5px 1px;
 }
 
 .hourly-forecast-temp {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 15px;
-  color: #e74c3c;
+  color: #daa700;
 }
 
 .hourly-forecast-icon img {
-  width: 40px;
-  height: 40px;
-  margin-bottom: 10px;
+  width: 45px;
+  height: 45px;
+  margin-bottom: -5px;
+}
+
+/* Additional styles to ensure smooth scrolling and better visuals */
+.hourly-forecast-grid::-webkit-scrollbar {
+  width: 15px;
+}
+
+.hourly-forecast-grid::-webkit-scrollbar-track {
+  background: #dbdbdb;
+}
+
+.hourly-forecast-grid::-webkit-scrollbar-thumb {
+  background-color: #daa700;
+  border-radius: 8px;
 }
 
 .current-weather h2 {
-  margin: 0;
+  margin: 10px;
 }
 
 .current-weather {
@@ -144,8 +156,8 @@ iframe {
   flex-direction: column;
   gap: 5px;
   position: relative;
-  top: -35vh;
-  left: -24vw;
+  top: -37vh;
+  left: -22vw;
 }
 
 .current-weather:hover {
@@ -200,7 +212,7 @@ iframe {
   gap: 15px;
   position: relative;
   bottom: 57.5vh;
-  left: 38vw;
+  left: 37vw;
   
 }
 

@@ -69,7 +69,7 @@ const weatherDescriptions = {
   82: 'Showers: Violent',
   85: 'Snow Showers: Slight',
   86: 'Snow Showers: Heavy',
-  95: 'T-Storms',
+  95: 'Thunderstorms',
   96: 'Thunderstorm w/ slight hail',
   99: 'Thunderstorm w/ heavy hail'
 };
@@ -282,7 +282,7 @@ const Dashboard = () => {
       {weather && (
         <>
           <div className="section current-weather">
-          <h2 style={{position:'absolute', top: "-3.5vh", left:'0.5vw', fontSize:'24px'}}>Right Now:</h2>
+          <h2 style={{position:'absolute', top: "-4.5vh", left:'7vw', fontSize:'24px'}}>Right Now:</h2>
             <img src={weather.iconUrl} alt={weather.weatherDescription} style={{ width: '150px', height: '150px', margin: '10px 0 0 25px' }} />
             <p style={{ fontSize: '58px', fontWeight: 'normal', color: 'white', margin: '-165px 0 0px 250px' }}>
               {isCelsius ? weather.temperatureCelsius : weather.temperatureFahrenheit}°{isCelsius ? 'C' : 'F'}
@@ -334,8 +334,8 @@ const Dashboard = () => {
 
       {forecast && (
         <div className="section forecast">
-          <h2 style={{position:'absolute', top: "14vh", left:'48vw', fontSize:'30px'}}>7-Day Outlook</h2>
-          <h4 style={{position:'absolute', top: "18vh", left:'48vw', fontSize:'15px'}}>* Click for hourly forecast *</h4>
+          <h2 style={{position:'absolute', top: "14vh", left:'65vw', fontSize:'30px'}}>7-Day Outlook</h2>
+          <h4 style={{position:'absolute', top: "18vh", left:'65vw', fontSize:'15px'}}>* Click for hourly forecast *</h4>
           <div className="forecast-grid">
             {forecast.map((day, index) => (
               <div key={index} className="forecast-item" onClick={() => handleDayClick(index)}>
