@@ -313,20 +313,20 @@ iframe:hover {
   iframe {
     width: 39%;
     height: 42vh;
-    top: 37vh;
-    left: 22vw;
+    top: 34vh;
+    left: 20vw;
   }
   
   .weather-cards {
-    bottom: 60vh;
-    left: -16vw;
+    bottom: 54vh;
+    left: -18vw;
     
   }
 
   .current-weather {
     text-align: left;
     width: 300px;
-    height: 320px;
+    height: 330px;
     padding: 25px;
     border-radius: 20px;
     background-color: rgba(114, 113, 113, 0.28);
@@ -337,14 +337,14 @@ iframe:hover {
     align-items: center;
     gap: 5px;
     position: relative;
-    top: -40vh;
-    left: -16vw;
+    top: -38vh;
+    left: -18vw;
   }
 
   .current-weather img {
     width: 120px;
     height: 120px;
-    margin: 150px 0 0 0px;
+    margin: 140px 0 0 0px;
   }
 
   .current-weather h2 {
@@ -359,11 +359,11 @@ iframe:hover {
     font-size: 48px;
     font-weight: normal;
     color: white;
-    margin: -260px 0 0px 5px;
+    margin: -250px 0 0px 5px;
   }
 
   .feels-like {
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 100;
     font-style: italic;
     color: rgba(255, 255, 255, 0.500);
@@ -375,7 +375,7 @@ iframe:hover {
     align-items: center;
     font-size: 16px;
     font-weight: 100;
-    margin: 140px 0 15px 0px;
+    margin: 115px 0 15px 0px;
     color: white;
   }
 
@@ -393,7 +393,7 @@ iframe:hover {
     justify-content: flex-start;
     gap: 10px;
     align-items: flex-start;
-    margin: -235px 0px 0px 0px;
+    margin: -210px 0px 0px 0px;
   }
 
   .styled-line-break {
@@ -405,13 +405,13 @@ iframe:hover {
   }
   
   .location {
-    font-size: 16px;
+    font-size: 18px;
     display: flex;
     flex-direction: row;
     gap:5px;
     justify-content: center;
     align-items: center;
-    margin: -190px 0px 5px -10px;
+    margin: -195px 0px 5px -10px;
   }
 
   .time {
@@ -421,20 +421,20 @@ iframe:hover {
     gap:5px;
     justify-content: center;
     align-items: center;
-    margin: 260px 0 5px -75px;
+    margin: 250px 0 5px -75px;
   }
 
   .forecast h2 {
     position: absolute;
     top:12vh;
-    left: 69vw;
+    left: 66vw;
     font-size: 18px;
   }
   
   .forecast h4 {
     position: absolute;
     top: 15vh;
-    left: 68vw;
+    left: 65vw;
     font-size: 12px;
   }
 
@@ -446,8 +446,8 @@ iframe:hover {
     max-width: 500px;
     gap: 10px;
     position: relative;
-    bottom: 72vh;
-    left: 15vw;
+    bottom: 67.5vh;
+    left: 13vw;
     
   }
   

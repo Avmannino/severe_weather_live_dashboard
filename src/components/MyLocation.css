@@ -1,82 +1,24 @@
-.container {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  /* Adjust height as necessary */
-  /* overflow: hidden; */
-}
-
-.backgroundVideo {
-  position: absolute;
-  width: 100vw;
-  height: 100%;
-  /* This ensures the video covers the entire container */
-  top: 0;
-  left: 0;
-  object-fit: cover;
-  /* This will cover the area without stretching */
-  z-index: -1;
-  /* Ensures the video stays in the background */
-}
-
-.content {
-  position: relative;
-  z-index: 2;
-  /* Ensures content is above the video */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  color: white;
-  /* Ensuring visibility over potentially dark video */
-  text-align: center;
-  font-family: Storm;
-}
-
-.titleLanding {
-  color: rgb(255, 255, 255);
-  font-family: Storm;
-  font-weight: 100;
-  font-size: 66px;
-  text-align: center;
-  position: relative;
-  top: -6vh;
-}
-
-.landing-logo {
-  width: 400px;
-  margin-top: -90px;
-}
-
-.mottoLanding {
-  color: rgb(255, 255, 255);
-  font-family: Gunners;
-  font-weight: 300;
-  font-size: 22px;
-  text-align: center;
-  position: relative;
-  top: -8vh;
-  font-family: thunder;
-  
-}
-
-.buttons button {
+.location-button {
   margin: 10px;
-  padding: 10px 20px;
+  padding: 15px 20px;
   font-size: 18px;
   cursor: pointer;
-  color: white;
+  color: rgb(255, 0, 0);
   background-color: #007bff;
   border: none;
-  border-radius: 10px;
+  border-radius: 35px;
   position: relative;
-  top: -6.5vh;
+  top: 0vh;
   
 }
 
-.buttons button:hover {
+.location-button:hover {
   background-color: #0056b3;
+}
+
+.location-icon {
+  width: 20px;
+  height: 20px;
 }
 
 @font-face {
@@ -87,4 +29,29 @@
 @font-face {
   font-family: 'thunder';
   src: url('./thunder.otf') format('opentype');
+}
+
+@media (max-width: 1920px) {
+  .location-button {
+    margin: 8px;
+    padding: 18px 8px;
+    font-size: 12px;
+    cursor: pointer;
+    color: rgb(255, 0, 0);
+    background-color: #ff0000;
+    border: none;
+    border-radius: 15px;
+    position: relative;
+    top: 0vh;
+    
+  }
+  
+  .location-button:hover {
+    background-color: #0056b3;
+  }
+
+  .location-icon {
+    width: 25px;
+    height: 25px;
+  }
 }
