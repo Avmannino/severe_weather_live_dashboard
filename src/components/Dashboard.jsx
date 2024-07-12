@@ -9,8 +9,8 @@ import DashNav from './DashNav'; // Import the DashNav component
 const locationImage = "./icons/location_marker.png";
 const dateTimeImage = "./icons/calendar_small.png";
 const rainDropImage = "./icons/rain_drop.png";
-const caretDownImage = "./icons/caretdown.png";
-const caretUpImage = "./icons/caretup.png";
+// const caretDownImage = "./icons/caretdown.png";
+// const caretUpImage = "./icons/caretup.png";
 
 const weatherIcons = {
   0: 'sunny.png',
@@ -99,7 +99,7 @@ const Dashboard = () => {
   const [isCelsius, setIsCelsius] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
   const [latLon, setLatLon] = useState({ lat: 50.4, lon: 14.3, zoom: 5 }); // Default coordinates with zoom level
-  const [isExpanded, setIsExpanded] = useState(false); // State for managing expansion
+  // const [isExpanded, setIsExpanded] = useState(false); // State for managing expansion
   const [searchConducted, setSearchConducted] = useState(false); // State for tracking search
 
   useEffect(() => {
@@ -248,9 +248,9 @@ const Dashboard = () => {
     });
   };
 
-  const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
-  };
+  // const toggleExpand = () => {
+  //   setIsExpanded(!isExpanded);
+  // };
 
   const updateSearchBar = (zipCode) => {
     setSearchInput(zipCode);
@@ -282,7 +282,7 @@ const Dashboard = () => {
       {weather && (
         <>
           <div className="section current-weather">
-          <h2>Right Now:</h2>
+          <h2></h2>
             <img src={weather.iconUrl} alt={weather.weatherDescription} />
             <p className='current-temp'>
               {isCelsius ? weather.temperatureCelsius : weather.temperatureFahrenheit}°{isCelsius ? 'C' : 'F'}
@@ -308,17 +308,19 @@ const Dashboard = () => {
             </div>
 
 
-            <div className='location-time'>
+            <div className='location'>
               <img src={locationImage} alt="Location" style={{ width: '25px', height: '25px', margin:'-5px 0 -5px 5px' }} />
               <p>{location}</p>
-          
+            </div>
+
+            <div className='time'>
               <img src={dateTimeImage} alt="Date and Time" style={{ width: '25px', height: '25px', margin: '0px 0px 0px 55px' }} />
               <p>{currentTime.toLocaleDateString()} | {currentTime.toLocaleTimeString()}</p>
             </div>
 
-            <div className="styled-line-break"></div>
+            {/* <div className="styled-line-break"></div> */}
             
-            <button onClick={toggleExpand} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0' }}>
+            {/* <button onClick={toggleExpand} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0' }}>
               <img src={isExpanded ? caretUpImage : caretDownImage} alt="Toggle Expand" style={{ width: '30px', height: '30px', margin: '10px 0' }} />
             </button>
 
@@ -328,7 +330,7 @@ const Dashboard = () => {
                   <p style={{ color: 'white' }}>UV Index: {uvIndex !== null ? uvIndex : 'Loading...'}</p>
                 </div>
               )}
-            </div>
+            </div> */}
           </div>
         </>
       )}

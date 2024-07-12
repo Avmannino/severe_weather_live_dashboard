@@ -15,32 +15,29 @@
   margin-right: auto; /* Center horizontally */
 }
 
-.search-bar-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  position: relative;
-  top: 6vh;
-}
 
 .search-bar {
   display: flex;
   align-items: center;
   gap: 15px;
-  margin-right: 5%; /* Use percentage for responsiveness */
+  margin-right: 25%; /* Use percentage for responsiveness */
+  max-width: 1500px; /* Maximum width for input */
 }
 
 .search-bar input {
+  font-size: 18px;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 15px;
   border: 1px solid #ccc;
   box-shadow: 0 7px 11px rgba(0, 0, 0, 0.400);
-  width: 100%; /* Allow input to scale */
-  max-width: 300px; /* Maximum width for input */
+  width: 350px; /* Allow input to scale */
+  position: relative;
+  top: 0vh;
+  left: -0vw;
 }
 
 .search-bar button {
-  padding: 10px 20px;
+  padding: 10px 12px;
   border: none;
   border-radius: 5px;
   background-color: #007bff;
@@ -59,7 +56,7 @@
   width: 64px;
   height: 27px;
   box-shadow: 0 10px 11px rgba(0, 0, 0, 0.400);
-  margin-right: 60%; /* Use percentage for responsiveness */
+  margin-right: 25%; /* Use percentage for responsiveness */
 }
 
 .switch input {
@@ -127,45 +124,41 @@ input:checked + .slider:before {
     margin: -5px;
     width: 60%; /* Adjust width for better responsiveness */
     max-width: 1200px; /* Maximum width for larger screens */
-    height: 30px;
+    height: 25px;
     margin-left: auto;
     margin-right: auto; /* Center horizontally */
   }
 
-  .search-bar-container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    position: relative;
-    top: 6vh;
-  }
-  
   .search-bar {
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-right: 5%; /* Use percentage for responsiveness */
+    margin-right: 25%; /* Use percentage for responsiveness */
+    max-width: 1500px; /* Maximum width for input */
   }
   
   .search-bar input {
+    font-size: 14px;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 15px;
     border: 1px solid #ccc;
     box-shadow: 0 7px 11px rgba(0, 0, 0, 0.400);
-    width: 100%; /* Allow input to scale */
-    max-width: 300px; /* Maximum width for input */
-    font-size: 12px;
+    width: 275px; /* Allow input to scale */
+    height: 12px;
+    position: relative;
+    top: 0vh;
+    left: 0vw;
   }
   
   .search-bar button {
-    padding: 7px 10px;
+    padding: 8px 8px;
     border: none;
     border-radius: 5px;
     background-color: #007bff;
     color: white;
     cursor: pointer;
     box-shadow: 0 6px 11px rgba(0, 0, 0, 0.400);
-    font-size: 10px;
+    font-size: 12px;
   }
   
   .search-bar button:hover {
@@ -178,7 +171,7 @@ input:checked + .slider:before {
     width: 47px;
     height: 20px;
     box-shadow: 0 10px 11px rgba(0, 0, 0, 0.400);
-    margin-right: 65%; /* Use percentage for responsiveness */
+    margin-right: 30%; /* Use percentage for responsiveness */
   }
   
   .switch input {

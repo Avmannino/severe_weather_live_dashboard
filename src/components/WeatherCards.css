@@ -23,7 +23,7 @@
     background-color: #a1a1a13d;
     border-radius: 10px;
     box-shadow: 15px 15px 13px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s;
+    transition: transform 0.3s;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -83,8 +83,8 @@
 @media (max-width: 1920px) {
 
     .weather-card {
-        width: 135px;
-        height: 135px;
+        width: 145px;
+        height: 145px;
       
     }
 
