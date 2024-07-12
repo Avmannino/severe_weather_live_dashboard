@@ -1,65 +1,73 @@
-/* Navbar.css */
 body {
-    margin: 0;
-    font-family: dashboard;
-  }
-  
-  .navbar {
-    background-color: #0088aa80;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: storm;
-    border-bottom: 1px solid white;
-  }
-  
-  .navbar-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 1300px;
-    padding: 0 50px;
-  }
-  
-  .navbar-logo {
-    color: #fff;
-    justify-self: start;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 2rem;
-    display: flex;
-    text-align: left;
-    align-items:start;
-    margin: 0 0 0 -40%;
-  }
-  
-  .nav-menu {
-    display: flex;
-    align-items: center;
-    list-style: none;
-    text-align: center;
-  }
-  
-  .nav-item {
-    height: 80px;
-  }
-  
-  .nav-links {
-    color: #fff;
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    padding: 0 0rem;
-    height: 100%;
-    cursor: pointer;
-    margin: 0 0 0 78px;
-  }
-  
-  .nav-links:hover {
-    color: #1f8ef1;
-    transition: all 0.3s ease;
-  }
-  
+  margin: 0;
+  font-family: dashboard;
+}
+
+.navbar {
+  background-color: #0088aa00;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: storm;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1300px;
+  padding: 0 50px;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  margin-left: -500px; /* Move the left section farther left */
+}
+
+.navbar-logo {
+  color: #fff;
+  justify-self: start;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.nav-img {
+  width: 60px;
+  height: 60px;
+  margin-right: 15px;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  text-align: center;
+  margin: 0 auto;
+  margin-left: 600px; /* Move nav items 50px to the right */
+}
+
+.nav-item {
+  height: 80px;
+}
+
+.nav-links {
+  color: #fff;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0rem 2.5rem;
+  height: 100%;
+  cursor: pointer;
+}
+
+.nav-links:hover {
+  color: #1f8ef1;
+  transition: all 0.3s ease;
+}
