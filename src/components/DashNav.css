@@ -1,5 +1,122 @@
 /* src/components/Dashboard.css */
 .dash-nav {
+  display: flex;
+  justify-content: center; /* Center-align the content */
+  align-items: center;
+  padding: 15px;
+  background-color: rgba(119, 119, 119, 0.308);
+  border-radius: 30px;
+  box-shadow: 0 14px 11px rgba(0, 0, 0, 0.400);
+  margin: 15px;
+  width: 80%; /* Adjust width for better responsiveness */
+  max-width: 1300px; /* Maximum width for larger screens */
+  height: 55px;
+  margin-left: auto;
+  margin-right: auto; /* Center horizontally */
+}
+
+.search-bar-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+  top: 6vh;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-right: 5%; /* Use percentage for responsiveness */
+}
+
+.search-bar input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 0 7px 11px rgba(0, 0, 0, 0.400);
+  width: 100%; /* Allow input to scale */
+  max-width: 300px; /* Maximum width for input */
+}
+
+.search-bar button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 6px 11px rgba(0, 0, 0, 0.400);
+}
+
+.search-bar button:hover {
+  background-color: #0056b3;
+}
+
+.switch {
+  position: relative;
+  display: flex;
+  width: 64px;
+  height: 27px;
+  box-shadow: 0 10px 11px rgba(0, 0, 0, 0.400);
+  margin-right: 60%; /* Use percentage for responsiveness */
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #11818b;
+  transition: .4s;
+  border-radius: 20px;
+}
+
+.slider:before {
+  position: absolute;
+  content: '°C';
+  height: 22px;
+  width: 22px;
+  left: 2px; /* Adjusted for moving left */
+  bottom: 2.5px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 20px;
+  text-align: center;
+  line-height: 22px;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(39px); /* Adjusted for moving right */
+  content: '°F';
+}
+
+.slider-text {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: white;
+}
+
+@media (max-width: 1920px) {
+  .dash-nav {
     display: flex;
     justify-content: center; /* Center-align the content */
     align-items: center;
@@ -7,48 +124,61 @@
     background-color: rgba(119, 119, 119, 0.308);
     border-radius: 30px;
     box-shadow: 0 14px 11px rgba(0, 0, 0, 0.400);
-    margin: 15px;
-    width: 60%;
-    height: 60px;
+    margin: -5px;
+    width: 60%; /* Adjust width for better responsiveness */
+    max-width: 1200px; /* Maximum width for larger screens */
+    height: 30px;
     margin-left: auto;
     margin-right: auto; /* Center horizontally */
+  }
+
+  .search-bar-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+    top: 6vh;
   }
   
   .search-bar {
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-right: 400px;
+    margin-right: 5%; /* Use percentage for responsiveness */
   }
-    
+  
   .search-bar input {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
     box-shadow: 0 7px 11px rgba(0, 0, 0, 0.400);
+    width: 100%; /* Allow input to scale */
+    max-width: 300px; /* Maximum width for input */
+    font-size: 12px;
   }
-    
+  
   .search-bar button {
-    padding: 10px 20px;
+    padding: 7px 10px;
     border: none;
     border-radius: 5px;
     background-color: #007bff;
     color: white;
     cursor: pointer;
     box-shadow: 0 6px 11px rgba(0, 0, 0, 0.400);
+    font-size: 10px;
   }
-    
+  
   .search-bar button:hover {
     background-color: #0056b3;
   }
-    
+  
   .switch {
     position: relative;
     display: flex;
-    width: 64px;
-    height: 27px;
+    width: 47px;
+    height: 20px;
     box-shadow: 0 10px 11px rgba(0, 0, 0, 0.400);
-    margin-right: 350px; /* Adjust spacing if needed */
+    margin-right: 65%; /* Use percentage for responsiveness */
   }
   
   .switch input {
@@ -72,8 +202,8 @@
   .slider:before {
     position: absolute;
     content: '°C';
-    height: 22px;
-    width: 22px;
+    height: 16px;
+    width: 16px;
     left: 2px; /* Adjusted for moving left */
     bottom: 2.5px;
     background-color: white;
@@ -88,7 +218,7 @@
   }
   
   input:checked + .slider:before {
-    transform: translateX(39px); /* Adjusted for moving right */
+    transform: translateX(30px); /* Adjusted for moving right */
     content: '°F';
   }
   
@@ -100,6 +230,8 @@
     top: 50%;
     left: 0;
     transform: translateY(-50%);
-    font-size: 16px;
+    font-size: 12px;
     color: white;
+  }
+
   }

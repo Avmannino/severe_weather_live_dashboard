@@ -282,40 +282,41 @@ const Dashboard = () => {
       {weather && (
         <>
           <div className="section current-weather">
-          <h2 style={{position:'absolute', top: "-4.5vh", left:'0vw', fontSize:'24px'}}>Right Now:</h2>
-            <img src={weather.iconUrl} alt={weather.weatherDescription} style={{ width: '170px', height: '170px', margin: '10px 0 0 50px' }} />
-            <p style={{ fontSize: '60px', fontWeight: 'normal', color: 'white', margin: '-185px 0 0px 320px' }}>
+          <h2>Right Now:</h2>
+            <img src={weather.iconUrl} alt={weather.weatherDescription} />
+            <p className='current-temp'>
               {isCelsius ? weather.temperatureCelsius : weather.temperatureFahrenheit}°{isCelsius ? 'C' : 'F'}
             </p>
-            <p style={{ fontSize: '16px', fontWeight: '100', fontStyle:"italic", color: 'rgba(255, 255, 255, 0.500)', margin: '-15px 0 10px 325px' }}>
+            <p className='feels-like'>
               Feels Like: {isCelsius ? weather.heatIndexCelsius : weather.heatIndexFahrenheit}°{isCelsius ? 'C' : 'F'}
             </p>
             
-            <div style={{ display: 'flex', alignItems: 'center', margin: '-20px 0 20px 305px' }}>
-              <p style={{ fontSize: '22px', fontWeight: '100', color: 'white', margin: '20px 5px 5px -0px', overflow:'clip' }}>
+            <div className='weather-desc'>
+              <p>
                 {weather.weatherDescription} | 
                 <img src={rainDropImage} alt={weather.precipitationProbability} style={{ width: '22px', height: '22px', margin: '5px 5px -5px 2px' }} />{weather.precipitationProbability}% 
               </p>
             </div>
 
-            <div style={{ display: 'flex', flexDirection:'row', justifyContent:"flex-start", gap:'5px', alignItems: 'flex-start', margin: '-15px 0px 0px 315px', paddingBottom:"15px" }}>
-              <p style={{ fontSize: '20px', fontWeight: '100', color: '#ffa500', margin: '0px 5px 0px 0px' }}>
+            <div className='hi-lo'>
+              <p style={{color: '#ffa500'}}>
                 H: {isCelsius ? weather.temperatureMaxCelsius : weather.temperatureMaxFahrenheit}°{isCelsius ? 'C' : 'F'} 
               </p>
-              <p style={{ fontSize: '20px', fontWeight: '100', color: '#458dab', margin: '0px 5px 0px 0px' }}>
+              <p style={{color: '#3b728b'}}>
                 L: {isCelsius ? weather.temperatureMinCelsius : weather.temperatureMinFahrenheit}°{isCelsius ? 'C' : 'F'}
               </p>
             </div>
 
-            <div className="styled-line-break"></div>
 
-            <div style={{ display: 'flex', flexDirection:'row', gap:'10px', justifyContent:'center', alignItems: 'center', margin: '-15px 0 5px -10px' }}>
+            <div className='location-time'>
               <img src={locationImage} alt="Location" style={{ width: '25px', height: '25px', margin:'-5px 0 -5px 5px' }} />
-              <p style={{ fontSize: '20px', margin: '25px 0' }}>{location}</p>
+              <p>{location}</p>
           
               <img src={dateTimeImage} alt="Date and Time" style={{ width: '25px', height: '25px', margin: '0px 0px 0px 55px' }} />
-              <p style={{ fontSize: '15px', margin: '25px 0' }}>{currentTime.toLocaleDateString()} | {currentTime.toLocaleTimeString()}</p>
+              <p>{currentTime.toLocaleDateString()} | {currentTime.toLocaleTimeString()}</p>
             </div>
+
+            <div className="styled-line-break"></div>
             
             <button onClick={toggleExpand} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0' }}>
               <img src={isExpanded ? caretUpImage : caretDownImage} alt="Toggle Expand" style={{ width: '30px', height: '30px', margin: '10px 0' }} />
@@ -334,8 +335,8 @@ const Dashboard = () => {
 
       {forecast && (
         <div className="section forecast">
-          <h2 style={{position:'absolute', top: "14vh", left:'65vw', fontSize:'30px'}}>7-Day Outlook</h2>
-          <h4 style={{position:'absolute', top: "18vh", left:'65vw', fontSize:'15px'}}>* Click for hourly forecast *</h4>
+          <h2>7-Day Outlook</h2>
+          <h4>* Click for hourly forecast *</h4>
           <div className="forecast-grid">
             {forecast.map((day, index) => (
               <div key={index} className="forecast-item" onClick={() => handleDayClick(index)}>

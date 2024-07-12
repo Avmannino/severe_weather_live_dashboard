@@ -52,7 +52,6 @@ class MyLocation extends React.Component {
     return (
       <button onClick={this.getLocation} className="location-button">
         <img src={locationIcon} alt="Location Icon" className="location-icon" />
-        My Location
       </button>
     );
   }

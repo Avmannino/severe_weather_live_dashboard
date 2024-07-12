@@ -80,6 +80,23 @@
     font-weight: 800;
 }
 
+@media (max-width: 1920px) {
+
+    .weather-card {
+        width: 135px;
+        height: 135px;
+      
+    }
+
+    .uv-index {
+        font-size: 0.6em;
+    }
+
+    .wind-speed {
+        font-size: 0.7em;
+    }
+  }
+
 
 
 

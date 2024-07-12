@@ -18,3 +18,19 @@
     z-index: 1; /* Ensures the arrow is above the compass */
   }
   
+
+  @media (max-width: 1920px) {
+
+    .compass-arrow {
+      width: 45px;
+      height: 45px;
+      position: relative;
+      top: 35%;
+      left: -50%;
+    }
+
+    .compass {
+      margin: 0 0 0 0;
+    }
+
+  }
