@@ -149,7 +149,7 @@ const Dashboard = () => {
       const weatherData = weatherResponse.data.current_weather;
 
       // Assume a fixed humidity value (e.g., 70%) as the API doesn't provide humidity
-      const fixedHumidity = 40;
+      const fixedHumidity = 50;
       const temperatureFahrenheit = Math.round((weatherData.temperature * 9 / 5) + 32);
       const heatIndexFahrenheit = calculateHeatIndex(temperatureFahrenheit, fixedHumidity);
 
@@ -351,8 +351,8 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <div className="forecast-details">
-                  <img src={`/icons/${getWeatherIcon(day.weatherCode)}`} alt={day.weatherDescription} style={{ width: '60px', height: '60px', display:'flex', margin:'-50px 0 0 0'  }} />
-                  <span style={{color:'grey'}}>{day.weatherDescription}</span>
+                  <img src={`/icons/${getWeatherIcon(day.weatherCode)}`} alt={day.weatherDescription} style={{ width: '60px', height: '60px', display:'flex', margin:'-55px 0 0 0'  }} />
+                  <span style={{color:'white', margin:'5px 0 0 0'}}>{day.weatherDescription}</span>
                 </div>
                 {selectedDay === index && (
                   <div className="hourly-forecast-grid">

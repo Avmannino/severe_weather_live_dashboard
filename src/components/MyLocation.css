@@ -31,7 +31,7 @@
   src: url('./thunder.otf') format('opentype');
 }
 
-@media (max-width: 1920px) {
+@media (min-width: 1920px) and (max-width: 2560px) {
   .location-button {
     margin: 8px;
     padding: 18px 8px;
