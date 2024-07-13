@@ -311,14 +311,14 @@ iframe:hover {
 /* Media queries for responsiveness */
 @media (min-width: 1920px) and (max-width: 3841px) {
   iframe {
-    width: 42%;
-    height: 38vh;
-    top: 42vh;
+    width: 44%;
+    height: 42vh;
+    top: 47vh;
     left: 23vw;
   }
   
   .weather-cards {
-    bottom: 55vh;
+    bottom: 45vh;
     left: -18vw;
     
   }
@@ -326,7 +326,7 @@ iframe:hover {
   .current-weather {
     text-align: left;
     width: 300px;
-    height: 330px;
+    height: 350px;
     padding: 25px;
     border-radius: 20px;
     background-color: rgba(114, 113, 113, 0.28);

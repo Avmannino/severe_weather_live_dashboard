@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Dashboard.css';
-// import NewsBar from './NewsBar';
+import NewsBar from './NewsBar';
 import WeatherCards from './WeatherCards';
 import DashNav from './DashNav'; // Import the DashNav component
 
@@ -386,7 +386,7 @@ const Dashboard = () => {
         </div>
       )}
 
-      {/* <NewsBar /> */}
+      <NewsBar />
     </div>
   );
 }

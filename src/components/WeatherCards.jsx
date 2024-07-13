@@ -131,7 +131,7 @@ const WeatherCards = ({ lat, lon }) => {
           <p>Loading...</p>
         )}
       </div>
-      {Array.from({ length: 4 }).map((_, index) => (
+      {Array.from({ length: 5 }).map((_, index) => (
         <div key={index} className="weather-card"></div>
       ))}
     </div>
