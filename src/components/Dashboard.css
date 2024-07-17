@@ -775,7 +775,7 @@ iframe:hover {
     max-height: 100%; /* Adjust this value based on your layout needs */
     width: 220px;
     border-radius: 8px;
-    padding: 20px;
+    padding: 25px;
     background-color: #022337; /* Background color to make it distinct */
     overflow-y: scroll;
   }
@@ -797,14 +797,23 @@ iframe:hover {
   .hourly-forecast-time, .hourly-forecast-temp, .hourly-forecast-description, .hourly-forecast-icon {
     margin: 0px 5px 5px 1px;
   }
+
+  .hourly-forecast-time {
+    font-size: 18px;
+  }
   
   .hourly-forecast-temp {
     color: #daa700;
+    font-size: 20px;
+  }
+
+  .hourly-forecast-description {
+    font-size: 18px;
   }
   
   .hourly-forecast-icon img {
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
     margin-bottom: -5px;
   }
   
@@ -814,7 +823,7 @@ iframe:hover {
   }
   
   .hourly-forecast-grid::-webkit-scrollbar-track {
-    background: #302f2f;
+    background: #66530000;
   }
   
   .hourly-forecast-grid::-webkit-scrollbar-thumb {

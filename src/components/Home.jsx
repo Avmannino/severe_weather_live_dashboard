@@ -3,7 +3,7 @@ import './Home.css';
 
 
 const featuresImage = './features.png';
-const featuresForecast = './features_forecast.png';
+const hourlyDemo = './hourly_demo.mp4';
 
 
 const Home = () => {
@@ -39,7 +39,12 @@ const Home = () => {
                     <h4 className='features-forecast'>Weekly and Hourly Forecasts</h4>
                     <p className='forecast-content'>See into the future with the next 7-days worth of forecasted data.</p>
                     <p className='forecast-content'>Click each day to see the hourly projected forecasted data</p>
-                    <img src={featuresForecast} className='forecast-img' alt="features-forecast"/>
+                    <video autoPlay muted loop className="hourly_demo">
+                        <source src={hourlyDemo} type="video/mp4" />
+                    </video>
+
+                    <h4 className='critical-communications'>Critical Communications</h4>
+
                 </section>
                 {/* <section className="features">
                     <h2>Features</h2>

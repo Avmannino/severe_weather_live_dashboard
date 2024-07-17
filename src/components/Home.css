@@ -38,7 +38,7 @@
 }
 
 .intro {
-    padding-bottom: 300px;
+    padding-bottom: 420px;
 }
 
 .h2 {
@@ -74,49 +74,60 @@
 .software-header {
     text-align: center;
     color: rgba(0, 0, 0, 0.315);
-    font-size: 16px;
-    margin: 150px 0 0 0;
+    font-size: 18px;
+    margin: 120px 0 0 0;
 }
 
 .easy-powerful {
     text-align: center;
     color: rgba(0, 0, 0, 0.705);
     font-size: 60px;
-    margin: 0px 0 0 0;
+    margin: 20px 0 0 0;
 }
 
 .features-header {
-    font-size: 40px;
-    margin: 150px 0 0 520px;
+    font-size: 42px;
+    margin: 225px 0 0 500px;
     color: rgba(0, 0, 0, 0.616);
     
 }
 
 .features li {
-    font-size: 18px;
-    margin-left: 500px; 
+    font-size: 20px;
+    margin-left: 480px; 
     margin-bottom: 25px; 
     color: rgba(0, 0, 0, 0.616);
 }
 
 .features-img {
-    margin: -450px 0 0 1400px;
+    margin: -490px 0 0 1370px;
+    width: 35%;
 }
 
 .features-forecast {
     font-size: 40px;
     color: rgba(0, 0, 0, 0.616);
-    margin: 30px 0 0 500px;
+    margin: 240px 0 0 500px;
 }
 
 .forecast-content {
     font-size: 20px;
     color: rgba(0, 0, 0, 0.616);
-    margin: 10px 0 0 500px;
+    margin: 5px 0 0 505px;
 }
 
-.forecast-img {
-    margin: 0px 0 0 1300px;
+
+.hourly_demo {
+    width:35%;
+    border-radius: 20px;
+    box-shadow: 12px 10px 15px rgba(0, 0, 0, 0.500);
+    margin: -155px 0 0 1350px;
+}
+
+.critical-communications {
+    font-size: 40px;
+    color: rgba(0, 0, 0, 0.616);
+    margin: 185px 0 0 505px;
 }
 
 
