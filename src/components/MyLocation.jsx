@@ -1,7 +1,6 @@
-// src/components/MyLocation.jsx
 import React from 'react';
-import './MyLocation.css'; // Import the CSS file
-import locationIcon from '/icons/location_arrow.png'; // Ensure the correct path to your image
+import './MyLocation.css'; 
+import locationIcon from '/icons/location_arrow.png'; 
 
 class MyLocation extends React.Component {
   getLocation = () => {
@@ -19,7 +18,7 @@ class MyLocation extends React.Component {
 
   getZipCode = async (position) => {
     const { latitude, longitude } = position.coords;
-    console.log("Coordinates:", latitude, longitude); // Debugging log
+    console.log("Coordinates:", latitude, longitude); 
     const apiKey = import.meta.env.VITE_OPENCAGE_API_KEY;
     const url = `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${apiKey}`;
 
@@ -29,7 +28,7 @@ class MyLocation extends React.Component {
         throw new Error(`API request failed with status ${response.status}`);
       }
       const data = await response.json();
-      console.log("API Response:", data); // Debugging log
+      console.log("API Response:", data); 
 
       if (!data.results || data.results.length === 0) {
         throw new Error('No results found in API response');
@@ -40,7 +39,7 @@ class MyLocation extends React.Component {
         throw new Error('No zip code found in API response');
       }
       
-      console.log("Zip Code:", zipCode); // Debugging log
+      console.log("Zip Code:", zipCode);
       this.props.updateSearchBar(zipCode);
     } catch (error) {
       console.error('Error fetching zip code:', error);
