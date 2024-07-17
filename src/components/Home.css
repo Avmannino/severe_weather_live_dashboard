@@ -37,8 +37,12 @@
     text-align: left;
 }
 
+.intro {
+    padding-bottom: 300px;
+}
+
 .h2 {
-    margin: 0 0 0 -80px;
+    margin: 0 0 0 -90px;
 }
 
 .smaller-text {
@@ -55,7 +59,7 @@
 .spottr-text {
     font-size: 65px;
     font-family: storm;
-    margin: -9vh 0 0 10.5vw;
+    margin: -7.5vh 0 0 7.5vw;
 }
 
 .intro, .features {
@@ -64,7 +68,7 @@
 
 
 .our-software {
-    background-color: grey;
+    background-color: rgb(255, 255, 255);
 }
 
 .software-header {
@@ -83,19 +87,38 @@
 
 .features-header {
     font-size: 40px;
-    margin: 150px 0 0 550px;
+    margin: 150px 0 0 520px;
+    color: rgba(0, 0, 0, 0.616);
     
 }
 
 .features li {
     font-size: 18px;
-    margin-left: 500px; /* Adjust this margin as needed */
-    margin-bottom: 25px; /* Increase this value to widen the vertical gap */
+    margin-left: 500px; 
+    margin-bottom: 25px; 
+    color: rgba(0, 0, 0, 0.616);
 }
 
 .features-img {
-    margin: -400px 0 0 1400px;
+    margin: -450px 0 0 1400px;
 }
+
+.features-forecast {
+    font-size: 40px;
+    color: rgba(0, 0, 0, 0.616);
+    margin: 30px 0 0 500px;
+}
+
+.forecast-content {
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.616);
+    margin: 10px 0 0 500px;
+}
+
+.forecast-img {
+    margin: 0px 0 0 1300px;
+}
+
 
 .home-footer {
     background-color: #f1f1f100;

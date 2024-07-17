@@ -1,3 +1,4 @@
+// src/components/WeatherCards.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import GaugeChart from 'react-gauge-chart';
@@ -17,6 +18,7 @@ const WeatherCards = ({ lat, lon }) => {
           // Fetch UV Index data
           const uvResponse = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=uv_index_max&timezone=auto`);
           const uvIndexData = uvResponse.data.daily.uv_index_max[0];
+          console.log('UV Index Data:', uvIndexData); // Log to debug
 
           // Fetch 15-minute weather data including dew point
           const dewPointResponse = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=dewpoint_2m&timezone=auto`);
@@ -24,7 +26,7 @@ const WeatherCards = ({ lat, lon }) => {
           const dewPointDataFahrenheit = (dewPointDataCelsius * 9/5) + 32; // Convert to Fahrenheit
           console.log('Dew Point Data (F):', dewPointDataFahrenheit); // Log to debug
 
-          // Fetch current weather data including sunrise and sunset times
+          // Fetch current weather data
           const weatherResponse = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&timezone=auto`);
           const weatherData = weatherResponse.data.current_weather;
           console.log('Weather Data:', weatherData); // Log to debug
@@ -34,14 +36,8 @@ const WeatherCards = ({ lat, lon }) => {
           setWindDirection(weatherData.winddirection);
           setDewPoint(dewPointDataFahrenheit); // Set the dew point in Fahrenheit
 
-          const sunrise = new Date(weatherData.sunrise);
-          const sunset = new Date(weatherData.sunset);
-          const now = new Date();
-
-          // Determine if it is currently day or night and set UV index accordingly
-          const isDay = now >= sunrise && now < sunset;
-          console.log('Is Day:', isDay); // Log to debug
-          setUvIndex(isDay ? uvIndexData : 0);
+          // Set UV index directly without checking for day or night
+          setUvIndex(uvIndexData);
         } catch (error) {
           console.error('Error fetching weather data', error);
         }

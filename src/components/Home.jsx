@@ -2,8 +2,9 @@ import React from 'react';
 import './Home.css';
 
 
-const featuresImage = './public/features.png';
-const featuresNav = './public/features_nav.png';
+const featuresImage = './features.png';
+const featuresForecast = './features_forecast.png';
+
 
 const Home = () => {
     return (
@@ -25,7 +26,7 @@ const Home = () => {
                 <section className="our-software">
                     <h2 className='software-header'>OUR SOFTWARE</h2>
                     <h3 className='easy-powerful'>Easy, powerful software</h3>
-                    <h4 className='features-header'>Web dashboard app</h4>
+                    <h4 className='features-header'>Web Dashboard App</h4>
                     <ul className='features'>
                         <li>Customizable to your organization’s policies, team structure, and more</li>
                         <li>See any relevant risks today that could disrupt activities (e.g., heat, storms)</li>
@@ -34,7 +35,11 @@ const Home = () => {
                         <li>Works with or without our on-site hardware</li>
                     </ul>
                     <img src={featuresImage} className='features-img' alt="features-image"/>
-                    <img src={featuresNav} alt="Features-Nav"/>
+
+                    <h4 className='features-forecast'>Weekly and Hourly Forecasts</h4>
+                    <p className='forecast-content'>See into the future with the next 7-days worth of forecasted data.</p>
+                    <p className='forecast-content'>Click each day to see the hourly projected forecasted data</p>
+                    <img src={featuresForecast} className='forecast-img' alt="features-forecast"/>
                 </section>
                 {/* <section className="features">
                     <h2>Features</h2>

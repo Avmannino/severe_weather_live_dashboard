@@ -1,5 +1,4 @@
-/* src/components/NewsBar.css */
-.news-bar {
+/* .news-bar {
     width: 100%;
     background-color: #f8be0075;
     color: rgb(0, 0, 0);
@@ -7,15 +6,15 @@
     overflow: hidden;
     white-space: nowrap;
     position: absolute;
-    top: 0px; /* Adjust this value based on your navbar height */
+    top: 0px; 
     left: 0;
     z-index: 1;
     box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.400);
-  }
+}
 
 .news-item {
     display: inline-block;
-    margin-right: 50px; /* Spacing between items */
+    margin-right: 50px; 
     font-size: 1em;
 }
 
@@ -28,14 +27,14 @@
     text-decoration: underline;
 }
 
-/* Responsive design adjustments */
+
 @media (max-width: 768px) {
     .news-bar {
         padding: 10px 5px;
     }
 
     .news-item {
-        margin-right: 20px; /* Reduce spacing for smaller screens */
+        margin-right: 20px; 
         font-size: 0.9em;
     }
 }
@@ -46,7 +45,7 @@
     }
 
     .news-item {
-        margin-right: 10px; /* Further reduce spacing for smaller screens */
+        margin-right: 10px; 
         font-size: 0.8em;
     }
-}
+} */

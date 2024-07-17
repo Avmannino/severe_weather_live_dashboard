@@ -2,15 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Dashboard.css';
-import NewsBar from './NewsBar';
+import Drawer from './Drawer'; // Import the custom Drawer component
 import WeatherCards from './WeatherCards';
-import DashNav from './DashNav'; // Import the DashNav component
+import DashNav from './DashNav';
 
 const locationImage = "./icons/location_marker.png";
 const dateTimeImage = "./icons/calendar_small.png";
 const rainDropImage = "./icons/rain_drop.png";
-// const caretDownImage = "./icons/caretdown.png";
-// const caretUpImage = "./icons/caretup.png";
 
 const weatherIcons = {
   0: 'sunny.png',
@@ -98,9 +96,9 @@ const Dashboard = () => {
   const [location, setLocation] = useState('');
   const [isCelsius, setIsCelsius] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
-  const [latLon, setLatLon] = useState({ lat: 50.4, lon: 14.3, zoom: 5 }); // Default coordinates with zoom level
-  // const [isExpanded, setIsExpanded] = useState(false); // State for managing expansion
-  const [searchConducted, setSearchConducted] = useState(false); // State for tracking search
+  const [latLon, setLatLon] = useState({ lat: 50.4, lon: 14.3, zoom: 5 });
+  const [searchConducted, setSearchConducted] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -140,15 +138,12 @@ const Dashboard = () => {
         }
       }
 
-      setLatLon({ lat, lon, zoom: 20 }); // Set zoom level to 20 for city-level view
+      setLatLon({ lat, lon, zoom: 20 });
 
-      // Fetch weather data from Open-Meteo API
       const weatherResponse = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max&hourly=temperature_2m,weathercode&timezone=auto`);
-      console.log(weatherResponse.data); // Debug: Log the full API response
+      console.log(weatherResponse.data);
 
       const weatherData = weatherResponse.data.current_weather;
-
-      // Assume a fixed humidity value (e.g., 70%) as the API doesn't provide humidity
       const fixedHumidity = 50;
       const temperatureFahrenheit = Math.round((weatherData.temperature * 9 / 5) + 32);
       const heatIndexFahrenheit = calculateHeatIndex(temperatureFahrenheit, fixedHumidity);
@@ -161,7 +156,7 @@ const Dashboard = () => {
         windDirection: weatherData.winddirection,
         weatherCode: weatherData.weathercode,
         weatherDescription: getWeatherDescription(weatherData.weathercode),
-        precipitationProbability: weatherResponse.data.daily.precipitation_probability_max[0], // Assuming we want today's probability
+        precipitationProbability: weatherResponse.data.daily.precipitation_probability_max[0],
         iconUrl: `/icons/${getWeatherIcon(weatherData.weathercode)}`,
         heatIndexCelsius: Math.round((heatIndexFahrenheit - 32) * 5 / 9),
         heatIndexFahrenheit: heatIndexFahrenheit,
@@ -196,10 +191,10 @@ const Dashboard = () => {
         weatherDescription: getWeatherDescription(hourlyData.weathercode[index])
       }));
 
-      console.log(formattedHourlyForecast); // Debug: Log the formatted hourly forecast
+      console.log(formattedHourlyForecast);
 
       setHourlyForecast(formattedHourlyForecast);
-      setSearchConducted(true); // Set search conducted to true after successful search
+      setSearchConducted(true);
     } catch (error) {
       console.error('Error fetching weather data', error);
     }
@@ -233,7 +228,12 @@ const Dashboard = () => {
   };
 
   const handleDayClick = (index) => {
-    setSelectedDay(selectedDay === index ? null : index);
+    setSelectedDay(index);
+    setDrawerOpen(true);
+  };
+
+  const closeDrawer = () => {
+    setDrawerOpen(false);
   };
 
   const getHourlyForecastForDay = (day) => {
@@ -247,10 +247,6 @@ const Dashboard = () => {
       return hourDate >= startOfDay && hourDate <= endOfDay;
     });
   };
-
-  // const toggleExpand = () => {
-  //   setIsExpanded(!isExpanded);
-  // };
 
   const updateSearchBar = (zipCode) => {
     setSearchInput(zipCode);
@@ -317,20 +313,6 @@ const Dashboard = () => {
               <img src={dateTimeImage} alt="Date and Time" style={{ width: '25px', height: '25px', margin: '0px 0px 0px 55px' }} />
               <p>{currentTime.toLocaleDateString()} | {currentTime.toLocaleTimeString()}</p>
             </div>
-
-            {/* <div className="styled-line-break"></div> */}
-            
-            {/* <button onClick={toggleExpand} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0' }}>
-              <img src={isExpanded ? caretUpImage : caretDownImage} alt="Toggle Expand" style={{ width: '30px', height: '30px', margin: '10px 0' }} />
-            </button>
-
-            <div className={`expanded-section ${isExpanded ? 'expanded' : 'collapsed'}`}>
-              {isExpanded && (
-                <div style={{ padding: '20px', backgroundColor: 'rgba(255, 255, 255, 0.1)', borderRadius: '10px' }}>
-                  <p style={{ color: 'white' }}>UV Index: {uvIndex !== null ? uvIndex : 'Loading...'}</p>
-                </div>
-              )}
-            </div> */}
           </div>
         </>
       )}
@@ -354,26 +336,6 @@ const Dashboard = () => {
                   <img src={`/icons/${getWeatherIcon(day.weatherCode)}`} alt={day.weatherDescription} style={{ width: '60px', height: '60px', display:'flex', margin:'-55px 0 0 0'  }} />
                   <span style={{color:'white', margin:'5px 0 0 0'}}>{day.weatherDescription}</span>
                 </div>
-                {selectedDay === index && (
-                  <div className="hourly-forecast-grid">
-                    {getHourlyForecastForDay(day).map((hour, hourIndex) => (
-                      <div key={hourIndex} className="hourly-forecast-item">
-                        <div className="hourly-forecast-time">
-                          {hour.time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                        </div>
-                        <div className="hourly-forecast-temp">
-                          {isCelsius ? hour.temperatureCelsius : hour.temperatureFahrenheit}°{isCelsius ? 'C' : 'F'}
-                        </div>
-                        <div className="hourly-forecast-description">
-                          {hour.weatherDescription}
-                        </div>
-                        <div className="hourly-forecast-icon">
-                          <img src={`/icons/${getWeatherIcon(hour.weatherCode)}`} alt={hour.weatherDescription} style={{ width: '60px', height: '60px'}} />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
               </div>
             ))}
           </div>
@@ -386,7 +348,28 @@ const Dashboard = () => {
         </div>
       )}
 
-      <NewsBar />
+      <Drawer isOpen={drawerOpen} onClose={closeDrawer}>
+        {selectedDay !== null && (
+          <div className="hourly-forecast-grid">
+            {getHourlyForecastForDay(forecast[selectedDay]).map((hour, hourIndex) => (
+              <div key={hourIndex} className="hourly-forecast-item">
+                <div className="hourly-forecast-time">
+                  {hour.time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </div>
+                <div className="hourly-forecast-temp">
+                  {isCelsius ? hour.temperatureCelsius : hour.temperatureFahrenheit}°{isCelsius ? 'C' : 'F'}
+                </div>
+                <div className="hourly-forecast-description">
+                  {hour.weatherDescription}
+                </div>
+                <div className="hourly-forecast-icon">
+                  <img src={`/icons/${getWeatherIcon(hour.weatherCode)}`} alt={hour.weatherDescription} style={{ width: '60px', height: '60px'}} />
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </Drawer>
     </div>
   );
 }

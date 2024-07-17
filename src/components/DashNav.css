@@ -112,7 +112,7 @@ input:checked + .slider:before {
   color: white;
 }
 
-@media (min-width: 1920px) and (max-width: 2560px) {
+@media (max-width: 1920px) {
   .dash-nav {
     display: flex;
     justify-content: center; /* Center-align the content */
@@ -121,10 +121,10 @@ input:checked + .slider:before {
     background-color: rgba(119, 119, 119, 0.308);
     border-radius: 20px;
     box-shadow: 0 14px 11px rgba(0, 0, 0, 0.400);
-    margin: 25px 0 0 0;
+    margin: -5px 0 0 0;
     width: 70%; /* Adjust width for better responsiveness */
     max-width: 1400px; /* Maximum width for larger screens */
-    height: 30px;
+    height: 20px;
     margin-left: auto;
     margin-right: auto; /* Center horizontally */
   }
@@ -138,13 +138,13 @@ input:checked + .slider:before {
   }
   
   .search-bar input {
-    font-size: 16px;
+    font-size: 14px;
     padding: 10px;
     border-radius: 10px;
     border: 1px solid #ccc;
     box-shadow: 0 7px 11px rgba(0, 0, 0, 0.400);
     width: 275px; /* Allow input to scale */
-    height: 18px;
+    height: 14px;
     position: relative;
     top: 0vh;
     left: 0vw;
@@ -165,9 +165,7 @@ input:checked + .slider:before {
     background-color: #0056b3;
   }
 
-  .search-box {
-    
-  }
+
 
   .location-button {
     margin: 10px;
