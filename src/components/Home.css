@@ -42,7 +42,7 @@
 }
 
 .smaller-text {
-    font-size: 18px;
+    font-size: 20px;
     margin: 0px 0 0 -15vw;
 }
 
@@ -62,9 +62,39 @@
     margin-bottom: 20px;
 }
 
-.features ul {
-    list-style-type: disc;
-    margin-left: 20px;
+
+.our-software {
+    background-color: grey;
+}
+
+.software-header {
+    text-align: center;
+    color: rgba(0, 0, 0, 0.315);
+    font-size: 16px;
+    margin: 150px 0 0 0;
+}
+
+.easy-powerful {
+    text-align: center;
+    color: rgba(0, 0, 0, 0.705);
+    font-size: 60px;
+    margin: 0px 0 0 0;
+}
+
+.features-header {
+    font-size: 40px;
+    margin: 150px 0 0 550px;
+    
+}
+
+.features li {
+    font-size: 18px;
+    margin-left: 500px; /* Adjust this margin as needed */
+    margin-bottom: 25px; /* Increase this value to widen the vertical gap */
+}
+
+.features-img {
+    margin: -400px 0 0 1400px;
 }
 
 .home-footer {
