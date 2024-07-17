@@ -1,4 +1,3 @@
-/* src/components/Dashboard.css */
 .dash-nav {
   display: flex;
   justify-content: center; /* Center-align the content */
@@ -13,6 +12,29 @@
   height: 55px;
   margin-left: auto;
   margin-right: auto; /* Center horizontally */
+}
+
+.location-button {
+  margin: 0px;
+  padding: 10px 10px;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+  border-radius: 25px;
+  position: relative;
+  top: 0vh;
+  left: 0vw;
+  height: 40px;
+  width: 40px;
+  
+}
+
+
+.location-icon {
+  width: 46px;
+  height: 46px;
+  margin: -14.5px 0 0 -16.3px;
+
 }
 
 
@@ -43,11 +65,12 @@
   background-color: #007bff00;
   color: white;
   cursor: pointer;
-  box-shadow: 0 6px 11px rgba(0, 0, 0, 0.400);
+
 }
 
 .search-bar button:hover {
-  background-color: #0056b3;
+  border: 2px solid white;
+  border-radius: 45px;
 }
 
 .switch {
@@ -164,8 +187,6 @@ input:checked + .slider:before {
   .search-bar :hover {
     background-color: #0056b3;
   }
-
-
 
   .location-button {
     margin: 10px;

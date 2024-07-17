@@ -36,6 +36,16 @@ const Home = () => {
                     </ul>
                     <img src={featuresImage} className='features-img' alt="features-image"/>
 
+                    <h4 className='critical-communications'>Critical Communications</h4>
+                    <p>Real time NWS alerts for your specific location:</p>
+                    <ul className='communications-content'>
+                        <li>Tornado Watches and Warnings</li>
+                        <li>Severe Thunderstorm Watches and Warnings</li>
+                        <li>Flash Flood Watches and Warnings</li>
+                        <li>Winter Weather Watches, Warnings, and Advisories</li>
+                        <li>A suite of Tropical Watches, Warnings, and Advisories (both coastal and inland)</li>
+                    </ul>
+
                     <h4 className='features-forecast'>Weekly and Hourly Forecasts</h4>
                     <p className='forecast-content'>See into the future with the next 7-days worth of forecasted data.</p>
                     <p className='forecast-content'>Click each day to see the hourly projected forecasted data</p>
@@ -43,7 +53,6 @@ const Home = () => {
                         <source src={hourlyDemo} type="video/mp4" />
                     </video>
 
-                    <h4 className='critical-communications'>Critical Communications</h4>
 
                 </section>
                 {/* <section className="features">

@@ -5,6 +5,7 @@ import './Dashboard.css';
 import Drawer from './Drawer'; // Import the custom Drawer component
 import WeatherCards from './WeatherCards';
 import DashNav from './DashNav';
+import AlertsButton from './AlertsButton'; // Import AlertsButton component
 
 const locationImage = "./icons/location_marker.png";
 const dateTimeImage = "./icons/calendar_small.png";
@@ -278,7 +279,7 @@ const Dashboard = () => {
       {weather && (
         <>
           <div className="section current-weather">
-          <h2></h2>
+            <h2></h2>
             <img src={weather.iconUrl} alt={weather.weatherDescription} />
             <p className='current-temp'>
               {isCelsius ? weather.temperatureCelsius : weather.temperatureFahrenheit}°{isCelsius ? 'C' : 'F'}
@@ -347,6 +348,8 @@ const Dashboard = () => {
           <WeatherCards lat={latLon.lat} lon={latLon.lon} />
         </div>
       )}
+
+      <AlertsButton lat={latLon.lat} lon={latLon.lon} /> {/* Add AlertsButton component */}
 
       <Drawer isOpen={drawerOpen} onClose={closeDrawer}>
         {selectedDay !== null && (

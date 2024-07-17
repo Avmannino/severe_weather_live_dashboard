@@ -310,6 +310,18 @@ iframe:hover {
     height: 40vh;
     top: 37vh;
     left: 21vw;
+    animation: slide-in-bottom 0.2s forwards;
+  }
+  
+  @keyframes slide-in-bottom {
+    from {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
   .weather-cards {
@@ -317,6 +329,18 @@ iframe:hover {
     bottom: 25vh;
     left: 13vw;
     transition: transform 0.3s;
+    animation: slide-in-left 0.3s forwards;
+  }
+  
+  @keyframes slide-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 
   .current-weather {
@@ -335,6 +359,18 @@ iframe:hover {
     position: relative;
     top: -39vh;
     left: -20vw;
+    animation: slide-in-top 0.5s forwards;
+  }
+  
+  @keyframes slide-in-top {
+    from {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .current-weather img {
@@ -453,10 +489,22 @@ iframe:hover {
     text-align: right;
     box-shadow: 10px 10px 11px rgba(0, 0, 0, 0.400);
     transition: transform 0.2s;
+    animation: slide-in-right 0.3s forwards;
   }
   
   .forecast-item:hover {
     transform: scale(1.035);
+  }
+  
+  @keyframes slide-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
   
   .forecast-day {
@@ -536,6 +584,8 @@ iframe:hover {
     text-align: center;
     font-size: 14px;
   }
+
+  
   
   .hourly-forecast-time, .hourly-forecast-temp, .hourly-forecast-description, .hourly-forecast-icon {
     margin: 0px 5px 5px 1px;
@@ -566,6 +616,7 @@ iframe:hover {
   }
 }
 
+/* 2560x1440 */
 
 @media (min-width: 2560px) {
   iframe {
@@ -573,13 +624,38 @@ iframe:hover {
     height: 40vh;
     top: 34vh;
     left: 20vw;
+    position: relative;
+    animation: slide-in-bottom 0.5s forwards;
+  }
+  
+  @keyframes slide-in-bottom {
+    from {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
   .weather-cards {
     position: absolute;
-    bottom: 27vh;
+    bottom: 32vh;
     left: 18vw;
     transition: transform 0.3s;
+    animation: slide-in-left 0.3s forwards;
+  }
+  
+  @keyframes slide-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 
   .current-weather {
@@ -597,7 +673,19 @@ iframe:hover {
     gap: 5px;
     position: relative;
     top: -37vh;
-    left: -20vw;
+    left: -19.5vw;
+    animation: slide-in-top 0.5s forwards;
+  }
+  
+  @keyframes slide-in-top {
+    from {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .current-weather img {
@@ -689,7 +777,6 @@ iframe:hover {
     font-size: 15px;
   }
   
-  
   .forecast-grid {
     display: flex;
     flex-direction: row;
@@ -700,9 +787,8 @@ iframe:hover {
     position: relative;
     bottom: 68vh;
     left: 19vw;
-    
   }
-  
+
   .forecast-item {
     background-color: rgba(80, 80, 80, 0.37);
     border-radius: 20px;
@@ -710,11 +796,24 @@ iframe:hover {
     text-align: right;
     box-shadow: 10px 10px 11px rgba(0, 0, 0, 0.400);
     transition: transform 0.3s;
+    animation: slide-in-right 0.4s forwards;
   }
-  
+
   .forecast-item:hover {
     transform: scale(1.035);
   }
+
+  @keyframes slide-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
   
   .forecast-day {
     display: flex;
@@ -772,11 +871,11 @@ iframe:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-height: 100%; /* Adjust this value based on your layout needs */
+    max-height: 100%;
     width: 220px;
     border-radius: 8px;
     padding: 25px;
-    background-color: #022337; /* Background color to make it distinct */
+    background-color: #022337; 
     overflow-y: scroll;
   }
   

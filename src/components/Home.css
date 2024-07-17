@@ -3,7 +3,6 @@
     flex-direction: column;
     min-height: 100vh;
     font-family: dashboard;
-    font-weight: 100;
 }
 
 .home-header {
@@ -48,18 +47,21 @@
 .smaller-text {
     font-size: 20px;
     margin: 0px 0 0 -15vw;
+    color: white;
 }
 
 .emphasized-text {
     font-size: 65px;
     max-width: 80%;
     margin: 20vh 0 0 -15vw;
+    color: white;
 }
 
 .spottr-text {
     font-size: 65px;
     font-family: storm;
     margin: -7.5vh 0 0 7.5vw;
+    color: white;
 }
 
 .intro, .features {
@@ -100,7 +102,7 @@
 }
 
 .features-img {
-    margin: -490px 0 0 1370px;
+    margin: -520px 0 0 1370px;
     width: 35%;
 }
 
@@ -127,7 +129,14 @@
 .critical-communications {
     font-size: 40px;
     color: rgba(0, 0, 0, 0.616);
-    margin: 185px 0 0 505px;
+    margin: 95px 0 0 505px;
+}
+
+.communications-content li {
+    font-size: 20px;
+    margin-left: 510px; 
+    margin-bottom: 25px; 
+    color: rgba(0, 0, 0, 0.616);
 }
 
 

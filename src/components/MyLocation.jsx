@@ -1,5 +1,4 @@
 import React from 'react';
-import './MyLocation.css'; 
 import locationIcon from '/icons/location_arrow.png'; 
 
 class MyLocation extends React.Component {
