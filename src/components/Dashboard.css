@@ -307,11 +307,70 @@ iframe:hover {
 /* 2560x1440 */
 
 @media (max-width: 2560px) {
-  iframe {
-    width: 42%;
-    height: 40vh;
-    top: 35vh;
-    left: 20.5vw;
+
+  .default-view {
+    text-align: center;
+    margin: 5vh auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #1b2a3d00;
+    color: #ffffffd0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1600px;
+    width: 80%;
+  }
+  
+  .default-view h2 {
+    font-size: 28px;
+    margin-top: -40px;
+  }
+  
+  .default-view p {
+    font-size: 18px;
+    margin-top: -10px;
+  }
+  
+  .default-weather-cards {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+  }
+  
+  .weather-card {
+    background-color: rgba(80, 80, 80, 0.37);
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    width: 150px;
+  }
+  
+  .weather-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .weather-card h3 {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+  
+  .weather-card img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .weather-card p {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  
+  .default-map {
+    width: 85%;
+    height: 45vh;
+    top: 0vh;
+    left: 0vw;
     position: relative;
     animation: slide-in-bottom 0.5s forwards;
   }
@@ -325,6 +384,15 @@ iframe:hover {
       opacity: 1;
       transform: translateY(0);
     }
+  }
+  
+  iframe {
+    width: 42%;
+    height: 40vh;
+    top: 35vh;
+    left: 20.5vw;
+    position: relative;
+    animation: slide-in-bottom 0.5s forwards;
   }
   
   .weather-cards {
@@ -345,7 +413,7 @@ iframe:hover {
       transform: translateX(0);
     }
   }
-
+  
   .current-weather {
     text-align: left;
     width: 400px;
@@ -375,7 +443,7 @@ iframe:hover {
       transform: translateY(0);
     }
   }
-
+  
   .current-weather img {
     width: 170px;
     height: 170px;
@@ -450,7 +518,6 @@ iframe:hover {
     margin: -80px 0;
   }
   
-  
   .forecast h2 {
     position: absolute;
     top: 14vh;
@@ -476,7 +543,7 @@ iframe:hover {
     bottom: 69vh;
     left: 19vw;
   }
-
+  
   .forecast-item {
     background-color: rgba(80, 80, 80, 0.37);
     border-radius: 20px;
@@ -486,11 +553,11 @@ iframe:hover {
     transition: transform 0.3s;
     animation: slide-in-right 0.4s forwards;
   }
-
+  
   .forecast-item:hover {
     transform: scale(1.035);
   }
-
+  
   @keyframes slide-in-right {
     from {
       opacity: 0;
@@ -501,7 +568,6 @@ iframe:hover {
       transform: translateX(0);
     }
   }
-
   
   .forecast-day {
     display: flex;
@@ -539,7 +605,7 @@ iframe:hover {
     height: 45px;
     width: 130px;
   }
-
+  
   .hourly-forecast {
     padding: 12px;
     background-color: #012c3e;
@@ -584,7 +650,7 @@ iframe:hover {
   .hourly-forecast-time, .hourly-forecast-temp, .hourly-forecast-description, .hourly-forecast-icon {
     margin: 0px 5px 5px 1px;
   }
-
+  
   .hourly-forecast-time {
     font-size: 18px;
   }
@@ -593,7 +659,7 @@ iframe:hover {
     color: #daa700;
     font-size: 20px;
   }
-
+  
   .hourly-forecast-description {
     font-size: 18px;
   }
@@ -618,7 +684,6 @@ iframe:hover {
     border-radius: 8px;
   }
   
-  
   .current-weather .expanded-section {
     transition: height 0.3s ease;
   }
@@ -631,7 +696,7 @@ iframe:hover {
   .current-weather .expanded-section.expanded {
     height: 500px; 
   }
-
+  
 }
 
 /*1920x1080*/

@@ -12,9 +12,7 @@ const alertDemo = './alert_demo.mp4'
 const Home = () => {
     return (
         <div className="home-container">
-            <header className="home-header">
-                <h1>Welcome to SPOT'R</h1>
-            </header>
+                <h1 className='home-header'>WEATHER MONITORING HUB</h1>
             <main className="home-main">
                 <section className="intro">
                     <p className='emphasized-text'>Stay two steps ahead of the storm with</p>

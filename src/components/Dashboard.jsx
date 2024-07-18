@@ -1,6 +1,6 @@
-// src/components/Dashboard.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { DateTime } from 'luxon';
 import './Dashboard.css';
 import Drawer from './Drawer'; // Import the custom Drawer component
 import WeatherCards from './WeatherCards';
@@ -88,6 +88,14 @@ const calculateHeatIndex = (temperatureF, humidity) => {
   return Math.round(HI);
 };
 
+const defaultCities = [
+  { name: 'Los Angeles, CA', lat: 34.0522, lon: -118.2437 },
+  { name: 'New York, NY', lat: 40.7128, lon: -74.0060 },
+  { name: 'London, UK', lat: 51.5074, lon: -0.1278 },
+  { name: 'Paris, France', lat: 48.8566, lon: 2.3522 },
+  { name: 'Kiev, Ukraine', lat: 50.4501, lon: 30.5234 }
+];
+
 const Dashboard = () => {
   const [searchInput, setSearchInput] = useState('');
   const [weather, setWeather] = useState(null);
@@ -100,6 +108,7 @@ const Dashboard = () => {
   const [latLon, setLatLon] = useState({ lat: 50.4, lon: 14.3, zoom: 5 });
   const [searchConducted, setSearchConducted] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [defaultWeather, setDefaultWeather] = useState([]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -107,6 +116,27 @@ const Dashboard = () => {
     }, 1000);
 
     return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const fetchDefaultWeather = async () => {
+      const weatherData = await Promise.all(defaultCities.map(async (city) => {
+        const response = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}&current_weather=true&timezone=auto`);
+        const data = response.data.current_weather;
+        const cityTime = DateTime.local().setZone(response.data.timezone).toLocaleString(DateTime.TIME_SIMPLE);
+        return {
+          ...city,
+          temperature: Math.round(data.temperature),
+          weatherCode: data.weathercode,
+          weatherDescription: getWeatherDescription(data.weathercode),
+          iconUrl: `/icons/${getWeatherIcon(data.weathercode)}`,
+          localTime: cityTime
+        };
+      }));
+      setDefaultWeather(weatherData);
+    };
+
+    fetchDefaultWeather();
   }, []);
 
   const handleSearch = async () => {
@@ -270,109 +300,132 @@ const Dashboard = () => {
         updateSearchBar={updateSearchBar}
       />
 
-      <iframe
-        title="Windy Map"
-        src={`https://embed.windy.com/embed2.html?lat=${latLon.lat}&lon=${latLon.lon}&detailLat=${latLon.lat}&detailLon=${latLon.lon}&width=650&height=450&zoom=${latLon.zoom}&level=surface&overlay=radar&product=ecmwf&menu=&message=true&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1`}
-        frameBorder="0"
-      ></iframe>
-
-      {weather && (
-        <>
-          <div className="section current-weather">
-            <h2></h2>
-            <img src={weather.iconUrl} alt={weather.weatherDescription} />
-            <p className='current-temp'>
-              {isCelsius ? weather.temperatureCelsius : weather.temperatureFahrenheit}°{isCelsius ? 'C' : 'F'}
-            </p>
-            <p className='feels-like'>
-              Feels Like: {isCelsius ? weather.heatIndexCelsius : weather.heatIndexFahrenheit}°{isCelsius ? 'C' : 'F'}
-            </p>
-            
-            <div className='weather-desc'>
-              <p>
-                {weather.weatherDescription} | 
-                <img src={rainDropImage} alt={weather.precipitationProbability} style={{ width: '22px', height: '22px', margin: '5px 5px -5px 2px' }} />{weather.precipitationProbability}% 
-              </p>
-            </div>
-
-            <div className='hi-lo'>
-              <p style={{color: '#ffa500'}}>
-                H: {isCelsius ? weather.temperatureMaxCelsius : weather.temperatureMaxFahrenheit}°{isCelsius ? 'C' : 'F'} 
-              </p>
-              <p style={{color: '#3b728b'}}>
-                L: {isCelsius ? weather.temperatureMinCelsius : weather.temperatureMinFahrenheit}°{isCelsius ? 'C' : 'F'}
-              </p>
-            </div>
-
-
-            <div className='location'>
-              <img src={locationImage} alt="Location" style={{ width: '25px', height: '25px', margin:'-5px 0 -5px 5px' }} />
-              <p>{location}</p>
-            </div>
-
-            <div className='time'>
-              <img src={dateTimeImage} alt="Date and Time" style={{ width: '25px', height: '25px', margin: '0px 0px 0px 55px' }} />
-              <p>{currentTime.toLocaleDateString()} | {currentTime.toLocaleTimeString()}</p>
-            </div>
-          </div>
-        </>
-      )}
-
-      {forecast && (
-        <div className="section forecast">
-          <h2>7-Day Outlook</h2>
-          <h4>* Click for hourly forecast *</h4>
-          <div className="forecast-grid">
-            {forecast.map((day, index) => (
-              <div key={index} className="forecast-item" onClick={() => handleDayClick(index)}>
-                <div className="forecast-header">
-                  <span className="forecast-day">{day.date.toLocaleDateString('en-US', { weekday: 'long' })}</span>
-                  <span className="forecast-date">{day.date.toLocaleDateString()}</span>
-                  <div className="forecast-temp" style={{alignItems:'start', justifyContent:'end'}}>
-                    <span style={{color: 'orange'}}>H: {isCelsius ? day.temperatureMaxCelsius : day.temperatureMaxFahrenheit}°{isCelsius ? 'C' : 'F'}</span>
-                    <span style={{color: '#448dab'}}>L: {isCelsius ? day.temperatureMinCelsius : day.temperatureMinFahrenheit}°{isCelsius ? 'C' : 'F'}</span>
-                  </div>
-                </div>
-                <div className="forecast-details">
-                  <img src={`/icons/${getWeatherIcon(day.weatherCode)}`} alt={day.weatherDescription} style={{ width: '60px', height: '60px', display:'flex', margin:'-55px 0 0 0'  }} />
-                  <span style={{color:'white', margin:'5px 0 0 0'}}>{day.weatherDescription}</span>
-                </div>
+      {!searchConducted && (
+        <div className="default-view">
+          <h2>Welcome to the Weather Dashboard</h2>
+          <p>Enter a city name or ZIP code to get started.</p>
+          <div className="default-weather-cards">
+            {defaultWeather.map((cityWeather, index) => (
+              <div key={index} className="weather-card">
+                <h3>{cityWeather.name}</h3>
+                <img src={cityWeather.iconUrl} alt={cityWeather.weatherDescription} />
+                <p>{cityWeather.temperature}°C</p>
+                <p>{cityWeather.localTime}</p>
               </div>
             ))}
           </div>
+          <iframe className='default-map'
+            title="Map"
+            src={`https://embed.windy.com/embed2.html?lat=${latLon.lat}&lon=${latLon.lon}&detailLat=${latLon.lat}&detailLon=${latLon.lon}&width=650&height=450&zoom=${latLon.zoom}&level=surface&overlay=radar&product=ecmwf&menu=&message=true&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1`}
+          ></iframe>
         </div>
       )}
 
       {searchConducted && (
-        <div className='weather-cards'>
-          <WeatherCards lat={latLon.lat} lon={latLon.lon} />
-        </div>
-      )}
+        <>
+          <iframe
+            title="Windy Map"
+            src={`https://embed.windy.com/embed2.html?lat=${latLon.lat}&lon=${latLon.lon}&detailLat=${latLon.lat}&detailLon=${latLon.lon}&width=650&height=450&zoom=${latLon.zoom}&level=surface&overlay=radar&product=ecmwf&menu=&message=true&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1`}
+            frameBorder="0"
+          ></iframe>
 
-      <AlertsButton lat={latLon.lat} lon={latLon.lon} /> {/* Add AlertsButton component */}
+          {weather && (
+            <>
+              <div className="section current-weather">
+                <img src={weather.iconUrl} alt={weather.weatherDescription} />
+                <p className='current-temp'>
+                  {isCelsius ? weather.temperatureCelsius : weather.temperatureFahrenheit}°{isCelsius ? 'C' : 'F'}
+                </p>
+                <p className='feels-like'>
+                  Feels Like: {isCelsius ? weather.heatIndexCelsius : weather.heatIndexFahrenheit}°{isCelsius ? 'C' : 'F'}
+                </p>
+                
+                <div className='weather-desc'>
+                  <p>
+                    {weather.weatherDescription} | 
+                    <img src={rainDropImage} alt={weather.precipitationProbability} style={{ width: '22px', height: '22px', margin: '5px 5px -5px 2px' }} />{weather.precipitationProbability}% 
+                  </p>
+                </div>
 
-      <Drawer isOpen={drawerOpen} onClose={closeDrawer}>
-        {selectedDay !== null && (
-          <div className="hourly-forecast-grid">
-            {getHourlyForecastForDay(forecast[selectedDay]).map((hour, hourIndex) => (
-              <div key={hourIndex} className="hourly-forecast-item">
-                <div className="hourly-forecast-time">
-                  {hour.time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                <div className='hi-lo'>
+                  <p style={{color: '#ffa500'}}>
+                    H: {isCelsius ? weather.temperatureMaxCelsius : weather.temperatureMaxFahrenheit}°{isCelsius ? 'C' : 'F'} 
+                  </p>
+                  <p style={{color: '#3b728b'}}>
+                    L: {isCelsius ? weather.temperatureMinCelsius : weather.temperatureMinFahrenheit}°{isCelsius ? 'C' : 'F'}
+                  </p>
                 </div>
-                <div className="hourly-forecast-temp">
-                  {isCelsius ? hour.temperatureCelsius : hour.temperatureFahrenheit}°{isCelsius ? 'C' : 'F'}
+
+                <div className='location'>
+                  <img src={locationImage} alt="Location" style={{ width: '25px', height: '25px', margin:'-5px 0 -5px 5px' }} />
+                  <p>{location}</p>
                 </div>
-                <div className="hourly-forecast-description">
-                  {hour.weatherDescription}
-                </div>
-                <div className="hourly-forecast-icon">
-                  <img src={`/icons/${getWeatherIcon(hour.weatherCode)}`} alt={hour.weatherDescription} style={{ width: '60px', height: '60px'}} />
+
+                <div className='time'>
+                  <img src={dateTimeImage} alt="Date and Time" style={{ width: '25px', height: '25px', margin: '0px 0px 0px 55px' }} />
+                  <p>{currentTime.toLocaleDateString()} | {currentTime.toLocaleTimeString()}</p>
                 </div>
               </div>
-            ))}
-          </div>
-        )}
-      </Drawer>
+            </>
+          )}
+
+          {forecast && (
+            <div className="section forecast">
+              <h2>7-Day Outlook</h2>
+              <h4>* Click for hourly forecast *</h4>
+              <div className="forecast-grid">
+                {forecast.map((day, index) => (
+                  <div key={index} className="forecast-item" onClick={() => handleDayClick(index)}>
+                    <div className="forecast-header">
+                      <span className="forecast-day">{day.date.toLocaleDateString('en-US', { weekday: 'long' })}</span>
+                      <span className="forecast-date">{day.date.toLocaleDateString()}</span>
+                      <div className="forecast-temp" style={{alignItems:'start', justifyContent:'end'}}>
+                        <span style={{color: 'orange'}}>H: {isCelsius ? day.temperatureMaxCelsius : day.temperatureMaxFahrenheit}°{isCelsius ? 'C' : 'F'}</span>
+                        <span style={{color: '#448dab'}}>L: {isCelsius ? day.temperatureMinCelsius : day.temperatureMinFahrenheit}°{isCelsius ? 'C' : 'F'}</span>
+                      </div>
+                    </div>
+                    <div className="forecast-details">
+                      <img src={`/icons/${getWeatherIcon(day.weatherCode)}`} alt={day.weatherDescription} style={{ width: '60px', height: '60px', display:'flex', margin:'-55px 0 0 0'  }} />
+                      <span style={{color:'white', margin:'5px 0 0 0'}}>{day.weatherDescription}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {searchConducted && (
+            <div className='weather-cards'>
+              <WeatherCards lat={latLon.lat} lon={latLon.lon} />
+            </div>
+          )}
+
+          <AlertsButton lat={latLon.lat} lon={latLon.lon} /> {/* Add AlertsButton component */}
+
+          <Drawer isOpen={drawerOpen} onClose={closeDrawer}>
+            {selectedDay !== null && (
+              <div className="hourly-forecast-grid">
+                {getHourlyForecastForDay(forecast[selectedDay]).map((hour, hourIndex) => (
+                  <div key={hourIndex} className="hourly-forecast-item">
+                    <div className="hourly-forecast-time">
+                      {hour.time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    </div>
+                    <div className="hourly-forecast-temp">
+                      {isCelsius ? hour.temperatureCelsius : hour.temperatureFahrenheit}°{isCelsius ? 'C' : 'F'}
+                    </div>
+                    <div className="hourly-forecast-description">
+                      {hour.weatherDescription}
+                    </div>
+                    <div className="hourly-forecast-icon">
+                      <img src={`/icons/${getWeatherIcon(hour.weatherCode)}`} alt={hour.weatherDescription} style={{ width: '60px', height: '60px'}} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </Drawer>
+        </>
+      )}
     </div>
   );
 }

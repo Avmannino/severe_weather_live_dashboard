@@ -7,10 +7,17 @@
 
 .home-header {
     background-color: #007bff00;
-    color: white;
+    color: rgba(255, 255, 255, 0.267);
     padding: 20px;
     text-align: center;
+    font-family: nova;
+    margin-top: 255px;
 }
+
+@font-face {
+    font-family: 'nova';
+    src: url('./nova.ttf') format('truetype');
+  }
 
 .home-nav {
     margin-top: 10px;
@@ -37,7 +44,7 @@
 }
 
 .intro {
-    padding-bottom: 420px;
+    padding-bottom: 450px;
 }
 
 .h2 {
@@ -45,22 +52,26 @@
 }
 
 .smaller-text {
-    font-size: 20px;
-    margin: 0px 0 0 -15vw;
+    font-size: 22px;
+    margin: 0px 0 0 13vw;
     color: white;
+    font-family: nova;
 }
 
 .emphasized-text {
     font-size: 65px;
-    max-width: 80%;
-    margin: 20vh 0 0 -15vw;
+    max-width: 56%;
+    margin: -1vh 0 0 13vw;
     color: white;
+    font-family: nova;
+    font-weight: bolder;
+    text-align: left;
 }
 
 .spottr-text {
     font-size: 65px;
     font-family: storm;
-    margin: -7.5vh 0 0 7.5vw;
+    margin: -7.5vh 0 0 25.5vw;
     color: white;
 }
 
@@ -71,6 +82,8 @@
 
 .our-software {
     background-color: rgb(255, 255, 255);
+    font-family: nova;
+    font-weight: 500;
 }
 
 .software-header {
@@ -194,7 +207,7 @@
 }
 
 .button-container {
-    margin-top: 20px;
+    margin: -15px 0 0 28vw;
 }
 
 .trial-button, .demo-button {
@@ -202,9 +215,10 @@
     color: white;
     border: none;
     padding: 10px 20px;
-    margin: 10px 0;
+    margin: 50px 0 0 200px;
     font-size: 18px;
     cursor: pointer;
+    font-family: nova;
 }
 
 .trial-button {
@@ -213,13 +227,15 @@
 
 .demo-button {
     margin-left: 1vw;
-    background-color: #28a745;
+    background-color: #28a74600;
+    border: 1px solid #017bff;
 }
 
-.trial-button:hover, .demo-button:hover {
-    background-color: #0056b3;
+.trial-button:hover {
+    background-color: #0057b300;
+    border: 1px solid #017bff;
 }
 
 .demo-button:hover {
-    background-color: #218838;
+    background-color: #017bff;
 }
