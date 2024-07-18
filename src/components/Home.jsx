@@ -21,7 +21,7 @@ const Home = () => {
                     <p className='spottr-text'>SPOT'R</p>
                     <p className='smaller-text'>The ultimate tool for precise, real-time weather and data monitoring, all in one place.</p>
                     <div className="button-container">
-                        <button className="trial-button">Start a Free Trial</button>
+                        <button className="trial-button" onClick={() => window.location.href='/sign-up'}>Start a Free Trial</button>
                         <button className="demo-button" onClick={() => window.location.href='/dashboard'}>Try a Live Demo</button>
                     </div>
                 </section>

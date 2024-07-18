@@ -8,8 +8,8 @@
     border-radius: 30px;
     box-shadow: 0 14px 11px rgba(0, 0, 0, 0.400);
     margin: 15px;
-    width: 80%; /* Adjust width for better responsiveness */
-    max-width: 1500px; /* Maximum width for larger screens */
+    width: 60%; /* Adjust width for better responsiveness */
+    max-width: 1450px; /* Maximum width for larger screens */
     height: 55px;
     margin-left: auto;
     margin-right: auto; /* Center horizontally */
@@ -148,11 +148,11 @@
     align-items: center;
     padding: 15px;
     background-color: rgba(119, 119, 119, 0.308);
-    border-radius: 20px;
+    border-radius: 25px;
     box-shadow: 0 14px 11px rgba(0, 0, 0, 0.400);
-    margin: -5px 0 0 0;
+    margin: -5px 0 0 10px;
     width: 60%; /* Adjust width for better responsiveness */
-    max-width: 1400px; /* Maximum width for larger screens */
+    max-width: 1150px; /* Maximum width for larger screens */
     height: 25px;
     margin-left: auto;
     margin-right: auto; /* Center horizontally */

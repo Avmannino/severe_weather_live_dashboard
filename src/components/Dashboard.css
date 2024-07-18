@@ -329,7 +329,7 @@ iframe:hover {
   
   .weather-cards {
     position: absolute;
-    bottom: 28vh;
+    bottom: 29vh;
     left: 15vw;
     transition: transform 0.3s;
     animation: slide-in-left 0.3s forwards;
@@ -349,7 +349,7 @@ iframe:hover {
   .current-weather {
     text-align: left;
     width: 400px;
-    height: 440px;
+    height: 460px;
     padding: 25px;
     border-radius: 20px;
     background-color: rgba(114, 113, 113, 0.28);
@@ -386,7 +386,7 @@ iframe:hover {
     font-size: 60px;
     font-weight: normal;
     color: white;
-    margin: -350px 0 0px 10px;
+    margin: -340px 0 0px 10px;
   }
   
   .feels-like {
@@ -473,7 +473,7 @@ iframe:hover {
     max-width: 1100px;
     gap: 15px;
     position: relative;
-    bottom: 68vh;
+    bottom: 69vh;
     left: 19vw;
   }
 
@@ -658,7 +658,7 @@ iframe:hover {
   
   .weather-cards {
     position: absolute;
-    bottom: 31vh;
+    bottom: 31.5vh;
     left: 13vw;
     transition: transform 0.3s;
     animation: slide-in-left 0.3s forwards;
@@ -678,7 +678,7 @@ iframe:hover {
   .current-weather {
     text-align: left;
     width: 300px;
-    height: 325px;
+    height: 330px;
     padding: 25px;
     border-radius: 20px;
     background-color: rgba(114, 113, 113, 0.28);

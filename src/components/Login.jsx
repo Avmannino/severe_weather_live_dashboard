@@ -1,5 +1,3 @@
-// Login.jsx
-
 import React, { useState } from 'react';
 import { Form, Button, Schema, Checkbox } from 'rsuite';
 import './Login.css';  // Import the CSS file
@@ -41,8 +39,8 @@ const Login = () => {
         model={model}
       >
         <Form.Group>
-          <Form.ControlLabel>Username or Email:</Form.ControlLabel>
-          <Form.Control name="email" type="email" placeholder="Username" />
+          <Form.ControlLabel>Email:</Form.ControlLabel>
+          <Form.Control name="email" type="email" placeholder="Email" />
         </Form.Group>
         <Form.Group>
           <Form.ControlLabel>Password:</Form.ControlLabel>
@@ -55,6 +53,10 @@ const Login = () => {
       </Form>
       <div className="forgot-password">
         <a href="#forgot-password">Forgot your password?</a>
+      </div>
+      <div className="signup-card">
+        <span>Don't have an account?</span>
+        <a href="/sign-up" className="signup-link">Create one here</a>
       </div>
     </div>
   );
