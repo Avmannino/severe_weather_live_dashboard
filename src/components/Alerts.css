@@ -1,4 +1,4 @@
-/* src/components/Alerts.css */
+@media (max-width: 2560px) {
 
 .alerts {
     background-color: #f8f9fa;
@@ -45,4 +45,54 @@
   .alerts p:last-child {
     margin-bottom: 0;
   }
+}
+
+@media (max-width: 1920px) {
+
+    .alerts {
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        padding: 12px;
+        margin: 10px 0;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        }
+        
+        .alerts h2 {
+        font-size: 1.5rem;
+        margin-bottom: 16px;
+        color: #343a40;
+        }
+        
+        .alerts ul {
+        list-style-type: none;
+        padding: 0;
+        }
+        
+        .alerts li {
+        border-bottom: 1px solid #dee2e6;
+        padding: 12px 0;
+        }
+        
+        .alerts li:last-child {
+        border-bottom: none;
+        }
+        
+        .alerts h3 {
+        font-size: 1.25rem;
+        margin-bottom: 8px;
+        color: #007bff;
+        }
+        
+        .alerts p {
+        margin: 4px 0;
+        color: #6c757d;
+        }
+        
+        .alerts p:last-child {
+        margin-bottom: 0;
+        }
+}
   

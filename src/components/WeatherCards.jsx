@@ -109,7 +109,7 @@ const WeatherCards = ({ lat, lon }) => {
         {windSpeed !== null && windDirection !== null ? (
           <div className="wind-speed">
             <h3>Wind</h3>
-            {windSpeed} MPH
+            <p>{windSpeed} MPH</p>
             <p className='wind-direction'>{getWindDirection(windDirection)}</p>
             <Compass direction={windDirection} />
           </div>
@@ -122,6 +122,7 @@ const WeatherCards = ({ lat, lon }) => {
           <div className="dew-point">
             <h3>Dew Point</h3>
             <p>{dewPoint.toFixed(1)}°F</p>
+            <img src="./icons/dew_icon.png" alt="dew-icon" />
           </div>
         ) : (
           <p>Loading...</p>
