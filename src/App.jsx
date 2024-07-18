@@ -5,6 +5,7 @@ import LandingPage from './components/LandingPage.jsx';
 import Home from './components/Home.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import Navbar from './components/Navbar.jsx';
+import Login from './components/Login.jsx';
 
 function App() {
     return (
@@ -25,6 +26,7 @@ const MainApp = () => {
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/log-in" element={<Login />} />
                 {/* Add more routes here as your project grows */}
             </Routes>
         </>
