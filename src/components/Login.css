@@ -18,6 +18,13 @@
         color: #ffffffd0;
     }
     
+    .login-error {
+        color: red;
+        text-align: center;
+        margin-top: 10px;
+      }
+      
+
     .rs-form-control {
         width: 100%;
         background-color: rgba(248, 204, 6, 0);

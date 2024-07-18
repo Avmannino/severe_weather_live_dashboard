@@ -12,13 +12,41 @@ const model = Schema.Model({
 const Login = () => {
   const [formValue, setFormValue] = useState({ email: '', password: '' });
   const [formError, setFormError] = useState({});
+  const [loginError, setLoginError] = useState('');
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!form.check()) {
       console.error('Form Error');
       return;
     }
+
     console.log('Form Value', formValue);
+
+    // Make a POST request to the backend
+    try {
+      const response = await fetch('http://127.0.0.1:5000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formValue)
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Login successful:', data);
+        setLoginError('');  // Clear any previous login error
+        // Perform further actions, e.g., store the token
+        // localStorage.setItem('token', data.access_token);
+      } else {
+        const errorData = await response.json();
+        console.error('Login failed:', errorData);
+        setLoginError('Invalid email or password.');
+      }
+    } catch (error) {
+      console.error('Network error:', error);
+      setLoginError('Network error. Please try again.');
+    }
   };
 
   let form;
@@ -51,6 +79,7 @@ const Login = () => {
           <Checkbox className="rs-checkbox">Remember Me</Checkbox>
         </div>
       </Form>
+      {loginError && <p className="login-error">{loginError}</p>}
       <div className="forgot-password">
         <a href="#forgot-password">Forgot your password?</a>
       </div>

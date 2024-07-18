@@ -16,12 +16,32 @@ const Signup = () => {
   const [formValue, setFormValue] = useState({ email: '', firstName: '', lastName: '', organization: '', password: '' });
   const [formError, setFormError] = useState({});
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!form.check()) {
       console.error('Form Error');
       return;
     }
+
     console.log('Form Value', formValue);
+
+    // Make a POST request to the backend
+    try {
+      const response = await fetch('http://127.0.0.1:5000/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formValue)
+      });
+
+      if (response.ok) {
+        console.log('User registered successfully');
+      } else {
+        console.error('Error registering user');
+      }
+    } catch (error) {
+      console.error('Network error:', error);
+    }
   };
 
   let form;
