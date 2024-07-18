@@ -1,4 +1,5 @@
 import React from 'react';
+import 'animate.css';
 import './Home.css';
 
 const featuresImage = './features.png';
@@ -12,13 +13,13 @@ const Home = () => {
         <div className="home-container">
             <h1 className="spottr-text snap-section"></h1>
             <main className="home-main">
-            <h1 className="spottr-header">SPOTT'R</h1>
+                <h1 className="spottr-header animate__animated animate__fadeIn animate__delay-5s">SPOTT'R</h1>
                 <section className="intro snap-section">
-                    <p className="emphasized-text">A Step Ahead of the Storm...</p>
+                    <p className="emphasized-text animate__animated animate__fadeInTopLeft animate__delay-1s">A Step Ahead of the Storm...</p>
                     <p className="home-header"></p>
-                    <p className="smaller-text">Real-time storm data, radar insights, and detailed forecasts</p>
-                    <p className="emphasized-text-lower">...we've got you covered.</p>
-                    <div className="button-container">
+                    <p className="smaller-text animate__animated animate__fadeInUp animate__delay-3s">Real-time storm data, radar insights, and detailed forecasts</p>
+                    <p className="emphasized-text-lower animate__animated animate__fadeInBottomRight animate__delay-4s">...we've got you covered.</p>
+                    <div className="button-container animate__animated animate__fadeInUp animate__delay-2s">
                         <button className="trial-button" onClick={() => window.location.href = '/sign-up'}>
                             Start a Free Trial
                         </button>

@@ -1,14 +1,21 @@
+/* Ensure the html and body take full height and have no overflow */
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden; /* Prevent the body from having its own scrollbar */
+}
+
 .home-container {
     display: flex;
     flex-direction: column;
-    height: 100vh; /* Ensure this is full view height */
+    height: 100vh;
     font-family: dashboard;
-    overflow-y: scroll;
+    overflow-y: scroll; /* Enable scrolling only for this container */
     scroll-snap-type: y mandatory;
 }
 
 .spottr-text {
-    color:transparent;
+    color: transparent;
 }
 
 .spottr-header {
@@ -53,8 +60,8 @@
 }
 
 .intro {
-    padding: 0 20px; /* Adjust as needed */
-    height: 100vh; /* Ensure it takes full view height */
+    padding: 0 20px;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -71,7 +78,7 @@
     margin: 99vh 0 0 -19.5vw;
     color: rgba(212, 226, 255, 0.726);
     font-family: dashboard;
-    max-width:120%
+    max-width: 120%;
 }
 
 .emphasized-text {
@@ -85,7 +92,7 @@
 
 .emphasized-text-lower {
     position: relative;
-    top:32vh;
+    top: 32vh;
     left: 15vw;
     font-size: 35px;
     max-width: 110%;
@@ -109,7 +116,7 @@
     font-family: nova;
     font-weight: 500;
     scroll-snap-align: start;
-    height: 100vh; /* Ensure each section takes full view height */
+    height: 100vh;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -137,8 +144,8 @@
 
 .features li {
     font-size: 20px;
-    margin-left: 480px; 
-    margin-bottom: 25px; 
+    margin-left: 480px;
+    margin-bottom: 25px;
     color: rgba(0, 0, 0, 0.616);
 }
 
@@ -227,7 +234,7 @@
     text-align: center;
     padding: 10px;
     scroll-snap-align: start;
-    height: 100vh; 
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;

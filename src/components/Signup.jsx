@@ -48,7 +48,7 @@ const Signup = () => {
 
   return (
     <div className="signup-container">
-      <h2>Create an account</h2>
+      <h4>1st Month Free, zero Gimmicks!</h4>
       <Form
         fluid
         ref={ref => (form = ref)}
