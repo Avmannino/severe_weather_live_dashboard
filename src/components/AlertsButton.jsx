@@ -38,7 +38,6 @@ const AlertsButton = ({ lat, lon }) => {
       >
         {alerts.length > 0 && <span className="notification-icon">🚨 </span>}
         Weather Alert
-        {alerts.length > 0 && <span className="notification-icon"> 🚨</span>}
       </button>
       <Modal
         isOpen={modalIsOpen}

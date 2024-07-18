@@ -120,25 +120,72 @@
 
 
 .hourly_demo {
-    width:35%;
+    width: 35%;
     border-radius: 20px;
     box-shadow: 12px 10px 15px rgba(0, 0, 0, 0.500);
     margin: -155px 0 0 1350px;
 }
 
+.radar_demo {
+    width: 35%;
+    border-radius: 20px;
+    box-shadow: 12px 10px 15px rgba(0, 0, 0, 0.500);
+    margin: -195px 0 0 1350px;
+}
+
+.alert-button-demo {
+    width: 5%;
+    border-radius: 15px;
+    box-shadow: 12px 10px 15px rgba(0, 0, 0, 0.500);
+    margin: -450px 0px 345px 1500px;
+    z-index: 9999 !important
+}
+
+.alert-demo {
+    width: 25%;
+    border-radius: 20px;
+    box-shadow: 12px 10px 15px rgba(0, 0, 0, 0.500);
+    margin: -355px 0 0 1535px;
+    z-index: 9990 !important;
+}
+
 .critical-communications {
     font-size: 40px;
     color: rgba(0, 0, 0, 0.616);
-    margin: 95px 0 0 505px;
+    margin: 235px 0 0 505px;
+}
+
+.critical-motto {
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.616);
+    margin: 5px 0 0 505px;
+}
+
+.communications-content ul {
+    font-size: 20px;
+    margin-left: 510px; 
+    margin-bottom: -30px; 
+    color: rgba(0, 0, 0, 0.616);
 }
 
 .communications-content li {
     font-size: 20px;
     margin-left: 510px; 
-    margin-bottom: 25px; 
+    margin-bottom:20px; 
     color: rgba(0, 0, 0, 0.616);
 }
 
+.realtime-radar {
+    font-size: 40px;
+    color: rgba(0, 0, 0, 0.616);
+    margin: 195px 0 0 505px;
+}
+
+.radar-content {
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.616);
+    margin: 5px 0 0 505px;
+}
 
 .home-footer {
     background-color: #f1f1f100;

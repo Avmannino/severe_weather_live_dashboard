@@ -1,116 +1,133 @@
 @media (max-width: 2560px) {
 
   .alerts-button-container {
-      text-align: center;
-      margin: 20px 0;
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .alerts-button {
+    padding: 15px 25px;
+    font-size: 16px;
+    border: solid 1px white;
+    border-radius: 25px;
+    cursor: pointer;
+    position: relative;
+    bottom: 105.6vh;
+    left: -17.5vw;
+    transition: 0.3s;
+  }
+  
+  .alerts-button:hover {
+    transform: scale(1.05);
+    border: 1px solid white;
+  }
+  
+  .alerts-button-red {
+    background-color: #8d000e;
+    color: white;
+  }
+  
+  .alerts-button-grey {
+    background-color: #6c757d;
+    color: white;
+  }
+  
+  .notification-icon {
+    font-size: 23px;
+    position: absolute;
+    top:-1.2vh;
+    left: 0vw;
+    display: inline-block;
+    animation: jump 4s infinite;
+  }
+  
+  @keyframes jump {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
     }
-    
-    .alerts-button {
-      padding: 15px 20px;
-      font-size: 16px;
-      border: solid 1px white;
-      border-radius: 15px;
-      cursor: pointer;
-      position: relative;
-      bottom: 105.6vh;
-      left: -17.5vw;
-      transition: 0.3s;
+    45% {
+      transform: translateY(-12px);
     }
-    
-    .alerts-button:hover {
-      transform: scale(1.05);
-      border: 1px solid white;
+    55% {
+      transform: translateY(-5px);
     }
-    
-    .alerts-button-red {
-      background-color: #8d000e;
-      color: white;
+  }
+  
+  .alerts-modal {
+    position: relative;
+    top: 50%;
+    left: 53%;
+    right: auto;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+    background: #1d1d1d;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 1200px;
+    max-height: 700px;
+    color: black;
+    overflow-y: scroll;
+    z-index: 9999 !important;
+    animation: slide-in 0.3s forwards;
+  }
+  
+  @keyframes slide-in {
+    from {
+      top: -100%;
     }
-    
-    .alerts-button-grey {
-      background-color: #6c757d;
-      color: white;
-    }
-    
-    .notification-icon {
-      margin-right: 0px;
-    }
-    
-    .alerts-modal {
-      position: relative;
+    to {
       top: 50%;
-      left: 53%;
-      right: auto;
-      bottom: auto;
-      transform: translate(-50%, -50%);
-      background: #1d1d1d;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      width: 100%;
-      max-width: 1200px;
-      max-height: 700px;
-      color: black;
-      overflow-y: scroll;
-      z-index: 9999 !important;
-      animation: slide-in 0.2s forwards;
     }
-    
-    @keyframes slide-in {
-      from {
-        top: -100%;
-      }
-      to {
-        top: 50%;
-      }
-    }
-    
-    .alerts-header {
-      color: rgba(196, 0, 0, 0.932);
-      text-align: center;
-    }
-    
-    .alerts-title {
-      color: rgba(255, 196, 0, 0.795);
-    }
-    
-    .alerts-desc {
-      color: rgba(255, 255, 255, 0.781);
-    }
-    
-    .alerts-instruction {
-      color: rgba(255, 255, 255, 0.781);
-      font-style: italic;
-    }
-    
-    .no-alerts {
-      color: green;
-      text-align: center;
-    }
-    
-    .alerts-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(0, 0, 0, 0.75);
-    }
-    
-    .close-modal-button {
-      position: absolute;
-      top: -15px;
-      left: -20px;
-      background: none;
-      border: none;
-      font-size: 28px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    
-    .close-modal-button:hover {
-      color: red;
-    }
+  }
+  
+  .alerts-header {
+    color: rgba(196, 0, 0, 0.932);
+    text-align: center;
+  }
+  
+  .alerts-title {
+    color: rgba(255, 196, 0, 0.795);
+  }
+  
+  .alerts-desc {
+    color: rgba(255, 255, 255, 0.781);
+  }
+  
+  .alerts-instruction {
+    color: rgba(255, 255, 255, 0.781);
+    font-style: italic;
+  }
+  
+  .no-alerts {
+    color: green;
+    text-align: center;
+  }
+  
+  .alerts-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+  }
+  
+  .close-modal-button {
+    position: absolute;
+    top: -15px;
+    left: -20px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .close-modal-button:hover {
+    color: red;
+  }
 }
 
 @media (max-width: 1920px) {
@@ -121,7 +138,7 @@
     }
     
     .alerts-button {
-      padding: 8px 10px;
+      padding: 9px 14px;
       font-size: 12px;
       border: solid 1px white;
       border-radius: 25px;
@@ -148,7 +165,24 @@
     }
     
     .notification-icon {
-      margin-right: 0px;
+      font-size: 18px;
+      position: absolute;
+      top:-1.4vh;
+      left: -0.1vw;
+      display: inline-block;
+      animation: jump 4s infinite;
+    }
+    
+    @keyframes jump {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      45% {
+        transform: translateY(-12px);
+      }
+      55% {
+        transform: translateY(-5px);
+      }
     }
     
     .alerts-modal {
@@ -168,7 +202,7 @@
       color: black;
       overflow-y: scroll;
       z-index: 9999 !important;
-      animation: slide-in 0.2s forwards;
+      animation: slide-in 0.3s forwards;
     }
     
     @keyframes slide-in {

@@ -23,7 +23,7 @@ const weatherIcons = {
   55: 'drizzle.png',
   56: 'freezing_drizzle_light.png',
   57: 'freezing_drizzle_dense.png',
-  61: 'rain_slight.png',
+  61: 'rain.png',
   63: 'rain.png',
   65: 'rain_heavy.png',
   66: 'freezing_rain_light.png',

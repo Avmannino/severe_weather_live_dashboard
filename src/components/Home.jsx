@@ -4,6 +4,9 @@ import './Home.css';
 
 const featuresImage = './features.png';
 const hourlyDemo = './hourly_demo.mp4';
+const radarDemo = './radar_demo.mp4';
+const buttonDemo = './alert_button_demo.mp4'
+const alertDemo = './alert_demo.mp4'
 
 
 const Home = () => {
@@ -37,7 +40,7 @@ const Home = () => {
                     <img src={featuresImage} className='features-img' alt="features-image"/>
 
                     <h4 className='critical-communications'>Critical Communications</h4>
-                    <p>Real time NWS alerts for your specific location:</p>
+                    <p className='critical-motto'>Real time NWS alerts for your specific location:</p>
                     <ul className='communications-content'>
                         <li>Tornado Watches and Warnings</li>
                         <li>Severe Thunderstorm Watches and Warnings</li>
@@ -45,6 +48,20 @@ const Home = () => {
                         <li>Winter Weather Watches, Warnings, and Advisories</li>
                         <li>A suite of Tropical Watches, Warnings, and Advisories (both coastal and inland)</li>
                     </ul>
+                    <video autoPlay muted loop className="alert-button-demo">
+                        <source src={buttonDemo} type="video/mp4" />
+                    </video>
+                    <video autoPlay muted loop className="alert-demo">
+                        <source src={alertDemo} type="video/mp4" />
+                    </video>
+                    
+
+                    <h4 className='realtime-radar'>Real-Time Radar</h4>
+                    <p className='radar-content'>See into the future with the next 7-days worth of forecasted data.</p>
+                    <p className='radar-content'>Click each day to see the hourly projected forecasted data</p>
+                    <video autoPlay muted loop className="radar_demo">
+                        <source src={radarDemo} type="video/mp4" />
+                    </video>
 
                     <h4 className='features-forecast'>Weekly and Hourly Forecasts</h4>
                     <p className='forecast-content'>See into the future with the next 7-days worth of forecasted data.</p>
