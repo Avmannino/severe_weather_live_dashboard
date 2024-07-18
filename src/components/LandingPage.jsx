@@ -11,7 +11,7 @@ function LandingPage() {
             </video>
             <div className="content">
                 {/* <img className='landing-logo' src='/landing_logo.png' /> */}
-                <h1 className='titleLanding'>SPOT'R</h1>
+                <h1 className='titleLanding'>SPOTT'R</h1>
                 <div className="buttons">
                     <Link to="/home">
                         <button>Home</button>

@@ -1,15 +1,16 @@
-// src/components/WeatherCards.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import GaugeChart from 'react-gauge-chart';
 import Compass from './Compass.jsx';
 import './WeatherCards.css';
 
-const WeatherCards = ({ lat, lon }) => {
+const WeatherCards = ({ lat, lon, setHumidity }) => {
   const [uvIndex, setUvIndex] = useState(null);
   const [windSpeed, setWindSpeed] = useState(null);
   const [windDirection, setWindDirection] = useState(null);
   const [dewPoint, setDewPoint] = useState(null);
+  const [historicalTemp, setHistoricalTemp] = useState(null);
+  const [humidity, setLocalHumidity] = useState(null);
 
   useEffect(() => {
     const fetchWeatherData = async () => {
@@ -23,7 +24,7 @@ const WeatherCards = ({ lat, lon }) => {
           // Fetch 15-minute weather data including dew point
           const dewPointResponse = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=dewpoint_2m&timezone=auto`);
           const dewPointDataCelsius = dewPointResponse.data.hourly.dewpoint_2m[0]; // Get the latest dew point data in Celsius
-          const dewPointDataFahrenheit = (dewPointDataCelsius * 9/5) + 32; // Convert to Fahrenheit
+          const dewPointDataFahrenheit = (dewPointDataCelsius * 9 / 5) + 32; // Convert to Fahrenheit
           console.log('Dew Point Data (F):', dewPointDataFahrenheit); // Log to debug
 
           // Fetch current weather data
@@ -36,6 +37,15 @@ const WeatherCards = ({ lat, lon }) => {
           setWindDirection(weatherData.winddirection);
           setDewPoint(dewPointDataFahrenheit); // Set the dew point in Fahrenheit
 
+          // Fetch current humidity data from NWS API
+          const nwsResponse = await axios.get(`https://api.weather.gov/points/${lat},${lon}`);
+          const gridpointUrl = nwsResponse.data.properties.forecastHourly;
+          const humidityResponse = await axios.get(gridpointUrl);
+          const humidityData = humidityResponse.data.properties.periods[0].relativeHumidity.value;
+          console.log('Humidity Data:', humidityData); // Log to debug
+          setLocalHumidity(humidityData); // Set the current humidity
+          setHumidity(humidityData); // Set the current humidity
+
           // Set UV index directly without checking for day or night
           setUvIndex(uvIndexData);
         } catch (error) {
@@ -44,7 +54,36 @@ const WeatherCards = ({ lat, lon }) => {
       }
     };
 
+    const fetchHistoricalWeatherData = async () => {
+      if (lat && lon) {
+        try {
+          const lastYear = new Date();
+          lastYear.setFullYear(lastYear.getFullYear() - 1);
+          const formattedDate = lastYear.toISOString().split('T')[0];
+
+          const historicalResponse = await axios.get(`https://archive-api.open-meteo.com/v1/archive`, {
+            params: {
+              latitude: lat,
+              longitude: lon,
+              start_date: formattedDate,
+              end_date: formattedDate,
+              hourly: 'temperature_2m'
+            }
+          });
+
+          const historicalTempDataCelsius = historicalResponse.data.hourly.temperature_2m[0]; // Get the temperature for the same time last year
+          const historicalTempDataFahrenheit = (historicalTempDataCelsius * 9 / 5) + 32; // Convert to Fahrenheit
+          console.log('Historical Temp Data (F):', historicalTempDataFahrenheit); // Log to debug
+
+          setHistoricalTemp(historicalTempDataFahrenheit);
+        } catch (error) {
+          console.error('Error fetching historical weather data', error);
+        }
+      }
+    };
+
     fetchWeatherData();
+    fetchHistoricalWeatherData();
   }, [lat, lon]);
 
   const getGaugeValue = (uvIndex) => {
@@ -128,8 +167,29 @@ const WeatherCards = ({ lat, lon }) => {
           <p>Loading...</p>
         )}
       </div>
-      {Array.from({ length: 5 }).map((_, index) => (
-        <div key={index} className="weather-card"></div>
+      <div className="weather-card">
+        {humidity !== null ? (
+          <div className="humidity">
+            <h3>Humidity</h3>
+            <p>{humidity}%</p>
+            <img src="./icons/humidity_icon.png" alt="humidity-icon" />
+          </div>
+        ) : (
+          <p>Loading...</p>
+        )}
+      </div>
+      {Array.from({ length: 4 }).map((_, index) => (
+        <div key={index} className="weather-card">
+          {index === 3 && historicalTemp !== null ? (
+            <div className="historical-temp">
+              <h3>Historical Temperature</h3>
+              <p>{historicalTemp.toFixed(1)}°F</p>
+              <img src="./icons/temp_icon.png" alt="temp-icon" />
+            </div>
+          ) : (
+            index === 3 ? <p>Loading...</p> : null
+          )}
+        </div>
       ))}
     </div>
   );

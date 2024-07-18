@@ -16,7 +16,7 @@ const Home = () => {
             <main className="home-main">
                 <section className="intro">
                     <p className='emphasized-text'>Stay two steps ahead of the storm with</p>
-                    <p className='spottr-text'>SPOT'R</p>
+                    <p className='spottr-text'>SPOTT'R</p>
                     <p className='smaller-text'>The ultimate tool for precise, real-time weather and data monitoring, all in one place.</p>
                     <div className="button-container">
                         <button className="trial-button" onClick={() => window.location.href='/sign-up'}>Start a Free Trial</button>

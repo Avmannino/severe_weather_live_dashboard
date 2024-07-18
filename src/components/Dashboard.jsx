@@ -81,13 +81,6 @@ const getWeatherDescription = (weatherCode) => {
   return weatherDescriptions[weatherCode] || 'Unknown weather';
 };
 
-const calculateHeatIndex = (temperatureF, humidity) => {
-  const T = temperatureF;
-  const R = humidity;
-  const HI = -42.379 + 2.04901523 * T + 10.14333127 * R - 0.22475541 * T * R - 0.00683783 * T * T - 0.05481717 * R * R + 0.00122874 * T * T * R + 0.00085282 * T * R * R - 0.00000199 * T * T * R * R;
-  return Math.round(HI);
-};
-
 const defaultCities = [
   { name: 'Los Angeles, CA', lat: 34.0522, lon: -118.2437 },
   { name: 'New York, NY', lat: 40.7128, lon: -74.0060 },
@@ -109,6 +102,8 @@ const Dashboard = () => {
   const [searchConducted, setSearchConducted] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [defaultWeather, setDefaultWeather] = useState([]);
+  const [humidity, setHumidity] = useState(null);
+  const [apparentTemperature, setApparentTemperature] = useState(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -172,25 +167,29 @@ const Dashboard = () => {
       setLatLon({ lat, lon, zoom: 20 });
 
       const weatherResponse = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max&hourly=temperature_2m,weathercode&timezone=auto`);
-      console.log(weatherResponse.data);
+      const nwsResponse = await axios.get(`https://api.weather.gov/points/${lat},${lon}`);
+      const gridpointUrl = nwsResponse.data.properties.forecastHourly;
+      const apparentTemperatureResponse = await axios.get(gridpointUrl);
 
       const weatherData = weatherResponse.data.current_weather;
-      const fixedHumidity = 50;
+      const apparentTemperatureData = apparentTemperatureResponse.data.properties.periods[0].apparentTemperature;
+
+      console.log(apparentTemperatureResponse.data);
+
       const temperatureFahrenheit = Math.round((weatherData.temperature * 9 / 5) + 32);
-      const heatIndexFahrenheit = calculateHeatIndex(temperatureFahrenheit, fixedHumidity);
 
       const currentWeather = {
         temperatureCelsius: Math.round(weatherData.temperature),
         temperatureFahrenheit: temperatureFahrenheit,
-        humidity: fixedHumidity,
+        humidity: humidity || 50, // Use fetched humidity or fallback to 50
         windSpeed: weatherData.windspeed,
         windDirection: weatherData.winddirection,
         weatherCode: weatherData.weathercode,
         weatherDescription: getWeatherDescription(weatherData.weathercode),
         precipitationProbability: weatherResponse.data.daily.precipitation_probability_max[0],
         iconUrl: `/icons/${getWeatherIcon(weatherData.weathercode)}`,
-        heatIndexCelsius: Math.round((heatIndexFahrenheit - 32) * 5 / 9),
-        heatIndexFahrenheit: heatIndexFahrenheit,
+        heatIndexCelsius: Math.round((apparentTemperatureData - 32) * 5 / 9), // Convert apparent temperature to Celsius
+        heatIndexFahrenheit: apparentTemperatureData, // Use apparent temperature as heat index
         temperatureMaxCelsius: Math.round(weatherResponse.data.daily.temperature_2m_max[0]),
         temperatureMinCelsius: Math.round(weatherResponse.data.daily.temperature_2m_min[0]),
         temperatureMaxFahrenheit: Math.round((weatherResponse.data.daily.temperature_2m_max[0] * 9 / 5) + 32),
@@ -198,6 +197,7 @@ const Dashboard = () => {
       };
 
       setWeather(currentWeather);
+      setApparentTemperature(apparentTemperatureData); // Ensure this line is present
 
       const forecastData = weatherResponse.data.daily;
       const formattedForecast = forecastData.time.map((time, index) => ({
@@ -306,11 +306,11 @@ const Dashboard = () => {
           <p>Enter a city name or ZIP code to get started.</p>
           <div className="default-weather-cards">
             {defaultWeather.map((cityWeather, index) => (
-              <div key={index} className="weather-card">
+              <div key={index} className="default-weather-card">
                 <h3>{cityWeather.name}</h3>
+                <p className='local-time'>{cityWeather.localTime}</p>
+                <p className='default-temp'>{cityWeather.temperature}°C</p>
                 <img src={cityWeather.iconUrl} alt={cityWeather.weatherDescription} />
-                <p>{cityWeather.temperature}°C</p>
-                <p>{cityWeather.localTime}</p>
               </div>
             ))}
           </div>
@@ -337,9 +337,9 @@ const Dashboard = () => {
                   {isCelsius ? weather.temperatureCelsius : weather.temperatureFahrenheit}°{isCelsius ? 'C' : 'F'}
                 </p>
                 <p className='feels-like'>
-                  Feels Like: {isCelsius ? weather.heatIndexCelsius : weather.heatIndexFahrenheit}°{isCelsius ? 'C' : 'F'}
+                  Feels Like: {isCelsius ? Math.round((apparentTemperature - 32) * 5 / 9) : apparentTemperature}°{isCelsius ? 'C' : 'F'}
                 </p>
-                
+
                 <div className='weather-desc'>
                   <p>
                     {weather.weatherDescription} | 
@@ -396,11 +396,11 @@ const Dashboard = () => {
 
           {searchConducted && (
             <div className='weather-cards'>
-              <WeatherCards lat={latLon.lat} lon={latLon.lon} />
+              <WeatherCards lat={latLon.lat} lon={latLon.lon} setHumidity={setHumidity} />
             </div>
           )}
 
-          <AlertsButton lat={latLon.lat} lon={latLon.lon} /> {/* Add AlertsButton component */}
+          <AlertsButton lat={latLon.lat} lon={latLon.lon} /> 
 
           <Drawer isOpen={drawerOpen} onClose={closeDrawer}>
             {selectedDay !== null && (
