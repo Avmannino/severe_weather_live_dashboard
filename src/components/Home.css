@@ -1,23 +1,31 @@
 .home-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    height: 100vh; /* Ensure this is full view height */
     font-family: dashboard;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
 }
 
-.home-header {
+.spottr-text {
+    color:transparent;
+}
+
+.spottr-header {
     background-color: #007bff00;
-    color: rgba(255, 255, 255, 0.267);
+    color: rgba(212, 226, 255, 0.932);
     padding: 20px;
     text-align: center;
-    font-family: nova;
-    margin-top: 255px;
+    font-family: storm;
+    font-size: 90px;
+    margin: 28vh 0 0 28vw;
+    scroll-snap-align: start;
 }
 
 @font-face {
     font-family: 'nova';
     src: url('./nova.ttf') format('truetype');
-  }
+}
 
 .home-nav {
     margin-top: 10px;
@@ -41,10 +49,17 @@
     flex: 1;
     padding: 20px;
     text-align: left;
+    scroll-snap-align: start;
 }
 
 .intro {
-    padding-bottom: 450px;
+    padding: 0 20px; /* Adjust as needed */
+    height: 100vh; /* Ensure it takes full view height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    scroll-snap-align: start;
 }
 
 .h2 {
@@ -52,45 +67,59 @@
 }
 
 .smaller-text {
-    font-size: 22px;
-    margin: 0px 0 0 13vw;
-    color: white;
-    font-family: nova;
+    font-size: 20px;
+    margin: 99vh 0 0 -19.5vw;
+    color: rgba(212, 226, 255, 0.726);
+    font-family: dashboard;
+    max-width:120%
 }
 
 .emphasized-text {
-    font-size: 65px;
-    max-width: 56%;
-    margin: -1vh 0 0 13vw;
-    color: white;
+    font-size: 35px;
+    max-width: 110%;
+    margin: -35vh 0 0 -47vw;
+    color: rgba(212, 226, 255, 0.726);
+    font-family: dashboard;
+    font-weight: normal;
+}
+
+.emphasized-text-lower {
+    position: relative;
+    top:32vh;
+    left: 15vw;
+    font-size: 35px;
+    max-width: 110%;
+    color: rgba(212, 226, 255, 0.726);
+    font-family: dashboard;
+    font-weight: normal;
+}
+
+.home-header {
+    font-size: 28px;
     font-family: nova;
-    font-weight: bolder;
-    text-align: left;
+    margin: -70vh 0 0 -17vw;
+    color: rgba(165, 165, 165, 0.568);
 }
 
-.spottr-text {
-    font-size: 65px;
-    font-family: storm;
-    margin: -7.5vh 0 0 25.5vw;
-    color: white;
-}
-
-.intro, .features {
-    margin-bottom: 20px;
-}
-
-
-.our-software {
+.our-software,
+.critical-communications,
+.realtime-radar,
+.features-forecast {
     background-color: rgb(255, 255, 255);
     font-family: nova;
     font-weight: 500;
+    scroll-snap-align: start;
+    height: 100vh; /* Ensure each section takes full view height */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .software-header {
     text-align: center;
     color: rgba(0, 0, 0, 0.315);
     font-size: 18px;
-    margin: 120px 0 0 0;
 }
 
 .easy-powerful {
@@ -104,7 +133,6 @@
     font-size: 42px;
     margin: 225px 0 0 500px;
     color: rgba(0, 0, 0, 0.616);
-    
 }
 
 .features li {
@@ -119,18 +147,39 @@
     width: 35%;
 }
 
-.features-forecast {
+.critical-communications-header {
     font-size: 40px;
     color: rgba(0, 0, 0, 0.616);
-    margin: 240px 0 0 500px;
+    margin: 235px 0 0 505px;
 }
 
-.forecast-content {
+.critical-motto {
     font-size: 20px;
     color: rgba(0, 0, 0, 0.616);
     margin: 5px 0 0 505px;
 }
 
+.communications-content {
+    margin-left: 510px;
+    color: rgba(0, 0, 0, 0.616);
+}
+
+.communications-content li {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.realtime-radar-header {
+    font-size: 40px;
+    color: rgba(0, 0, 0, 0.616);
+    margin: 195px 0 0 505px;
+}
+
+.radar-content {
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.616);
+    margin: 5px 0 0 505px;
+}
 
 .hourly_demo {
     width: 35%;
@@ -151,7 +200,7 @@
     border-radius: 15px;
     box-shadow: 12px 10px 15px rgba(0, 0, 0, 0.500);
     margin: -450px 0px 345px 1500px;
-    z-index: 9999 !important
+    z-index: 9999 !important;
 }
 
 .alert-demo {
@@ -162,39 +211,12 @@
     z-index: 9990 !important;
 }
 
-.critical-communications {
+.features-forecast-header {
     font-size: 40px;
     color: rgba(0, 0, 0, 0.616);
-    margin: 235px 0 0 505px;
 }
 
-.critical-motto {
-    font-size: 20px;
-    color: rgba(0, 0, 0, 0.616);
-    margin: 5px 0 0 505px;
-}
-
-.communications-content ul {
-    font-size: 20px;
-    margin-left: 510px; 
-    margin-bottom: -30px; 
-    color: rgba(0, 0, 0, 0.616);
-}
-
-.communications-content li {
-    font-size: 20px;
-    margin-left: 510px; 
-    margin-bottom:20px; 
-    color: rgba(0, 0, 0, 0.616);
-}
-
-.realtime-radar {
-    font-size: 40px;
-    color: rgba(0, 0, 0, 0.616);
-    margin: 195px 0 0 505px;
-}
-
-.radar-content {
+.forecast-content {
     font-size: 20px;
     color: rgba(0, 0, 0, 0.616);
     margin: 5px 0 0 505px;
@@ -204,38 +226,54 @@
     background-color: #f1f1f100;
     text-align: center;
     padding: 10px;
+    scroll-snap-align: start;
+    height: 100vh; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .button-container {
-    margin: -15px 0 0 28vw;
+    position: relative;
+    top: -9vh;
+    left: -28.5vw;
+    margin: 0px 0 0 14vw;
 }
 
-.trial-button, .demo-button {
+.trial-button {
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 14px 16px;
     margin: 50px 0 0 200px;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
     font-family: nova;
 }
 
 .trial-button {
-    margin-left: -15vw;
+    margin-left: 0vw;
 }
 
 .demo-button {
-    margin-left: 1vw;
-    background-color: #28a74600;
+    background-color: #007bff00;
+    color: white;
     border: 1px solid #017bff;
+    padding: 14px 16px;
+    margin: 50px 0 0 20px;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: nova;
 }
 
 .trial-button:hover {
     background-color: #0057b300;
     border: 1px solid #017bff;
+    transition: 0.4s;
 }
 
 .demo-button:hover {
-    background-color: #017bff;
+    background-color: #007bff;
+    border: 1px solid #017bff;
+    transition: 0.4s;
 }
