@@ -1,15 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext.jsx';
 import './Navbar.css';
-import NavImg from '/nav_logo.png'; // Adjust the path as necessary
 
 const Navbar = () => {
+  const { isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
         <div className="navbar-left">
           <Link to="/home" className="navbar-logo">
-            <img src={NavImg} alt="Nav Logo" className="nav-img" />
             SPOTT'R
           </Link>
         </div>
@@ -35,9 +42,15 @@ const Navbar = () => {
             </Link>
           </li>
         </ul>
-        <Link to="/log-in" className="nav-login">
-              Log-In
-        </Link>
+        {isAuthenticated ? (
+          <button onClick={handleLogout} className="nav-login">
+            Logout
+          </button>
+        ) : (
+          <Link to="/login" className="nav-login">
+            Login
+          </Link>
+        )}
       </div>
     </nav>
   );

@@ -1,4 +1,3 @@
-// src/App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import LandingPage from './components/LandingPage.jsx';
@@ -7,12 +6,16 @@ import Dashboard from './components/Dashboard.jsx';
 import Navbar from './components/Navbar.jsx';
 import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
+import MyAccount from './components/MyAccount.jsx';
+import { AuthProvider } from './components/AuthContext.jsx';
 
 function App() {
     return (
-        <Router>
-            <MainApp />
-        </Router>
+        <AuthProvider>
+            <Router>
+                <MainApp />
+            </Router>
+        </AuthProvider>
     );
 }
 
@@ -27,8 +30,9 @@ const MainApp = () => {
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/log-in" element={<Login />} />
+                <Route path="/login" element={<Login />} />
                 <Route path="/sign-up" element={<Signup />} />
+                <Route path="/my-account" element={<MyAccount />} />
                 {/* Add more routes here as your project grows */}
             </Routes>
         </>

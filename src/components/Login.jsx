@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Schema, Checkbox } from 'rsuite';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext.jsx';
 import './Login.css';  // Import the CSS file
 
 const { StringType } = Schema.Types;
@@ -13,6 +15,8 @@ const Login = () => {
   const [formValue, setFormValue] = useState({ email: '', password: '' });
   const [formError, setFormError] = useState({});
   const [loginError, setLoginError] = useState('');
+  const navigate = useNavigate();
+  const { login } = useAuth();  // Use AuthContext
 
   const handleSubmit = async () => {
     if (!form.check()) {
@@ -36,8 +40,11 @@ const Login = () => {
         const data = await response.json();
         console.log('Login successful:', data);
         setLoginError('');  // Clear any previous login error
-        // Perform further actions, e.g., store the token
-        // localStorage.setItem('token', data.access_token);
+        // Store the token
+        localStorage.setItem('token', data.access_token);
+        login();  // Update the authentication state
+        // Redirect to /my-account
+        navigate('/my-account');
       } else {
         const errorData = await response.json();
         console.error('Login failed:', errorData);
