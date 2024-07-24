@@ -48,7 +48,7 @@ const Signup = () => {
 
   return (
     <div className="signup-container">
-      <h4>1st Month Free, zero Gimmicks!</h4>
+      <h4 className='trial-content'>First 3-Weeks Are On Us!</h4>
       <Form
         fluid
         ref={ref => (form = ref)}
@@ -96,7 +96,7 @@ const Signup = () => {
           <Form.Control name="password" type="password" placeholder="Password" />
         </Form.Group>
         <div className="checkbox-and-button">
-          <Button appearance="primary" onClick={handleSubmit} className="signup-button">Sign up</Button>
+          <Button appearance="primary" onClick={handleSubmit} className="signup-button">Create Account</Button>
         </div>
       </Form>
     </div>

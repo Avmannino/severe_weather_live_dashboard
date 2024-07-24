@@ -49,6 +49,11 @@
     
 }
 
+.trial-content {
+    color: white;
+    text-align: center;
+}
+
 .rs-btn {
     background: linear-gradient(90deg, #00c6ff, #0072ff);
     border: none;
@@ -72,4 +77,5 @@
     align-items: center;
     justify-content: center;
     margin-top: 20px;
+    padding-bottom: 15px;
 }

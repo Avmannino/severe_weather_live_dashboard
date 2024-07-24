@@ -6,20 +6,21 @@ const featuresImage = './features.png';
 const hourlyDemo = './hourly_demo.mp4';
 const radarDemo = './radar_demo.mp4';
 const buttonDemo = './alert_button_demo.mp4';
-const alertDemo = './alert_demo.mp4';
+const alertDemo = './alert_demo.png';
+const radarMaps = './radar_options.png';
 
 const Home = () => {
     return (
         <div className="home-container">
             <h1 className="spottr-text snap-section"></h1>
             <main className="home-main">
-                <h1 className="spottr-header animate__animated animate__fadeIn animate__delay-5s">SPOTT'R</h1>
+                <h1 className="spottr-header animate__animated animate__fadeIn animate__delay-3s">SPOTT'R</h1>
                 <section className="intro snap-section">
-                    <p className="emphasized-text animate__animated animate__fadeInTopLeft animate__delay-1s">A Step Ahead of the Storm...</p>
+                    <p className="emphasized-text animate__animated animate__fadeInUp animate__delay-1s">Stay Ahead of the Storm...</p>
                     <p className="home-header"></p>
-                    <p className="smaller-text animate__animated animate__fadeInUp animate__delay-3s">Real-time storm data, radar insights, and detailed forecasts</p>
-                    <p className="emphasized-text-lower animate__animated animate__fadeInBottomRight animate__delay-4s">...we've got you covered.</p>
-                    <div className="button-container animate__animated animate__fadeInUp animate__delay-2s">
+                    <p className="smaller-text animate__animated animate__fadeInUp animate__delay-2s">Real-time storm data, radar insights, and detailed forecasts</p>
+                    <p className="emphasized-text-lower animate__animated animate__fadeInUp animate__delay-5s">...we've got you covered.</p>
+                    <div className="button-container animate__animated animate__fadeInUp animate__delay-4s">
                         <button className="trial-button" onClick={() => window.location.href = '/sign-up'}>
                             Start a Free Trial
                         </button>
@@ -45,7 +46,7 @@ const Home = () => {
 
             <section className='critical-communications snap-section'>
                 <h4 className="critical-communications-header">Critical Communications</h4>
-                <p className="critical-motto">Real time NWS alerts for your specific location:</p>
+                <p className="critical-motto">Real-time NWS alerts for your specific location:</p>
                 <ul className="communications-content">
                     <li>Tornado Watches and Warnings</li>
                     <li>Severe Thunderstorm Watches and Warnings</li>
@@ -56,29 +57,42 @@ const Home = () => {
                 <video autoPlay muted loop className="alert-button-demo">
                     <source src={buttonDemo} type="video/mp4" />
                 </video>
-                <video autoPlay muted loop className="alert-demo">
-                    <source src={alertDemo} type="video/mp4" />
-                </video>
+                <img src={alertDemo} className="alert-demo" alt="alert-image" />
             </section>
             <section className='realtime-radar snap-section'>
                 <h4 className="realtime-radar-header">Real-Time Radar</h4>
                 <p className="radar-content">See into the future with the next 7-days worth of forecasted data.</p>
-                <p className="radar-content">Click each day to see the hourly projected forecasted data</p>
+                <ul className='radar-list'>
+                    <li>Real-time updates to track current weather conditions.</li>
+                    <li>High-Resolution imagery for precise weather monitoring.</li>
+                    <li>Layer Customization to customize radar layers and type.</li>
+                    <li>Interactive Map with zoom and pan capabilities for detailed local and regional views.</li>
+                    <li>Playback Controls to view past radar data and predict weather movement.</li>
+                </ul>
                 <video autoPlay muted loop className="radar_demo">
                     <source src={radarDemo} type="video/mp4" />
                 </video>
-            </section>
-            <section className='features-forecast snap-section'>
+                <img src={radarMaps} className="radar-maps" alt="map-options" />
                 <h4 className="features-forecast-header">Weekly and Hourly Forecasts</h4>
-                <p className="forecast-content">See into the future with the next 7-days worth of forecasted data.</p>
                 <p className="forecast-content">Click each day to see the hourly projected forecasted data</p>
+                <ul className='forecast-list'>
+                    <li>Detailed weather predictions for the next 24 hours</li>
+                    <li>Hourly breakdown of temperature, weather conditions and descriptions.</li>
+                    <li>Access to historical hourly weather data for trend analysis and comparison.</li>
+                </ul>
                 <video autoPlay muted loop className="hourly_demo">
                     <source src={hourlyDemo} type="video/mp4" />
                 </video>
-            </section>
-            <footer className="home-footer snap-section">
-                <p>&copy; 2024 SPOT'R. All rights reserved.</p>
+                <footer className="home-footer">
+                    <button className="pricing-button" onClick={() => window.location.href = '/pricing'}>
+                        Plans & Pricing
+                    </button>
+                    <p>&copy; 2024 SPOTT'R. All rights reserved.</p>
+                </footer>
+            <footer className="home-footer">
+                <p>&copy; 2024 SPOTT'R. All rights reserved.</p>
             </footer>
+        </section>
         </div>
     );
 };

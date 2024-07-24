@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-route
 import LandingPage from './components/LandingPage.jsx';
 import Home from './components/Home.jsx';
 import Dashboard from './components/Dashboard.jsx';
+import Pricing from './components/Pricing.jsx';
 import Navbar from './components/Navbar.jsx';
 import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
@@ -30,6 +31,7 @@ const MainApp = () => {
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/pricing" element={<Pricing />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/sign-up" element={<Signup />} />
                 <Route path="/my-account" element={<MyAccount />} />

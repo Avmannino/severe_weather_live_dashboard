@@ -1,0 +1,97 @@
+.pricing-container {
+    text-align: center;
+    padding: 50px;
+}
+
+.pricing-title {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.pricing-subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.billing-toggle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.toggle-button {
+    background-color: #a89d00;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 10px;
+}
+
+.toggle-button.active {
+    background-color: #007BFF;
+    color: white;
+}
+
+.pricing-plans {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.plan {
+    background-color: rgba(255, 255, 255, 0.692);
+    border: 1px solid #ddd;
+    color: black;
+    border-radius: 8px;
+    padding: 20px;
+    width: 250px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.plan:hover {
+    transform: translateY(-10px);
+}
+
+.recommended {
+    border: 2px solid #007BFF;
+}
+
+.plan h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 2rem;
+    margin: 20px 0;
+}
+
+.features {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+    color: #666;
+}
+
+.features li {
+    margin: 10px 0;
+}
+
+.signup-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.signup-button:hover {
+    background-color: #0056b3;
+}

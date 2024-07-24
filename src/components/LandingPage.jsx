@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './LandingPage.css';
-import Rainstorm from '/Rainstorm.mp4'; // Adjust the path as necessary
+import Rainstorm from '/Rainstorm.mp4'; 
 
 function LandingPage() {
     return (
@@ -18,6 +18,12 @@ function LandingPage() {
                     </Link>
                     <Link to="/dashboard">
                         <button>Dashboard</button>
+                    </Link>
+                    <Link to="/pricing">
+                        <button>See Plans</button>
+                    </Link>
+                    <Link to="/sign-up">
+                        <button>Free 3-Week Trial</button>
                     </Link>
                 </div>
             </div>
