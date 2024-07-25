@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { DndProvider, useDrag, useDrop } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import GaugeChart from 'react-gauge-chart';
 import Compass from './Compass.jsx';
+import 'animate.css';
 import './WeatherCards.css';
 
 const WeatherCards = ({ lat, lon, setHumidity }) => {
@@ -11,43 +14,53 @@ const WeatherCards = ({ lat, lon, setHumidity }) => {
   const [dewPoint, setDewPoint] = useState(null);
   const [historicalTemp, setHistoricalTemp] = useState(null);
   const [humidity, setLocalHumidity] = useState(null);
+  const [visibility, setVisibility] = useState(null);
+  const [cardsOrder, setCardsOrder] = useState([
+    'uvIndex',
+    'visibility',
+    'windSpeed',
+    'dewPoint',
+    'humidity',
+    'historicalTemp'
+  ]);
+  const [animate, setAnimate] = useState(true);
 
   useEffect(() => {
     const fetchWeatherData = async () => {
       if (lat && lon) {
         try {
-          // Fetch UV Index data
           const uvResponse = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=uv_index_max&timezone=auto`);
           const uvIndexData = uvResponse.data.daily.uv_index_max[0];
-          console.log('UV Index Data:', uvIndexData); // Log to debug
 
-          // Fetch 15-minute weather data including dew point
           const dewPointResponse = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=dewpoint_2m&timezone=auto`);
-          const dewPointDataCelsius = dewPointResponse.data.hourly.dewpoint_2m[0]; // Get the latest dew point data in Celsius
-          const dewPointDataFahrenheit = (dewPointDataCelsius * 9 / 5) + 32; // Convert to Fahrenheit
-          console.log('Dew Point Data (F):', dewPointDataFahrenheit); // Log to debug
+          const dewPointDataCelsius = dewPointResponse.data.hourly.dewpoint_2m[0];
+          const dewPointDataFahrenheit = (dewPointDataCelsius * 9 / 5) + 32;
 
-          // Fetch current weather data
           const weatherResponse = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&timezone=auto`);
           const weatherData = weatherResponse.data.current_weather;
-          console.log('Weather Data:', weatherData); // Log to debug
 
           const windSpeedMph = (weatherData.windspeed * 0.621371).toFixed(1);
           setWindSpeed(windSpeedMph);
           setWindDirection(weatherData.winddirection);
-          setDewPoint(dewPointDataFahrenheit); // Set the dew point in Fahrenheit
+          setDewPoint(dewPointDataFahrenheit);
 
-          // Fetch current humidity data from NWS API
+          const visibilityResponse = await axios.get(`https://api.weatherbit.io/v2.0/current?lat=${lat}&lon=${lon}&key=dccf2094f0544bf0a44723686d7fbb12`);
+          const visibilityData = visibilityResponse.data.data[0].vis;
+          setVisibility((visibilityData * 0.621371).toFixed(1));
+
           const nwsResponse = await axios.get(`https://api.weather.gov/points/${lat},${lon}`);
           const gridpointUrl = nwsResponse.data.properties.forecastHourly;
           const humidityResponse = await axios.get(gridpointUrl);
           const humidityData = humidityResponse.data.properties.periods[0].relativeHumidity.value;
-          console.log('Humidity Data:', humidityData); // Log to debug
-          setLocalHumidity(humidityData); // Set the current humidity
-          setHumidity(humidityData); // Set the current humidity
+          setLocalHumidity(humidityData);
+          setHumidity(humidityData);
 
-          // Set UV index directly without checking for day or night
           setUvIndex(uvIndexData);
+
+          // Remove animation after a short delay
+          setTimeout(() => {
+            setAnimate(false);
+          }, 0); // Adjust the delay as needed
         } catch (error) {
           console.error('Error fetching weather data', error);
         }
@@ -71,11 +84,10 @@ const WeatherCards = ({ lat, lon, setHumidity }) => {
             }
           });
 
-          const historicalTempDataCelsius = historicalResponse.data.hourly.temperature_2m[0]; // Get the temperature for the same time last year
-          const historicalTempDataFahrenheit = (historicalTempDataCelsius * 9 / 5) + 32; // Convert to Fahrenheit
-          console.log('Historical Temp Data (F):', historicalTempDataFahrenheit); // Log to debug
+          const historicalTempDataCelsius = historicalResponse.data.hourly.temperature_2m[0];
+          const historicalTempDataFahrenheit = (historicalTempDataCelsius * 9 / 5) + 32;
 
-          setHistoricalTemp(historicalTempDataFahrenheit);
+          setHistoricalTemp(Math.round(historicalTempDataFahrenheit));
         } catch (error) {
           console.error('Error fetching historical weather data', error);
         }
@@ -115,84 +127,140 @@ const WeatherCards = ({ lat, lon, setHumidity }) => {
     return directions[index % 16];
   };
 
-  if (!lat || !lon) {
-    return null;
-  }
+  const lastYearDate = new Date();
+  lastYearDate.setFullYear(lastYearDate.getFullYear() - 1);
+  const formattedLastYearDate = lastYearDate.toLocaleDateString();
+
+  const onDragEnd = (result) => {
+    if (!result.destination) {
+      return;
+    }
+    const newOrder = Array.from(cardsOrder);
+    const [removed] = newOrder.splice(result.source.index, 1);
+    newOrder.splice(result.destination.index, 0, removed);
+    setCardsOrder(newOrder);
+  };
+
+  const renderCard = (cardType) => {
+    const animationClass = animate ? 'animate__animated animate__slideInLeft' : '';
+    switch (cardType) {
+      case 'uvIndex':
+        return (
+          uvIndex !== null && (
+            <div className={`uv-index ${animationClass}`}>
+              <h3>UV Index</h3>
+              <p>{uvIndex}</p>
+              <GaugeChart
+                id="uv-gauge"
+                nrOfLevels={11}
+                arcsLength={[2 / 11, 2 / 11, 2 / 11, 2 / 11, 2 / 11]}
+                colors={['#00FF00', '#FFFF00', '#FFA500', '#FF0000', '#8B0000']}
+                percent={getGaugeValue(uvIndex)}
+                arcPadding={0.02}
+                textColor="#000"
+                needleColor="#ccc"
+                animate={false}
+                hideText={true}
+                style={{ width: '175px', height: '175px' }}
+              />
+              <p style={{ marginTop: '-105px' }}>{getUvLevel(uvIndex)}</p>
+            </div>
+          )
+        );
+      case 'visibility':
+        return (
+          visibility !== null && (
+            <div className={`visibility ${animationClass}`}>
+              <h3 className='visibility-header'>Visibility</h3>
+              <p className='visibility-figure'>{visibility} miles</p>
+              <img src="./icons/binoculars.png" alt="visibility-icon" />
+            </div>
+          )
+        );
+      case 'windSpeed':
+        return (
+          windSpeed !== null && windDirection !== null && (
+            <div className={`wind-speed ${animationClass}`}>
+              <h3>Wind</h3>
+              <p>{windSpeed} MPH</p>
+              <p className='wind-direction'>{getWindDirection(windDirection)}</p>
+              <Compass direction={windDirection} />
+            </div>
+          )
+        );
+      case 'dewPoint':
+        return (
+          dewPoint !== null && (
+            <div className={`dew-point ${animationClass}`}>
+              <h3>Dew Point</h3>
+              <p>{dewPoint.toFixed(1)}°F</p>
+              <img src="./icons/dew_icon.png" alt="dew-icon" />
+            </div>
+          )
+        );
+      case 'humidity':
+        return (
+          humidity !== null && (
+            <div className={`humidity ${animationClass}`}>
+              <h3 className='humidity-header'>Humidity</h3>
+              <p className='humidity-figure'>{humidity}%</p>
+              <img src="./icons/humidity-icon.png" alt="humidity-icon" />
+            </div>
+          )
+        );
+      case 'historicalTemp':
+        return (
+          historicalTemp !== null && (
+            <div className={`historical-temp ${animationClass}`}>
+              <h3 className='historical-header'>1 Year Ago:</h3>
+              <p className='historical-date'>{formattedLastYearDate}</p>
+              <p className='historical-figure'>{historicalTemp}°F</p>
+              <img src="./icons/historical-temp.png" alt="historical-icon" />
+            </div>
+          )
+        );
+      default:
+        return null;
+    }
+  };
+
+  const DraggableCard = ({ id, index, children }) => {
+    const [, ref] = useDrag({
+      type: 'card',
+      item: { id, index }
+    });
+
+    const [, drop] = useDrop({
+      accept: 'card',
+      hover: (item) => {
+        if (item.index !== index) {
+          const newOrder = [...cardsOrder];
+          newOrder.splice(item.index, 1);
+          newOrder.splice(index, 0, item.id);
+          item.index = index;
+          setCardsOrder(newOrder);
+        }
+      }
+    });
+
+    return (
+      <div ref={(node) => ref(drop(node))} className={`draggable-card ${animate ? 'animate__animated animate__slideInLeft' : ''}`}>
+        {children}
+      </div>
+    );
+  };
 
   return (
-    <div className="weather-cards-container">
-      <div className="weather-card">
-        {uvIndex !== null ? (
-          <div className="uv-index">
-            <h3>UV Index</h3>
-            <p>{uvIndex}</p>
-            <GaugeChart id="uv-gauge"
-              nrOfLevels={11}
-              arcsLength={[2 / 11, 2 / 11, 2 / 11, 2 / 11, 2 / 11]}
-              colors={['#00FF00', '#FFFF00', '#FFA500', '#FF0000', '#8B0000']}
-              percent={getGaugeValue(uvIndex)}
-              arcPadding={0.02}
-              textColor="#000"
-              needleColor="#ccc"
-              animate={false}
-              hideText={true}
-              style={{ width: '175px', height: '175px' }} 
-            />
-            <p style={{ marginTop: '-105px' }}>{getUvLevel(uvIndex)}</p> 
-          </div>
-        ) : (
-          <p>Loading...</p>
-        )}
+    <DndProvider backend={HTML5Backend}>
+      <div className="weather-cards-container">
+        {cardsOrder.map((cardType, index) => (
+          <DraggableCard key={cardType} id={cardType} index={index}>
+            {renderCard(cardType)}
+          </DraggableCard>
+        ))}
       </div>
-      <div className="weather-card">
-        {windSpeed !== null && windDirection !== null ? (
-          <div className="wind-speed">
-            <h3>Wind</h3>
-            <p>{windSpeed} MPH</p>
-            <p className='wind-direction'>{getWindDirection(windDirection)}</p>
-            <Compass direction={windDirection} />
-          </div>
-        ) : (
-          <p>Loading...</p>
-        )}
-      </div>
-      <div className="weather-card">
-        {dewPoint !== null ? (
-          <div className="dew-point">
-            <h3>Dew Point</h3>
-            <p>{dewPoint.toFixed(1)}°F</p>
-            <img src="./icons/dew_icon.png" alt="dew-icon" />
-          </div>
-        ) : (
-          <p>Loading...</p>
-        )}
-      </div>
-      <div className="weather-card">
-        {humidity !== null ? (
-          <div className="humidity">
-            <h3>Humidity</h3>
-            <p>{humidity}%</p>
-            <img src="./icons/humidity_icon.png" alt="humidity-icon" />
-          </div>
-        ) : (
-          <p>Loading...</p>
-        )}
-      </div>
-      {Array.from({ length: 4 }).map((_, index) => (
-        <div key={index} className="weather-card">
-          {index === 3 && historicalTemp !== null ? (
-            <div className="historical-temp">
-              <h3>Historical Temperature</h3>
-              <p>{historicalTemp.toFixed(1)}°F</p>
-              <img src="./icons/temp_icon.png" alt="temp-icon" />
-            </div>
-          ) : (
-            index === 3 ? <p>Loading...</p> : null
-          )}
-        </div>
-      ))}
-    </div>
+    </DndProvider>
   );
-}
+};
 
 export default WeatherCards;

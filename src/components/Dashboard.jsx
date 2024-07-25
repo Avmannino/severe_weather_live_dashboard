@@ -166,15 +166,15 @@ const Dashboard = () => {
 
       setLatLon({ lat, lon, zoom: 20 });
 
-      const weatherResponse = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max&hourly=temperature_2m,weathercode&timezone=auto`);
-      const nwsResponse = await axios.get(`https://api.weather.gov/points/${lat},${lon}`);
-      const gridpointUrl = nwsResponse.data.properties.forecastHourly;
-      const apparentTemperatureResponse = await axios.get(gridpointUrl);
+      const weatherResponse = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max&hourly=temperature_2m,weathercode,apparent_temperature&timezone=auto`);
 
       const weatherData = weatherResponse.data.current_weather;
-      const apparentTemperatureData = apparentTemperatureResponse.data.properties.periods[0].apparentTemperature;
+      const hourlyData = weatherResponse.data.hourly;
 
-      console.log(apparentTemperatureResponse.data);
+      // Use the current hour's apparent temperature
+      const currentHourIndex = new Date().getHours();
+      const apparentTemperatureCelsius = hourlyData.apparent_temperature[currentHourIndex];
+      const apparentTemperatureFahrenheit = Math.round((apparentTemperatureCelsius * 9 / 5) + 32);
 
       const temperatureFahrenheit = Math.round((weatherData.temperature * 9 / 5) + 32);
 
@@ -188,8 +188,8 @@ const Dashboard = () => {
         weatherDescription: getWeatherDescription(weatherData.weathercode),
         precipitationProbability: weatherResponse.data.daily.precipitation_probability_max[0],
         iconUrl: `/icons/${getWeatherIcon(weatherData.weathercode)}`,
-        heatIndexCelsius: Math.round((apparentTemperatureData - 32) * 5 / 9), // Convert apparent temperature to Celsius
-        heatIndexFahrenheit: apparentTemperatureData, // Use apparent temperature as heat index
+        heatIndexCelsius: apparentTemperatureCelsius,
+        heatIndexFahrenheit: apparentTemperatureFahrenheit,
         temperatureMaxCelsius: Math.round(weatherResponse.data.daily.temperature_2m_max[0]),
         temperatureMinCelsius: Math.round(weatherResponse.data.daily.temperature_2m_min[0]),
         temperatureMaxFahrenheit: Math.round((weatherResponse.data.daily.temperature_2m_max[0] * 9 / 5) + 32),
@@ -197,7 +197,7 @@ const Dashboard = () => {
       };
 
       setWeather(currentWeather);
-      setApparentTemperature(apparentTemperatureData); // Ensure this line is present
+      setApparentTemperature(isCelsius ? apparentTemperatureCelsius : apparentTemperatureFahrenheit);
 
       const forecastData = weatherResponse.data.daily;
       const formattedForecast = forecastData.time.map((time, index) => ({
@@ -213,7 +213,6 @@ const Dashboard = () => {
 
       setForecast(formattedForecast);
 
-      const hourlyData = weatherResponse.data.hourly;
       const formattedHourlyForecast = hourlyData.time.map((time, index) => ({
         time: new Date(time),
         temperatureCelsius: Math.round(hourlyData.temperature_2m[index]),
@@ -221,8 +220,6 @@ const Dashboard = () => {
         weatherCode: hourlyData.weathercode[index],
         weatherDescription: getWeatherDescription(hourlyData.weathercode[index])
       }));
-
-      console.log(formattedHourlyForecast);
 
       setHourlyForecast(formattedHourlyForecast);
       setSearchConducted(true);
@@ -256,6 +253,9 @@ const Dashboard = () => {
 
   const toggleTemperatureUnit = () => {
     setIsCelsius(!isCelsius);
+    if (weather) {
+      setApparentTemperature(isCelsius ? weather.heatIndexFahrenheit : weather.heatIndexCelsius);
+    }
   };
 
   const handleDayClick = (index) => {
@@ -285,7 +285,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="dashboard-container ">
+    <div className="dashboard-container">
       <header className="header">
         <h1></h1>
       </header>
@@ -337,7 +337,7 @@ const Dashboard = () => {
                   {isCelsius ? weather.temperatureCelsius : weather.temperatureFahrenheit}°{isCelsius ? 'C' : 'F'}
                 </p>
                 <p className='feels-like'>
-                  Feels Like: {isCelsius ? Math.round((apparentTemperature - 32) * 5 / 9) : apparentTemperature}°{isCelsius ? 'C' : 'F'}
+                  Feels Like: {isCelsius ? weather.heatIndexCelsius : weather.heatIndexFahrenheit}°{isCelsius ? 'C' : 'F'}
                 </p>
 
                 <div className='weather-desc'>

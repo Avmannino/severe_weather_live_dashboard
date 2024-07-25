@@ -30,11 +30,11 @@ iframe {
   left: 20vw;
   border-radius: 25px;
   box-shadow: 0px 0px 17px 15px rgba(0, 0, 0, 0.4);
-  transition: transform 0.3s;
+  transition: transform 0.5s !important;
 }
 
 iframe:hover {
-  transform: scale(1.02);
+  transform: scale(1.015) !important;
 }
 
 .hourly-forecast {
@@ -121,7 +121,7 @@ iframe:hover {
   border-radius: 20px;
   background-color: rgba(114, 113, 113, 0.28);
   box-shadow: 10px 14px 11px rgba(0, 0, 0, 0.400);
-  transition: transform 0.3s;
+  transition: transform 0.5s !important;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -132,7 +132,7 @@ iframe:hover {
 }
 
 .current-weather:hover {
-  transform: scale(1.025);
+  transform: scale(1.025) !important;
 }
 
 .current-weather img {
@@ -244,11 +244,11 @@ iframe:hover {
   padding: 10px;
   text-align: right;
   box-shadow: 10px 10px 11px rgba(0, 0, 0, 0.400);
-  transition: transform 0.3s;
+  transition: transform 0.7s !important;
 }
 
 .forecast-item:hover {
-  transform: scale(1.035);
+  transform: scale(1.035) !important;
 }
 
 .forecast-day {
@@ -344,13 +344,13 @@ iframe:hover {
     padding: 10px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
+    transition: transform 0.6s !important;
     width: 250px;
     height: 90px
   }
   
   .default-weather-card:hover {
-    transform: scale(1.05);
+    transform: scale(1.03) !important;
   }
   
   .default-weather-card h3 {
@@ -411,7 +411,7 @@ iframe:hover {
     position: absolute;
     bottom: 29vh;
     left: 15vw;
-    transition: transform 0.3s;
+    transition: transform 0.2s !important;
     animation: slide-in-left 0.3s forwards;
   }
   
@@ -434,7 +434,7 @@ iframe:hover {
     border-radius: 20px;
     background-color: rgba(114, 113, 113, 0.28);
     box-shadow: 10px 14px 11px rgba(0, 0, 0, 0.400);
-    transition: transform 0.3s;
+    transition: transform 0.3s !important;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -470,10 +470,10 @@ iframe:hover {
   }
   
   .feels-like {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 100;
     font-style: italic;
-    color: rgba(255, 0, 0, 0.5);
+    color: rgba(255, 255, 255, 0.5);
     margin: -15px 0 10px 10px
   }
   
@@ -562,12 +562,12 @@ iframe:hover {
     padding: 10px;
     text-align: right;
     box-shadow: 10px 10px 11px rgba(0, 0, 0, 0.400);
-    transition: transform 0.3s;
+    transition: transform 0.3s !important;
     animation: slide-in-right 0.4s forwards;
   }
   
   .forecast-item:hover {
-    transform: scale(1.035);
+    transform: scale(1.035) !important;
   }
   
   @keyframes slide-in-right {
@@ -737,7 +737,7 @@ iframe:hover {
     position: absolute;
     bottom: 31.5vh;
     left: 13vw;
-    transition: transform 0.3s;
+    transition: transform 0.3s !important;
     animation: slide-in-left 0.3s forwards;
   }
   
@@ -760,7 +760,7 @@ iframe:hover {
     border-radius: 20px;
     background-color: rgba(114, 113, 113, 0.28);
     box-shadow: 10px 14px 11px rgba(0, 0, 0, 0.400);
-    transition: transform 0.3s;
+    transition: transform 0.3s !important;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -804,7 +804,7 @@ iframe:hover {
   }
 
   .feels-like {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 100;
     font-style: italic;
     color: rgba(255, 255, 255, 0.500);
@@ -897,12 +897,12 @@ iframe:hover {
     padding: 10px;
     text-align: right;
     box-shadow: 10px 10px 11px rgba(0, 0, 0, 0.400);
-    transition: transform 0.2s;
+    transition: transform 0.4s !important;
     animation: slide-in-right 0.3s forwards;
   }
   
   .forecast-item:hover {
-    transform: scale(1.035);
+    transform: scale(1.035) !important;
   }
   
   @keyframes slide-in-right {
