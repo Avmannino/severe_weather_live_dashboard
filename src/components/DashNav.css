@@ -13,6 +13,7 @@
     height: 55px;
     margin-left: auto;
     margin-right: auto; 
+    margin-top: 35px;
   }
 
   .location-button {
@@ -150,7 +151,7 @@
     background-color: rgba(119, 119, 119, 0.308);
     border-radius: 25px;
     box-shadow: 0 14px 11px rgba(0, 0, 0, 0.400);
-    margin: -5px 0 0 10px;
+    margin: 10px 0 0 10px;
     width: 60%; 
     max-width: 1150px; 
     height: 25px;
@@ -173,7 +174,7 @@
     border: 1px solid #118edd;
     box-shadow: 0 7px 11px rgba(0, 0, 0, 0.400);
     width: 225px; 
-    height: 16px;
+    height: 12px;
     position: relative;
     top: 0vh;
     left: 0vw;

@@ -4,324 +4,653 @@ html, body {
     overflow: hidden; 
 }
 
-.home-container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    font-family: dashboard;
-    overflow-y: scroll; 
-    scroll-snap-type: y mandatory;
+@media (max-width: 2560px) {
+
+    .home-container {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        font-family: dashboard;
+        overflow-y: scroll; 
+        scroll-snap-type: y mandatory;
+    }
+
+    .spottr-text {
+        color: transparent;
+    }
+
+    .spottr-header {
+        background-color: #007bff00;
+        color: rgba(212, 226, 255, 0.932);
+        padding: 20px;
+        text-align: center;
+        font-family: storm;
+        font-size: 90px;
+        margin: 28vh 0 0 28vw;
+        scroll-snap-align: start;
+    }
+
+    @font-face {
+        font-family: 'nova';
+        src: url('./nova.ttf') format('truetype');
+    }
+
+    .home-nav {
+        margin-top: 10px;
+    }
+
+    .home-nav a {
+        margin: 0 10px;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .home-nav a:hover {
+        text-decoration: underline;
+    }
+
+    .home-main {
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        flex: 1;
+        padding: 20px;
+        text-align: left;
+        scroll-snap-align: start;
+    }
+
+    .intro {
+        padding: 0 20px;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        scroll-snap-align: start;
+    }
+
+    .h2 {
+        margin: 0 0 0 -90px;
+    }
+
+    .smaller-text {
+        font-size: 20px;
+        margin: 99vh 0 0 -19.5vw;
+        color: rgba(212, 226, 255, 0.726);
+        font-family: dashboard;
+        max-width: 120%;
+    }
+
+    .emphasized-text {
+        font-size: 35px;
+        max-width: 110%;
+        margin: -35vh 0 0 -47vw;
+        color: rgba(212, 226, 255, 0.726);
+        font-family: dashboard;
+        font-weight: normal;
+    }
+
+    .emphasized-text-lower {
+        position: relative;
+        top: 32vh;
+        left: 15vw;
+        font-size: 35px;
+        max-width: 110%;
+        color: rgba(212, 226, 255, 0.726);
+        font-family: dashboard;
+        font-weight: normal;
+    }
+
+    .home-header {
+        font-size: 28px;
+        font-family: nova;
+        margin: -70vh 0 0 -17vw;
+        color: rgba(165, 165, 165, 0.568);
+    }
+
+    .our-software,
+    .critical-communications,
+    .realtime-radar,
+    .features-forecast {
+        background-color: rgb(211, 211, 211);
+        font-family: nova;
+        font-weight: 500;
+        scroll-snap-align: start;
+        height: 100vh;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .software-header {
+        text-align: center;
+        color: rgba(0, 0, 0, 0.315);
+        font-size: 18px;
+    }
+
+    .easy-powerful {
+        text-align: center;
+        color: rgba(0, 0, 0, 0.705);
+        font-size: 60px;
+        margin: 20px 0 0 0;
+    }
+
+    .features-header {
+        font-size: 55px;
+        margin: 225px 0 0 400px;
+        color: rgba(0, 0, 0, 0.616);
+    }
+
+    .features li {
+        font-size: 25px;
+        margin: 0 0 0 400px;
+        margin-bottom: 25px;
+        color: rgba(0, 0, 0, 0.616);
+    }
+
+    .features-img {
+        margin: -520px 0 0 1300px;
+        width: 35%;
+    }
+
+    .critical-communications-header {
+        font-size: 55px;
+        color: rgba(0, 0, 0, 0.616);
+        margin: 235px 0 0 380px;
+    }
+
+    .critical-motto {
+        font-size: 20px;
+        color: rgba(0, 0, 0, 0.616);
+        margin: 0px 0 0 405px;
+    }
+
+    .communications-content {
+        margin: 15px 0 0 390px;
+        color: rgba(0, 0, 0, 0.616);
+    }
+
+    .communications-content li {
+        font-size: 25px;
+        margin-bottom: 10px;
+    }
+
+
+    .realtime-radar-header {
+        font-size: 55px;
+        color: rgba(0, 0, 0, 0.616);
+        margin: 300px 0 0 305px;
+    }
+
+    .radar-content {
+        font-size: 22px;
+        color: rgba(0, 0, 0, 0.616);
+        margin: -5px 0 0 310px;
+    }
+
+    .radar-list {
+        font-size: 25px;
+        margin: 0 0 0 300px;  
+        color: rgba(0, 0, 0, 0.616);
+    }
+
+    .radar-maps {
+        width: 8%;
+        border-radius: 20px;
+        margin: -250px 0 0 2100px;
+        box-shadow: 12px 10px 15px rgba(0, 0, 0, 0.500);
+    }
+
+
+    .radar_demo {
+        width: 35%;
+        border-radius: 20px;
+        box-shadow: 12px 10px 15px rgba(0, 0, 0, 0.500);
+        margin: -275px 0 0 1350px;
+    }
+
+    .alert-button-demo {
+        width: 6%;
+        border-radius: 20px;
+        box-shadow: 12px 10px 15px rgba(0, 0, 0, 0.500);
+        margin: -270px 0px 345px 1320px;
+        z-index: 9999 !important;
+    }
+
+    .alert-demo {
+        width: 32%;
+        border-radius: 20px;
+        box-shadow: 12px 10px 15px rgba(0, 0, 0, 0.500);
+        margin: -345px 0 0 1400px;
+        z-index: 9990 !important;
+    }
+
+    .features-forecast-header {
+        font-size: 55px;
+        color: rgba(0, 0, 0, 0.616);
+        margin: 50px 0 0 305px;
+    }
+
+    .forecast-content {
+        font-size: 22px;
+        color: rgba(0, 0, 0, 0.616);
+        margin: 0px 0 0 315px;
+    }
+
+    .forecast-list {
+        font-size: 25px;
+        margin: 0 0 0 300px;
+        color: rgba(0, 0, 0, 0.616);
+        padding-bottom: 50px;
+    }
+
+    .hourly_demo {
+        width: 37%;
+        border-radius: 20px;
+        margin: -255px 0 0 1350px;
+        padding-bottom: 100px;
+    }
+
+    .pricing-button {
+        background-color: #004a99; 
+        color: white;
+        padding: 18px 32px; 
+        font-size: 24px; 
+        border: 1px solid rgb(255, 217, 0); 
+        border-radius: 10px; 
+        cursor: pointer; 
+        transition: background-color 0.3s ease; 
+        margin: -60px 0 0 0; 
+    }
+
+    .pricing-button:hover {
+        background-color: #0057b300; 
+        color: black;
+    }
+
+    .home-footer {
+        background-color: rgb(211, 211, 211);
+        color: black;
+        text-align: center;
+        padding: 10px;
+        scroll-snap-align: start;
+        display: flex;
+        flex-direction: column; 
+        align-items: center;
+        justify-content: center;
+        margin: 0px 0 0 0;
+    }
+
+    .button-container {
+        position: relative;
+        top: -9vh;
+        left: -28.5vw;
+        margin: 0px 0 0 14vw;
+    }
+
+    .trial-button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 14px 16px;
+        margin: 30px 0 0 200px;
+        font-size: 16px;
+        cursor: pointer;
+        font-family: nova;
+    }
+
+    .trial-button {
+        margin-left: 0vw;
+    }
+
+    .plans-button {
+        background-color: #007bff00;
+        color: white;
+        border: 1px solid #017bff;
+        padding: 14px 16px;
+        margin: 20px 0 0 20px;
+        font-size: 16px;
+        cursor: pointer;
+        font-family: nova;
+    }
+
+    .trial-button:hover {
+        background-color: #0057b300;
+        border: 1px solid #017bff;
+        transition: 0.4s;
+    }
+
+    .plans-button:hover {
+        background-color: #007bff;
+        border: 1px solid #017bff;
+        transition: 0.4s;
+    }
 }
 
-.spottr-text {
-    color: transparent;
-}
 
-.spottr-header {
-    background-color: #007bff00;
-    color: rgba(212, 226, 255, 0.932);
-    padding: 20px;
-    text-align: center;
-    font-family: storm;
-    font-size: 90px;
-    margin: 28vh 0 0 28vw;
-    scroll-snap-align: start;
-}
+@media (max-width: 1920px) {
 
-@font-face {
-    font-family: 'nova';
-    src: url('./nova.ttf') format('truetype');
-}
+    .home-container {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        font-family: dashboard;
+        overflow-y: scroll; 
+        scroll-snap-type: y mandatory;
+    }
 
-.home-nav {
-    margin-top: 10px;
-}
+    .spottr-text {
+        color: transparent;
+    }
 
-.home-nav a {
-    margin: 0 10px;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-}
+    .spottr-header {
+        background-color: #007bff00;
+        color: rgba(212, 226, 255, 0.932);
+        padding: 20px;
+        text-align: center;
+        font-family: storm;
+        font-size: 65px;
+        margin: 28vh 0 0 28vw;
+        scroll-snap-align: start;
+    }
 
-.home-nav a:hover {
-    text-decoration: underline;
-}
+    @font-face {
+        font-family: 'nova';
+        src: url('./nova.ttf') format('truetype');
+    }
 
-.home-main {
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    flex: 1;
-    padding: 20px;
-    text-align: left;
-    scroll-snap-align: start;
-}
+    .home-nav {
+        margin-top: 10px;
+    }
 
-.intro {
-    padding: 0 20px;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    scroll-snap-align: start;
-}
+    .home-nav a {
+        margin: 0 10px;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
 
-.h2 {
-    margin: 0 0 0 -90px;
-}
+    .home-nav a:hover {
+        text-decoration: underline;
+    }
 
-.smaller-text {
-    font-size: 20px;
-    margin: 99vh 0 0 -19.5vw;
-    color: rgba(212, 226, 255, 0.726);
-    font-family: dashboard;
-    max-width: 120%;
-}
+    .home-main {
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        flex: 1;
+        padding: 20px;
+        text-align: left;
+        scroll-snap-align: start;
+    }
 
-.emphasized-text {
-    font-size: 35px;
-    max-width: 110%;
-    margin: -35vh 0 0 -47vw;
-    color: rgba(212, 226, 255, 0.726);
-    font-family: dashboard;
-    font-weight: normal;
-}
+    .intro {
+        padding: 0 20px;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        scroll-snap-align: start;
+    }
 
-.emphasized-text-lower {
-    position: relative;
-    top: 32vh;
-    left: 15vw;
-    font-size: 35px;
-    max-width: 110%;
-    color: rgba(212, 226, 255, 0.726);
-    font-family: dashboard;
-    font-weight: normal;
-}
+    .h2 {
+        margin: 0 0 0 -90px;
+    }
 
-.home-header {
-    font-size: 28px;
-    font-family: nova;
-    margin: -70vh 0 0 -17vw;
-    color: rgba(165, 165, 165, 0.568);
-}
+    .smaller-text {
+        font-size: 15px;
+        margin: 99vh 0 0 -19.5vw;
+        color: rgba(212, 226, 255, 0.726);
+        font-family: dashboard;
+        max-width: 120%;
+    }
 
-.our-software,
-.critical-communications,
-.realtime-radar,
-.features-forecast {
-    background-color: rgb(211, 211, 211);
-    font-family: nova;
-    font-weight: 500;
-    scroll-snap-align: start;
-    height: 100vh;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
+    .emphasized-text {
+        font-size: 22px;
+        max-width: 110%;
+        margin: -35vh 0 0 -47vw;
+        color: rgba(212, 226, 255, 0.726);
+        font-family: dashboard;
+        font-weight: normal;
+    }
 
-.software-header {
-    text-align: center;
-    color: rgba(0, 0, 0, 0.315);
-    font-size: 18px;
-}
+    .emphasized-text-lower {
+        position: relative;
+        top: 32vh;
+        left: 15vw;
+        font-size: 22px;
+        max-width: 110%;
+        color: rgba(212, 226, 255, 0.726);
+        font-family: dashboard;
+        font-weight: normal;
+    }
 
-.easy-powerful {
-    text-align: center;
-    color: rgba(0, 0, 0, 0.705);
-    font-size: 60px;
-    margin: 20px 0 0 0;
-}
+    .home-header {
+        font-size: 20px;
+        font-family: nova;
+        margin: -70vh 0 0 -17vw;
+        color: rgba(165, 165, 165, 0.568);
+    }
 
-.features-header {
-    font-size: 55px;
-    margin: 225px 0 0 400px;
-    color: rgba(0, 0, 0, 0.616);
-}
+    .our-software,
+    .critical-communications,
+    .realtime-radar,
+    .features-forecast {
+        background-color: rgb(211, 211, 211);
+        font-family: nova;
+        font-weight: 100;
+        scroll-snap-align: start;
+        height: 100vh;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
 
-.features li {
-    font-size: 25px;
-    margin: 0 0 0 400px;
-    margin-bottom: 25px;
-    color: rgba(0, 0, 0, 0.616);
-}
+    .software-header {
+        text-align: center;
+        color: rgba(0, 0, 0, 0.315);
+        font-size: 16px;
+    }
 
-.features-img {
-    margin: -520px 0 0 1300px;
-    width: 35%;
-}
+    .easy-powerful {
+        text-align: center;
+        color: rgba(0, 0, 0, 0.705);
+        font-size: 40px;
+        margin: 20px 0 0 0;
+    }
 
-.critical-communications-header {
-    font-size: 55px;
-    color: rgba(0, 0, 0, 0.616);
-    margin: 235px 0 0 380px;
-}
+    .features-header {
+        font-size: 30px;
+        margin: 155px 0 0 270px;
+        color: rgba(0, 0, 0, 0.616);
+    }
 
-.critical-motto {
-    font-size: 20px;
-    color: rgba(0, 0, 0, 0.616);
-    margin: 0px 0 0 405px;
-}
+    .features li {
+        font-size: 20px;
+        margin: 0 0 0 250px;
+        margin-bottom: 15px;
+        color: rgba(0, 0, 0, 0.616);
+    }
 
-.communications-content {
-    margin: 15px 0 0 390px;
-    color: rgba(0, 0, 0, 0.616);
-}
+    .features-img {
+        margin: -380px 0 0 1000px;
+        width: 35%;
+    }
 
-.communications-content li {
-    font-size: 25px;
-    margin-bottom: 10px;
-}
+    .critical-communications-header {
+        font-size: 30px;
+        color: rgba(0, 0, 0, 0.616);
+        margin: 185px 0 0 270px;
+    }
 
+    .critical-motto {
+        font-size: 16px;
+        color: rgba(0, 0, 0, 0.616);
+        margin: 0px 0 0 270px;
+    }
 
-.realtime-radar-header {
-    font-size: 55px;
-    color: rgba(0, 0, 0, 0.616);
-    margin: 300px 0 0 305px;
-}
+    .communications-content {
+        margin: 15px 0 0 250px;
+        color: rgba(0, 0, 0, 0.616);
+    }
 
-.radar-content {
-    font-size: 22px;
-    color: rgba(0, 0, 0, 0.616);
-    margin: -5px 0 0 310px;
-}
-
-.radar-list {
-    font-size: 25px;
-    margin: 0 0 0 300px;  
-    color: rgba(0, 0, 0, 0.616);
-}
-
-.radar-maps {
-    width: 8%;
-    border-radius: 20px;
-    margin: -250px 0 0 2100px;
-    box-shadow: 12px 10px 15px rgba(0, 0, 0, 0.500);
-}
+    .communications-content li {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
 
 
-.radar_demo {
-    width: 35%;
-    border-radius: 20px;
-    box-shadow: 12px 10px 15px rgba(0, 0, 0, 0.500);
-    margin: -275px 0 0 1350px;
-}
+    .realtime-radar-header {
+        font-size: 32px;
+        color: rgba(0, 0, 0, 0.616);
+        margin: 190px 0 0 215px;
+    }
 
-.alert-button-demo {
-    width: 6%;
-    border-radius: 20px;
-    box-shadow: 12px 10px 15px rgba(0, 0, 0, 0.500);
-    margin: -270px 0px 345px 1320px;
-    z-index: 9999 !important;
-}
+    .radar-content {
+        font-size: 18px;
+        color: rgba(0, 0, 0, 0.616);
+        margin: -5px 0 0 215px;
+    }
 
-.alert-demo {
-    width: 32%;
-    border-radius: 20px;
-    box-shadow: 12px 10px 15px rgba(0, 0, 0, 0.500);
-    margin: -345px 0 0 1400px;
-    z-index: 9990 !important;
-}
+    .radar-list {
+        font-size: 20px;
+        margin: 0px 0 0 200px;  
+        color: rgba(0, 0, 0, 0.616);
+    }
 
-.features-forecast-header {
-    font-size: 55px;
-    color: rgba(0, 0, 0, 0.616);
-    margin: 50px 0 0 305px;
-}
+    .radar-maps {
+        width: 8%;
+        border-radius: 15px;
+        margin: -240px 0 0 1500px;
+        box-shadow: 12px 10px 15px rgba(0, 0, 0, 0.500);
+    }
 
-.forecast-content {
-    font-size: 22px;
-    color: rgba(0, 0, 0, 0.616);
-    margin: 0px 0 0 315px;
-}
 
-.forecast-list {
-    font-size: 25px;
-    margin: 0 0 0 300px;
-    color: rgba(0, 0, 0, 0.616);
-    padding-bottom: 50px;
-}
+    .radar_demo {
+        width: 30%;
+        border-radius: 20px;
+        box-shadow: 12px 10px 15px rgba(0, 0, 0, 0.500);
+        margin: -205px 0 0 1080px;
+    }
 
-.hourly_demo {
-    width: 37%;
-    border-radius: 20px;
-    margin: -255px 0 0 1350px;
-    padding-bottom: 100px;
-}
+    .alert-button-demo {
+        width: 7%;
+        border-radius: 20px;
+        box-shadow: 12px 10px 15px rgba(0, 0, 0, 0.500);
+        margin: -250px 0px 345px 1050px;
+        z-index: 9999 !important;
+    }
 
-.pricing-button {
-    background-color: #004a99; 
-    color: white;
-    padding: 18px 32px; 
-    font-size: 24px; 
-    border: 1px solid rgb(255, 217, 0); 
-    border-radius: 10px; 
-    cursor: pointer; 
-    transition: background-color 0.3s ease; 
-    margin: -60px 0 0 0; 
-}
+    .alert-demo {
+        width: 35%;
+        border-radius: 20px;
+        box-shadow: 12px 10px 15px rgba(0, 0, 0, 0.500);
+        margin: -365px 0 0 1080px;
+        z-index: 9990 !important;
+    }
 
-.pricing-button:hover {
-    background-color: #0057b300; 
-    color: black;
-}
+    .features-forecast-header {
+        font-size: 30px;
+        color: rgba(0, 0, 0, 0.616);
+        margin: 50px 0 0 215px;
+    }
 
-.home-footer {
-    background-color: rgb(211, 211, 211);
-    color: black;
-    text-align: center;
-    padding: 10px;
-    scroll-snap-align: start;
-    display: flex;
-    flex-direction: column; 
-    align-items: center;
-    justify-content: center;
-    margin: 0px 0 0 0;
-}
+    .forecast-content {
+        font-size: 18px;
+        color: rgba(0, 0, 0, 0.616);
+        margin: 0px 0 0 215px;
+    }
 
-.button-container {
-    position: relative;
-    top: -9vh;
-    left: -28.5vw;
-    margin: 0px 0 0 14vw;
-}
+    .forecast-list {
+        font-size: 20px;
+        margin: 0 0 0 200px;
+        color: rgba(0, 0, 0, 0.616);
+        padding-bottom: 50px;
+    }
 
-.trial-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 14px 16px;
-    margin: 50px 0 0 200px;
-    font-size: 16px;
-    cursor: pointer;
-    font-family: nova;
-}
+    .hourly_demo {
+        width: 29%;
+        border-radius: 20px;
+        margin: -255px 0 0 1100px;
+        padding-bottom: 150px;
+    }
 
-.trial-button {
-    margin-left: 0vw;
-}
+    .pricing-button {
+        background-color: #004a99; 
+        color: white;
+        padding: 18px 30px; 
+        font-size: 16px; 
+        border: 1px solid rgb(255, 217, 0); 
+        border-radius: 10px; 
+        cursor: pointer; 
+        transition: background-color 0.3s ease; 
+        margin: -60px 0 0 0; 
+    }
 
-.plans-button {
-    background-color: #007bff00;
-    color: white;
-    border: 1px solid #017bff;
-    padding: 14px 16px;
-    margin: 50px 0 0 20px;
-    font-size: 16px;
-    cursor: pointer;
-    font-family: nova;
-}
+    .pricing-button:hover {
+        background-color: #0057b300; 
+        color: black;
+    }
 
-.trial-button:hover {
-    background-color: #0057b300;
-    border: 1px solid #017bff;
-    transition: 0.4s;
-}
+    .home-footer {
+        background-color: rgb(211, 211, 211);
+        color: black;
+        text-align: center;
+        padding: 10px;
+        scroll-snap-align: start;
+        display: flex;
+        flex-direction: column; 
+        align-items: center;
+        justify-content: center;
+        margin: 0px 0 0 0;
+    }
 
-.plans-button:hover {
-    background-color: #007bff;
-    border: 1px solid #017bff;
-    transition: 0.4s;
+    .button-container {
+        position: relative;
+        top: -9vh;
+        left: -28.7vw;
+        margin: 0px 0 0 14vw;
+    }
+
+    .trial-button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 12px 14px;
+        margin: 30px 0 0 200px;
+        font-size: 12px;
+        cursor: pointer;
+        font-family: nova;
+    }
+
+    .trial-button {
+        margin-left: 0vw;
+    }
+
+    .plans-button {
+        background-color: #007bff00;
+        color: white;
+        border: 1px solid #017bff;
+        padding: 12px 14px;
+        margin: 20px 0 0 20px;
+        font-size: 12px;
+        cursor: pointer;
+        font-family: nova;
+    }
+
+    .trial-button:hover {
+        background-color: #0057b300;
+        border: 1px solid #017bff;
+        transition: 0.4s;
+    }
+
+    .plans-button:hover {
+        background-color: #007bff;
+        border: 1px solid #017bff;
+        transition: 0.4s;
+    }
 }

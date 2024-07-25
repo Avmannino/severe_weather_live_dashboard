@@ -1,3 +1,5 @@
+// File: WeatherCards.jsx
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
@@ -15,13 +17,17 @@ const WeatherCards = ({ lat, lon, setHumidity }) => {
   const [historicalTemp, setHistoricalTemp] = useState(null);
   const [humidity, setLocalHumidity] = useState(null);
   const [visibility, setVisibility] = useState(null);
+  const [airQuality, setAirQuality] = useState(null);
+  const [pressure, setPressure] = useState(null); // Add state for pressure
   const [cardsOrder, setCardsOrder] = useState([
     'uvIndex',
     'visibility',
     'windSpeed',
     'dewPoint',
     'humidity',
-    'historicalTemp'
+    'historicalTemp',
+    'airQuality',
+    'pressure' // Add pressure to cards order
   ]);
   const [animate, setAnimate] = useState(true);
 
@@ -55,6 +61,15 @@ const WeatherCards = ({ lat, lon, setHumidity }) => {
           setLocalHumidity(humidityData);
           setHumidity(humidityData);
 
+          const airQualityResponse = await axios.get(`https://api.weatherbit.io/v2.0/current/airquality?lat=${lat}&lon=${lon}&key=dccf2094f0544bf0a44723686d7fbb12`);
+          const airQualityData = airQualityResponse.data.data[0].aqi;
+          setAirQuality(airQualityData);
+
+          const pressureResponse = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=pressure_msl&timezone=auto`);
+          const pressureDataHpa = pressureResponse.data.hourly.pressure_msl[0];
+          const pressureDataInHg = (pressureDataHpa * 0.02953).toFixed(2); // Convert hPa to inHg
+          setPressure(pressureDataInHg);
+
           setUvIndex(uvIndexData);
 
           setTimeout(() => {
@@ -73,7 +88,7 @@ const WeatherCards = ({ lat, lon, setHumidity }) => {
           lastYear.setFullYear(lastYear.getFullYear() - 1);
           const formattedDate = lastYear.toISOString().split('T')[0];
 
-          const historicalResponse = await axios.get(`https://archive-api.open-meteo.com/v1/archive`, {
+          const historicalResponse = await axios.get('https://archive-api.open-meteo.com/v1/archive', {
             params: {
               latitude: lat,
               longitude: lon,
@@ -124,6 +139,15 @@ const WeatherCards = ({ lat, lon, setHumidity }) => {
     const directions = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
     const index = Math.round(degree / 22.5);
     return directions[index % 16];
+  };
+
+  const getAirQualityLevel = (aqi) => {
+    if (aqi <= 50) return 'Good';
+    if (aqi <= 100) return 'Moderate';
+    if (aqi <= 150) return 'Unhealthy - Sensitive Groups';
+    if (aqi <= 200) return 'Unhealthy';
+    if (aqi <= 300) return 'Very Unhealthy';
+    return 'Hazardous';
   };
 
   const lastYearDate = new Date();
@@ -215,6 +239,24 @@ const WeatherCards = ({ lat, lon, setHumidity }) => {
               <p className='historical-date'>{formattedLastYearDate}</p>
               <p className='historical-figure'>{historicalTemp}°F</p>
               <img src="./icons/historical-temp.png" alt="historical-icon" />
+            </div>
+          )
+        );
+      case 'airQuality':
+        return (
+          airQuality !== null && (
+            <div className={`air-quality ${animationClass}`}>
+              <h3>Air Quality</h3>
+              <p>{airQuality} ({getAirQualityLevel(airQuality)})</p>
+            </div>
+          )
+        );
+      case 'pressure':
+        return (
+          pressure !== null && (
+            <div className={`pressure ${animationClass}`}>
+              <h3>Pressure</h3>
+              <p>{pressure} inHg</p>
             </div>
           )
         );

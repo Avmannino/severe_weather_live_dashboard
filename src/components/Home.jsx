@@ -78,6 +78,8 @@ const Home = () => {
                     <li>Detailed weather predictions for the next 24 hours</li>
                     <li>Hourly breakdown of temperature, weather conditions and descriptions.</li>
                     <li>Access to historical hourly weather data for trend analysis and comparison.</li>
+                    <li>Hourly breakdown of temperature, weather conditions and descriptions.</li>
+                    <li>Hourly breakdown of temperature, weather conditions and descriptions.</li>
                 </ul>
                 <video autoPlay muted loop className="hourly_demo">
                     <source src={hourlyDemo} type="video/mp4" />

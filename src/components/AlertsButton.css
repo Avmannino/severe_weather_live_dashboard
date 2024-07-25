@@ -12,7 +12,7 @@
     border-radius: 25px;
     cursor: pointer;
     position: relative;
-    bottom: 105.6vh;
+    bottom: 94.8vh;
     left: 24.5vw;
     transition: 0.3s;
   }
@@ -138,13 +138,13 @@
     }
     
     .alerts-button {
-      padding: 9px 14px;
-      font-size: 12px;
+      padding: 7px 12px;
+      font-size: 10px;
       border: solid 1px white;
       border-radius: 25px;
       cursor: pointer;
       position: relative;
-      bottom: 109.5vh;
+      bottom: 96.4vh;
       left: 26.5vw;
       transition: 0.3s;
     }

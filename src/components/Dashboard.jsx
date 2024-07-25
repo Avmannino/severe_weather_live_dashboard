@@ -318,13 +318,14 @@ const Dashboard = () => {
         height: 300
       },
       title: {
-        text: '7-Day Temperature Trend',
+        text: '7-Day Trend (Temp. °F)',
         align: 'center',
         style: {
           color: '#FFFFFF',
-          fontSize: '16px',
+          fontSize: '12px',
           fontFamily: 'dashboard',
           fontWeight: 'bold'
+          
         }
       },
       xaxis: {
@@ -343,7 +344,7 @@ const Dashboard = () => {
           text: 'Temperature (°F)',
           style: {
             color: '#FFFFFF',
-            fontSize: '12px',
+            fontSize: '10px',
             fontFamily: 'dashboard',
             fontWeight: 100,
           }
@@ -351,7 +352,7 @@ const Dashboard = () => {
         labels: {
           style: {
             colors: '#FF5733',
-            fontSize: '12px',
+            fontSize: '10px',
             fontFamily: 'dashboard',
             fontWeight: 100,
           }
@@ -362,7 +363,7 @@ const Dashboard = () => {
       },
       stroke: {
         curve: 'smooth',
-        width: 5,
+        width: 4,
         colors: ['#FF5733']
       },
       dataLabels: {
@@ -439,7 +440,7 @@ const Dashboard = () => {
             </div>
             <div className={`carousel-slide ${carouselIndex === 1 ? 'active' : prevIndex === 1 ? 'prev' : 'next'}`}>
               <h3></h3>
-              {lineChartData && <Chart options={lineChartData.options} series={lineChartData.series} type="line" height={450} />}
+              {lineChartData && <Chart options={lineChartData.options} series={lineChartData.series} type="line" height={300} />}
             </div>
             <div className={`carousel-slide ${carouselIndex === 2 ? 'active' : prevIndex === 2 ? 'prev' : 'next'}`}>
               <h3>Card 3</h3>
@@ -482,12 +483,12 @@ const Dashboard = () => {
                 </div>
 
                 <div className='location'>
-                  <img src={locationImage} alt="Location" style={{ width: '25px', height: '25px', margin:'-5px 0 -5px 5px' }} />
+                  <img src={locationImage} alt="Location" style={{ width: '20px', height: '20px', margin:'-5px 0 -5px 5px' }} />
                   <p>{location}</p>
                 </div>
 
                 <div className='time'>
-                  <img src={dateTimeImage} alt="Date and Time" style={{ width: '25px', height: '25px', margin: '0px 0px 0px 55px' }} />
+                  <img src={dateTimeImage} alt="Date and Time" style={{ width: '20px', height: '20px', margin: '0px 0px 0px 0px' }} />
                   <p>{currentTime.toLocaleDateString()} | {currentTime.toLocaleTimeString()}</p>
                 </div>
               </div>
@@ -510,7 +511,7 @@ const Dashboard = () => {
                       </div>
                     </div>
                     <div className="forecast-details">
-                      <img src={`/icons/${getWeatherIcon(day.weatherCode)}`} alt={day.weatherDescription} style={{ width: '60px', height: '60px', display:'flex', margin:'-55px 0 0 0'  }} />
+                      <img src={`/icons/${getWeatherIcon(day.weatherCode)}`} alt={day.weatherDescription} />
                       <span style={{color:'white', margin:'5px 0 0 0'}}>{day.weatherDescription}</span>
                     </div>
                   </div>
