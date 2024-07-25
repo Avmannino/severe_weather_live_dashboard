@@ -4,30 +4,58 @@ html, body {
     overflow: hidden; 
 }
 
+
 @media (max-width: 2560px) {
 
+    @keyframes moveAcross {
+        0% { transform: translateX(-100%); }
+        50% { transform: translateX(0); }
+        100% { transform: translateX(100%); }
+    }
+
+    @keyframes revealText {
+        0% { width: 0; }
+        100% { width: 100%; }
+    }
+
     .home-container {
+        position: relative;
         display: flex;
         flex-direction: column;
         height: 100vh;
         font-family: dashboard;
-        overflow-y: scroll; 
+        overflow-y: scroll;
         scroll-snap-type: y mandatory;
     }
 
-    .spottr-text {
-        color: transparent;
+    .gif-animation {
+        position: absolute;
+        top: 32%;
+        left: 50.5%;
+        width: 150px; /* Adjust size as needed */
+        height: 150px; /* Adjust size as needed */
+        animation: moveAcross 1.6s linear forwards 0s;
+    }
+
+    .gif-image {
+        width: 100%;
+        height: 100%;
     }
 
     .spottr-header {
+        position: absolute;
         background-color: #007bff00;
-        color: rgba(212, 226, 255, 0.932);
+        color: #cddbe4;
         padding: 20px;
         text-align: center;
         font-family: storm;
         font-size: 90px;
-        margin: 28vh 0 0 28vw;
+        margin: 28vh 0 0 -2vw;
         scroll-snap-align: start;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0; /* Initially set to 0 */
+        animation: revealText 7s steps(90, end) 0.35s forwards; /* Adjust the duration and delay to match the gif animation */
     }
 
     @font-face {
@@ -76,16 +104,16 @@ html, body {
 
     .smaller-text {
         font-size: 20px;
-        margin: 99vh 0 0 -19.5vw;
+        margin: 730px 0 0 1.5vw;
         color: rgba(212, 226, 255, 0.726);
         font-family: dashboard;
-        max-width: 120%;
+        max-width: 150%;
     }
 
     .emphasized-text {
-        font-size: 35px;
+        font-size: 30px;
         max-width: 110%;
-        margin: -35vh 0 0 -47vw;
+        margin: -30vh 0 0 -25vw;
         color: rgba(212, 226, 255, 0.726);
         font-family: dashboard;
         font-weight: normal;
@@ -95,7 +123,7 @@ html, body {
         position: relative;
         top: 32vh;
         left: 15vw;
-        font-size: 35px;
+        font-size: 30px;
         max-width: 110%;
         color: rgba(212, 226, 255, 0.726);
         font-family: dashboard;
@@ -177,7 +205,6 @@ html, body {
         margin-bottom: 10px;
     }
 
-
     .realtime-radar-header {
         font-size: 55px;
         color: rgba(0, 0, 0, 0.616);
@@ -192,7 +219,7 @@ html, body {
 
     .radar-list {
         font-size: 25px;
-        margin: 0 0 0 300px;  
+        margin: 0 0 0 300px;
         color: rgba(0, 0, 0, 0.616);
     }
 
@@ -202,7 +229,6 @@ html, body {
         margin: -250px 0 0 2100px;
         box-shadow: 12px 10px 15px rgba(0, 0, 0, 0.500);
     }
-
 
     .radar_demo {
         width: 35%;
@@ -285,9 +311,9 @@ html, body {
 
     .button-container {
         position: relative;
-        top: -9vh;
-        left: -28.5vw;
-        margin: 0px 0 0 14vw;
+        top: 0.5vh;
+        left: -8.5vw;
+        margin: 0px 0 0 15.5vw;
     }
 
     .trial-button {
@@ -328,6 +354,9 @@ html, body {
         transition: 0.4s;
     }
 }
+
+    
+
 
 
 @media (max-width: 1920px) {

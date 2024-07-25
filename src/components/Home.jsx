@@ -8,19 +8,22 @@ const radarDemo = './radar_demo.mp4';
 const buttonDemo = './alert_button_demo.mp4';
 const alertDemo = './alert_demo.png';
 const radarMaps = './radar_options.png';
+const twisterGif = './twister.gif'; 
 
 const Home = () => {
     return (
         <div className="home-container">
             <h1 className="spottr-text snap-section"></h1>
             <main className="home-main">
-                <h1 className="spottr-header animate__animated animate__fadeIn animate__delay-3s">SPOTT'R</h1>
+                <div className="gif-animation">
+                    <img src={twisterGif} alt="Weather Animation" className="gif-image" />
+                </div>
+                <h1 className="spottr-header">SPOTT'R</h1>
                 <section className="intro snap-section">
-                    <p className="emphasized-text animate__animated animate__fadeInUp animate__delay-1s">Stay Ahead of the Storm...</p>
+                    {/* <p className="emphasized-text animate__animated animate__fadeInUp animate__delay-0s">Stay Ahead of the Storm...</p> */}
                     <p className="home-header"></p>
-                    <p className="smaller-text animate__animated animate__fadeInUp animate__delay-2s">Real-time storm data, radar insights, and detailed forecasts</p>
-                    <p className="emphasized-text-lower animate__animated animate__fadeInUp animate__delay-5s">...we've got you covered.</p>
-                    <div className="button-container animate__animated animate__fadeInUp animate__delay-4s">
+                    <p className="smaller-text animate__animated animate__fadeInUp animate__delay-1s">Real-time weather data, radar insights, and detailed forecasts</p>
+                    <div className="button-container animate__animated animate__fadeInUp animate__delay-2s">
                         <button className="trial-button" onClick={() => window.location.href = '/sign-up'}>
                             Start a Free Trial
                         </button>
@@ -90,10 +93,7 @@ const Home = () => {
                     </button>
                     <p>&copy; 2024 SPOTT'R. All rights reserved.</p>
                 </footer>
-            <footer className="home-footer">
-                <p>&copy; 2024 SPOTT'R. All rights reserved.</p>
-            </footer>
-        </section>
+            </section>
         </div>
     );
 };
