@@ -2,34 +2,27 @@
     position: relative;
     width: 100%;
     height: 100vh;
-    /* Adjust height as necessary */
-    /* overflow: hidden; */
 }
 
 .backgroundVideo {
     position: absolute;
     width: 100vw;
     height: 100%;
-    /* This ensures the video covers the entire container */
     top: 0;
     left: 0;
     object-fit: cover;
-    /* This will cover the area without stretching */
     z-index: -1;
-    /* Ensures the video stays in the background */
 }
 
 .content {
     position: relative;
     z-index: 2;
-    /* Ensures content is above the video */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100%;
     color: white;
-    /* Ensuring visibility over potentially dark video */
     text-align: center;
     font-family: Storm;
 }
@@ -58,7 +51,6 @@
     position: relative;
     top: -8vh;
     font-family: thunder;
-    
 }
 
 .buttons button {
@@ -72,7 +64,6 @@
     border-radius: 10px;
     position: relative;
     top: -11vh;
-    
 }
 
 .buttons button:hover {

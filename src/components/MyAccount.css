@@ -49,10 +49,10 @@
   }
   
   .account-content {
-    margin-left: 250px; /* Matches the width of the sidebar */
+    margin-left: 250px; 
     flex: 1;
     padding: 40px;
-    background-color: #ecf0f1; /* Change the background color of the container here */
+    background-color: #ecf0f1; 
     overflow-y: auto;
   }
   

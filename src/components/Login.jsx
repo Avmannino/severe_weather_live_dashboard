@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button, Schema, Checkbox } from 'rsuite';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext.jsx';
-import './Login.css';  // Import the CSS file
+import './Login.css'; 
 
 const { StringType } = Schema.Types;
 
@@ -16,7 +16,7 @@ const Login = () => {
   const [formError, setFormError] = useState({});
   const [loginError, setLoginError] = useState('');
   const navigate = useNavigate();
-  const { login } = useAuth();  // Use AuthContext
+  const { login } = useAuth(); 
 
   const handleSubmit = async () => {
     if (!form.check()) {
@@ -26,7 +26,7 @@ const Login = () => {
 
     console.log('Form Value', formValue);
 
-    // Make a POST request to the backend
+    // POST request to backend
     try {
       const response = await fetch('http://127.0.0.1:5000/login', {
         method: 'POST',
@@ -39,10 +39,10 @@ const Login = () => {
       if (response.ok) {
         const data = await response.json();
         console.log('Login successful:', data);
-        setLoginError('');  // Clear any previous login error
-        // Store the token
+        setLoginError('');  
+        // Storing the token
         localStorage.setItem('token', data.access_token);
-        login();  // Update the authentication state
+        login();  // Updating the authentication state
         // Redirect to /my-account
         navigate('/my-account');
       } else {

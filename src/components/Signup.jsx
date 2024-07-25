@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button, Schema } from 'rsuite';
-import './Signup.css';  // Import the CSS file
+import './Signup.css'; 
 
 const { StringType } = Schema.Types;
 
@@ -24,7 +24,7 @@ const Signup = () => {
 
     console.log('Form Value', formValue);
 
-    // Make a POST request to the backend
+    // POST request to backend
     try {
       const response = await fetch('http://127.0.0.1:5000/register', {
         method: 'POST',

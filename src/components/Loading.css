@@ -1,4 +1,3 @@
-/* Loading.css */
 .loading-container {
     display: flex;
     justify-content: center;
@@ -13,6 +12,6 @@
 }
 
 .loading-gif {
-    width: 160px; /* Adjust the size as needed */
-    height: 160px; /* Adjust the size as needed */
+    width: 160px; 
+    height: 160px; 
 }

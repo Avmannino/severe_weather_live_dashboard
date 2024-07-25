@@ -1,5 +1,3 @@
-/* src/components/Dashboard.css */
-
 .dashboard-container {
   display: flex;
   flex-direction: column;
@@ -22,8 +20,8 @@
 }
 
 iframe {
-  width: 45%; /* Relative width */
-  height: 43vh; /* Relative height using viewport height */
+  width: 45%; 
+  height: 43vh; 
   border: 2px solid yellow;
   position: relative;
   top: 34.5vh;
@@ -56,11 +54,11 @@ iframe:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-height: 300px; /* Adjust this value based on your layout needs */
+  max-height: 300px; 
   overflow-y: auto;
   border-radius: 8px;
   padding: 20px;
-  background-color: #1f1f1f; /* Background color to make it distinct */
+  background-color: #1f1f1f; 
   width: 130px;
 }
 
@@ -72,7 +70,7 @@ iframe:hover {
   background-color: #34495e;
   border-radius: 8px;
   padding: 20px;
-  margin: 5px 0; /* Adjust margin for spacing between items */
+  margin: 5px 0; 
   width: 80%;
   text-align: center;
 }
@@ -91,7 +89,7 @@ iframe:hover {
   margin-bottom: -5px;
 }
 
-/* Additional styles to ensure smooth scrolling and better visuals */
+
 .hourly-forecast-grid::-webkit-scrollbar {
   width: 15px;
 }
@@ -653,7 +651,7 @@ iframe:hover {
     background-color: #34495e;
     border-radius: 8px;
     padding: 10px;
-    margin: 10px; /* Adjust margin for spacing between items */
+    margin: 10px; 
     width: 100%;
     text-align: center;
     font-size: 14px;
@@ -682,7 +680,7 @@ iframe:hover {
     margin-bottom: -5px;
   }
   
-  /* Additional styles to ensure smooth scrolling and better visuals */
+
   .hourly-forecast-grid::-webkit-scrollbar {
     width: 10px;
   }
@@ -972,11 +970,11 @@ iframe:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-height: 100%; /* Adjust this value based on your layout needs */
+    max-height: 100%; 
     width: 220px;
     border-radius: 8px;
     padding: 20px;
-    background-color: #022337; /* Background color to make it distinct */
+    background-color: #022337; 
     overflow-y: scroll;
   }
   
@@ -988,7 +986,7 @@ iframe:hover {
     background-color: #34495e;
     border-radius: 8px;
     padding: 10px;
-    margin: 10px; /* Adjust margin for spacing between items */
+    margin: 10px;
     width: 100%;
     text-align: center;
     font-size: 14px;
@@ -1008,7 +1006,6 @@ iframe:hover {
     margin-bottom: -5px;
   }
   
-  /* Additional styles to ensure smooth scrolling and better visuals */
   .hourly-forecast-grid::-webkit-scrollbar {
     width: 10px;
   }
@@ -1022,4 +1019,3 @@ iframe:hover {
     border-radius: 8px;
   }
 }
-

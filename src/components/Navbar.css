@@ -27,7 +27,7 @@ body {
 .navbar-left {
   display: flex;
   align-items: center;
-  margin-left: -500px; /* Move the left section farther left */
+  margin-left: -500px; 
 }
 
 .navbar-logo {
@@ -54,7 +54,7 @@ body {
   list-style: none;
   text-align: center;
   margin: 0 auto;
-  margin-left: 600px; /* Move nav items 50px to the right */
+  margin-left: 600px; 
 }
 
 .nav-item {
@@ -112,7 +112,7 @@ body {
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
-  right: -0; /* Align the dropdown menu to the right */
+  right: -0; 
   border-radius: 25px;
 }
 
@@ -167,7 +167,7 @@ body {
   .navbar-left {
     display: flex;
     align-items: center;
-    margin-left: -250px; /* Move the left section farther left */
+    margin-left: -250px; 
   }
   
   .navbar-logo {
@@ -192,7 +192,7 @@ body {
     list-style: none;
     text-align: center;
     margin: 0 auto;
-    margin-left: 400px; /* Move nav items 50px to the right */
+    margin-left: 400px; 
   }
   
   .nav-item {

@@ -1,4 +1,3 @@
-// src/components/Drawer.jsx
 import React from 'react';
 import './Drawer.css';
 

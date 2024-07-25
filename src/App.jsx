@@ -10,6 +10,7 @@ import Signup from './components/Signup.jsx';
 import MyAccount from './components/MyAccount.jsx';
 import { AuthProvider } from './components/AuthContext.jsx';
 import Loading from './components/Loading.jsx';
+import Contact from './components/Contact.jsx';
 
 function App() {
     return (
@@ -48,7 +49,7 @@ const MainApp = () => {
                     <Route path="/login" element={<Login />} />
                     <Route path="/sign-up" element={<Signup />} />
                     <Route path="/my-account" element={<MyAccount />} />
-                    {/* Add more routes here as your project grows */}
+                    <Route path="/contact-us" element={<Contact />} />
                 </Routes>
             )}
         </>

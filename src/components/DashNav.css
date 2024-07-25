@@ -1,18 +1,18 @@
 @media (max-width: 2560px) {
   .dash-nav {
     display: flex;
-    justify-content: center; /* Center-align the content */
+    justify-content: center; 
     align-items: center;
     padding: 15px;
     background-color: rgba(119, 119, 119, 0.308);
     border-radius: 30px;
     box-shadow: 0 14px 11px rgba(0, 0, 0, 0.400);
     margin: 15px;
-    width: 60%; /* Adjust width for better responsiveness */
-    max-width: 1450px; /* Maximum width for larger screens */
+    width: 60%; 
+    max-width: 1450px;
     height: 55px;
     margin-left: auto;
-    margin-right: auto; /* Center horizontally */
+    margin-right: auto; 
   }
 
   .location-button {
@@ -46,8 +46,8 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-right: 30%; /* Use percentage for responsiveness */
-    max-width: 1700px; /* Maximum width for input */
+    margin-right: 30%; 
+    max-width: 1700px; 
   }
 
   .search-bar input {
@@ -56,7 +56,7 @@
     border-radius: 15px;
     border: 1px solid #118edd;
     box-shadow: 0 7px 11px rgba(0, 0, 0, 0.400);
-    width: 350px; /* Allow input to scale */
+    width: 350px; 
     height: 30px;
     position: relative;
     top: -0.1vh;
@@ -82,7 +82,7 @@
     width: 64px;
     height: 27px;
     box-shadow: 0 10px 11px rgba(0, 0, 0, 0.400);
-    margin-right: 30%; /* Use percentage for responsiveness */
+    margin-right: 30%; 
   }
 
   .switch input {
@@ -108,7 +108,7 @@
     content: '°C';
     height: 22px;
     width: 22px;
-    left: 2px; /* Adjusted for moving left */
+    left: 2px; 
     bottom: 2.5px;
     background-color: white;
     transition: .4s;
@@ -122,7 +122,7 @@
   }
 
   input:checked + .slider:before {
-    transform: translateX(39px); /* Adjusted for moving right */
+    transform: translateX(39px); 
     content: '°F';
   }
 
@@ -144,18 +144,18 @@
 @media (max-width: 1920px) {
   .dash-nav {
     display: flex;
-    justify-content: center; /* Center-align the content */
+    justify-content: center; 
     align-items: center;
     padding: 15px;
     background-color: rgba(119, 119, 119, 0.308);
     border-radius: 25px;
     box-shadow: 0 14px 11px rgba(0, 0, 0, 0.400);
     margin: -5px 0 0 10px;
-    width: 60%; /* Adjust width for better responsiveness */
-    max-width: 1150px; /* Maximum width for larger screens */
+    width: 60%; 
+    max-width: 1150px; 
     height: 25px;
     margin-left: auto;
-    margin-right: auto; /* Center horizontally */
+    margin-right: auto; 
   }
 
   .search-bar {
@@ -231,7 +231,7 @@
     width: 47px;
     height: 20px;
     box-shadow: 0 10px 11px rgba(0, 0, 0, 0.400);
-    margin-right: 33%; /* Use percentage for responsiveness */
+    margin-right: 33%; 
   }
   
   .switch input {
@@ -257,7 +257,7 @@
     content: '°C';
     height: 16px;
     width: 16px;
-    left: 2px; /* Adjusted for moving left */
+    left: 2px; 
     bottom: 2.5px;
     background-color: white;
     transition: .4s;
@@ -271,7 +271,7 @@
   }
   
   input:checked + .slider:before {
-    transform: translateX(30px); /* Adjusted for moving right */
+    transform: translateX(30px); 
     content: '°F';
   }
   

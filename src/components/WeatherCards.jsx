@@ -57,10 +57,9 @@ const WeatherCards = ({ lat, lon, setHumidity }) => {
 
           setUvIndex(uvIndexData);
 
-          // Remove animation after a short delay
           setTimeout(() => {
             setAnimate(false);
-          }, 0); // Adjust the delay as needed
+          }, 0);
         } catch (error) {
           console.error('Error fetching weather data', error);
         }
@@ -244,7 +243,7 @@ const WeatherCards = ({ lat, lon, setHumidity }) => {
     });
 
     return (
-      <div ref={(node) => ref(drop(node))} className={`draggable-card ${animate ? 'animate__animated animate__slideInLeft' : ''}`}>
+      <div ref={(node) => ref(drop(node))} className={`draggable-card ${animate ? 'animate__animated animate__fadeInUp' : ''}`}>
         {children}
       </div>
     );

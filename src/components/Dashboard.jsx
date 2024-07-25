@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { DateTime } from 'luxon';
 import './Dashboard.css';
-import Drawer from './Drawer'; // Import the custom Drawer component
+import Drawer from './Drawer'; 
 import WeatherCards from './WeatherCards';
 import DashNav from './DashNav';
-import AlertsButton from './AlertsButton'; // Import AlertsButton component
+import AlertsButton from './AlertsButton'; 
 
 const locationImage = "./icons/location_marker.png";
 const dateTimeImage = "./icons/calendar_small.png";
@@ -171,7 +171,7 @@ const Dashboard = () => {
       const weatherData = weatherResponse.data.current_weather;
       const hourlyData = weatherResponse.data.hourly;
 
-      // Use the current hour's apparent temperature
+      // Current hour's apparent temperature
       const currentHourIndex = new Date().getHours();
       const apparentTemperatureCelsius = hourlyData.apparent_temperature[currentHourIndex];
       const apparentTemperatureFahrenheit = Math.round((apparentTemperatureCelsius * 9 / 5) + 32);
@@ -181,7 +181,7 @@ const Dashboard = () => {
       const currentWeather = {
         temperatureCelsius: Math.round(weatherData.temperature),
         temperatureFahrenheit: temperatureFahrenheit,
-        humidity: humidity || 50, // Use fetched humidity or fallback to 50
+        humidity: humidity || 50, 
         windSpeed: weatherData.windspeed,
         windDirection: weatherData.winddirection,
         weatherCode: weatherData.weathercode,
