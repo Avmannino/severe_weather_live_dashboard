@@ -6,7 +6,7 @@ import Drawer from './Drawer';
 import WeatherCards from './WeatherCards';
 import DashNav from './DashNav';
 import AlertsButton from './AlertsButton';
-import Chart from 'react-apexcharts'; // Import ApexCharts
+import Chart from 'react-apexcharts';
 
 const locationImage = "./icons/location_marker.png";
 const dateTimeImage = "./icons/calendar_small.png";
@@ -126,7 +126,7 @@ const Dashboard = () => {
         const cityTime = DateTime.local().setZone(response.data.timezone).toLocaleString(DateTime.TIME_SIMPLE);
         return {
           ...city,
-          temperature: Math.round(data.temperature),
+          temperature: Math.round((data.temperature * 9 / 5) + 32), // Convert to Fahrenheit
           weatherCode: data.weathercode,
           weatherDescription: getWeatherDescription(data.weathercode),
           iconUrl: `/icons/${getWeatherIcon(data.weathercode)}`,
@@ -386,13 +386,14 @@ const Dashboard = () => {
       </header>
 
       <DashNav
-        searchInput={searchInput}
-        setSearchInput={setSearchInput}
-        handleSearch={handleSearch}
-        handleKeyDown={handleKeyDown}
-        toggleTemperatureUnit={toggleTemperatureUnit}
-        isCelsius={isCelsius}
-        updateSearchBar={updateSearchBar}
+      searchInput={searchInput}
+      setSearchInput={setSearchInput}
+      handleSearch={handleSearch}
+      handleKeyDown={handleKeyDown}
+      toggleTemperatureUnit={toggleTemperatureUnit}
+      isCelsius={isCelsius}
+      updateSearchBar={updateSearchBar}
+      searchConducted={searchConducted}
       />
 
       {!searchConducted && (
@@ -403,13 +404,14 @@ const Dashboard = () => {
             {defaultWeather.map((cityWeather, index) => (
               <div key={index} className="default-weather-card animate__animated animate__fadeInUp animate__delay-0s">
                 <h3>{cityWeather.name}</h3>
-                <p className='local-time'>{cityWeather.localTime}</p>
-                <p className='default-temp animate__animated animate__fadeInUp animate__delay-1s'>{cityWeather.temperature}°C</p>
+                <p className="local-time">{cityWeather.localTime}</p>
+                <p className="default-temp animate__animated animate__fadeInUp animate__delay-1s">{cityWeather.temperature}°F</p>
                 <img src={cityWeather.iconUrl} alt={cityWeather.weatherDescription} />
               </div>
             ))}
           </div>
-          <iframe className='default-map'
+          <iframe
+            className="default-map"
             title="Map"
             src={`https://embed.windy.com/embed2.html?lat=${latLon.lat}&lon=${latLon.lon}&detailLat=${latLon.lat}&detailLon=${latLon.lon}&width=650&height=450&zoom=${latLon.zoom}&level=surface&overlay=radar&product=ecmwf&menu=&message=true&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1}`}
           ></iframe>

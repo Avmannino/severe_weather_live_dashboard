@@ -11,6 +11,10 @@ const radarMaps = './radar_options.png';
 const twisterGif = './twister.gif'; 
 
 const Home = () => {
+    const scrollToSoftware = () => {
+        document.querySelector('.our-software').scrollIntoView({ behavior: 'smooth' });
+    };
+
     return (
         <div className="home-container">
             <h1 className="spottr-text snap-section"></h1>
@@ -20,7 +24,6 @@ const Home = () => {
                 </div>
                 <h1 className="spottr-header">SPOTT'R</h1>
                 <section className="intro snap-section">
-                    {/* <p className="emphasized-text animate__animated animate__fadeInUp animate__delay-0s">Stay Ahead of the Storm...</p> */}
                     <p className="home-header"></p>
                     <p className="smaller-text animate__animated animate__fadeInUp animate__delay-1s">Real-time weather data, radar insights, and detailed forecasts</p>
                     <div className="button-container animate__animated animate__fadeInUp animate__delay-2s">
@@ -32,16 +35,20 @@ const Home = () => {
                         </button>
                     </div>
                 </section>
+                <button className="learn-more-button animate__animated animate__fadeInUp animate__delay-1s" onClick={scrollToSoftware}>
+                    <p className='learn-more animate__animated animate__fadeInUp animate__delay-1s'>Learn More</p>
+                    <span className="caret animate__animated animate__fadeInUp animate__delay-2s">&#9660;</span>
+                </button>
             </main>
             <section className="our-software snap-section">
                 <h2 className="software-header">OUR SOFTWARE</h2>
                 <h3 className="easy-powerful">Easy, powerful software</h3>
                 <h4 className="features-header">Web Dashboard App</h4>
                 <ul className="features">
-                    <li>Customizable to your organization’s policies, team structure, and more</li>
-                    <li>See any relevant risks today that could disrupt activities (e.g., heat, storms)</li>
-                    <li>Automated instructions for your team when weather disrupts</li>
-                    <li>Works with or without our on-site hardware</li>
+                    <li>Customizable to your organization’s policies, team structure, and more.</li>
+                    <li>See any relevant risks today that could disrupt activities. (e.g., heat, storms)</li>
+                    <li>Automated instructions for your team when weather disrupts.</li>
+                    <li>Works with or without our on-site hardware.</li>
                 </ul>
                 <img src={featuresImage} className="features-img" alt="features-image" />
             </section>
@@ -50,18 +57,18 @@ const Home = () => {
                 <h4 className="critical-communications-header">Critical Communications</h4>
                 <p className="critical-motto">Real-time NWS alerts for your specific location:</p>
                 <ul className="communications-content">
-                    <li>Tornado Watches and Warnings</li>
-                    <li>Severe Thunderstorm Watches and Warnings</li>
-                    <li>Flash Flood Watches and Warnings</li>
-                    <li>Winter Weather Watches, Warnings, and Advisories</li>
-                    <li>A suite of Tropical Watches, Warnings, and Advisories (both coastal and inland)</li>
+                    <li>Tornado Watches and Warnings.</li>
+                    <li>Severe Thunderstorm Watches and Warnings.</li>
+                    <li>Flash Flood Watches and Warnings.</li>
+                    <li>Winter Weather Watches, Warnings, and Advisories.</li>
+                    <li>A suite of Tropical Watches, Warnings, and Advisories.</li>
                 </ul>
                 <video autoPlay muted loop className="alert-button-demo">
                     <source src={buttonDemo} type="video/mp4" />
                 </video>
                 <img src={alertDemo} className="alert-demo" alt="alert-image" />
             </section>
-            <section className='realtime-radar snap-section'>
+            <section className='realtime-radar'>
                 <h4 className="realtime-radar-header">Real-Time Radar</h4>
                 <p className="radar-content">See into the future with the next 7-days worth of forecasted data.</p>
                 <ul className='radar-list'>
@@ -76,18 +83,16 @@ const Home = () => {
                 </video>
                 <img src={radarMaps} className="radar-maps" alt="map-options" />
                 <h4 className="features-forecast-header">Weekly and Hourly Forecasts</h4>
-                <p className="forecast-content">Click each day to see the hourly projected forecasted data</p>
+                <p className="forecast-content">Click each day to see the hourly projected forecasted data.</p>
                 <ul className='forecast-list'>
-                    <li>Detailed weather predictions for the next 24 hours</li>
+                    <li>Detailed weather predictions for the next 24 hours.</li>
                     <li>Hourly breakdown of temperature, weather conditions and descriptions.</li>
                     <li>Access to historical hourly weather data for trend analysis and comparison.</li>
-                    <li>Hourly breakdown of temperature, weather conditions and descriptions.</li>
-                    <li>Hourly breakdown of temperature, weather conditions and descriptions.</li>
                 </ul>
                 <video autoPlay muted loop className="hourly_demo">
                     <source src={hourlyDemo} type="video/mp4" />
                 </video>
-                <footer className="home-footer">
+                <footer className="home-footer snap-section">
                     <button className="pricing-button" onClick={() => window.location.href = '/pricing'}>
                         Plans & Pricing
                     </button>

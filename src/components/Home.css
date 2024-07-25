@@ -32,8 +32,8 @@ html, body {
         position: absolute;
         top: 32%;
         left: 50.5%;
-        width: 150px; /* Adjust size as needed */
-        height: 150px; /* Adjust size as needed */
+        width: 150px; 
+        height: 150px; 
         animation: moveAcross 1.6s linear forwards 0s;
     }
 
@@ -54,14 +54,52 @@ html, body {
         scroll-snap-align: start;
         white-space: nowrap;
         overflow: hidden;
-        width: 0; /* Initially set to 0 */
-        animation: revealText 7s steps(90, end) 0.35s forwards; /* Adjust the duration and delay to match the gif animation */
+        width: 0; 
+        animation: revealText 7s steps(90, end) 0.35s forwards; 
     }
 
     @font-face {
         font-family: 'nova';
         src: url('./nova.ttf') format('truetype');
     }
+
+    .learn-more-button {
+        position: absolute;
+        bottom: 8vh;
+        background-color: #007bff00;
+        color: #cddbe4;
+        border: none;
+        padding: 2px 2px;
+        font-size: 26px;
+        cursor: pointer;
+        margin-top: 40px;
+        animation: float 3s ease-in-out infinite;
+        display: flex;
+        flex-direction: column; 
+        align-items: center;
+        justify-content: center;
+    }
+
+    .learn-more-button:hover {
+        color: #017bff;
+        transition: 0.4s;
+    }
+
+    .caret {
+        margin-top: -15px;
+        font-size: 22px;
+    }
+
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+
 
     .home-nav {
         margin-top: 10px;
@@ -95,7 +133,6 @@ html, body {
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
-        scroll-snap-align: start;
     }
 
     .h2 {
@@ -137,10 +174,19 @@ html, body {
         color: rgba(165, 165, 165, 0.568);
     }
 
-    .our-software,
-    .critical-communications,
-    .realtime-radar,
-    .features-forecast {
+    .our-software {
+        background-color: rgb(211, 211, 211);
+        font-family: nova;
+        font-weight: 500;
+        scroll-snap-align: start;
+        height: 105vh;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .critical-communications {
         background-color: rgb(211, 211, 211);
         font-family: nova;
         font-weight: 500;
@@ -156,6 +202,7 @@ html, body {
         text-align: center;
         color: rgba(0, 0, 0, 0.315);
         font-size: 18px;
+        margin: 55px 0 0 0;
     }
 
     .easy-powerful {
@@ -167,26 +214,26 @@ html, body {
 
     .features-header {
         font-size: 55px;
-        margin: 225px 0 0 400px;
+        margin: 225px 0 0 410px;
         color: rgba(0, 0, 0, 0.616);
     }
 
     .features li {
         font-size: 25px;
-        margin: 0 0 0 400px;
+        margin: -5px 0 0 400px;
         margin-bottom: 25px;
         color: rgba(0, 0, 0, 0.616);
     }
 
     .features-img {
-        margin: -520px 0 0 1300px;
-        width: 35%;
+        margin: -520px 0 0 1250px;
+        width: 40%;
     }
 
     .critical-communications-header {
         font-size: 55px;
         color: rgba(0, 0, 0, 0.616);
-        margin: 235px 0 0 380px;
+        margin: 200px 0 0 380px;
     }
 
     .critical-motto {
@@ -205,21 +252,32 @@ html, body {
         margin-bottom: 10px;
     }
 
+    .realtime-radar {
+        background-color: rgb(211, 211, 211);
+        font-family: nova;
+        font-weight: 500;
+        height: 100vh;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
     .realtime-radar-header {
         font-size: 55px;
         color: rgba(0, 0, 0, 0.616);
-        margin: 300px 0 0 305px;
+        margin: 400px 0 0 305px;
     }
 
     .radar-content {
         font-size: 22px;
         color: rgba(0, 0, 0, 0.616);
-        margin: -5px 0 0 310px;
+        margin: -10px 0 0 310px;
     }
 
-    .radar-list {
+    .radar-list li {
         font-size: 25px;
-        margin: 0 0 0 300px;
+        margin: 5px 0 0 290px;
         color: rgba(0, 0, 0, 0.616);
     }
 
@@ -234,7 +292,7 @@ html, body {
         width: 35%;
         border-radius: 20px;
         box-shadow: 12px 10px 15px rgba(0, 0, 0, 0.500);
-        margin: -275px 0 0 1350px;
+        margin: -285px 0 0 1350px;
     }
 
     .alert-button-demo {
@@ -246,10 +304,10 @@ html, body {
     }
 
     .alert-demo {
-        width: 32%;
+        width: 35%;
         border-radius: 20px;
         box-shadow: 12px 10px 15px rgba(0, 0, 0, 0.500);
-        margin: -345px 0 0 1400px;
+        margin: -385px 0 0 1350px;
         z-index: 9990 !important;
     }
 
@@ -276,7 +334,7 @@ html, body {
         width: 37%;
         border-radius: 20px;
         margin: -255px 0 0 1350px;
-        padding-bottom: 100px;
+       
     }
 
     .pricing-button {
@@ -306,7 +364,9 @@ html, body {
         flex-direction: column; 
         align-items: center;
         justify-content: center;
-        margin: 0px 0 0 0;
+        margin: 150px 0 0 -20px;
+        padding-bottom: 50px;
+        width: 105%;
     }
 
     .button-container {
