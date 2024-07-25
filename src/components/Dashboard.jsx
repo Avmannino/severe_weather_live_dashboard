@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { DateTime } from 'luxon';
 import './Dashboard.css';
-import Drawer from './Drawer'; 
+import Drawer from './Drawer';
 import WeatherCards from './WeatherCards';
 import DashNav from './DashNav';
-import AlertsButton from './AlertsButton'; 
+import AlertsButton from './AlertsButton';
+import Chart from 'react-apexcharts'; // Import ApexCharts
 
 const locationImage = "./icons/location_marker.png";
 const dateTimeImage = "./icons/calendar_small.png";
@@ -104,6 +105,10 @@ const Dashboard = () => {
   const [defaultWeather, setDefaultWeather] = useState([]);
   const [humidity, setHumidity] = useState(null);
   const [apparentTemperature, setApparentTemperature] = useState(null);
+  const [alerts, setAlerts] = useState([]);
+  const [carouselIndex, setCarouselIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [prevIndex, setPrevIndex] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -133,6 +138,17 @@ const Dashboard = () => {
 
     fetchDefaultWeather();
   }, []);
+
+  useEffect(() => {
+    let timer;
+    if (isPlaying) {
+      timer = setInterval(() => {
+        setPrevIndex(carouselIndex);
+        setCarouselIndex((prevIndex) => (prevIndex + 1) % 4);
+      }, 6000);
+    }
+    return () => clearInterval(timer);
+  }, [isPlaying, carouselIndex]);
 
   const handleSearch = async () => {
     if (!searchInput) return;
@@ -171,7 +187,6 @@ const Dashboard = () => {
       const weatherData = weatherResponse.data.current_weather;
       const hourlyData = weatherResponse.data.hourly;
 
-      // Current hour's apparent temperature
       const currentHourIndex = new Date().getHours();
       const apparentTemperatureCelsius = hourlyData.apparent_temperature[currentHourIndex];
       const apparentTemperatureFahrenheit = Math.round((apparentTemperatureCelsius * 9 / 5) + 32);
@@ -181,7 +196,7 @@ const Dashboard = () => {
       const currentWeather = {
         temperatureCelsius: Math.round(weatherData.temperature),
         temperatureFahrenheit: temperatureFahrenheit,
-        humidity: humidity || 50, 
+        humidity: humidity || 50,
         windSpeed: weatherData.windspeed,
         windDirection: weatherData.winddirection,
         weatherCode: weatherData.weathercode,
@@ -223,6 +238,10 @@ const Dashboard = () => {
 
       setHourlyForecast(formattedHourlyForecast);
       setSearchConducted(true);
+
+      const alertsResponse = await axios.get(`https://api.weather.gov/alerts/active?point=${lat},${lon}`);
+      setAlerts(alertsResponse.data.features);
+
     } catch (error) {
       console.error('Error fetching weather data', error);
     }
@@ -284,13 +303,88 @@ const Dashboard = () => {
     handleSearch();
   };
 
+  const togglePlayPause = () => {
+    setIsPlaying(!isPlaying);
+  };
+
+  const lineChartData = forecast ? {
+    series: [{
+      name: 'Temperature Max (°F)',
+      data: forecast.map(day => day.temperatureMaxFahrenheit)
+    }],
+    options: {
+      chart: {
+        type: 'area',
+        height: 300
+      },
+      title: {
+        text: '7-Day Temperature Trend',
+        align: 'center',
+        style: {
+          color: '#FFFFFF',
+          fontSize: '16px',
+          fontFamily: 'dashboard',
+          fontWeight: 'bold'
+        }
+      },
+      xaxis: {
+        categories: forecast.map(day => day.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })),
+        labels: {
+          style: {
+            colors: '#FFFFFF',
+            fontSize: '12px',
+            fontFamily: 'dashboard',
+            fontWeight: 100,
+          }
+        }
+      },
+      yaxis: {
+        title: {
+          text: 'Temperature (°F)',
+          style: {
+            color: '#FFFFFF',
+            fontSize: '12px',
+            fontFamily: 'dashboard',
+            fontWeight: 100,
+          }
+        },
+        labels: {
+          style: {
+            colors: '#FF5733',
+            fontSize: '12px',
+            fontFamily: 'dashboard',
+            fontWeight: 100,
+          }
+        }
+      },
+      fill: {
+        type: 'solid',
+      },
+      stroke: {
+        curve: 'smooth',
+        width: 5,
+        colors: ['#FF5733']
+      },
+      dataLabels: {
+        enabled: true
+      },
+      markers: {
+        size: 0
+      },
+      tooltip: {
+        enabled: false // Disable the tooltip
+      }
+    }
+  } : null;
+  
+  
   return (
     <div className="dashboard-container">
       <header className="header">
         <h1></h1>
       </header>
 
-      <DashNav  
+      <DashNav
         searchInput={searchInput}
         setSearchInput={setSearchInput}
         handleSearch={handleSearch}
@@ -316,7 +410,7 @@ const Dashboard = () => {
           </div>
           <iframe className='default-map'
             title="Map"
-            src={`https://embed.windy.com/embed2.html?lat=${latLon.lat}&lon=${latLon.lon}&detailLat=${latLon.lat}&detailLon=${latLon.lon}&width=650&height=450&zoom=${latLon.zoom}&level=surface&overlay=radar&product=ecmwf&menu=&message=true&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1`}
+            src={`https://embed.windy.com/embed2.html?lat=${latLon.lat}&lon=${latLon.lon}&detailLat=${latLon.lat}&detailLon=${latLon.lon}&width=650&height=450&zoom=${latLon.zoom}&level=surface&overlay=radar&product=ecmwf&menu=&message=true&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1}`}
           ></iframe>
         </div>
       )}
@@ -325,9 +419,40 @@ const Dashboard = () => {
         <>
           <iframe
             title="Windy Map"
-            src={`https://embed.windy.com/embed2.html?lat=${latLon.lat}&lon=${latLon.lon}&detailLat=${latLon.lat}&detailLon=${latLon.lon}&width=650&height=450&zoom=${latLon.zoom}&level=surface&overlay=radar&product=ecmwf&menu=&message=true&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1`}
+            src={`https://embed.windy.com/embed2.html?lat=${latLon.lat}&lon=${latLon.lon}&detailLat=${latLon.lat}&detailLon=${latLon.lon}&width=650&height=450&zoom=${latLon.zoom}&level=surface&overlay=radar&product=ecmwf&menu=&message=true&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1}`}
             frameBorder="0"
           ></iframe>
+
+          <div className="carousel-container">
+            <div className={`carousel-slide ${carouselIndex === 0 ? 'active' : prevIndex === 0 ? 'prev' : 'next'}`}>
+              <h3 className='carousel-headerone'>Weather Alerts for {location}</h3>
+              {alerts.length > 0 ? (
+                alerts.map((alert, index) => (
+                  <div key={index}>
+                    <h4>{alert.properties.headline}</h4>
+                    <p>{alert.properties.description}</p>
+                  </div>
+                ))
+              ) : (
+                <p>No active alerts.</p>
+              )}
+            </div>
+            <div className={`carousel-slide ${carouselIndex === 1 ? 'active' : prevIndex === 1 ? 'prev' : 'next'}`}>
+              <h3></h3>
+              {lineChartData && <Chart options={lineChartData.options} series={lineChartData.series} type="line" height={450} />}
+            </div>
+            <div className={`carousel-slide ${carouselIndex === 2 ? 'active' : prevIndex === 2 ? 'prev' : 'next'}`}>
+              <h3>Card 3</h3>
+              <p>This is the third card.</p>
+            </div>
+            <div className={`carousel-slide ${carouselIndex === 3 ? 'active' : prevIndex === 3 ? 'prev' : 'next'}`}>
+              <h3>Card 4</h3>
+              <p>This is the fourth card.</p>
+            </div>
+            <button onClick={togglePlayPause} className="carousel-play-pause">
+              {isPlaying ? '⏸️' : '▶️'}
+            </button>
+          </div>
 
           {weather && (
             <>
@@ -342,14 +467,14 @@ const Dashboard = () => {
 
                 <div className='weather-desc'>
                   <p>
-                    {weather.weatherDescription} | 
-                    <img src={rainDropImage} alt={weather.precipitationProbability} style={{ width: '22px', height: '22px', margin: '5px 5px -5px 2px' }} />{weather.precipitationProbability}% 
+                    {weather.weatherDescription} |
+                    <img src={rainDropImage} alt={weather.precipitationProbability} style={{ width: '22px', height: '22px', margin: '5px 5px -5px 2px' }} />{weather.precipitationProbability}%
                   </p>
                 </div>
 
                 <div className='hi-lo'>
                   <p style={{color: '#ffa500'}}>
-                    H: {isCelsius ? weather.temperatureMaxCelsius : weather.temperatureMaxFahrenheit}°{isCelsius ? 'C' : 'F'} 
+                    H: {isCelsius ? weather.temperatureMaxCelsius : weather.temperatureMaxFahrenheit}°{isCelsius ? 'C' : 'F'}
                   </p>
                   <p style={{color: '#3b728b'}}>
                     L: {isCelsius ? weather.temperatureMinCelsius : weather.temperatureMinFahrenheit}°{isCelsius ? 'C' : 'F'}
@@ -400,7 +525,7 @@ const Dashboard = () => {
             </div>
           )}
 
-          <AlertsButton lat={latLon.lat} lon={latLon.lon} /> 
+          <AlertsButton lat={latLon.lat} lon={latLon.lon} />
 
           <Drawer isOpen={drawerOpen} onClose={closeDrawer}>
             {selectedDay !== null && (

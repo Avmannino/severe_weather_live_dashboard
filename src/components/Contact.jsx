@@ -10,14 +10,14 @@ const Contact = () => {
           <h3>Locations:</h3>
           <div className="location-group">
             <div className="location-one">
-              <p>New York Office</p>
+              <p style={{fontWeight: 'bolder', fontSize:'19px'}}>New York Office</p>
               <p>1234 Broadway Ave</p>
               <p>Suite 5678</p>
               <p>New York, NY 10001</p>
               <p>555-555-1234</p>
             </div>
             <div className="location-two">
-              <p>Northern Colorado Office</p>
+              <p style={{fontWeight: 'bolder', fontSize:'18px'}}>Northern Colorado Office</p>
               <p>1234 Alpine Road</p>
               <p>Suite 200</p>
               <p>Fictionville, CO 80000</p>

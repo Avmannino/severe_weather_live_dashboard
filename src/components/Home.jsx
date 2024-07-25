@@ -24,8 +24,8 @@ const Home = () => {
                         <button className="trial-button" onClick={() => window.location.href = '/sign-up'}>
                             Start a Free Trial
                         </button>
-                        <button className="demo-button" onClick={() => window.location.href = '/dashboard'}>
-                            Try a Live Demo
+                        <button className="plans-button" onClick={() => window.location.href = '/pricing'}>
+                            Plans & Pricing
                         </button>
                     </div>
                 </section>
@@ -38,7 +38,6 @@ const Home = () => {
                     <li>Customizable to your organization’s policies, team structure, and more</li>
                     <li>See any relevant risks today that could disrupt activities (e.g., heat, storms)</li>
                     <li>Automated instructions for your team when weather disrupts</li>
-                    <li>Works with or without our on-site hardware</li>
                     <li>Works with or without our on-site hardware</li>
                 </ul>
                 <img src={featuresImage} className="features-img" alt="features-image" />
