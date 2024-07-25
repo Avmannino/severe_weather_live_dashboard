@@ -6,12 +6,12 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identi
 @app.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
-    print("Received data:", data)  # Debugging log
+    print("Received data:", data)  
 
     # Extracting data
     email = data.get('email')
-    first_name = data.get('firstName')  # Adjusted to camelCase
-    last_name = data.get('lastName')    # Adjusted to camelCase
+    first_name = data.get('firstName')  
+    last_name = data.get('lastName')    
     organization = data.get('organization', '')
     password = data.get('password')
 
@@ -22,7 +22,7 @@ def register():
 
     # Check if the user already exists
     if User.query.filter_by(email=email).first():
-        print("Email already exists")  # Debugging log
+        print("Email already exists")  
         return jsonify({"msg": "Email already exists"}), 400
 
     # Create a new user
