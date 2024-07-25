@@ -36,10 +36,17 @@ const Navbar = () => {
               Pricing
             </Link>
           </li>
-          <li className="nav-item">
+          <li className="nav-item dropdown">
             <Link to="/about-us" className="nav-links">
-              About Us
+              About Us <span className="caret">&#9662;</span>
             </Link>
+            <ul className="dropdown-menu">
+              <li>
+                <Link to="/contact-us" className="dropdown-link">
+                Contact Us 📞
+                </Link>
+              </li>
+            </ul>
           </li>
         </ul>
         {isAuthenticated ? (

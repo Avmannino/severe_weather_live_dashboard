@@ -285,12 +285,12 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="dashboard-container">
+    <div className="dashboard-container ">
       <header className="header">
         <h1></h1>
       </header>
 
-      <DashNav 
+      <DashNav  
         searchInput={searchInput}
         setSearchInput={setSearchInput}
         handleSearch={handleSearch}
@@ -304,12 +304,12 @@ const Dashboard = () => {
         <div className="default-view">
           <h2>Welcome to the Weather Dashboard</h2>
           <p>Enter a city name or ZIP code to get started.</p>
-          <div className="default-weather-cards">
+          <div className="default-weather-cards animate__animated animate__fadeInUp animate__delay-0s">
             {defaultWeather.map((cityWeather, index) => (
-              <div key={index} className="default-weather-card">
+              <div key={index} className="default-weather-card animate__animated animate__fadeInUp animate__delay-0s">
                 <h3>{cityWeather.name}</h3>
                 <p className='local-time'>{cityWeather.localTime}</p>
-                <p className='default-temp'>{cityWeather.temperature}°C</p>
+                <p className='default-temp animate__animated animate__fadeInUp animate__delay-1s'>{cityWeather.temperature}°C</p>
                 <img src={cityWeather.iconUrl} alt={cityWeather.weatherDescription} />
               </div>
             ))}

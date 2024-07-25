@@ -1,0 +1,18 @@
+/* Loading.css */
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+}
+
+.loading-gif {
+    width: 160px; /* Adjust the size as needed */
+    height: 160px; /* Adjust the size as needed */
+}
