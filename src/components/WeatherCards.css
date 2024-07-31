@@ -177,6 +177,10 @@
         height: 60px;
     }
 
+    .sunrise-sunset {
+        margin-top: -15px;
+    }
+
     .draggable-card {
         width: 100%;
         height: 100%;

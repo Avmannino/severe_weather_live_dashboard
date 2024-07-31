@@ -1,36 +1,64 @@
-from flask import request, jsonify
+import os
+from flask import request, jsonify, send_from_directory, abort
+from werkzeug.utils import secure_filename
 from app import app, db
 from models import User
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
-@app.route('/register', methods=['POST'])
-def register():
-    data = request.get_json()
-    print("Received data:", data)  
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+UPLOAD_FOLDER = app.config['UPLOAD_FOLDER']
 
-    # Extracting data
-    email = data.get('email')
-    first_name = data.get('firstName')  
-    last_name = data.get('lastName')    
-    organization = data.get('organization', '')
-    password = data.get('password')
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-    # Check for missing fields
-    if not email or not first_name or not last_name or not password:
-        print("Missing required fields")  # Debugging log
-        return jsonify({"msg": "Missing required fields"}), 400
+@app.route('/profile', methods=['GET'])
+@jwt_required()
+def get_profile():
+    identity = get_jwt_identity()
+    user = User.query.filter_by(email=identity['email']).first()
+    if not user:
+        return jsonify({"msg": "User not found"}), 404
 
-    # Check if the user already exists
-    if User.query.filter_by(email=email).first():
-        print("Email already exists")  
-        return jsonify({"msg": "Email already exists"}), 400
+    user_data = {
+        "firstName": user.first_name,
+        "lastName": user.last_name,
+        "email": user.email,
+        "organizationName": user.organization,
+        "address": user.address,
+        "profilePictureUrl": user.profile_picture
+    }
+    return jsonify(user_data), 200
 
-    # Create a new user
-    new_user = User(email=email, first_name=first_name, last_name=last_name, organization=organization, password=password)
-    db.session.add(new_user)
+@app.route('/update-profile', methods=['POST'])
+@jwt_required()
+def update_profile():
+    identity = get_jwt_identity()
+    user = User.query.filter_by(email=identity['email']).first()
+    if not user:
+        return jsonify({"msg": "User not found"}), 404
+
+    if 'profilePicture' in request.files:
+        file = request.files['profilePicture']
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file_path = os.path.join(UPLOAD_FOLDER, filename)
+            file.save(file_path)
+            user.profile_picture = filename  # Save the filename to the database
+
+    user.first_name = request.form.get('firstName', user.first_name)
+    user.last_name = request.form.get('lastName', user.last_name)
+    user.organization = request.form.get('organization', user.organization)
+    user.address = request.form.get('address', user.address)
+
     db.session.commit()
+    return jsonify({"msg": "Profile updated successfully", "profilePictureUrl": user.profile_picture}), 200
 
-    return jsonify({"msg": "User registered successfully"}), 201
+@app.route('/uploads/<filename>', methods=['GET'])
+def get_uploaded_file(filename):
+    try:
+        return send_from_directory(UPLOAD_FOLDER, filename)
+    except FileNotFoundError:
+        abort(404)
 
 @app.route('/login', methods=['POST'])
 def login():

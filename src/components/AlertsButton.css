@@ -6,14 +6,14 @@
   }
   
   .alerts-button {
-    padding: 15px 25px;
-    font-size: 16px;
+    padding: 12px 20px;
+    font-size: 14px;
     border: solid 1px white;
     border-radius: 25px;
     cursor: pointer;
     position: relative;
-    bottom: 94.8vh;
-    left: 24.5vw;
+    bottom: 92.9vh;
+    left: -12vw;
     transition: 0.3s;
   }
   

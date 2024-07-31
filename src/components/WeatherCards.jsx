@@ -15,7 +15,8 @@ const WeatherCards = ({ lat, lon, setHumidity }) => {
   const [historicalTemp, setHistoricalTemp] = useState(null);
   const [humidity, setLocalHumidity] = useState(null);
   const [visibility, setVisibility] = useState(null);
-  const [airQuality, setAirQuality] = useState(null);
+  const [sunrise, setSunrise] = useState(null);
+  const [sunset, setSunset] = useState(null);
   const [pressure, setPressure] = useState(null);
   const [cardsOrder, setCardsOrder] = useState([
     'uvIndex',
@@ -24,7 +25,7 @@ const WeatherCards = ({ lat, lon, setHumidity }) => {
     'dewPoint',
     'humidity',
     'historicalTemp',
-    'airQuality',
+    'sunriseSunset',
     'pressure'
   ]);
   const [animate, setAnimate] = useState(true);
@@ -32,7 +33,7 @@ const WeatherCards = ({ lat, lon, setHumidity }) => {
   const fetchWeatherData = useCallback(async () => {
     if (lat && lon) {
       try {
-        const [uvResponse, dewPointResponse, weatherResponse, visibilityResponse, nwsResponse, pressureResponse] = await Promise.all([
+        const [uvResponse, dewPointResponse, weatherResponse, visibilityResponse, nwsResponse, pressureResponse, sunResponse] = await Promise.all([
           axios.get(`https://api.open-meteo.com/v1/forecast`, {
             params: {
               latitude: lat,
@@ -73,6 +74,14 @@ const WeatherCards = ({ lat, lon, setHumidity }) => {
               hourly: 'pressure_msl',
               timezone: 'auto'
             }
+          }),
+          axios.get(`https://api.open-meteo.com/v1/forecast`, {
+            params: {
+              latitude: lat,
+              longitude: lon,
+              daily: 'sunrise,sunset',
+              timezone: 'auto'
+            }
           })
         ]);
 
@@ -82,13 +91,16 @@ const WeatherCards = ({ lat, lon, setHumidity }) => {
         const weatherData = weatherResponse.data.current_weather;
         const windSpeedMph = (weatherData.windspeed * 0.621371).toFixed(1);
         const visibilityData = visibilityResponse.data.hourly.visibility[0];
-        const visibilityMiles = (visibilityData * 0.000621371).toFixed(1); 
+        const visibilityMiles = (visibilityData * 0.000621371).toFixed(1); // Convert meters to miles
 
         const gridpointUrl = nwsResponse.data.properties.forecastHourly;
         const humidityData = await axios.get(gridpointUrl).then(res => res.data.properties.periods[0].relativeHumidity.value);
 
         const pressureDataHpa = pressureResponse.data.hourly.pressure_msl[0];
-        const pressureDataInHg = (pressureDataHpa * 0.02953).toFixed(2); 
+        const pressureDataInHg = (pressureDataHpa * 0.02953).toFixed(2); // Convert hPa to inHg
+
+        const sunriseData = sunResponse.data.daily.sunrise[0];
+        const sunsetData = sunResponse.data.daily.sunset[0];
 
         setUvIndex(uvIndexData);
         setDewPoint(dewPointDataFahrenheit);
@@ -98,6 +110,8 @@ const WeatherCards = ({ lat, lon, setHumidity }) => {
         setLocalHumidity(humidityData);
         setHumidity(humidityData);
         setPressure(pressureDataInHg);
+        setSunrise(sunriseData);
+        setSunset(sunsetData);
 
         setTimeout(() => {
           setAnimate(false);
@@ -168,14 +182,15 @@ const WeatherCards = ({ lat, lon, setHumidity }) => {
     return directions[index % 16];
   };
 
-  const getAirQualityLevel = (aqi) => {
-    if (aqi <= 50) return 'Good';
-    if (aqi <= 100) return 'Moderate';
-    if (aqi <= 150) return 'Unhealthy - Sensitive Groups';
-    if (aqi <= 200) return 'Unhealthy';
-    if (aqi <= 300) return 'Very Unhealthy';
-    return 'Hazardous';
+  const timeToMinutes = (time) => {
+    const date = new Date(time);
+    return date.getHours() * 60 + date.getMinutes();
   };
+
+  const currentMinutes = timeToMinutes(new Date());
+  const sunriseMinutes = timeToMinutes(sunrise);
+  const sunsetMinutes = timeToMinutes(sunset);
+  const sunPosition = ((currentMinutes - sunriseMinutes) / (sunsetMinutes - sunriseMinutes)) * 100;
 
   const lastYearDate = new Date();
   lastYearDate.setFullYear(lastYearDate.getFullYear() - 1);
@@ -266,12 +281,25 @@ const WeatherCards = ({ lat, lon, setHumidity }) => {
             </div>
           )
         );
-      case 'airQuality':
+      case 'sunriseSunset':
         return (
-          airQuality !== null && (
-            <div className={`air-quality ${animationClass}`}>
-              <h3>Air Quality</h3>
-              <p>{airQuality} ({getAirQualityLevel(airQuality)})</p>
+          sunrise !== null && sunset !== null && (
+            <div className={`sunrise-sunset ${animationClass}`}>
+              <h4 style={{fontSize:'19px', marginBottom:'-10px', marginTop:'5px'}}>Sun</h4>
+              <svg width="100%" height="100px" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 0 40 Q 50 -10 100 40" stroke="#ffa500" strokeWidth="2.5" fill="none" />
+                <circle cx={sunPosition} cy="13" r="3" fill="white" />
+                <text x="0" y="50" fontSize="8" fill='white'>{new Date(sunrise).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</text>
+                <text x="62" y="50" fontSize="8" fill='white'>{new Date(sunset).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</text>
+              </svg>
+              <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', marginTop: '10px' }}>
+                <div style={{ textAlign: 'center' }}>
+                  <img src="./icons/sunrise.png" alt="Sunrise" style={{ width: '35px', height: '35px', marginLeft:'-30px', marginTop: '-10px' }} />
+                </div>
+                <div style={{ textAlign: 'center' }}>
+                  <img src="./icons/sunset.png" alt="Sunset" style={{ width: '40px', height: '40px', marginRight:'-30px', marginTop: '-10px' }} />
+                </div>
+              </div>
             </div>
           )
         );
@@ -281,9 +309,11 @@ const WeatherCards = ({ lat, lon, setHumidity }) => {
             <div className={`pressure ${animationClass}`}>
               <h3>Pressure</h3>
               <p>{pressure} inHg</p>
+              <img src="./icons/pressure.png" alt="Pressure Icon" style={{ width: '75px', height: '75px', marginTop: '10px' }} />
             </div>
           )
         );
+          
       default:
         return null;
     }

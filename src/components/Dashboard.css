@@ -489,8 +489,8 @@ iframe {
   
   .current-weather {
     text-align: left;
-    width: 620px;
-    height: 350px;
+    width: 460px;
+    height: 330px;
     padding: 20px;
     border-radius: 20px;
     background-color: rgba(114, 113, 113, 0.28);
@@ -519,63 +519,86 @@ iframe {
   .current-weather img {
     width: 140px;
     height: 140px;
-    margin: -55px 0 0 10px;
+    margin: -50px 0 0 60px;
   }
   
   .current-temp {
     font-size: 60px;
     font-weight: normal;
     color: white;
-    margin: -90px 0 0px 15px;
+    margin: -110px 0 0px 15px;
   }
   
   .feels-like {
+    position: absolute;
+    top: -1.8vh;
+    left: 2.2vw;
     display: flex;
-    flex-direction: row;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
     font-size: 16px;
     font-weight: 100;
     font-style: italic;
     color: rgba(255, 255, 255, 0.5);
-    margin: 10px 0 10px -135px
+    width: 100%; /* Ensure the container takes the full width of its parent */
+    height: 100%; /* Ensure the container takes the full height of its parent */
+    margin: 10px 0; /* Adjust margin as needed */
   }
   
+  
   .weather-desc {
+    position: absolute;
+    top: 6vh;
+    left: 0vw;
     display: flex;
-    flex-direction: row;
-    font-size: 18px;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    font-size: 20px;
     font-weight: 100;
-    margin: -105px 0 0px 60px;
     color: white;
+    width: 100%; /* Ensure the container takes the full width of its parent */
+    height: 100%; /* Ensure the container takes the full height of its parent */
+    margin: 0; /* Reset margin */
   }
+  
   
   .hi-lo {
     position: absolute;
-    top:7vh;
-    left: 20vw;
+    top:13vh;
+    left:14vw;
     font-size: 22px;
     font-weight: 100;
     gap: 15px;
-    margin: 50px 0px 0px -130px;
+    margin: 0px 0px 0px -130px;
   }
   
   .location {
-    position: absolute;
-    top:1vh;
-    left:1vw;
-    font-size: 18px;
+    text-align: center;
+    font-size: 20px;
     display: flex;
-    flex-direction: row;
-    gap:5px;
-    margin: -10px 0 5px -15px;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    gap: 5px;
+    width: 100%; /* Ensure the container takes the full width of its parent */
+    height: 100%; /* Ensure the container takes the full height of its parent */
+    margin: -270px 0 0 -370px;
   }
   
+  
   .time {
-    font-size: 14px;
+    position: absolute;
+    top: 11vh;
+    left: -0.2vw;
     display: flex;
-    flex-direction: row !important;
-    gap:5px;
-    margin: 330px 0 5px -185px;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    font-size: 16px;
+    gap: 5px;
+    width: 100%; /* Ensure the container takes the full width of its parent */
+    height: 100%; /* Ensure the container takes the full height of its parent */
+    margin: 0; /* Reset margin */
   }
+  
   
   .short-forecast {
     color: rgba(145, 145, 145, 0.521);
