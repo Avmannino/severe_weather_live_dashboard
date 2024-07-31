@@ -1,6 +1,4 @@
-// File: WeatherCards.jsx
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -18,7 +16,7 @@ const WeatherCards = ({ lat, lon, setHumidity }) => {
   const [humidity, setLocalHumidity] = useState(null);
   const [visibility, setVisibility] = useState(null);
   const [airQuality, setAirQuality] = useState(null);
-  const [pressure, setPressure] = useState(null); // Add state for pressure
+  const [pressure, setPressure] = useState(null);
   const [cardsOrder, setCardsOrder] = useState([
     'uvIndex',
     'visibility',
@@ -27,90 +25,119 @@ const WeatherCards = ({ lat, lon, setHumidity }) => {
     'humidity',
     'historicalTemp',
     'airQuality',
-    'pressure' // Add pressure to cards order
+    'pressure'
   ]);
   const [animate, setAnimate] = useState(true);
 
-  useEffect(() => {
-    const fetchWeatherData = async () => {
-      if (lat && lon) {
-        try {
-          const uvResponse = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=uv_index_max&timezone=auto`);
-          const uvIndexData = uvResponse.data.daily.uv_index_max[0];
-
-          const dewPointResponse = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=dewpoint_2m&timezone=auto`);
-          const dewPointDataCelsius = dewPointResponse.data.hourly.dewpoint_2m[0];
-          const dewPointDataFahrenheit = (dewPointDataCelsius * 9 / 5) + 32;
-
-          const weatherResponse = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&timezone=auto`);
-          const weatherData = weatherResponse.data.current_weather;
-
-          const windSpeedMph = (weatherData.windspeed * 0.621371).toFixed(1);
-          setWindSpeed(windSpeedMph);
-          setWindDirection(weatherData.winddirection);
-          setDewPoint(dewPointDataFahrenheit);
-
-          const visibilityResponse = await axios.get(`https://api.weatherbit.io/v2.0/current?lat=${lat}&lon=${lon}&key=dccf2094f0544bf0a44723686d7fbb12`);
-          const visibilityData = visibilityResponse.data.data[0].vis;
-          setVisibility((visibilityData * 0.621371).toFixed(1));
-
-          const nwsResponse = await axios.get(`https://api.weather.gov/points/${lat},${lon}`);
-          const gridpointUrl = nwsResponse.data.properties.forecastHourly;
-          const humidityResponse = await axios.get(gridpointUrl);
-          const humidityData = humidityResponse.data.properties.periods[0].relativeHumidity.value;
-          setLocalHumidity(humidityData);
-          setHumidity(humidityData);
-
-          const airQualityResponse = await axios.get(`https://api.weatherbit.io/v2.0/current/airquality?lat=${lat}&lon=${lon}&key=dccf2094f0544bf0a44723686d7fbb12`);
-          const airQualityData = airQualityResponse.data.data[0].aqi;
-          setAirQuality(airQualityData);
-
-          const pressureResponse = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=pressure_msl&timezone=auto`);
-          const pressureDataHpa = pressureResponse.data.hourly.pressure_msl[0];
-          const pressureDataInHg = (pressureDataHpa * 0.02953).toFixed(2); // Convert hPa to inHg
-          setPressure(pressureDataInHg);
-
-          setUvIndex(uvIndexData);
-
-          setTimeout(() => {
-            setAnimate(false);
-          }, 0);
-        } catch (error) {
-          console.error('Error fetching weather data', error);
-        }
-      }
-    };
-
-    const fetchHistoricalWeatherData = async () => {
-      if (lat && lon) {
-        try {
-          const lastYear = new Date();
-          lastYear.setFullYear(lastYear.getFullYear() - 1);
-          const formattedDate = lastYear.toISOString().split('T')[0];
-
-          const historicalResponse = await axios.get('https://archive-api.open-meteo.com/v1/archive', {
+  const fetchWeatherData = useCallback(async () => {
+    if (lat && lon) {
+      try {
+        const [uvResponse, dewPointResponse, weatherResponse, visibilityResponse, nwsResponse, pressureResponse] = await Promise.all([
+          axios.get(`https://api.open-meteo.com/v1/forecast`, {
             params: {
               latitude: lat,
               longitude: lon,
-              start_date: formattedDate,
-              end_date: formattedDate,
-              hourly: 'temperature_2m'
+              daily: 'uv_index_max',
+              timezone: 'auto'
             }
-          });
+          }),
+          axios.get(`https://api.open-meteo.com/v1/forecast`, {
+            params: {
+              latitude: lat,
+              longitude: lon,
+              hourly: 'dewpoint_2m',
+              timezone: 'auto'
+            }
+          }),
+          axios.get(`https://api.open-meteo.com/v1/forecast`, {
+            params: {
+              latitude: lat,
+              longitude: lon,
+              current_weather: true,
+              timezone: 'auto'
+            }
+          }),
+          axios.get(`https://api.open-meteo.com/v1/forecast`, {
+            params: {
+              latitude: lat,
+              longitude: lon,
+              hourly: 'visibility',
+              timezone: 'auto'
+            }
+          }),
+          axios.get(`https://api.weather.gov/points/${lat},${lon}`),
+          axios.get(`https://api.open-meteo.com/v1/forecast`, {
+            params: {
+              latitude: lat,
+              longitude: lon,
+              hourly: 'pressure_msl',
+              timezone: 'auto'
+            }
+          })
+        ]);
 
-          const historicalTempDataCelsius = historicalResponse.data.hourly.temperature_2m[0];
-          const historicalTempDataFahrenheit = (historicalTempDataCelsius * 9 / 5) + 32;
+        const uvIndexData = uvResponse.data.daily.uv_index_max[0];
+        const dewPointDataCelsius = dewPointResponse.data.hourly.dewpoint_2m[0];
+        const dewPointDataFahrenheit = (dewPointDataCelsius * 9 / 5) + 32;
+        const weatherData = weatherResponse.data.current_weather;
+        const windSpeedMph = (weatherData.windspeed * 0.621371).toFixed(1);
+        const visibilityData = visibilityResponse.data.hourly.visibility[0];
+        const visibilityMiles = (visibilityData * 0.000621371).toFixed(1); 
 
-          setHistoricalTemp(Math.round(historicalTempDataFahrenheit));
-        } catch (error) {
-          console.error('Error fetching historical weather data', error);
-        }
+        const gridpointUrl = nwsResponse.data.properties.forecastHourly;
+        const humidityData = await axios.get(gridpointUrl).then(res => res.data.properties.periods[0].relativeHumidity.value);
+
+        const pressureDataHpa = pressureResponse.data.hourly.pressure_msl[0];
+        const pressureDataInHg = (pressureDataHpa * 0.02953).toFixed(2); 
+
+        setUvIndex(uvIndexData);
+        setDewPoint(dewPointDataFahrenheit);
+        setWindSpeed(windSpeedMph);
+        setWindDirection(weatherData.winddirection);
+        setVisibility(visibilityMiles);
+        setLocalHumidity(humidityData);
+        setHumidity(humidityData);
+        setPressure(pressureDataInHg);
+
+        setTimeout(() => {
+          setAnimate(false);
+        }, 0);
+      } catch (error) {
+        console.error('Error fetching weather data', error);
       }
-    };
+    }
+  }, [lat, lon, setHumidity]);
 
+  const fetchHistoricalWeatherData = useCallback(async () => {
+    if (lat && lon) {
+      try {
+        const lastYear = new Date();
+        lastYear.setFullYear(lastYear.getFullYear() - 1);
+        const formattedDate = lastYear.toISOString().split('T')[0];
+
+        const historicalResponse = await axios.get('https://archive-api.open-meteo.com/v1/archive', {
+          params: {
+            latitude: lat,
+            longitude: lon,
+            start_date: formattedDate,
+            end_date: formattedDate,
+            hourly: 'temperature_2m'
+          }
+        });
+
+        const historicalTempDataCelsius = historicalResponse.data.hourly.temperature_2m[0];
+        const historicalTempDataFahrenheit = (historicalTempDataCelsius * 9 / 5) + 32;
+        setHistoricalTemp(Math.round(historicalTempDataFahrenheit));
+      } catch (error) {
+        console.error('Error fetching historical weather data', error);
+      }
+    }
+  }, [lat, lon]);
+
+  useEffect(() => {
     fetchWeatherData();
     fetchHistoricalWeatherData();
-  }, [lat, lon]);
+  }, [fetchWeatherData, fetchHistoricalWeatherData]);
 
   const getGaugeValue = (uvIndex) => {
     if (uvIndex <= 1.0) return 0.01;
@@ -154,17 +181,14 @@ const WeatherCards = ({ lat, lon, setHumidity }) => {
   lastYearDate.setFullYear(lastYearDate.getFullYear() - 1);
   const formattedLastYearDate = lastYearDate.toLocaleDateString();
 
-  const onDragEnd = (result) => {
-    if (!result.destination) {
-      return;
-    }
+  const moveCard = (dragIndex, hoverIndex) => {
     const newOrder = Array.from(cardsOrder);
-    const [removed] = newOrder.splice(result.source.index, 1);
-    newOrder.splice(result.destination.index, 0, removed);
+    const [removed] = newOrder.splice(dragIndex, 1);
+    newOrder.splice(hoverIndex, 0, removed);
     setCardsOrder(newOrder);
   };
 
-  const renderCard = (cardType) => {
+  const renderCard = (cardType, index) => {
     const animationClass = animate ? 'animate__animated animate__slideInLeft' : '';
     switch (cardType) {
       case 'uvIndex':
@@ -268,20 +292,20 @@ const WeatherCards = ({ lat, lon, setHumidity }) => {
   const DraggableCard = ({ id, index, children }) => {
     const [, ref] = useDrag({
       type: 'card',
-      item: { id, index }
+      item: { id, index },
+      collect: (monitor) => ({
+        isDragging: monitor.isDragging(),
+      }),
     });
 
     const [, drop] = useDrop({
       accept: 'card',
       hover: (item) => {
         if (item.index !== index) {
-          const newOrder = [...cardsOrder];
-          newOrder.splice(item.index, 1);
-          newOrder.splice(index, 0, item.id);
+          moveCard(item.index, index);
           item.index = index;
-          setCardsOrder(newOrder);
         }
-      }
+      },
     });
 
     return (
@@ -296,7 +320,7 @@ const WeatherCards = ({ lat, lon, setHumidity }) => {
       <div className="weather-cards-container">
         {cardsOrder.map((cardType, index) => (
           <DraggableCard key={cardType} id={cardType} index={index}>
-            {renderCard(cardType)}
+            {renderCard(cardType, index)}
           </DraggableCard>
         ))}
       </div>
