@@ -385,8 +385,8 @@ iframe {
   
   iframe {
     width: 27%;
-    height: 35vh;
-    top: 38vh;
+    height: 38vh;
+    top: 36.5vh;
     left: 29.5vw;
     position: relative;
     animation: slide-in-bottom 0.5s forwards;
@@ -394,10 +394,10 @@ iframe {
 
   .carousel-container {
     position: absolute;
-    top: 51vh;
-    right: 35.5vw;
+    top: 50vh;
+    right: 35.2vw;
     width: 30%;
-    height: 470px;
+    height: 500px;
     max-width: 600px;
     padding-left: 25px;
     border-radius: 5px;
@@ -461,7 +461,7 @@ iframe {
   
   .weather-cards {
     position: absolute;
-    bottom: 18.5vh;
+    bottom: 26.5vh;
     left: 7vw;
     transition: transform 0.2s !important;
     animation: slide-in-left 0.3s forwards;
@@ -481,7 +481,7 @@ iframe {
   .current-weather {
     text-align: left;
     width: 460px;
-    height: 330px;
+    height: 370px;
     padding: 20px;
     border-radius: 20px;
     background-color: rgba(114, 113, 113, 0.28);
@@ -491,8 +491,8 @@ iframe {
     flex-direction: row;
     gap: 5px;
     position: relative;
-    top: -30vh;
-    left: -26vw;
+    top: -34vh;
+    left: -22vw;
     animation: slide-in-top 0.5s forwards;
   }
   
@@ -508,21 +508,21 @@ iframe {
   }
   
   .current-weather img {
-    width: 140px;
-    height: 140px;
-    margin: -50px 0 0 60px;
+    width: 150px;
+    height: 150px;
+    margin: -90px 0 0 55px;
   }
   
   .current-temp {
-    font-size: 60px;
+    font-size: 62px;
     font-weight: normal;
     color: white;
-    margin: -110px 0 0px 15px;
+    margin: -150px 0 0px 15px;
   }
   
   .feels-like {
     position: absolute;
-    top: -1.8vh;
+    top: -2.2vh;
     left: 2.2vw;
     display: flex;
     justify-content: center; 
@@ -533,7 +533,7 @@ iframe {
     color: rgba(255, 255, 255, 0.5);
     width: 100%;
     height: 100%; 
-    margin: 10px 0;
+    margin: -0px 0;
   }
   
   
@@ -544,20 +544,20 @@ iframe {
     display: flex;
     justify-content: center; 
     align-items: center; 
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 100;
     color: white;
     width: 100%; 
     height: 100%; 
-    margin: 0;
+    margin: 0 0 0 0;
   }
   
   
   .hi-lo {
     position: absolute;
-    top:13vh;
-    left:14vw;
-    font-size: 22px;
+    top:15vh;
+    left:13.5vw;
+    font-size: 23px;
     font-weight: 100;
     gap: 15px;
     margin: 0px 0px 0px -130px;
@@ -565,25 +565,25 @@ iframe {
   
   .location {
     text-align: center;
-    font-size: 20px;
+    font-size: 22px;
     display: flex;
     justify-content: center;
     align-items: center; 
     gap: 5px;
     width: 100%; 
     height: 50%; 
-    margin: -270px 0 0 -370px;
+    margin: -300px 0 0 -370px;
   }
   
   
   .time {
     position: absolute;
-    top: 11vh;
+    top: 12vh;
     left: -0.2vw;
     display: flex;
     justify-content: center; 
     align-items: center; 
-    font-size: 16px;
+    font-size: 18px;
     gap: 5px;
     width: 100%; 
     height: 100%;
@@ -618,7 +618,7 @@ iframe {
     max-width: 1100px;
     gap: 15px;
     position: relative;
-    bottom: 54.5vh;
+    bottom: 60.5vh;
     left: 13vw;
   }
   
@@ -787,12 +787,79 @@ iframe {
 /*1920x1080*/
 
 @media (max-width: 1920px) {
-  iframe {
-    width: 28%;
-    height: 39vh;
-    top: 35vh;
-    left: 30.5vw;
-    animation: slide-in-bottom 0.2s forwards;
+  .default-view {
+    text-align: center;
+    margin: 5vh auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #1b2a3d00;
+    color: #ffffffd0;
+    max-width: 1700px;
+    width: 80%;
+    font-family: nova;
+  }
+  
+  .default-view h2 {
+    font-size: 28px;
+    margin-top: -40px;
+    margin-bottom: -10px;
+  }
+
+  
+  .default-weather-cards {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    margin: 20px 0;
+  }
+  
+  .default-weather-card {
+    background-color: rgba(80, 80, 80, 0.37);
+    border-radius: 15px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.6s !important;
+    width: 170px;
+    height: 70px
+  }
+  
+  .default-weather-card:hover {
+    transform: scale(1.03) !important;
+  }
+  
+  .default-weather-card h3 {
+    font-size: 12px;
+    font-family: nova;
+    color: white;
+    margin: 0px 0 0 -85px;
+  }
+  
+  .default-weather-card img {
+    width: 60px;
+    height: 60px;
+    margin: -75px 0 40px 95px;
+  }
+  
+  .default-temp {
+    color: rgba(255, 255, 255, 0.589);
+    font-size: 30px;
+    margin: 0px 0 0 -100px;
+  }
+
+  .local-time {
+    font-size: 13px;
+    margin: 0px 0 0 -110px;
+    color: rgba(255, 255, 255, 0.589);
+  }
+  
+  .default-map {
+    width: 65%;
+    height: 47vh;
+    top: 1vh;
+    left: 0vw;
+    position: relative;
+    animation: slide-in-bottom 0.5s forwards;
   }
   
   @keyframes slide-in-bottom {
@@ -805,35 +872,45 @@ iframe {
       transform: translateY(0);
     }
   }
+  
+  iframe {
+    width: 27%;
+    height: 37vh;
+    top: 38vh;
+    left: 29.5vw;
+    position: relative;
+    animation: slide-in-bottom 0.5s forwards;
+  }
 
   .carousel-container {
     position: absolute;
-    top: 46vh;
-    right: 35vw;
-    width: 30%;
-    height: 370px;
-    max-width: 400px;
+    top: 51vh;
+    right: 35.5vw;
+    width: 22%;
+    height: 350px;
+    max-width: 500px;
     padding-left: 25px;
     border-radius: 5px;
     margin: 0px 0px 0px 0px;
-    overflow-y: auto;
+    overflow: hidden;
   }
   
   .carousel-slide {
-    padding: 10px;  
+    padding: 10px; 
     background: #628aaa3a;
-    border-radius: 0px;
+    border-radius: 10px;
     text-align: left;
     position: absolute;
-    width: calc(100% - 50px);  
+    width: calc(100% - 50px); 
     height: 100%;
-    font-size: 12px;
+    font-size: 13px;
     transition: left 0.3s ease-in-out, opacity 0.3s ease-in-out;
     opacity: 0;
   }
   
   .carousel-slide.active {
-    left: 25px;  
+    left: 25px; 
+    opacity: 1;
   }
   
   .carousel-slide.prev {
@@ -848,34 +925,36 @@ iframe {
   
   .carousel-play-pause {
     position: absolute;
-    top: 5px;
-    left: 20px;
-    padding: 10px 20px;
+    top: -30px;
+    left: 15px;
+    padding: 10px 10px;
     background-color: rgba(0, 0, 0, 0);
     color: #ffffff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 22px;
     transition: background-color 0.3s;
   }
   
   .carousel-play-pause:hover {
     background-color: rgba(0, 0, 0, 0);
+    border: none;
   }
   
   .carousel-headerone {
     text-align: center;
     white-space: nowrap;  
-    overflow: hidden; 
-    text-overflow: ellipsis; 
+    overflow: hidden;  
+    text-overflow: ellipsis;  
+    color:rgba(255, 0, 0, 0.808);
   }
   
   .weather-cards {
     position: absolute;
-    bottom: 22vh;
-    left: 8vw;
-    transition: transform 0.3s !important;
+    bottom: 25vh;
+    left: 8.2vw;
+    transition: transform 0.2s !important;
     animation: slide-in-left 0.3s forwards;
   }
   
@@ -889,11 +968,11 @@ iframe {
       transform: translateX(0);
     }
   }
-
+  
   .current-weather {
     text-align: left;
-    width: 500px;
-    height: 230px;
+    width: 370px;
+    height: 255px;
     padding: 20px;
     border-radius: 20px;
     background-color: rgba(114, 113, 113, 0.28);
@@ -903,8 +982,8 @@ iframe {
     flex-direction: row;
     gap: 5px;
     position: relative;
-    top: -35vh;
-    left: -24vw;
+    top: -34vh;
+    left: -25vw;
     animation: slide-in-top 0.5s forwards;
   }
   
@@ -922,74 +1001,97 @@ iframe {
   .current-weather img {
     width: 100px;
     height: 100px;
-    margin: -35px 0 0 10px;
+    margin: -85px 0 0 55px;
   }
   
   .current-temp {
-    font-size: 46px;
+    font-size: 48px;
     font-weight: normal;
     color: white;
-    margin: -55px 0 0px 10px;
+    margin: -110px 0 0px 10px;
   }
   
   .feels-like {
+    position: absolute;
+    top: -1.8vh;
+    left: 2.2vw;
     display: flex;
-    flex-direction: row;
-    font-size: 13px;
+    justify-content: center; 
+    align-items: center; 
+    font-size: 14px;
     font-weight: 100;
+    font-style: italic;
     color: rgba(255, 255, 255, 0.5);
-    margin: 15px 0 10px -105px
+    width: 100%;
+    height: 100%; 
+    margin: 0px 0 0 0px;
   }
   
+  
   .weather-desc {
+    position: absolute;
+    top: 6vh;
+    left: 0vw;
     display: flex;
-    flex-direction: row;
-    font-size: 16px;
+    justify-content: center; 
+    align-items: center; 
+    font-size: 18px;
     font-weight: 100;
-    margin: -70px 0 0px 55px;
     color: white;
+    width: 100%; 
+    height: 100%; 
+    margin: 7px 0 0 -5px;
   }
+  
   
   .hi-lo {
     position: absolute;
-    top:7vh;
-    left: 20vw;
-    font-size: 16px;
+    top:13vh;
+    left:14vw;
+    font-size: 18px;
     font-weight: 100;
     gap: 15px;
-    margin: 40px 0px 0px -65px;
+    margin: 15px 0px 0px -105px;
   }
   
   .location {
-    position: absolute;
-    top:1vh;
-    left:1vw;
-    font-size: 15px;
+    text-align: center;
+    font-size: 16px;
     display: flex;
-    flex-direction: row;
-    gap:5px;
-    margin: -10px 0 5px -15px;
+    justify-content: center;
+    align-items: center; 
+    gap: 5px;
+    width: 100%; 
+    height: 50%; 
+    margin: -230px 0 0 -280px;
   }
   
+  
   .time {
-    font-size: 11px;
+    position: absolute;
+    top: 11vh;
+    left: -0.2vw;
     display: flex;
-    flex-direction: row !important;
-    gap:5px;
-    margin: 220px 0 5px -175px;
+    justify-content: center; 
+    align-items: center; 
+    font-size: 14px;
+    gap: 5px;
+    width: 100%; 
+    height: 100%;
+    margin: 10px 0 0 0;
   }
 
   .forecast h2 {
     position: absolute;
-    top: 12.5vh;
-    left: 66vw;
+    top: 14vh;
+    left: 62.5vw;
     font-size: 18px;
   }
   
   .forecast h4 {
     position: absolute;
-    top: 15.5vh;
-    left: 65vw;
+    top: 17vh;
+    left: 61.5vw;
     font-size: 12px;
   }
 
@@ -1001,8 +1103,8 @@ iframe {
     max-width: 500px;
     gap: 10px;
     position: relative;
-    bottom: 59.5vh;
-    left: 9vw;
+    bottom: 60vh;
+    left: 2vw;
   }
   
   .forecast-item {
@@ -1036,7 +1138,7 @@ iframe {
     align-items: center;
     justify-content: center;
     font-weight: bolder;
-    font-size: 14px;
+    font-size: 16px;
   }
   
   .forecast-date {
@@ -1047,31 +1149,32 @@ iframe {
   }
   
   .forecast-temp {
-    font-size: 0.8em;
+    font-size: 0.9em;
     color: #7c9bbd;
     display: flex;
     flex-direction: column;
     align-items: end;
     justify-content: end;
-    margin: 5px 0 0 25px;
+    margin: 5px 0 0 35px;
   }
   
   .forecast-details {
-    font-size: 0.7em;
+    font-size: 0.85em;
     color: #ffffff;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 60px 0 0 0;
-    height: 25px;
-    width: 100px;
+    margin-top:55px;
+    margin-bottom: 10px;
+    height: 35px;
+    width: 120px;
   }
 
   .forecast-details img {
     width: 55px;
     height: 55px;
     margin-bottom: 5px;
-    margin-top: -55px;
+    margin-top: -45px;
   }
 
   .hourly-forecast {

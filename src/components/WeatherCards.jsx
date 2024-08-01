@@ -285,7 +285,7 @@ const WeatherCards = ({ lat, lon, setHumidity }) => {
         return (
           sunrise !== null && sunset !== null && (
             <div className={`sunrise-sunset ${animationClass}`}>
-              <h4 style={{fontSize:'19px', marginBottom:'-10px', marginTop:'5px'}}>Sun</h4>
+              <h4 style={{fontSize:'16px', marginBottom:'-30px', marginTop:'20px'}}>Sun</h4>
               <svg width="100%" height="100px" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
                 <path d="M 0 40 Q 50 -10 100 40" stroke="#ffa500" strokeWidth="2.5" fill="none" />
                 <circle cx={sunPosition} cy="13" r="3" fill="white" />

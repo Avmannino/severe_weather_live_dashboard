@@ -12,8 +12,8 @@
     border-radius: 25px;
     cursor: pointer;
     position: relative;
-    bottom: 92.9vh;
-    left: -13.5vw;
+    bottom: 100.5vh;
+    left: -12.5vw;
     transition: 0.3s;
   }
   
@@ -144,8 +144,8 @@
       border-radius: 25px;
       cursor: pointer;
       position: relative;
-      bottom: 96.4vh;
-      left: 26.5vw;
+      bottom:103.8vh;
+      left: -13vw;
       transition: 0.3s;
     }
     

@@ -82,7 +82,7 @@ const Login = () => {
           <Form.Control name="password" type="password" placeholder="Password" />
         </Form.Group>
         <div className="checkbox-and-button">
-          <Button appearance="primary" onClick={handleSubmit} className="login-button">Login</Button>
+          <Button appearance="primary" onClick={handleSubmit} className="login-btn">Login</Button>
           <Checkbox className="rs-checkbox">Remember Me</Checkbox>
         </div>
       </Form>

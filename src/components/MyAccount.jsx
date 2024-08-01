@@ -13,9 +13,9 @@ const MyAccount = () => {
   }
 
   return (
-    <Box sx={{ display: 'flex', height: '100vh', fontFamily: 'Arial, sans-serif' }}>
-      <Paper elevation={3} sx={{ width: '350px', backgroundColor: '#2c3e50', color: '#ecf0f1', borderRight: '1px solid white' }}>
-        <Typography variant="h5" component="div" sx={{ p: 2, textAlign: 'center', color: '#ecf0f1' }}>
+    <Box sx={{ display: 'flex', height: '100vh', fontFamily: 'Dashboard' }}>
+      <Paper elevation={3} sx={{ width: '270px', backgroundColor: '#2c3e50', color: '#ecf0f1', borderRight: '1px solid white' }}>
+        <Typography variant="h5" component="div" sx={{ p: 3, textAlign: 'center', color: '#ecf0f1', fontSize:'18px' }}>
           My Account
         </Typography>
         <List component="nav">
@@ -146,14 +146,14 @@ const AccountOverview = () => {
   };
 
   return (
-    <Paper elevation={3} sx={{ p: 4, backgroundColor: '#1a1d24', color: 'white', borderRadius: 5, boxShadow: 2, maxWidth: 600, mx: 'auto', fontSize: '1.25rem', marginTop: '150px' }}>
-      <Typography variant="h4" component="div" gutterBottom>
+    <Paper elevation={3} sx={{ p: 3, backgroundColor: '#1a1d24', color: 'white', borderRadius: 5, boxShadow: 2, maxWidth: 600, mx: 'auto', fontSize: '0.9rem', marginTop: '20px' }}>
+      <Typography variant="h6" component="div" gutterBottom>
         Profile
       </Typography>
       <Divider sx={{ mb: 3, borderColor: 'white' }} />
       <Box component="form" noValidate autoComplete="off" sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3 }}>
-          <img src={preview} alt="Profile" style={{ width: '180px', height: '160px', borderRadius: '50%' }} />
+          <img src={preview} alt="Profile" style={{ width: '125px', height: '120px', borderRadius: '50%', marginTop:'-15px' }} />
           {isEditing && (
             <Button variant="contained" component="label">
               Upload Picture
@@ -177,7 +177,7 @@ const AccountOverview = () => {
           sx={{
             '& .MuiInputBase-root': {
               color: 'white',
-              fontSize: '1.15rem'
+              fontSize: '1rem'
             },
             '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
               borderColor: 'white',
@@ -206,7 +206,7 @@ const AccountOverview = () => {
           sx={{
             '& .MuiInputBase-root': {
               color: 'white',
-              fontSize: '1.15rem'
+              fontSize: '1rem'
             },
             '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
               borderColor: 'white',
@@ -235,7 +235,7 @@ const AccountOverview = () => {
           sx={{
             '& .MuiInputBase-root': {
               color: 'white',
-              fontSize: '1.15rem'
+              fontSize: '1rem'
             },
             '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
               borderColor: 'white',
@@ -264,7 +264,7 @@ const AccountOverview = () => {
           sx={{
             '& .MuiInputBase-root': {
               color: 'white',
-              fontSize: '1.15rem'
+              fontSize: '1rem'
             },
             '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
               borderColor: 'white',
@@ -293,7 +293,7 @@ const AccountOverview = () => {
           sx={{
             '& .MuiInputBase-root': {
               color: 'white',
-              fontSize: '1.15rem'
+              fontSize: '1rem'
             },
             '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
               borderColor: 'white',
@@ -322,7 +322,7 @@ const AccountOverview = () => {
           sx={{
             '& .MuiInputBase-root': {
               color: 'white',
-              fontSize: '1.15rem'
+              fontSize: '1rem'
             },
             '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
               borderColor: 'white',
@@ -339,7 +339,7 @@ const AccountOverview = () => {
           variant="contained"
           color="primary"
           onClick={() => setIsEditing(!isEditing)}
-          sx={{ fontSize: '1.15rem' }}
+          sx={{ fontSize: '1rem' }}
         >
           {isEditing ? 'Cancel' : 'Edit'}
         </Button>
@@ -348,7 +348,7 @@ const AccountOverview = () => {
             variant="contained"
             color="secondary"
             onClick={handleSaveChanges}
-            sx={{ fontSize: '1.15rem' }}
+            sx={{ fontSize: '1rem' }}
           >
             Save changes
           </Button>

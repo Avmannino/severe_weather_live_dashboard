@@ -80,7 +80,6 @@ const Pricing = () => {
             <li>✔ Basic radar imagery and weather maps.</li>
             <li>✔ Detailed daily and hourly weather forecasts.</li>
             <li>✔ Email support with a 24-hour response time.</li>
-            <li>✔ 10 saved locations for personalized weather tracking.</li>
           </ul>
           <button className="signup-button" onClick={() => handleGetStarted({ name: 'Personal', price: prices.smallBusiness })}>Get Started</button>
         </div>

@@ -1,139 +1,291 @@
-.pricing-container {
-    text-align: center;
-    padding: 50px;
+@media (max-width: 2560px) {
+
+    .pricing-container {
+        text-align: center;
+        padding: 50px;
+    }
+
+    .pricing-title {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+    }
+
+    .pricing-subtitle {
+        font-size: 1.2rem;
+        color: #aaaaaa;
+        margin-bottom: 30px;
+    }
+
+    .billing-toggle {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 40px;
+    }
+
+    .toggle-button {
+        background-color: #a89d0000;
+        border: 1px solid #ddd;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin: 0 10px;
+    }
+
+    .toggle-button.active {
+        background-color: #007BFF;
+        color: white;
+    }
+
+    .pricing-plans {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .plan {
+        background-color: rgba(255, 255, 255, 0.692);
+        border: 1px solid #ddd;
+        color: rgb(0, 17, 116);
+        border-radius: 8px;
+        padding: 20px;
+        width: 300px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, border 0.1s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .plan:hover {
+        transform: translateY(-7px);
+    }
+
+    .plan.selected {
+        border: 8px solid #007BFF;
+    }
+
+    .plan h2 {
+        font-size: 1.6rem;
+        margin-bottom: 10px;
+    }
+
+    .price {
+        font-size: 2.5rem;
+        margin: 10px 0;
+        color: rgb(0, 0, 0);
+    }
+
+    .cents {
+        font-size: 1rem;
+        vertical-align: super;
+    }
+
+    .everything {
+        color: black;
+        font-weight: bold;
+        font-size: 13px;
+        text-align: center;
+    }
+
+    .features-basic,
+    .features-personal,
+    .features-pro,
+    .features-ent {
+        list-style-type: none;
+        padding: 0;
+        margin: 20px 0;
+        color: rgb(2, 0, 92);
+        text-align: left;
+        flex-grow: 1;
+    }
+
+    .features-basic li,
+    .features-personal li,
+    .features-pro li,
+    .features-ent li {
+        margin: 10px 0;
+        font-size: 18px;
+        text-align: left;
+    }
+
+    .signup-button {
+        background-color: #0057b300;
+        color: rgb(53, 0, 199);
+        border: 2px solid rgb(4, 0, 255);
+        padding: 10px 80px;
+        font-size: 1.1rem;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.4s ease;
+    }
+
+    .signup-button:hover {
+        background-color: #005ab9;
+        border: 2px solid rgba(255, 196, 0, 0.438);
+        color: white;
+    }
+
+    .contact-us {
+        margin-top: 40px;
+        font-size: 1.25rem;
+    }
+
+    .contact-us a {
+        color: #007BFF;
+        text-decoration: none;
+    }
+
+    .contact-us a:hover {
+        text-decoration: underline;
+    }
 }
 
-.pricing-title {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-}
 
-.pricing-subtitle {
-    font-size: 1.2rem;
-    color: #aaaaaa;
-    margin-bottom: 30px;
-}
+@media (max-width: 1920px) {
 
-.billing-toggle {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 40px;
-}
+    .pricing-container {
+        text-align: center;
+        padding: 50px;
+    }
 
-.toggle-button {
-    background-color: #a89d0000;
-    border: 1px solid #ddd;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin: 0 10px;
-}
+    .pricing-title {
+        font-size: 1.7rem;
+        margin-bottom: 10px;
+    }
 
-.toggle-button.active {
-    background-color: #007BFF;
-    color: white;
-}
+    .pricing-subtitle {
+        font-size: 0.8rem;
+        color: #aaaaaa;
+        margin-bottom: 30px;
+    }
 
-.pricing-plans {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-}
+    .billing-toggle {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 40px;
+    }
 
-.plan {
-    background-color: rgba(255, 255, 255, 0.692);
-    border: 1px solid #ddd;
-    color: rgb(0, 17, 116);
-    border-radius: 8px;
-    padding: 20px;
-    width: 300px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, border 0.1s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
+    .toggle-button {
+        background-color: #a89d0000;
+        border: 1px solid #ddd;
+        padding: 8px 10px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin: 0 10px;
+        font-size: 0.85em;
+    }
 
-.plan:hover {
-    transform: translateY(-7px);
-}
+    .toggle-button.active {
+        background-color: #007BFF;
+        color: white;
+    }
 
-.plan.selected {
-    border: 8px solid #007BFF;
-}
+    .pricing-plans {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
 
-.plan h2 {
-    font-size: 1.6rem;
-    margin-bottom: 10px;
-}
+    .plan {
+        background-color: rgba(255, 255, 255, 0.692);
+        border: 1px solid #ddd;
+        color: rgb(0, 17, 116);
+        border-radius: 8px;
+        padding: 20px;
+        width: 250px;
+        height: 450px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, border 0.1s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
 
-.price {
-    font-size: 2.5rem;
-    margin: 10px 0;
-    color: rgb(0, 0, 0);
-}
+    .plan:hover {
+        transform: translateY(-7px);
+    }
 
-.cents {
-    font-size: 1rem;
-    vertical-align: super;
-}
+    .plan.selected {
+        border: 6px solid #007BFF;
+    }
 
-.everything {
-    color: black;
-    font-weight: bold;
-    font-size: 13px;
-    text-align: center;
-}
+    .plan h2 {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+    }
 
-.features-basic,
-.features-personal,
-.features-pro,
-.features-ent {
-    list-style-type: none;
-    padding: 0;
-    margin: 20px 0;
-    color: rgb(2, 0, 92);
-    text-align: left;
-    flex-grow: 1;
-}
+    .price {
+        font-size: 2.0rem;
+        margin: 0px 0;
+        color: rgb(0, 0, 0);
+    }
 
-.features-basic li,
-.features-personal li,
-.features-pro li,
-.features-ent li {
-    margin: 10px 0;
-    font-size: 18px;
-    text-align: left;
-}
+    .cents {
+        font-size: 0.8rem;
+        vertical-align: super;
+    }
 
-.signup-button {
-    background-color: #0057b300;
-    color: rgb(53, 0, 199);
-    border: 2px solid rgb(4, 0, 255);
-    padding: 10px 80px;
-    font-size: 1.1rem;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.4s ease;
-}
+    .everything {
+        color: black;
+        font-weight: bold;
+        font-size: 14px;
+        text-align: center;
+    }
 
-.signup-button:hover {
-    background-color: #005ab9;
-    border: 2px solid rgba(255, 196, 0, 0.438);
-    color: white;
-}
+    .features-basic,
+    .features-personal,
+    .features-pro,
+    .features-ent {
+        list-style-type: none;
+        padding: 0;
+        margin: -10px 0;
+        color: rgb(2, 0, 92);
+        text-align: left;
+        flex-grow: 1;
+    }
 
-.contact-us {
-    margin-top: 40px;
-    font-size: 1.25rem;
-}
+    .features-basic li,
+    .features-personal li,
+    .features-pro li,
+    .features-ent li {
+        margin: 10px 0;
+        font-size: 14px;
+        text-align: left;
+    }
 
-.contact-us a {
-    color: #007BFF;
-    text-decoration: none;
-}
+    .signup-button {
+        background-color: #0057b300;
+        color: rgb(53, 0, 199);
+        border: 2px solid rgb(4, 0, 255);
+        padding: 10px 40px;
+        font-size: 0.9rem;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.4s ease;
+        position: relative;
+        top: -0.5vh;
+        left:0vw;
+    }
 
-.contact-us a:hover {
-    text-decoration: underline;
+    .signup-button:hover {
+        background-color: #005ab9;
+        border: 2px solid rgba(255, 196, 0, 0.438);
+        color: white;
+    }
+
+    .contact-us {
+        margin-top: 40px;
+        font-size: 0.8rem;
+    }
+
+    .contact-us a {
+        color: #007BFF;
+        text-decoration: none;
+    }
+
+    .contact-us a:hover {
+        text-decoration: underline;
+    }
 }

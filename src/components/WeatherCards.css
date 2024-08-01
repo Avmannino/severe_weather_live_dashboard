@@ -311,14 +311,14 @@
     .dew-point h3,
     .humidity-header {
         margin: -0px 0 0 0;
-        font-size: 0.8em;
+        font-size: 0.7em;
         color: #ffffff;
         font-weight: 100;
     }
 
     .uv-index h3 {
         margin: 5px 0 0 0;
-        font-size: 0.8em;
+        font-size: 0.7em;
     }
 
     .uv-index p,
@@ -337,14 +337,14 @@
     .visibility img,
     .dew-point img {
         margin-top: 15px;
-        width: 60px;
-        height: 60px;
+        width: 45px;
+        height: 45px;
     }
 
     .visibility-figure {
         margin: 5px 0 0 0;
         color: #dbdbdbd2;
-        font-size: 0.9em;
+        font-size: 0.8em;
     }
 
     .wind-speed h3 {
@@ -355,7 +355,7 @@
         margin-top: 5px;
         font-weight: 800;
         color: #dbdbdbd2;
-        font-size: 0.9em;
+        font-size: 0.8em;
     }
 
     .wind-direction {
@@ -370,7 +370,7 @@
     .dew-point p {
         font-weight: 800;
         margin: 5px 0 0 0;
-        font-size: 0.9em;
+        font-size: 0.8em;
         color: #dbdbdbd2;
         font-weight: 100;
     }
@@ -381,7 +381,7 @@
 
     .humidity-figure {
         margin-top: 5px;
-        font-size: 0.9em;
+        font-size: 0.8em;
     }
 
     .humidity img {
@@ -403,7 +403,7 @@
 
     .historical-figure {
         margin: 5px 0 0 0;
-        font-size: 1.0em;
+        font-size: 0.9em;
     }
 
     .historical-temp img {
@@ -415,12 +415,21 @@
     .draggable-card {
         width: 100%;
         height: 100%;
-        max-width: 160px;
-        max-height: 160px;
+        max-width: 150px;
+        max-height: 150px;
         display: flex;
         justify-content: center;
         align-items: center;
         text-align: center;
         box-sizing: border-box;
+    }
+
+    .sunrise-sunset {
+        margin-top: -15px;
+        font-size: 0.9em;
+    }
+
+    .pressure {
+        font-size: 0.85em;
     }
 }

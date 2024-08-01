@@ -35,6 +35,7 @@ const Home = () => {
                         </button>
                     </div>
                 </section>
+               
                 <button className="learn-more-button animate__animated animate__fadeInUp animate__delay-1s" onClick={scrollToSoftware}>
                     <p className='learn-more animate__animated animate__fadeInUp animate__delay-1s'>Learn More</p>
                     <span className="caret animate__animated animate__fadeInUp animate__delay-2s">&#9660;</span>
@@ -52,7 +53,7 @@ const Home = () => {
                 </ul>
                 <img src={featuresImage} className="features-img" alt="features-image" />
             </section>
-
+            <p className='line-break'>&nbsp;</p> {/* Line break */}
             <section className='critical-communications snap-section'>
                 <h4 className="critical-communications-header">Critical Communications</h4>
                 <p className="critical-motto">Real-time NWS alerts for your specific location:</p>
@@ -68,6 +69,7 @@ const Home = () => {
                 </video>
                 <img src={alertDemo} className="alert-demo" alt="alert-image" />
             </section>
+            <p className='line-break'>&nbsp;</p> {/* Line break */}
             <section className='realtime-radar'>
                 <h4 className="realtime-radar-header">Real-Time Radar</h4>
                 <p className="radar-content">See into the future with the next 7-days worth of forecasted data.</p>

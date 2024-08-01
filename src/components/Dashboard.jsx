@@ -144,8 +144,8 @@ const Dashboard = () => {
     if (isPlaying) {
       timer = setInterval(() => {
         setPrevIndex(carouselIndex);
-        setCarouselIndex((prevIndex) => (prevIndex + 1) % 4);
-      }, 6000);
+        setCarouselIndex((prevIndex) => (prevIndex + 1) % 2);
+      }, 4000);
     }
     return () => clearInterval(timer);
   }, [isPlaying, carouselIndex]);
@@ -325,7 +325,6 @@ const Dashboard = () => {
           fontSize: '12px',
           fontFamily: 'dashboard',
           fontWeight: 'bold'
-          
         }
       },
       xaxis: {
@@ -377,8 +376,7 @@ const Dashboard = () => {
       }
     }
   } : null;
-  
-  
+
   return (
     <div className="dashboard-container">
       <header className="header">
@@ -386,14 +384,14 @@ const Dashboard = () => {
       </header>
 
       <DashNav
-      searchInput={searchInput}
-      setSearchInput={setSearchInput}
-      handleSearch={handleSearch}
-      handleKeyDown={handleKeyDown}
-      toggleTemperatureUnit={toggleTemperatureUnit}
-      isCelsius={isCelsius}
-      updateSearchBar={updateSearchBar}
-      searchConducted={searchConducted}
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
+        handleSearch={handleSearch}
+        handleKeyDown={handleKeyDown}
+        toggleTemperatureUnit={toggleTemperatureUnit}
+        isCelsius={isCelsius}
+        updateSearchBar={updateSearchBar}
+        searchConducted={searchConducted}
       />
 
       {!searchConducted && (
@@ -442,15 +440,7 @@ const Dashboard = () => {
             </div>
             <div className={`carousel-slide ${carouselIndex === 1 ? 'active' : prevIndex === 1 ? 'prev' : 'next'}`}>
               <h3></h3>
-              {lineChartData && <Chart options={lineChartData.options} series={lineChartData.series} type="line" height={300} />}
-            </div>
-            <div className={`carousel-slide ${carouselIndex === 2 ? 'active' : prevIndex === 2 ? 'prev' : 'next'}`}>
-              <h3>Card 3</h3>
-              <p>This is the third card.</p>
-            </div>
-            <div className={`carousel-slide ${carouselIndex === 3 ? 'active' : prevIndex === 3 ? 'prev' : 'next'}`}>
-              <h3>Card 4</h3>
-              <p>This is the fourth card.</p>
+              {lineChartData && <Chart options={lineChartData.options} series={lineChartData.series} type="line" height={320} />}
             </div>
             <button onClick={togglePlayPause} className="carousel-play-pause">
               {isPlaying ? '⏸️' : '▶️'}

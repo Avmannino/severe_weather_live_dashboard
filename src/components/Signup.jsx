@@ -96,7 +96,7 @@ const Signup = () => {
           <Form.Control name="password" type="password" placeholder="Password" />
         </Form.Group>
         <div className="checkbox-and-button">
-          <Button appearance="primary" onClick={handleSubmit} className="signup-button">Create Account</Button>
+          <Button appearance="primary" onClick={handleSubmit} className="signup-btn">Create Account</Button>
         </div>
       </Form>
     </div>
