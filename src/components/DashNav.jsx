@@ -30,7 +30,7 @@ const DashNav = ({
           });
           if (response.ok) {
             const data = await response.json();
-            setProfilePictureUrl(data.profilePictureUrl || './icons/profile-icon.png');
+            setProfilePictureUrl(data.profilePictureUrl ? `http://127.0.0.1:5000/uploads/${data.profilePictureUrl}` : './icons/profile-icon.png');
           }
         } catch (error) {
           console.error('Error fetching profile picture:', error);
@@ -69,11 +69,17 @@ const DashNav = ({
           onKeyDown={handleKeyDown}
           placeholder="Enter city name or ZIP code"
         />
-        <button onClick={handleSearch}>Search</button>
-        <MyLocation updateSearchBar={updateSearchBar} />
-      </div>
-      <div className="profile-icon" onClick={handleProfileClick}>
-        <img src={profilePictureUrl} alt="Profile" style={{ width: '30px', height: '30px', cursor: 'pointer', borderRadius: '50%' }} />
+        <button className='search-button' onClick={handleSearch}>Search</button>
+        <button className="location-button">
+          <MyLocation updateSearchBar={updateSearchBar} />
+        </button>
+        <div className="profile-icon" onClick={handleProfileClick}>
+          <img
+            src={isAuthenticated ? profilePictureUrl : './icons/placeholder-icon.png'}
+            alt="Profile"
+            className="profile-picture"
+          />
+        </div>
       </div>
     </div>
   );

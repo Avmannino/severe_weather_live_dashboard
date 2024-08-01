@@ -170,15 +170,6 @@ iframe {
   margin: -335px 0px 0px 0px;
 }
 
-.location {
-  font-size: 20px;
-  display: flex;
-  flex-direction: row;
-  gap:5px;
-  justify-content: center;
-  align-items: center;
-  margin: -230px 0 5px -10px;
-}
 
 .time {
   font-size: 14px;
@@ -415,12 +406,12 @@ iframe {
   }
   
   .carousel-slide {
-    padding: 10px;  /* Ensure padding is consistent */
+    padding: 10px; 
     background: #628aaa3a;
     border-radius: 10px;
     text-align: left;
     position: absolute;
-    width: calc(100% - 50px);  /* Ensure the width fits within the container */
+    width: calc(100% - 50px); 
     height: 100%;
     font-size: 16px;
     transition: left 0.3s ease-in-out, opacity 0.3s ease-in-out;
@@ -428,7 +419,7 @@ iframe {
   }
   
   .carousel-slide.active {
-    left: 25px;  /* Adjust to account for padding */
+    left: 25px; 
     opacity: 1;
   }
   
@@ -462,15 +453,15 @@ iframe {
   
   .carousel-headerone {
     text-align: center;
-    white-space: nowrap;  /* Ensure header text doesn't wrap */
-    overflow: hidden;  /* Ensure overflow is hidden */
-    text-overflow: ellipsis;  /* Add ellipsis for overflow text */
+    white-space: nowrap;  
+    overflow: hidden;  
+    text-overflow: ellipsis;  
     color:rgba(255, 0, 0, 0.808);
   }
   
   .weather-cards {
     position: absolute;
-    bottom: 22vh;
+    bottom: 18.5vh;
     left: 7vw;
     transition: transform 0.2s !important;
     animation: slide-in-left 0.3s forwards;
@@ -500,7 +491,7 @@ iframe {
     flex-direction: row;
     gap: 5px;
     position: relative;
-    top: -31vh;
+    top: -30vh;
     left: -26vw;
     animation: slide-in-top 0.5s forwards;
   }
@@ -534,15 +525,15 @@ iframe {
     top: -1.8vh;
     left: 2.2vw;
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    justify-content: center; 
+    align-items: center; 
     font-size: 16px;
     font-weight: 100;
     font-style: italic;
     color: rgba(255, 255, 255, 0.5);
-    width: 100%; /* Ensure the container takes the full width of its parent */
-    height: 100%; /* Ensure the container takes the full height of its parent */
-    margin: 10px 0; /* Adjust margin as needed */
+    width: 100%;
+    height: 100%; 
+    margin: 10px 0;
   }
   
   
@@ -551,14 +542,14 @@ iframe {
     top: 6vh;
     left: 0vw;
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    justify-content: center; 
+    align-items: center; 
     font-size: 20px;
     font-weight: 100;
     color: white;
-    width: 100%; /* Ensure the container takes the full width of its parent */
-    height: 100%; /* Ensure the container takes the full height of its parent */
-    margin: 0; /* Reset margin */
+    width: 100%; 
+    height: 100%; 
+    margin: 0;
   }
   
   
@@ -576,11 +567,11 @@ iframe {
     text-align: center;
     font-size: 20px;
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    justify-content: center;
+    align-items: center; 
     gap: 5px;
-    width: 100%; /* Ensure the container takes the full width of its parent */
-    height: 100%; /* Ensure the container takes the full height of its parent */
+    width: 100%; 
+    height: 50%; 
     margin: -270px 0 0 -370px;
   }
   
@@ -590,13 +581,13 @@ iframe {
     top: 11vh;
     left: -0.2vw;
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    justify-content: center; 
+    align-items: center; 
     font-size: 16px;
     gap: 5px;
-    width: 100%; /* Ensure the container takes the full width of its parent */
-    height: 100%; /* Ensure the container takes the full height of its parent */
-    margin: 0; /* Reset margin */
+    width: 100%; 
+    height: 100%;
+    margin: 0;
   }
   
   
@@ -627,8 +618,8 @@ iframe {
     max-width: 1100px;
     gap: 15px;
     position: relative;
-    bottom: 56vh;
-    left: 14vw;
+    bottom: 54.5vh;
+    left: 13vw;
   }
   
   .forecast-item {
@@ -829,12 +820,12 @@ iframe {
   }
   
   .carousel-slide {
-    padding: 10px;  /* Ensure padding is consistent */
+    padding: 10px;  
     background: #628aaa3a;
     border-radius: 0px;
     text-align: left;
     position: absolute;
-    width: calc(100% - 50px);  /* Ensure the width fits within the container */
+    width: calc(100% - 50px);  
     height: 100%;
     font-size: 12px;
     transition: left 0.3s ease-in-out, opacity 0.3s ease-in-out;
@@ -842,8 +833,7 @@ iframe {
   }
   
   .carousel-slide.active {
-    left: 25px;  /* Adjust to account for padding */
-    opacity: 1;
+    left: 25px;  
   }
   
   .carousel-slide.prev {
@@ -876,9 +866,9 @@ iframe {
   
   .carousel-headerone {
     text-align: center;
-    white-space: nowrap;  /* Ensure header text doesn't wrap */
-    overflow: hidden;  /* Ensure overflow is hidden */
-    text-overflow: ellipsis;  /* Add ellipsis for overflow text */
+    white-space: nowrap;  
+    overflow: hidden; 
+    text-overflow: ellipsis; 
   }
   
   .weather-cards {

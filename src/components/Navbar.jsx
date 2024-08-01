@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext.jsx';
 import './Navbar.css';
@@ -6,10 +6,42 @@ import './Navbar.css';
 const Navbar = () => {
   const { isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
+  const [profilePictureUrl, setProfilePictureUrl] = useState('./icons/profile-icon.png'); // Default icon
 
   const handleLogout = () => {
     logout();
     navigate('/login');
+  };
+
+  useEffect(() => {
+    const fetchProfilePicture = async () => {
+      if (isAuthenticated) {
+        const token = localStorage.getItem('token');
+        try {
+          const response = await fetch('http://127.0.0.1:5000/profile', {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+          if (response.ok) {
+            const data = await response.json();
+            setProfilePictureUrl(data.profilePictureUrl ? `http://127.0.0.1:5000/uploads/${data.profilePictureUrl}` : './icons/profile-icon.png');
+          }
+        } catch (error) {
+          console.error('Error fetching profile picture:', error);
+        }
+      }
+    };
+
+    fetchProfilePicture();
+  }, [isAuthenticated]);
+
+  const handleProfileClick = () => {
+    if (isAuthenticated) {
+      navigate('/my-account');
+    } else {
+      navigate('/login');
+    }
   };
 
   return (
@@ -43,21 +75,30 @@ const Navbar = () => {
             <ul className="dropdown-menu">
               <li>
                 <Link to="/contact-us" className="dropdown-link">
-                Contact Us 📞
+                  Contact Us 📞
                 </Link>
               </li>
             </ul>
           </li>
         </ul>
-        {isAuthenticated ? (
-          <button onClick={handleLogout} className="nav-login">
-            Logout
-          </button>
-        ) : (
-          <Link to="/login" className="nav-login">
-            Login
-          </Link>
-        )}
+        <div className="navbar-right">
+          <div className="navbar-profile-icon" onClick={handleProfileClick}>
+            <img
+              src={isAuthenticated ? profilePictureUrl : './icons/placeholder-icon.png'}
+              alt="Profile"
+              className="navbar-profile-picture"
+            />
+          </div>
+          {isAuthenticated ? (
+            <button onClick={handleLogout} className="nav-login">
+              Logout
+            </button>
+          ) : (
+            <Link to="/login" className="nav-login">
+              Login
+            </Link>
+          )}
+        </div>
       </div>
     </nav>
   );

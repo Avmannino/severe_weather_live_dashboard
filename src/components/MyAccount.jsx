@@ -153,7 +153,7 @@ const AccountOverview = () => {
       <Divider sx={{ mb: 3, borderColor: 'white' }} />
       <Box component="form" noValidate autoComplete="off" sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3 }}>
-          <img src={preview} alt="Profile" style={{ width: '150px', height: '150px', borderRadius: '50%' }} />
+          <img src={preview} alt="Profile" style={{ width: '180px', height: '160px', borderRadius: '50%' }} />
           {isEditing && (
             <Button variant="contained" component="label">
               Upload Picture

@@ -1,0 +1,37 @@
+.checkout-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  .checkout-form label {
+    margin-bottom: 10px;
+  }
+  
+  .checkout-form input {
+    padding: 10px;
+    margin-top: 5px;
+  }
+  
+  .StripeElement {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #6772e5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:disabled {
+    background-color: #bbb;
+  }
+  

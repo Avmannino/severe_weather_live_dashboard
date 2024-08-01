@@ -4,9 +4,12 @@ from werkzeug.utils import secure_filename
 from app import app, db
 from models import User
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+import stripe
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 UPLOAD_FOLDER = app.config['UPLOAD_FOLDER']
+
+stripe.api_key = 'your_stripe_secret_key'
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -72,3 +75,28 @@ def login():
 
     access_token = create_access_token(identity={'email': user.email})
     return jsonify(access_token=access_token), 200
+
+@app.route('/create-checkout-session', methods=['POST'])
+@jwt_required()
+def create_checkout_session():
+    try:
+        data = request.json
+        session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=[{
+                'price_data': {
+                    'currency': 'usd',
+                    'product_data': {
+                        'name': data['product_name'],
+                    },
+                    'unit_amount': data['amount'],
+                },
+                'quantity': 1,
+            }],
+            mode='payment',
+            success_url='http://localhost:5173/success',
+            cancel_url='http://localhost:5173/cancel',
+        )
+        return jsonify({'id': session.id})
+    except Exception as e:
+        return jsonify(error=str(e)), 403

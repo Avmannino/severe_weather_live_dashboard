@@ -11,6 +11,7 @@ import MyAccount from './components/MyAccount.jsx';
 import { AuthProvider } from './components/AuthContext.jsx';
 import Loading from './components/Loading.jsx';
 import Contact from './components/Contact.jsx';
+import Checkout from './components/Checkout.jsx';
 
 function App() {
     return (
@@ -46,6 +47,7 @@ const MainApp = () => {
                     <Route path="/home" element={<Home />} />
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/pricing" element={<Pricing />} />
+                    <Route path="/checkout" element={<Checkout />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/sign-up" element={<Signup />} />
                     <Route path="/my-account" element={<MyAccount />} />
