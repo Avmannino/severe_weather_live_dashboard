@@ -4,6 +4,10 @@ html, body {
     overflow: hidden; 
 }
 
+@font-face {
+    font-family: 'Storm';
+    src: url('/storm.ttf') format('truetype');
+}
 
 @media (max-width: 2560px) {
 
@@ -28,10 +32,21 @@ html, body {
         scroll-snap-type: y mandatory;
     }
 
+    .backgroundVideo {
+        position: fixed; /* Change to fixed to cover the entire viewport */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh; 
+        object-fit: cover;
+        z-index: -1; 
+    }
+    
+
     .gif-animation {
         position: absolute;
-        top: 32%;
-        left: 50.5%;
+        top: 29%;
+        left: 50%;
         width: 150px; 
         height: 150px; 
         animation: moveAcross 1.6s linear forwards 0s;
@@ -46,16 +61,16 @@ html, body {
         position: absolute;
         background-color: #007bff00;
         color: #cddbe4;
-        padding: 20px;
+        padding: 0px;
         text-align: center;
         font-family: storm;
         font-size: 90px;
-        margin: 28vh 0 0 -2vw;
+        margin: 25vh 0 0 -2vw;
         scroll-snap-align: start;
         white-space: nowrap;
         overflow: hidden;
         width: 0; 
-        animation: revealText 7s steps(90, end) 0.35s forwards; 
+        animation: revealText 7s steps(90, end) 0.25s forwards; 
     }
 
     @font-face {
@@ -65,7 +80,7 @@ html, body {
 
     .learn-more-button {
         position: absolute;
-        bottom: 6vh;
+        bottom: 3vh;
         background-color: #007bff00;
         color: #cddbe4;
         border: none;
@@ -98,8 +113,6 @@ html, body {
             transform: translateY(-10px);
         }
     }
-
-
 
     .home-nav {
         margin-top: 10px;
@@ -150,7 +163,7 @@ html, body {
     }
     .smaller-text {
         font-size: 20px;
-        margin: 730px 0 0 1.5vw;
+        margin: 620px 0 0 1.5vw;
         color: rgba(212, 226, 255, 0.726);
         font-family: dashboard;
         max-width: 150%;
@@ -380,7 +393,7 @@ html, body {
 
     .button-container {
         position: relative;
-        top: 0.5vh;
+        top: 2vh;
         left: -8.5vw;
         margin: 0px 0 0 15.5vw;
     }

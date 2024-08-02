@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from './AuthContext.jsx';
 import './Navbar.css';
 
 const Navbar = () => {
   const { isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [profilePictureUrl, setProfilePictureUrl] = useState('./icons/profile-icon.png'); // Default icon
 
   const handleLogout = () => {
@@ -44,8 +45,10 @@ const Navbar = () => {
     }
   };
 
+  const navbarClass = location.pathname === '/' || location.pathname === '/home' ? 'navbar navbar-home' : 'navbar';
+
   return (
-    <nav className="navbar">
+    <nav className={navbarClass}>
       <div className="navbar-container">
         <div className="navbar-left">
           <Link to="/home" className="navbar-logo">

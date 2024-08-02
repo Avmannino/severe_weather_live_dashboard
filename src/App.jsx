@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
-import LandingPage from './components/LandingPage.jsx';
+// import LandingPage from './components/LandingPage.jsx';
 import Home from './components/Home.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import Pricing from './components/Pricing.jsx';
@@ -25,7 +25,6 @@ function App() {
 
 const MainApp = () => {
     const location = useLocation();
-    const showNavbar = location.pathname !== '/';
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -40,10 +39,10 @@ const MainApp = () => {
     return (
         <>
             {loading && <Loading />}
-            {!loading && showNavbar && <Navbar />}
+            {!loading && <Navbar />}
             {!loading && (
                 <Routes>
-                    <Route path="/" element={<LandingPage />} />
+                    <Route path="/" element={<Home />} />
                     <Route path="/home" element={<Home />} />
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/pricing" element={<Pricing />} />

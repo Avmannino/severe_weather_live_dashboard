@@ -1,6 +1,7 @@
 import React from 'react';
 import 'animate.css';
 import './Home.css';
+import Rainstorm from '/Rainstorm.mp4';
 
 const featuresImage = './features.png';
 const hourlyDemo = './hourly_demo.mp4';
@@ -8,7 +9,7 @@ const radarDemo = './radar_demo.mp4';
 const buttonDemo = './alert_button_demo.mp4';
 const alertDemo = './alert_demo.png';
 const radarMaps = './radar_options.png';
-const twisterGif = './twister.gif'; 
+const twisterGif = './twister.gif';
 
 const Home = () => {
     const scrollToSoftware = () => {
@@ -17,6 +18,15 @@ const Home = () => {
 
     return (
         <div className="home-container">
+            <video autoPlay muted loop className="backgroundVideo">
+                <source src={Rainstorm} type="video/mp4" />
+            </video>
+            <nav className="home-nav">
+                <a href="/">Home</a>
+                <a href="/features">Features</a>
+                <a href="/pricing">Pricing</a>
+                <a href="/sign-up">Sign Up</a>
+            </nav>
             <h1 className="spottr-text snap-section"></h1>
             <main className="home-main">
                 <div className="gif-animation">
@@ -35,7 +45,6 @@ const Home = () => {
                         </button>
                     </div>
                 </section>
-               
                 <button className="learn-more-button animate__animated animate__fadeInUp animate__delay-1s" onClick={scrollToSoftware}>
                     <p className='learn-more animate__animated animate__fadeInUp animate__delay-1s'>Learn More</p>
                     <span className="caret animate__animated animate__fadeInUp animate__delay-2s">&#9660;</span>

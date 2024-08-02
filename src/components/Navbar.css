@@ -5,7 +5,7 @@ body {
 
 @media (max-width: 2560px) {
   .navbar {
-    background-color: #0088aa00 !important;
+    background-color: #ff000000; /* Default background color */
     height: 100px;
     display: flex;
     align-items: center;
@@ -13,6 +13,10 @@ body {
     font-family: storm;
     border-bottom: 1px solid white;
     z-index: 9999;
+}
+
+  .navbar-home {
+      background-color: transparent; /* Ensures transparency on home page */
   }
 
   .navbar-container {
