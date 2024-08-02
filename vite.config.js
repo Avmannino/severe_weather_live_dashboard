@@ -1,9 +1,19 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { createProxyMiddleware } from 'http-proxy-middleware';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    viteStaticCopy({
+      targets: [
+        {
+          src: 'src/assets/fonts/*',
+          dest: 'fonts'
+        }
+      ]
+    })
+  ],
   server: {
     proxy: {
       '/api': {
