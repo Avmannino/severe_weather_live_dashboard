@@ -6,7 +6,7 @@ html, body {
 
 @font-face {
     font-family: 'Storm';
-    src: url('./public/storm.ttf') format('truetype');
+    src: url('./storm.ttf') format('truetype');
 }
 
 @media (max-width: 2560px) {
@@ -75,7 +75,7 @@ html, body {
 
     @font-face {
         font-family: 'nova';
-        src: url('./public/nova.ttf') format('truetype');
+        src: url('./nova.ttf') format('truetype');
     }
 
     .learn-more-button {
@@ -494,7 +494,7 @@ html, body {
 
     @font-face {
         font-family: 'nova';
-        src: url('./public/nova.ttf') format('truetype');
+        src: url('./nova.ttf') format('truetype');
     }
 
     .learn-more-button {
