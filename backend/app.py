@@ -9,12 +9,19 @@ from config import Config
 
 app = Flask(__name__)
 app.config.from_object(Config)
-app.config['UPLOAD_FOLDER'] = 'uploads'  # Ensure this is set correctly
+app.config['UPLOAD_FOLDER'] = 'uploads'
+
+# Ensure the upload directory exists
+if not os.path.exists(app.config['UPLOAD_FOLDER']):
+    os.makedirs(app.config['UPLOAD_FOLDER'])
+
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
-CORS(app, resources={r"/*": {"origins": "http://127.0.0.1:5173"}})
+
+# Use environment variable for CORS origin
+CORS(app, resources={r"/*": {"origins": os.environ.get('CORS_ORIGIN', 'http://127.0.0.1:5173')}})
 
 from routes import *
 

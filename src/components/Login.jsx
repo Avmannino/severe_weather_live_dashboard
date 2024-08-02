@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button, Schema, Checkbox } from 'rsuite';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext.jsx';
-import './Login.css'; 
+import './Login.css';
 
 const { StringType } = Schema.Types;
 
@@ -16,7 +16,7 @@ const Login = () => {
   const [formError, setFormError] = useState({});
   const [loginError, setLoginError] = useState('');
   const navigate = useNavigate();
-  const { login } = useAuth(); 
+  const { login } = useAuth();
 
   const handleSubmit = async () => {
     if (!form.check()) {
@@ -28,7 +28,7 @@ const Login = () => {
 
     // POST request to backend
     try {
-      const response = await fetch('http://127.0.0.1:5000/login', {
+      const response = await fetch('https://spottr-inky.vercel.app/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -39,10 +39,10 @@ const Login = () => {
       if (response.ok) {
         const data = await response.json();
         console.log('Login successful:', data);
-        setLoginError('');  
+        setLoginError('');
         // Storing the token
         localStorage.setItem('token', data.access_token);
-        login();  // Updating the authentication state
+        login(); // Updating the authentication state
         // Redirect to /my-account
         navigate('/my-account');
       } else {

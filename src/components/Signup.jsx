@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button, Schema } from 'rsuite';
-import './Signup.css'; 
+import './Signup.css';
 
 const { StringType } = Schema.Types;
 
@@ -26,7 +26,7 @@ const Signup = () => {
 
     // POST request to backend
     try {
-      const response = await fetch('http://127.0.0.1:5000/register', {
+      const response = await fetch('https://spottr-inky.vercel.app/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -15,7 +15,7 @@ const MyAccount = () => {
   return (
     <Box sx={{ display: 'flex', height: '100vh', fontFamily: 'Dashboard' }}>
       <Paper elevation={3} sx={{ width: '270px', backgroundColor: '#2c3e50', color: '#ecf0f1', borderRight: '1px solid white' }}>
-        <Typography variant="h5" component="div" sx={{ p: 3, textAlign: 'center', color: '#ecf0f1', fontSize:'18px' }}>
+        <Typography variant="h5" component="div" sx={{ p: 3, textAlign: 'center', color: '#ecf0f1', fontSize: '18px' }}>
           My Account
         </Typography>
         <List component="nav">
@@ -64,11 +64,10 @@ const AccountOverview = () => {
   const [preview, setPreview] = useState(null);
 
   useEffect(() => {
-    // Fetch user profile from backend
     const fetchUserProfile = async () => {
       const token = localStorage.getItem('token');
       try {
-        const response = await fetch('http://127.0.0.1:5000/profile', {
+        const response = await fetch('https://spottr-inky.vercel.app/profile', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -77,7 +76,7 @@ const AccountOverview = () => {
           const data = await response.json();
           setUser(data);
           if (data.profilePictureUrl) {
-            setPreview(`http://127.0.0.1:5000/uploads/${data.profilePictureUrl}`);
+            setPreview(`https://spottr-inky.vercel.app/uploads/${data.profilePictureUrl}`);
           }
         }
       } catch (error) {
@@ -108,7 +107,6 @@ const AccountOverview = () => {
     setIsEditing(false);
     console.log('Saved changes:', user);
 
-    // Save the changes to the backend
     const formData = new FormData();
     formData.append('firstName', user.firstName);
     formData.append('lastName', user.lastName);
@@ -121,7 +119,7 @@ const AccountOverview = () => {
 
     const token = localStorage.getItem('token');
     try {
-      const response = await fetch('http://127.0.0.1:5000/update-profile', {
+      const response = await fetch('https://spottr-inky.vercel.app/update-profile', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -134,7 +132,7 @@ const AccountOverview = () => {
         console.log('Profile updated successfully:', data);
         setUser(prevUser => ({ ...prevUser, profilePictureUrl: data.profilePictureUrl }));
         if (data.profilePictureUrl) {
-          setPreview(`http://127.0.0.1:5000/uploads/${data.profilePictureUrl}`);
+          setPreview(`https://spottr-inky.vercel.app/uploads/${data.profilePictureUrl}`);
         }
       } else {
         const errorData = await response.json();
@@ -153,7 +151,7 @@ const AccountOverview = () => {
       <Divider sx={{ mb: 3, borderColor: 'white' }} />
       <Box component="form" noValidate autoComplete="off" sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3 }}>
-          <img src={preview} alt="Profile" style={{ width: '125px', height: '120px', borderRadius: '50%', marginTop:'-15px' }} />
+          <img src={preview} alt="Profile" style={{ width: '125px', height: '120px', borderRadius: '50%', marginTop: '-15px' }} />
           {isEditing && (
             <Button variant="contained" component="label">
               Upload Picture
