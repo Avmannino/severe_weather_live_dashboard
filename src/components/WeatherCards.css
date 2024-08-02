@@ -12,7 +12,7 @@
 
     @font-face {
         font-family: 'dashboard';
-        src: url('./dashboard.otf') format('opentype');
+        src: url('./public/dashboard.otf') format('opentype');
     }
 
     .weather-card {
@@ -271,7 +271,7 @@
 
     @font-face {
         font-family: 'dashboard';
-        src: url('./dashboard.otf') format('opentype');
+        src: url('./public/dashboard.otf') format('opentype');
     }
 
     .weather-card {
