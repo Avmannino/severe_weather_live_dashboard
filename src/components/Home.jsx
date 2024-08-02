@@ -25,7 +25,7 @@ const Home = () => {
                 <a href="/">Home</a>
                 <a href="/features">Features</a>
                 <a href="/pricing">Pricing</a>
-                <a href="/sign-up">Sign Up</a>
+                <a href="/signup">Sign Up</a>
             </nav>
             <h1 className="spottr-text snap-section"></h1>
             <main className="home-main">
@@ -37,7 +37,7 @@ const Home = () => {
                     <p className="home-header"></p>
                     <p className="smaller-text animate__animated animate__fadeInUp animate__delay-1s">Real-time weather data, radar insights, and detailed forecasts</p>
                     <div className="button-container animate__animated animate__fadeInUp animate__delay-2s">
-                        <button className="trial-button" onClick={() => window.location.href = '/sign-up'}>
+                        <button className="trial-button" onClick={() => window.location.href = '/signup'}>
                             Start a Free Trial
                         </button>
                         <button className="plans-button" onClick={() => window.location.href = '/pricing'}>

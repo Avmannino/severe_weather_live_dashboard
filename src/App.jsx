@@ -48,7 +48,7 @@ const MainApp = () => {
                     <Route path="/pricing" element={<Pricing />} />
                     <Route path="/checkout" element={<Checkout />} />
                     <Route path="/login" element={<Login />} />
-                    <Route path="/sign-up" element={<Signup />} />
+                    <Route path="/signup" element={<Signup />} />
                     <Route path="/my-account" element={<MyAccount />} />
                     <Route path="/contact-us" element={<Contact />} />
                 </Routes>

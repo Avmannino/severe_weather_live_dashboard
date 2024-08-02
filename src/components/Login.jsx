@@ -92,7 +92,7 @@ const Login = () => {
       </div>
       <div className="signup-card">
         <span>Don't have an account?</span>
-        <a href="/sign-up" className="signup-link">Create one here</a>
+        <a href="/signup" className="signup-link">Create one here</a>
       </div>
     </div>
   );
