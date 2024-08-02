@@ -11,7 +11,7 @@
 
 @font-face {
   font-family: 'dashboard';
-  src: url('./dashboard.otf') format('opentype');
+  src: url('/dashboard.otf') format('opentype');
 }
 
 .header {
@@ -290,7 +290,7 @@ iframe {
 
 @font-face {
   font-family: 'nova';
-  src: url('./nova.ttf') format('truetype');
+  src: url('/nova.ttf') format('truetype');
 }
 
 
