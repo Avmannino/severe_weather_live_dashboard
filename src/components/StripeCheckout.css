@@ -1,4 +1,4 @@
-/* Style for the overall form */
+/* 
 .StripeCheckoutForm {
     display: flex;
     flex-direction: column;
@@ -17,7 +17,7 @@
     border-radius: 5px;
   }
   
-  /* Style for the Stripe Card Element */
+
   .StripeElement {
     padding: 10px;
     margin-top: 5px;
@@ -52,4 +52,4 @@
     background-color: #bbb;
     cursor: not-allowed;
   }
-  
+   */

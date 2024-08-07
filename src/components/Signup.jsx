@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Schema } from 'rsuite';
 import './Signup.css';
+import axios from 'axios';
 
 const { StringType } = Schema.Types;
 
@@ -8,7 +9,7 @@ const model = Schema.Model({
   email: StringType().isEmail('Please enter a valid email address').isRequired('Email is required'),
   firstName: StringType().isRequired('First Name is required'),
   lastName: StringType().isRequired('Last Name is required'),
-  organization: StringType(),
+  organization: StringType().isRequired('Organization Name is required'),
   password: StringType().isRequired('Password is required')
 });
 
@@ -21,26 +22,11 @@ const Signup = () => {
       console.error('Form Error');
       return;
     }
-
-    console.log('Form Value', formValue);
-
-    // POST request to backend
     try {
-      const response = await fetch('https://spottr-inky.vercel.app/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formValue)
-      });
-
-      if (response.ok) {
-        console.log('User registered successfully');
-      } else {
-        console.error('Error registering user');
-      }
+      const response = await axios.post('http://localhost:5000/register', formValue);
+      console.log(response.data);
     } catch (error) {
-      console.error('Network error:', error);
+      console.error('Error submitting form', error);
     }
   };
 
@@ -48,7 +34,7 @@ const Signup = () => {
 
   return (
     <div className="signup-container">
-      <h4 className='trial-content'>First 3-Weeks Are On Us!</h4>
+      <h2>Create an account</h2>
       <Form
         fluid
         ref={ref => (form = ref)}
@@ -62,41 +48,27 @@ const Signup = () => {
         model={model}
       >
         <Form.Group>
-          <Form.ControlLabel>
-            Email:
-            {!formValue.email && <span className="required-asterisk">*</span>}
-          </Form.ControlLabel>
+          <Form.ControlLabel>Email:</Form.ControlLabel>
           <Form.Control name="email" type="email" placeholder="Email" />
         </Form.Group>
         <Form.Group>
-          <Form.ControlLabel>
-            First Name:
-            {!formValue.firstName && <span className="required-asterisk">*</span>}
-          </Form.ControlLabel>
+          <Form.ControlLabel>First Name:</Form.ControlLabel>
           <Form.Control name="firstName" type="text" placeholder="First Name" />
         </Form.Group>
         <Form.Group>
-          <Form.ControlLabel>
-            Last Name:
-            {!formValue.lastName && <span className="required-asterisk">*</span>}
-          </Form.ControlLabel>
+          <Form.ControlLabel>Last Name:</Form.ControlLabel>
           <Form.Control name="lastName" type="text" placeholder="Last Name" />
         </Form.Group>
         <Form.Group>
-          <Form.ControlLabel>
-            Organization Name:
-          </Form.ControlLabel>
+          <Form.ControlLabel>Organization Name:</Form.ControlLabel>
           <Form.Control name="organization" type="text" placeholder="Organization Name" />
         </Form.Group>
         <Form.Group>
-          <Form.ControlLabel>
-            Password:
-            {!formValue.password && <span className="required-asterisk">*</span>}
-          </Form.ControlLabel>
+          <Form.ControlLabel>Password:</Form.ControlLabel>
           <Form.Control name="password" type="password" placeholder="Password" />
         </Form.Group>
         <div className="checkbox-and-button">
-          <Button appearance="primary" onClick={handleSubmit} className="signup-btn">Create Account</Button>
+          <Button appearance="primary" onClick={handleSubmit} className="signup-button">Sign up</Button>
         </div>
       </Form>
     </div>

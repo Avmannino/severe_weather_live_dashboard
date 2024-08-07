@@ -1,4 +1,4 @@
-#!/home/avmannino/development/code/practice_projects/severe_weather_dashboard/severe-weather-resource/backend/venv/bin/python
+#!/home/avmannino/development/code/projects/weather_dashboard/severe_weather_live_dashboard/backend/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

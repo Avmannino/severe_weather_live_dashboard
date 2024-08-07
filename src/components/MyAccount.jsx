@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
 import { TextField, Button, Box, Typography, Paper, Divider, List, ListItem, ListItemText } from '@mui/material';
 import './MyAccount.css';
-import { useAuth } from './AuthContext';
 
 const MyAccount = () => {
   const location = useLocation();
-  const { isAuthenticated } = useAuth();
+  const isAuthenticated = true; // Assuming user is always authenticated for this example
 
   if (!isAuthenticated) {
     return <Navigate to="/login" />;
@@ -52,40 +51,16 @@ const MyAccount = () => {
 
 const AccountOverview = () => {
   const [user, setUser] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    organizationName: "",
-    dateJoined: "",
-    address: "",
+    firstName: "John",
+    lastName: "Doe",
+    email: "john.doe@example.com",
+    organizationName: "Example Org",
+    dateJoined: "2022-01-01",
+    address: "123 Example St, Example City, EX 12345",
     profilePictureUrl: null
   });
   const [isEditing, setIsEditing] = useState(false);
   const [preview, setPreview] = useState(null);
-
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      const token = localStorage.getItem('token');
-      try {
-        const response = await fetch('https://spottr-inky.vercel.app/profile', {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
-        if (response.ok) {
-          const data = await response.json();
-          setUser(data);
-          if (data.profilePictureUrl) {
-            setPreview(`https://spottr-inky.vercel.app/uploads/${data.profilePictureUrl}`);
-          }
-        }
-      } catch (error) {
-        console.error('Error fetching user profile:', error);
-      }
-    };
-
-    fetchUserProfile();
-  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -103,44 +78,11 @@ const AccountOverview = () => {
     reader.readAsDataURL(file);
   };
 
-  const handleSaveChanges = async () => {
+  const handleSaveChanges = () => {
     setIsEditing(false);
     console.log('Saved changes:', user);
 
-    const formData = new FormData();
-    formData.append('firstName', user.firstName);
-    formData.append('lastName', user.lastName);
-    formData.append('email', user.email);
-    formData.append('organization', user.organizationName);
-    formData.append('address', user.address);
-    if (user.profilePicture) {
-      formData.append('profilePicture', user.profilePicture);
-    }
-
-    const token = localStorage.getItem('token');
-    try {
-      const response = await fetch('https://spottr-inky.vercel.app/update-profile', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`
-        },
-        body: formData
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log('Profile updated successfully:', data);
-        setUser(prevUser => ({ ...prevUser, profilePictureUrl: data.profilePictureUrl }));
-        if (data.profilePictureUrl) {
-          setPreview(`https://spottr-inky.vercel.app/uploads/${data.profilePictureUrl}`);
-        }
-      } else {
-        const errorData = await response.json();
-        console.error('Failed to update profile:', errorData);
-      }
-    } catch (error) {
-      console.error('Error updating profile:', error);
-    }
+    // Here you would normally send the updated user data to the backend
   };
 
   return (
@@ -151,7 +93,7 @@ const AccountOverview = () => {
       <Divider sx={{ mb: 3, borderColor: 'white' }} />
       <Box component="form" noValidate autoComplete="off" sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3 }}>
-          <img src={preview} alt="Profile" style={{ width: '125px', height: '120px', borderRadius: '50%', marginTop: '-15px' }} />
+          <img src={preview || './icons/profile-icon.png'} alt="Profile" style={{ width: '125px', height: '120px', borderRadius: '50%', marginTop: '-15px' }} />
           {isEditing && (
             <Button variant="contained" component="label">
               Upload Picture

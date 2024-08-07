@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from './AuthContext';
 import './Pricing.css';
 
 const Pricing = () => {
   const [billingCycle, setBillingCycle] = useState('monthly');
   const [selectedPlan, setSelectedPlan] = useState(null);
-  const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   const monthlyPrices = {
@@ -24,15 +22,11 @@ const Pricing = () => {
   const prices = billingCycle === 'monthly' ? monthlyPrices : annualPrices;
 
   const handleGetStarted = (product) => {
-    if (isAuthenticated) {
-      navigate('/checkout', { state: { product } });
-    } else {
-      navigate('/login');
-    }
+    navigate('/checkout', { state: { product } });
   };
 
   return (
-    <div className="pricing-container ">
+    <div className="pricing-container">
       <h1 className="pricing-title">Plans & Pricing</h1>
       <p className="pricing-subtitle">Sign up in less than 30 seconds! Try out our 3-week risk-free trial, upgrade at any time, no questions, no hassle.</p>
       <div className="billing-toggle">
@@ -97,8 +91,6 @@ const Pricing = () => {
           <ul className="features-pro">
             <li>✔ Enhanced radar imagery and weather maps.</li>
             <li>✔ Access to advanced weather models and predictions.</li>
-            <li></li>
-            <li></li>
           </ul>
           <button className="signup-button" onClick={() => handleGetStarted({ name: 'Pro', price: prices.professional })}>Get Started</button>
         </div>

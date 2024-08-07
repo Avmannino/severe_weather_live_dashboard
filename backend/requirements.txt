@@ -1,8 +1,4 @@
-flask
-flask_sqlalchemy
-flask_migrate
-flask_bcrypt
-flask_jwt_extended
-flask_cors
-gunicorn
-stripe
+Flask
+Flask-SQLAlchemy
+Flask-Migrate
+Werkzeug

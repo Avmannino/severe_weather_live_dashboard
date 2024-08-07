@@ -19,6 +19,11 @@ class MyLocation extends React.Component {
     const { latitude, longitude } = position.coords;
     console.log("Coordinates:", latitude, longitude); 
     const apiKey = import.meta.env.VITE_OPENCAGE_API_KEY;
+    if (!apiKey) {
+      console.error('API key is undefined. Please set the API key in your environment variables.');
+      alert('API key is missing. Please check your configuration.');
+      return;
+    }
     const url = `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${apiKey}`;
 
     try {
