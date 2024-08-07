@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Form, Button, Schema, Checkbox, Message } from 'rsuite';
+import { Link, useNavigate } from 'react-router-dom'; // Import Link from react-router-dom
 import './Login.css';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const { StringType } = Schema.Types;
 
@@ -60,8 +60,8 @@ const Login = ({ onLogin }) => {
         model={model}
       >
         <Form.Group>
-          <Form.ControlLabel>Username or Email:</Form.ControlLabel>
-          <Form.Control name="email" type="email" placeholder="Username" />
+          <Form.ControlLabel>Email:</Form.ControlLabel>
+          <Form.Control name="email" type="email" placeholder="Email" />
         </Form.Group>
         <Form.Group>
           <Form.ControlLabel>Password:</Form.ControlLabel>
@@ -74,6 +74,9 @@ const Login = ({ onLogin }) => {
       </Form>
       <div className="forgot-password">
         <a href="#forgot-password">Forgot your password?</a>
+      </div>
+      <div className="create-account">
+        <p>Don't have an Account? <Link to="/signup">Create one</Link></p>
       </div>
     </div>
   );

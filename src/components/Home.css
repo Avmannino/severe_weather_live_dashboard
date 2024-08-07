@@ -80,7 +80,7 @@ html, body {
 
     .learn-more-button {
         position: absolute;
-        bottom: 3vh;
+        bottom: 6vh;
         background-color: #007bff00;
         color: #cddbe4;
         border: none;
@@ -251,6 +251,13 @@ html, body {
         margin: -520px 0 0 1250px;
         width: 40%;
     }
+    
+    .stay-ahead {
+        color: rgba(90, 90, 90, 0.76);
+        font-size: 45px;
+        text-align: center;
+        margin: 25px 0 0 0;
+    }
 
     .critical-communications-header {
         font-size: 55px;
@@ -294,7 +301,7 @@ html, body {
     .radar-content {
         font-size: 22px;
         color: rgba(0, 0, 0, 0.616);
-        margin: -10px 0 0 310px;
+        margin: -0px 0 0 310px;
     }
 
     .radar-list li {
@@ -333,6 +340,14 @@ html, body {
         z-index: 9990 !important;
     }
 
+    .alert-carousel {
+        width: 15%;
+        border-radius: 20px;
+        box-shadow: 12px 10px 15px rgba(0, 0, 0, 0.500);
+        margin: -205px 0 0 1900px;
+        z-index: 9990 !important;
+    }
+
     .features-forecast-header {
         font-size: 55px;
         color: rgba(0, 0, 0, 0.616);
@@ -347,7 +362,7 @@ html, body {
 
     .forecast-list {
         font-size: 25px;
-        margin: 0 0 0 300px;
+        margin: 15px 0 0 300px;
         color: rgba(0, 0, 0, 0.616);
         padding-bottom: 50px;
     }
@@ -662,6 +677,12 @@ html, body {
     .features-img {
         margin: -380px 0 0 1000px;
         width: 35%;
+    }
+
+    .stay-ahead {
+        color: rgb(90, 90, 90);
+        font-size: 35px;
+        text-align: center;
     }
 
     .critical-communications-header {

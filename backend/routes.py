@@ -40,3 +40,20 @@ def login():
         return jsonify({'message': 'Invalid email or password'}), 401
 
     return jsonify({'message': 'Login successful'}), 200
+
+@app.route('/update_user', methods=['PUT'])
+def update_user():
+    data = request.get_json()
+    email = data.get('email')
+    user = User.query.filter_by(email=email).first()
+
+    if not user:
+        return jsonify({'message': 'User not found'}), 404
+
+    user.first_name = data.get('firstName', user.first_name)
+    user.last_name = data.get('lastName', user.last_name)
+    user.organization = data.get('organizationName', user.organization)
+    user.address = data.get('address', user.address)
+    
+    db.session.commit()
+    return jsonify({'message': 'User updated successfully'})

@@ -42,6 +42,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        gap: 5px;
     }
 
     .uv-index h3 {
@@ -52,10 +53,10 @@
     }
 
     .uv-index p {
-        margin: 5px 0;
+        margin: 0px 0;
         font-size: 1.2em;
-        color: #dbdbdbd2;
-        font-weight: 100;
+        color: #bebebed2;
+        font-weight: lighter;
     }
 
     .visibility {
@@ -63,10 +64,11 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        gap: 5px;
     }
 
     .visibility-header {
-        margin: -15px 0 0 0;
+        margin: -30px 0 0 0;
         font-size: 1.1em;
     }
 
@@ -87,21 +89,22 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        gap: 0px;
     }
 
     .wind-speed h3 {
-        margin-top: -55px;
+        margin-top: -50px;
     }
 
     .wind-speed p {
-        margin-top: 5px;
+        margin-top: -10px;
         font-weight: 800;
         color: #dbdbdbd2;
         font-size: 1.2em;
     }
 
     .wind-direction {
-        margin: -15px 0 0 0 !important;
+        margin: -20px 0 0 0 !important;
     }
 
     .dew-point {
@@ -112,21 +115,20 @@
     }
 
     .dew-point h3 {
-        margin-top: -10px;
+        margin-top: -30px;
     }
 
     .dew-point p {
-        margin: 5px 0;
+        margin: -5px 0;
         font-size: 1.2em;
         color: #dbdbdbd2;
         font-weight: 100;
-        font-weight: 800;
     }
 
     .dew-point img {
-        margin-top: 10px;
-        width: 85px;
-        height: 85px;
+        margin-top: 20px;
+        width: 54px;
+        height: 54px;
     }
 
     .humidity {
@@ -134,19 +136,22 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        gap: 15px
     }
 
     .humidity-header {
-        margin-top: -5px;
+        margin-top: -10px;
     }
 
     .humidity-figure {
-        margin-top: -20px;
+        margin-top: -25px;
         font-size: 20px;
+        color: #dbdbdbd2;
     }
 
     .humidity img {
-        max-width: 75px;
+        margin-top: -15px;
+        max-width: 65px;
     }
 
     .historical-temp {
@@ -157,28 +162,28 @@
     }
 
     .historical-header {
-        margin-top: -10px;
+        margin-top: -15px;
     }
 
     .historical-date {
-        margin-top: -15px;
+        margin-top: -10px;
         color: #dbdbdbd2;
     }
 
     .historical-figure {
-        margin-top: -10px;
+        margin-top: -15px;
         font-size: 1.2em;
         color: #dbdbdbd2;
     }
 
     .historical-temp img {
-        margin: 5px 0 0px 0;
-        width: 60px;
-        height: 60px;
+        margin: -5px 0 0px 0;
+        width: 50px;
+        height: 50px;
     }
 
     .sunrise-sunset {
-        margin-top: -15px;
+        margin-top: -30px;
     }
 
     .draggable-card {
@@ -204,38 +209,12 @@
         transform: scale(1.05) !important;
     }
 
-    .air-quality {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .air-quality h3 {
-        margin: 0px 0 0 0;
-        font-size: 1.1em;
-        color: #ffffff;
-        font-weight: 100;
-    }
-
-    .air-quality p {
-        margin: 5px 0;
-        font-size: 1.2em;
-        color: #dbdbdbd2;
-        font-weight: 100;
-    }
-
-    .air-quality img {
-        margin-top: 10px;
-        width: 85px;
-        height: 85px;
-    }
-
     .pressure {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        gap: 5px;
     }
 
     .pressure h3 {

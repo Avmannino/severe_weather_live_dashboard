@@ -94,6 +94,7 @@ body {
     height: 100%;
     cursor: pointer;
     position: relative;
+    top: 0.1vh;
     left: 30vw;
   }
 

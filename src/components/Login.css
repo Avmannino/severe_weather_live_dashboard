@@ -72,7 +72,7 @@
         padding: 13px 55px !important;
         border-radius: 65px;
         flex-shrink: 0;
-        margin-left: 160px !important; 
+        margin-left: 60px !important; 
         margin-top: 5px !important;
     }
     
@@ -108,6 +108,19 @@
     }
     
     .forgot-password a:hover {
+        text-decoration: underline;
+    }
+
+    .create-account {
+        color: white;
+        text-align: center;
+    }
+
+    .create-account a {
+        color: #09c5ff;
+    }
+
+    .create-account a:hover {
         text-decoration: underline;
     }
     

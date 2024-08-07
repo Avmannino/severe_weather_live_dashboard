@@ -9,31 +9,21 @@ import Signup from './components/Signup.jsx';
 import MyAccount from './components/MyAccount.jsx';
 import Loading from './components/Loading.jsx';
 import Contact from './components/Contact.jsx';
+import { AuthProvider, useAuth } from './components/AuthContext.jsx'; // Import AuthContext
+import ProtectedRoute from './components/ProtectedRoute.jsx'; // Import ProtectedRoute
 
 function App() {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-    const handleLogin = () => {
-        setIsAuthenticated(true);
-    };
-
-    const handleLogout = (navigate) => {
-        setIsAuthenticated(false);
-        navigate('/login');
-    };
-
     return (
-        <Router>
-            <MainApp 
-                isAuthenticated={isAuthenticated}
-                onLogin={handleLogin}
-                onLogout={handleLogout}
-            />
-        </Router>
+        <AuthProvider>
+            <Router>
+                <MainApp />
+            </Router>
+        </AuthProvider>
     );
 }
 
-const MainApp = ({ isAuthenticated, onLogin, onLogout }) => {
+const MainApp = () => {
+    const { isAuthenticated, login, logout } = useAuth(); // Use AuthContext
     const location = useLocation();
     const [loading, setLoading] = useState(true);
 
@@ -41,7 +31,7 @@ const MainApp = ({ isAuthenticated, onLogin, onLogout }) => {
         setLoading(true);
         const handleLoading = setTimeout(() => {
             setLoading(false);
-        }, 700); // 0.5 seconds loading time
+        }, 700); // 0.7 seconds loading time
 
         return () => clearTimeout(handleLoading);
     }, [location.pathname]);
@@ -49,17 +39,26 @@ const MainApp = ({ isAuthenticated, onLogin, onLogout }) => {
     return (
         <>
             {loading && <Loading />}
-            {!loading && <Navbar isAuthenticated={isAuthenticated} onLogout={onLogout} />}
+            {!loading && <Navbar isAuthenticated={isAuthenticated} onLogout={logout} />}
             {!loading && (
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/home" element={<Home />} />
-                    <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/pricing" element={<Pricing />} />
-                    <Route path="/login" element={<Login onLogin={onLogin} />} />
+                    <Route path="/login" element={<Login onLogin={login} />} />
                     <Route path="/signup" element={<Signup />} />
-                    <Route path="/my-account" element={<MyAccount />} />
                     <Route path="/contact-us" element={<Contact />} />
+                    {/* Protect the dashboard route */}
+                    <Route path="/dashboard" element={
+                        <ProtectedRoute>
+                            <Dashboard />
+                        </ProtectedRoute>
+                    } />
+                    <Route path="/my-account" element={
+                        <ProtectedRoute>
+                            <MyAccount />
+                        </ProtectedRoute>
+                    } />
                 </Routes>
             )}
         </>

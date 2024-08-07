@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Pricing.css';
 
 const Pricing = () => {
@@ -115,6 +115,9 @@ const Pricing = () => {
       </div>
       <div className="contact-us">
         <p>Questions? <a href="/contact-us">Contact Us</a></p>
+      </div>
+      <div className="create-account">
+        <p>Don't have an Account? <Link to="/signup">Create one</Link></p>
       </div>
     </div>
   );

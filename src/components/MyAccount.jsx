@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
 import { TextField, Button, Box, Typography, Paper, Divider, List, ListItem, ListItemText } from '@mui/material';
 import './MyAccount.css';
+import axios from 'axios';
 
 const MyAccount = () => {
   const location = useLocation();
@@ -51,11 +52,11 @@ const MyAccount = () => {
 
 const AccountOverview = () => {
   const [user, setUser] = useState({
-    firstName: "John",
-    lastName: "Doe",
-    email: "john.doe@example.com",
-    organizationName: "Example Org",
-    dateJoined: "2022-01-01",
+    firstName: "Adam",
+    lastName: "M.",
+    email: "Adam.M@example.com",
+    organizationName: "Flatiron School",
+    dateJoined: "2024-07-08",
     address: "123 Example St, Example City, EX 12345",
     profilePictureUrl: null
   });
@@ -78,11 +79,17 @@ const AccountOverview = () => {
     reader.readAsDataURL(file);
   };
 
-  const handleSaveChanges = () => {
+  const handleSaveChanges = async () => {
     setIsEditing(false);
     console.log('Saved changes:', user);
 
-    // Here you would normally send the updated user data to the backend
+
+    try {
+      const response = await axios.put('http://localhost:5000/update_user', user);
+      console.log(response.data.message);
+    } catch (error) {
+      console.error('Error updating user information', error);
+    }
   };
 
   return (
@@ -304,5 +311,3 @@ const MyPlan = () => <div>Current Plan Content</div>;
 const MyTeam = () => <div>Team Content</div>;
 
 export default MyAccount;
-
-

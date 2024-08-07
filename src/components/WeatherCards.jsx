@@ -155,7 +155,7 @@ const WeatherCards = ({ lat, lon, setHumidity }) => {
 
   const getGaugeValue = (uvIndex) => {
     if (uvIndex <= 1.0) return 0.01;
-    if (uvIndex <= 2.9) return 0.10;
+    if (uvIndex <= 2.9) return 0.19;
     if (uvIndex <= 3.0) return 0.20;
     if (uvIndex <= 4.5) return 0.20;
     if (uvIndex <= 5.9) return 0.30;

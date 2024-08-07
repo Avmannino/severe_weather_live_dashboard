@@ -10,6 +10,7 @@ const buttonDemo = './alert_button_demo.mp4';
 const alertDemo = './alert_demo.png';
 const radarMaps = './radar_options.png';
 const twisterGif = './twister.gif';
+const carouselDemo = './carousel-demo.mp4'
 
 const Home = () => {
     const scrollToSoftware = () => {
@@ -21,12 +22,6 @@ const Home = () => {
             <video autoPlay muted loop className="backgroundVideo">
                 <source src={Rainstorm} type="video/mp4" />
             </video>
-            <nav className="home-nav">
-                <a href="/">Home</a>
-                <a href="/features">Features</a>
-                <a href="/pricing">Pricing</a>
-                <a href="/signup">Sign Up</a>
-            </nav>
             <h1 className="spottr-text snap-section"></h1>
             <main className="home-main">
                 <div className="gif-animation">
@@ -64,6 +59,8 @@ const Home = () => {
             </section>
             <p className='line-break'>&nbsp;</p> {/* Line break */}
             <section className='critical-communications snap-section'>
+                <h2 className="software-header"></h2>
+                <h3 className="stay-ahead">Stay Ahead of the Storm</h3>
                 <h4 className="critical-communications-header">Critical Communications</h4>
                 <p className="critical-motto">Real-time NWS alerts for your specific location:</p>
                 <ul className="communications-content">
@@ -77,6 +74,9 @@ const Home = () => {
                     <source src={buttonDemo} type="video/mp4" />
                 </video>
                 <img src={alertDemo} className="alert-demo" alt="alert-image" />
+                <video autoPlay muted loop className="alert-carousel">
+                    <source src={carouselDemo} type="video/mp4" />
+                </video>
             </section>
             <p className='line-break'>&nbsp;</p> {/* Line break */}
             <section className='realtime-radar'>
