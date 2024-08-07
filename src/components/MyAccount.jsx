@@ -304,3 +304,5 @@ const MyPlan = () => <div>Current Plan Content</div>;
 const MyTeam = () => <div>Team Content</div>;
 
 export default MyAccount;
+
+

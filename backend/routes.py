@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from app import app, db
 from models import User
 
@@ -29,3 +29,14 @@ def register():
 
     return jsonify({'message': 'User registered successfully'}), 201
 
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    email = data.get('email')
+    password = data.get('password')
+
+    user = User.query.filter_by(email=email).first()
+    if not user or not check_password_hash(user.password, password):
+        return jsonify({'message': 'Invalid email or password'}), 401
+
+    return jsonify({'message': 'Login successful'}), 200

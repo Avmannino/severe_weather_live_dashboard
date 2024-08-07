@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
-// import LandingPage from './components/LandingPage.jsx';
 import Home from './components/Home.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import Pricing from './components/Pricing.jsx';
@@ -8,21 +7,33 @@ import Navbar from './components/Navbar.jsx';
 import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
 import MyAccount from './components/MyAccount.jsx';
-// import { AuthProvider } from './components/AuthContext.jsx';
 import Loading from './components/Loading.jsx';
 import Contact from './components/Contact.jsx';
-// import Checkout from './components/Checkout.jsx';
 
 function App() {
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    const handleLogin = () => {
+        setIsAuthenticated(true);
+    };
+
+    const handleLogout = (navigate) => {
+        setIsAuthenticated(false);
+        navigate('/login');
+    };
+
     return (
-            <Router>
-                <MainApp />
-            </Router>
-       
+        <Router>
+            <MainApp 
+                isAuthenticated={isAuthenticated}
+                onLogin={handleLogin}
+                onLogout={handleLogout}
+            />
+        </Router>
     );
 }
 
-const MainApp = () => {
+const MainApp = ({ isAuthenticated, onLogin, onLogout }) => {
     const location = useLocation();
     const [loading, setLoading] = useState(true);
 
@@ -38,15 +49,14 @@ const MainApp = () => {
     return (
         <>
             {loading && <Loading />}
-            {!loading && <Navbar />}
+            {!loading && <Navbar isAuthenticated={isAuthenticated} onLogout={onLogout} />}
             {!loading && (
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/home" element={<Home />} />
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/pricing" element={<Pricing />} />
-                    {/* <Route path="/checkout" element={<Checkout />} /> */}
-                    <Route path="/login" element={<Login />} />
+                    <Route path="/login" element={<Login onLogin={onLogin} />} />
                     <Route path="/signup" element={<Signup />} />
                     <Route path="/my-account" element={<MyAccount />} />
                     <Route path="/contact-us" element={<Contact />} />

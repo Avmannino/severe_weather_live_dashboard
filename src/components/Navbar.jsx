@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Navbar.css';
 
-const Navbar = () => {
+const Navbar = ({ isAuthenticated, onLogout }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [profilePictureUrl] = useState('./icons/profile-icon.png'); // Default icon
 
   const handleProfileClick = () => {
-    navigate('/login');
+    navigate(isAuthenticated ? '/my-account' : '/login');
   };
 
   const navbarClass = location.pathname === '/' || location.pathname === '/home' ? 'navbar navbar-home' : 'navbar';
@@ -58,9 +58,15 @@ const Navbar = () => {
               className="navbar-profile-picture"
             />
           </div>
-          <Link to="/login" className="nav-login">
-            Login
-          </Link>
+          {isAuthenticated ? (
+            <button onClick={() => onLogout(navigate)} className="nav-login">
+              Logout
+            </button>
+          ) : (
+            <Link to="/login" className="nav-login">
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </nav>

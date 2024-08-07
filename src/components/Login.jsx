@@ -1,8 +1,8 @@
-// Login.jsx
-
 import React, { useState } from 'react';
-import { Form, Button, Schema, Checkbox } from 'rsuite';
-import './Login.css';  // Import the CSS file
+import { Form, Button, Schema, Checkbox, Message } from 'rsuite';
+import './Login.css';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const { StringType } = Schema.Types;
 
@@ -11,16 +11,30 @@ const model = Schema.Model({
   password: StringType().isRequired('Password is required')
 });
 
-const Login = () => {
+const Login = ({ onLogin }) => {
   const [formValue, setFormValue] = useState({ email: '', password: '' });
   const [formError, setFormError] = useState({});
+  const [message, setMessage] = useState(null);
+  const navigate = useNavigate();
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!form.check()) {
       console.error('Form Error');
       return;
     }
-    console.log('Form Value', formValue);
+    try {
+      const response = await axios.post('http://localhost:5000/login', formValue);
+      setMessage({ type: 'success', content: response.data.message });
+      onLogin();
+      navigate('/my-account');
+    } catch (error) {
+      if (error.response) {
+        setMessage({ type: 'error', content: error.response.data.message });
+      } else {
+        setMessage({ type: 'error', content: 'Error submitting form' });
+      }
+      console.error('Error submitting form', error);
+    }
   };
 
   let form;
@@ -28,6 +42,11 @@ const Login = () => {
   return (
     <div className="login-container">
       <h2>Welcome back!</h2>
+      {message && (
+        <Message showIcon type={message.type}>
+          {message.content}
+        </Message>
+      )}
       <Form
         fluid
         ref={ref => (form = ref)}
