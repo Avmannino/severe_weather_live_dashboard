@@ -11,6 +11,17 @@
         border: 3px solid #000e2259;
     }
 
+
+    .signup-message {
+        color: white;
+        background-color: #4caf50; /* Green background color for visibility */
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 1.5rem; /* Larger font size */
+        text-align: center;
+        margin-bottom: 20px; /* Space below the message */
+      }
+      
     .signup-container h2 {
         font-size: 30px;
         text-align: center;

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button, Schema } from 'rsuite';
+import { useNavigate } from 'react-router-dom';
 import './Signup.css';
 import axios from 'axios';
 
@@ -16,6 +17,8 @@ const model = Schema.Model({
 const Signup = () => {
   const [formValue, setFormValue] = useState({ email: '', firstName: '', lastName: '', organization: '', password: '' });
   const [formError, setFormError] = useState({});
+  const [message, setMessage] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     if (!form.check()) {
@@ -24,7 +27,10 @@ const Signup = () => {
     }
     try {
       const response = await axios.post('http://localhost:5000/register', formValue);
-      console.log(response.data);
+      setMessage('Account was created!');
+      setTimeout(() => {
+        navigate('/login');
+      }, 1000); 
     } catch (error) {
       console.error('Error submitting form', error);
     }
@@ -35,6 +41,7 @@ const Signup = () => {
   return (
     <div className="signup-container">
       <h2>Create an account</h2>
+      {message && <div className="signup-message">{message}</div>}
       <Form
         fluid
         ref={ref => (form = ref)}

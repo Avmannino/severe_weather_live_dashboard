@@ -38,7 +38,7 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
             </Link>
           </li>
           <li className="nav-item dropdown">
-            <Link to="/about-us" className="nav-links">
+            <Link to="/about" className="nav-links">
               About Us <span className="nav-caret">&#9662;</span>
             </Link>
             <ul className="dropdown-menu">

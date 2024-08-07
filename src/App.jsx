@@ -11,6 +11,7 @@ import Loading from './components/Loading.jsx';
 import Contact from './components/Contact.jsx';
 import { AuthProvider, useAuth } from './components/AuthContext.jsx'; // Import AuthContext
 import ProtectedRoute from './components/ProtectedRoute.jsx'; // Import ProtectedRoute
+import About from './components/About.jsx';
 
 function App() {
     return (
@@ -47,6 +48,7 @@ const MainApp = () => {
                     <Route path="/pricing" element={<Pricing />} />
                     <Route path="/login" element={<Login onLogin={login} />} />
                     <Route path="/signup" element={<Signup />} />
+                    <Route path="/about" element={<About />} />
                     <Route path="/contact-us" element={<Contact />} />
                     {/* Protect the dashboard route */}
                     <Route path="/dashboard" element={

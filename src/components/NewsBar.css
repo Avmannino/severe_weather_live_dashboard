@@ -1,6 +1,6 @@
-/* .news-bar {
+.news-bar {
     width: 100%;
-    background-color: #f8be0075;
+    background-color: #263443;
     color: rgb(0, 0, 0);
     padding: 10px 0;
     overflow: hidden;
@@ -48,4 +48,4 @@
         margin-right: 10px; 
         font-size: 0.8em;
     }
-} */
+}
