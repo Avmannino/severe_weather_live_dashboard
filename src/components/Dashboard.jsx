@@ -7,7 +7,7 @@ import WeatherCards from './WeatherCards';
 import DashNav from './DashNav';
 import AlertsButton from './AlertsButton';
 import Chart from 'react-apexcharts';
-import NewsBar from './NewsBar';
+// import NewsBar from './NewsBar';
 
 const locationImage = "./icons/location_marker.png";
 const dateTimeImage = "./icons/calendar_small.png";
@@ -383,7 +383,7 @@ const Dashboard = () => {
       <header className="header">
         <h1></h1>
       </header>
-      <NewsBar />
+      {/* <NewsBar /> */}
 
       <DashNav
         searchInput={searchInput}

@@ -162,9 +162,9 @@
     border-radius: 30px;
     box-shadow: 0 14px 11px rgba(0, 0, 0, 0.400);
     margin: 15px;
-    width: 60%; 
+    width: 40%; 
     max-width: 850px;
-    height: 30px;
+    height: 20px;
     margin-left: auto;
     margin-right: auto; 
     margin-top: 5px;
@@ -199,7 +199,8 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-left: 10%; 
+    margin-left: 25%;
+    margin-top: 2px; 
     max-width: 1700px; 
   }
 
@@ -209,11 +210,11 @@
     border-radius: 15px;
     border: 1px solid #118edd;
     box-shadow: 0 7px 11px rgba(0, 0, 0, 0.400);
-    width: 250px; 
-    height: 15px;
+    width: 350px; 
+    height: 10px;
     position: relative;
     top: -0.2vh;
-    left: -6vw;
+    left: -9.5vw;
   }
 
   .search-button {
@@ -224,8 +225,8 @@
     color: white;
     cursor: pointer;
     position: relative;
-    top: -1.3vh;
-    left: -6.5vw;
+    top: 0vh;
+    left: -9.5vw;
     font-size: 10px;
   }
 
@@ -236,9 +237,9 @@
   .switch {
     position: relative;
     display: flex;
-    width: 55px;
+    width: 60px;
     height: 25px;
-    margin-right: 28%; 
+    margin-right:-0%; 
   }
 
   .switch input {

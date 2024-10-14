@@ -309,7 +309,7 @@ const WeatherCards = ({ lat, lon, setHumidity }) => {
             <div className={`pressure ${animationClass}`}>
               <h3>Pressure</h3>
               <p>{pressure} inHg</p>
-              <img src="./icons/pressure.png" alt="Pressure Icon" style={{ width: '75px', height: '75px', marginTop: '10px' }} />
+              <img src="./icons/pressure.png" alt="Pressure Icon" style={{ width: '35px', height: '35px', marginTop: '5px' }} />
             </div>
           )
         );

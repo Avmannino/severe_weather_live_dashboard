@@ -876,7 +876,7 @@ iframe {
   iframe {
     width: 27%;
     height: 37vh;
-    top: 38vh;
+    top: 37vh;
     left: 29.5vw;
     position: relative;
     animation: slide-in-bottom 0.5s forwards;
@@ -884,7 +884,7 @@ iframe {
 
   .carousel-container {
     position: absolute;
-    top: 51vh;
+    top: 49vh;
     right: 35.5vw;
     width: 22%;
     height: 350px;
@@ -925,8 +925,8 @@ iframe {
   
   .carousel-play-pause {
     position: absolute;
-    top: -30px;
-    left: 15px;
+    top: -5px;
+    left: 20px;
     padding: 10px 10px;
     background-color: rgba(0, 0, 0, 0);
     color: #ffffff;
@@ -952,7 +952,7 @@ iframe {
   
   .weather-cards {
     position: absolute;
-    bottom: 25vh;
+    bottom: 26.5vh;
     left: 8.2vw;
     transition: transform 0.2s !important;
     animation: slide-in-left 0.3s forwards;
@@ -982,7 +982,7 @@ iframe {
     flex-direction: row;
     gap: 5px;
     position: relative;
-    top: -34vh;
+    top: -34.5vh;
     left: -25vw;
     animation: slide-in-top 0.5s forwards;
   }
@@ -1138,7 +1138,7 @@ iframe {
     align-items: center;
     justify-content: center;
     font-weight: bolder;
-    font-size: 16px;
+    font-size: 14px;
   }
   
   .forecast-date {

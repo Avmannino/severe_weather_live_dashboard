@@ -296,14 +296,14 @@
     }
 
     .uv-index h3 {
-        margin: 5px 0 0 0;
+        margin: 8px 0 0 0;
         font-size: 0.7em;
     }
 
     .uv-index p,
     .humidity-figure {
         margin: 5px 0 0 0;
-        font-size: 0.9em;
+        font-size: 0.7em;
         color: #dbdbdbd2;
         font-weight: 100;
     }
@@ -316,8 +316,8 @@
     .visibility img,
     .dew-point img {
         margin-top: 15px;
-        width: 45px;
-        height: 45px;
+        width: 40px;
+        height: 40px;
     }
 
     .visibility-figure {
@@ -355,7 +355,7 @@
     }
 
     .humidity-header {
-        margin-top: 0px;
+        margin-bottom: -10px;
     }
 
     .humidity-figure {
@@ -364,9 +364,9 @@
     }
 
     .humidity img {
-        margin-top: 15px;
-        width: 70px;
-        height: 70px;
+        margin-top: -5px;
+        width: 45px;
+        height: 45px;
     }
 
     .historical-header {
@@ -387,8 +387,8 @@
 
     .historical-temp img {
         margin: 7px 0 0px 0;
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
     }
 
     .draggable-card {
@@ -409,6 +409,7 @@
     }
 
     .pressure {
-        font-size: 0.85em;
+        font-size: 0.75em;
+        margin-top: 0px;
     }
 }
