@@ -33,7 +33,7 @@ html, body {
     }
 
     .backgroundVideo {
-        position: fixed; /* Change to fixed to cover the entire viewport */
+        position: fixed; 
         top: 0;
         left: 0;
         width: 100%;
